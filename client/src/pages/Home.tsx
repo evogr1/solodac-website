@@ -31,6 +31,9 @@ const services = [
     title: "Social media systems",
     description:
       "Strategy, channel management, publishing, community care, and the operating rhythm that keeps a brand culturally present.",
+    more:
+      "Your brand should be present before your audience starts looking. SoloDac manages the complete social media engine—from strategy and content planning to publishing, community management, reporting, and ongoing optimization. We help brands build a recognizable presence across Instagram, YouTube, X, and other relevant channels.",
+    includes: "Social strategy · Instagram management · YouTube channels · X / Twitter · Reels · Shorts · Community engagement · Reporting",
     tags: ["Instagram", "YouTube", "X / Twitter"],
     color: "lime",
   },
@@ -40,6 +43,9 @@ const services = [
     title: "Content production",
     description:
       "Short-form, long-form, edits, shoots, and platform-native stories built to earn attention instead of filling a calendar.",
+    more:
+      "Ideas are only useful when they become something people want to watch. We produce platform-native content designed for attention, including short-form videos, long-form edits, social campaigns, branded stories, talking-head content, and creative formats built around your audience and channel.",
+    includes: "Reels · Shorts · YouTube videos · Social campaigns · Video editing · Motion graphics · Scripts · Content repurposing",
     tags: ["Video", "Reels", "Campaigns"],
     color: "blue",
   },
@@ -49,6 +55,9 @@ const services = [
     title: "AI content studio",
     description:
       "Human-led AI workflows for articles, social captions, creative variations, research, and scalable content operations.",
+    more:
+      "Content that moves at the speed of your business. SoloDac uses human-led AI workflows to help brands create more content without losing their voice—from blog articles and website copy to social captions, campaign concepts, SEO content, and creative variations.",
+    includes: "AI blog articles · Website copy · Social captions · SEO strategy · Campaign messaging · Brand voice · Repurposing",
     tags: ["AI workflows", "SEO content", "Brand voice"],
     color: "coral",
   },
@@ -58,6 +67,9 @@ const services = [
     title: "Web & digital builds",
     description:
       "Fast, responsive websites and landing pages that make your offer clearer, your brand sharper, and your next action obvious.",
+    more:
+      "A website should make your business easier to understand and easier to choose. SoloDac designs and builds responsive websites, landing pages, and digital experiences that combine clear messaging, strong visual identity, useful user experience, and conversion-focused structure.",
+    includes: "Business websites · Landing pages · Campaign microsites · Portfolio sites · Redesigns · Mobile UX · SEO-ready structure",
     tags: ["Websites", "Landing pages", "UX"],
     color: "paper",
   },
@@ -67,6 +79,9 @@ const services = [
     title: "Search & visibility",
     description:
       "SEO, local search, Google Business Profile, and the content signals that help the right people find you at the right moment.",
+    more:
+      "Be easier to find when people are ready to act. We help businesses improve visibility across search engines, local search, Google Business Profile, and helpful content. The goal is not just more traffic—it is better-qualified attention.",
+    includes: "SEO strategy · Keyword research · Local SEO · Google Business Profile · On-page SEO · SEO content · Reporting",
     tags: ["SEO", "Local search", "Google"],
     color: "violet",
   },
@@ -76,6 +91,9 @@ const services = [
     title: "Performance marketing",
     description:
       "Paid campaigns, creative testing, tracking, and iteration focused on useful outcomes—not vanity dashboards.",
+    more:
+      "Creative that earns attention. Campaigns that create action. SoloDac plans, launches, tracks, and improves paid campaigns across platforms such as Meta and Google, connecting creative production with measurement so campaigns improve over time.",
+    includes: "Campaign strategy · Meta ads · Google ads · Creative testing · Conversion tracking · Targeting · Landing-page optimization",
     tags: ["Meta", "Google", "Reporting"],
     color: "orange",
   },
@@ -94,6 +112,7 @@ function scrollToId(id: string) {
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [expandedService, setExpandedService] = useState<string | null>(null);
   const [formSent, setFormSent] = useState(false);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -227,9 +246,11 @@ export default function Home() {
           <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => {
               const Icon = service.icon;
-              return <article key={service.number} className={`group relative min-h-[300px] overflow-hidden rounded-3xl border border-white/10 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/25 ${service.color === "paper" ? "bg-paper text-ink" : "bg-white/[0.045]"}`}>
-                <div className="flex items-start justify-between"><span className={`font-mono text-xs ${service.color === "paper" ? "text-ink/45" : "text-white/35"}`}>{service.number}</span><div className={`grid h-10 w-10 place-items-center rounded-full transition-colors ${service.color === "lime" ? "bg-lime text-ink" : service.color === "blue" ? "bg-blue-400 text-ink" : service.color === "coral" ? "bg-coral text-ink" : service.color === "paper" ? "bg-ink text-paper" : service.color === "violet" ? "bg-violet-400 text-ink" : "bg-orange-300 text-ink"}`}><Icon size={18} /></div></div>
-                <div className="absolute bottom-6 left-6 right-6"><h3 className="max-w-[260px] font-display text-3xl font-black leading-[0.95] tracking-[-0.06em]">{service.title}</h3><p className={`mt-4 max-w-[300px] text-sm leading-relaxed ${service.color === "paper" ? "text-ink/60" : "text-white/55"}`}>{service.description}</p><div className={`mt-5 flex flex-wrap gap-2 text-[9px] font-bold uppercase tracking-[0.14em] ${service.color === "paper" ? "text-ink/45" : "text-white/35"}`}>{service.tags.map((tag) => <span key={tag} className="rounded-full border border-current px-2 py-1">{tag}</span>)}</div></div>
+              const isExpanded = expandedService === service.number;
+              const isPaper = service.color === "paper";
+              return <article key={service.number} className={`group relative min-h-[330px] overflow-hidden rounded-3xl border border-white/10 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/25 hover:shadow-2xl hover:shadow-black/20 ${isPaper ? "bg-paper text-ink" : "bg-white/[0.045]"}`}>
+                <div className="flex items-start justify-between"><span className={`font-mono text-xs ${isPaper ? "text-ink/45" : "text-white/35"}`}>{service.number}</span><div className={`grid h-10 w-10 place-items-center rounded-full transition-transform duration-300 group-hover:rotate-12 ${service.color === "lime" ? "bg-lime text-ink" : service.color === "blue" ? "bg-blue-400 text-ink" : service.color === "coral" ? "bg-coral text-ink" : isPaper ? "bg-ink text-paper" : service.color === "violet" ? "bg-violet-400 text-ink" : "bg-orange-300 text-ink"}`}><Icon size={18} /></div></div>
+                <div className="absolute bottom-6 left-6 right-6"><h3 className="max-w-[280px] font-display text-3xl font-black leading-[0.95] tracking-[-0.06em]">{service.title}</h3><p className={`mt-4 max-w-[330px] text-sm leading-relaxed ${isPaper ? "text-ink/60" : "text-white/55"}`}>{service.description}</p><div className={`grid transition-all duration-300 ${isExpanded ? "mt-4 max-h-48 opacity-100" : "max-h-0 overflow-hidden opacity-0"}`}><p className={`text-sm leading-relaxed ${isPaper ? "text-ink/70" : "text-white/65"}`}>{service.more}</p><p className={`mt-3 text-[10px] font-bold uppercase leading-relaxed tracking-[0.12em] ${isPaper ? "text-ink/45" : "text-lime/80"}`}>{service.includes}</p></div><div className="mt-5 flex items-center justify-between gap-3"><div className={`flex flex-wrap gap-2 text-[9px] font-bold uppercase tracking-[0.14em] ${isPaper ? "text-ink/45" : "text-white/35"}`}>{service.tags.map((tag) => <span key={tag} className="rounded-full border border-current px-2 py-1">{tag}</span>)}</div><button type="button" onClick={() => setExpandedService(isExpanded ? null : service.number)} aria-expanded={isExpanded} className={`flex shrink-0 items-center gap-1 text-[10px] font-black uppercase tracking-[0.12em] transition-colors ${isPaper ? "text-ink hover:text-coral" : "text-lime hover:text-white"}`}>{isExpanded ? "Less" : "Read more"}<ChevronDown size={14} className={`transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`} /></button></div></div>
                 <ArrowUpRight size={18} className="absolute right-6 top-[82px] opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:opacity-100" />
               </article>;
             })}
@@ -261,7 +282,7 @@ export default function Home() {
           <div><div className="mb-6 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.25em] text-ink/55"><span className="h-px w-10 bg-ink/60" /> Start a conversation</div><h2 className="max-w-xl font-display text-6xl font-black leading-[0.84] tracking-[-0.09em] sm:text-8xl">Have a good problem?</h2><p className="mt-8 max-w-md text-lg leading-relaxed text-ink/70">Tell us what you&apos;re building, where it&apos;s stuck, or where you want it to go. We&apos;ll come back with a point of view.</p><div className="mt-10 flex flex-wrap gap-3"><span className="rounded-full border border-ink/25 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em]">Social</span><span className="rounded-full border border-ink/25 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em]">Content</span><span className="rounded-full border border-ink/25 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em]">Digital</span></div></div>
           <form onSubmit={handleSubmit} className="rounded-3xl bg-ink p-6 text-paper sm:p-10">
             <div className="mb-8 flex items-center justify-between"><span className="font-display text-2xl font-black tracking-[-0.06em]">Project brief</span><PenTool size={20} className="text-lime" /></div>
-            {formSent ? <div className="flex min-h-[320px] flex-col items-center justify-center text-center"><div className="mb-5 grid h-16 w-16 place-items-center rounded-full bg-lime text-ink"><Check size={28} /></div><h3 className="font-display text-4xl font-black tracking-[-0.06em]">Signal received.</h3><p className="mt-3 max-w-sm text-sm leading-relaxed text-white/55">This demo form is ready to connect to your inbox or CRM when you are.</p><button type="button" onClick={() => setFormSent(false)} className="mt-7 text-xs font-bold uppercase tracking-[0.18em] text-lime hover:underline">Send another brief</button></div> : <div className="space-y-5"><div className="grid gap-5 sm:grid-cols-2"><label className="text-xs font-bold uppercase tracking-[0.14em] text-white/45">Your name<input required name="name" placeholder="Jane Smith" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" /></label><label className="text-xs font-bold uppercase tracking-[0.14em] text-white/45">Email<input required type="email" name="email" placeholder="you@company.com" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" /></label></div><label className="block text-xs font-bold uppercase tracking-[0.14em] text-white/45">What can we help with?<select name="service" defaultValue="" className="mt-2 w-full border-b border-white/20 bg-ink pb-3 text-base font-medium text-paper outline-none transition-colors focus:border-lime"><option value="" disabled>Select a direction</option><option>Social media management</option><option>Content production</option><option>AI content generation</option><option>Website / digital build</option><option>SEO or performance marketing</option><option>Not sure yet</option></select></label><label className="block text-xs font-bold uppercase tracking-[0.14em] text-white/45">A little context<textarea required name="message" rows={4} placeholder="What are you trying to make happen?" className="mt-2 w-full resize-none border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" /></label><button type="submit" className="group flex w-full items-center justify-between rounded-full bg-lime px-5 py-4 text-sm font-black text-ink transition-colors hover:bg-[#d8ff2f]">Send project brief <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></button></div>}
+            {formSent ? <div className="flex min-h-[320px] flex-col items-center justify-center text-center"><div className="mb-5 grid h-16 w-16 place-items-center rounded-full bg-lime text-ink"><Check size={28} /></div><h3 className="font-display text-4xl font-black tracking-[-0.06em]">Signal received.</h3><p className="mt-3 max-w-sm text-sm leading-relaxed text-white/55">This demo form is ready to connect to your inbox or CRM when you are.</p><button type="button" onClick={() => setFormSent(false)} className="mt-7 text-xs font-bold uppercase tracking-[0.18em] text-lime hover:underline">Send another brief</button></div> : <div className="space-y-5"><div className="grid gap-5 sm:grid-cols-2"><label className="text-xs font-bold uppercase tracking-[0.14em] text-white/45">Your name<input required name="name" placeholder="Jane Smith" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" /></label><label className="text-xs font-bold uppercase tracking-[0.14em] text-white/45">Company / brand<input required name="company" placeholder="Your company" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" /></label></div><div className="grid gap-5 sm:grid-cols-2"><label className="text-xs font-bold uppercase tracking-[0.14em] text-white/45">Email<input required type="email" name="email" placeholder="you@company.com" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" /></label><label className="text-xs font-bold uppercase tracking-[0.14em] text-white/45">Phone / WhatsApp<input name="phone" placeholder="Optional" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" /></label></div><label className="block text-xs font-bold uppercase tracking-[0.14em] text-white/45">What can we help with?<select required name="service" defaultValue="" className="mt-2 w-full border-b border-white/20 bg-ink pb-3 text-base font-medium text-paper outline-none transition-colors focus:border-lime"><option value="" disabled>Select a direction</option><option>Social media management</option><option>Content production</option><option>AI content generation</option><option>Website / digital build</option><option>SEO or performance marketing</option><option>Not sure yet</option></select></label><label className="block text-xs font-bold uppercase tracking-[0.14em] text-white/45">A little context<textarea required name="message" rows={4} placeholder="What are you trying to make happen?" className="mt-2 w-full resize-none border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" /></label><button type="submit" className="group flex w-full items-center justify-between rounded-full bg-lime px-5 py-4 text-sm font-black text-ink transition-colors hover:bg-[#d8ff2f]">Send project brief <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></button></div>}
           </form>
         </div>
       </section>
