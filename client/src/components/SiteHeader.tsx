@@ -78,7 +78,7 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
   };
 
   return (
-    <header className={`z-50 bg-transparent px-2 pt-2 sm:px-4 sm:pt-3 ${isFormPage ? "relative" : "sticky top-2 sm:top-3"}`}>
+    <header className={`left-0 right-0 top-2 z-50 bg-transparent px-2 sm:top-3 sm:px-4 ${isFormPage ? "relative" : "fixed"}`}>
       <div
         className={`mx-auto flex w-full max-w-[1440px] items-center justify-between gap-3 rounded-full border border-white/10 bg-black/40 shadow-[0_18px_60px_rgba(0,0,0,.28)] backdrop-blur-xl transition-all duration-300 md:w-fit md:justify-normal ${
           scrolled ? "min-h-[40px] px-2 py-1 md:gap-4 lg:gap-6 lg:px-3" : "min-h-[52px] px-3 py-1.5 sm:min-h-[56px] sm:px-4 md:gap-10 lg:gap-14 lg:px-6"
