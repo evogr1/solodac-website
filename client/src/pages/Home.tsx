@@ -214,7 +214,7 @@ export default function Home() {
           </nav>
 
           <button
-            onClick={() => navigate("contact")}
+            onClick={() => setLocation("/start-a-project")}
             className="hidden items-center gap-3 rounded-full border border-white/30 bg-white/[0.08] px-5 py-3 text-[11px] font-bold uppercase tracking-[0.16em] text-paper shadow-inner shadow-white/10 transition-all hover:border-lime hover:bg-lime hover:text-ink md:flex"
           >
             Start a project <ArrowUpRight size={14} />
@@ -234,7 +234,7 @@ export default function Home() {
               <button onClick={() => navigate("services")} className={`text-left ${activeSection === "services" ? "text-lime" : "text-white/70"}`}>Services</button>
               <button onClick={() => navigate("network")} className={`text-left ${activeSection === "network" ? "text-lime" : "text-white/70"}`}>Network</button>
               <button onClick={() => navigate("approach")} className={`text-left ${activeSection === "approach" ? "text-lime" : "text-white/70"}`}>Approach</button>
-              <button onClick={() => navigate("contact")} className="text-left text-lime">Start a project <ArrowUpRight className="ml-1 inline" size={16} /></button>
+              <button onClick={() => setLocation("/start-a-project")} className="text-left text-lime">Start a project <ArrowUpRight className="ml-1 inline" size={16} /></button>
             </div>
           </div>
         )}
