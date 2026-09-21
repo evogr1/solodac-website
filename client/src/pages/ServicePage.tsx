@@ -1,5 +1,6 @@
 import { ArrowLeft, ArrowUpRight, Check, ChevronRight, Instagram, Sparkles } from "lucide-react";
 import { Link, useLocation, useRoute } from "wouter";
+import SiteHeader from "../components/SiteHeader";
 import { services } from "./Home";
 
 export default function ServicePage() {
@@ -19,12 +20,7 @@ export default function ServicePage() {
   return (
     <main className="min-h-screen overflow-hidden bg-ink text-paper selection:bg-lime selection:text-ink">
       <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.045] noise" />
-      <header className="relative z-10 border-b border-white/10 bg-ink/90 backdrop-blur-xl">
-        <div className="mx-auto flex h-[76px] max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12">
-          <Link href="/" className="group flex items-center gap-3" aria-label="SoloDac home"><span className="grid h-9 w-9 place-items-center rounded-full bg-lime text-ink transition-transform group-hover:rotate-12"><span className="h-3 w-3 rounded-full bg-ink" /></span><span className="font-display text-[1.7rem] font-black tracking-[-0.08em]">SoloDac</span></Link>
-          <Link href="/eyeballs" className="flex items-center gap-3 rounded-full border border-lime/60 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-lime transition-all hover:bg-lime hover:text-ink">Get eyeballs <ArrowUpRight size={14} /></Link>
-        </div>
-      </header>
+      <SiteHeader />
 
       <section className="relative z-10 border-b border-white/10 px-5 pb-20 pt-14 sm:px-8 sm:pt-20 lg:px-12 lg:pb-28 lg:pt-24">
         <div className="absolute right-[-10%] top-[-10%] h-[520px] w-[520px] rounded-full bg-lime/10 blur-[120px]" />

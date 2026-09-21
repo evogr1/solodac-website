@@ -9,7 +9,6 @@ import {
   Globe2,
   Instagram,
   Layers3,
-  Menu,
   Megaphone,
   MoveRight,
   Play,
@@ -22,6 +21,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { useLocation } from "wouter";
+import SiteHeader from "../components/SiteHeader";
 import heroImage from "../assets/solodac-signal.jpg";
 
 export const services = [
@@ -120,13 +120,8 @@ const demographicBreakdown = [
   { label: "Extended accounts reached", value: "100M", note: "Extended Network — unique accounts reached." },
 ];
 
-function scrollToId(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-}
-
 export default function Home() {
   const [, setLocation] = useLocation();
-  const [menuOpen, setMenuOpen] = useState(false);
   const [expandedService, setExpandedService] = useState<string | null>(null);
   const [activeSection, setActiveSection] = useState("top");
 
@@ -151,56 +146,10 @@ export default function Home() {
     };
   }, []);
 
-  const navigate = (id: string) => {
-    setMenuOpen(false);
-    scrollToId(id);
-  };
-
   return (
     <main className="min-h-screen overflow-hidden bg-ink text-paper selection:bg-lime selection:text-ink">
       <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.045] noise" />
-      <header className="sticky top-2 z-50 bg-transparent px-2 pt-2 sm:top-3 sm:px-4 sm:pt-3">
-        <div className="mx-auto flex min-h-[68px] max-w-[1440px] items-center justify-between gap-3 rounded-full border border-white/10 bg-black/90 px-4 py-3 shadow-[0_18px_60px_rgba(0,0,0,.28)] backdrop-blur-xl sm:min-h-[76px] sm:px-7 lg:px-10">
-          <a href="#top" className="group flex items-center gap-3" aria-label="SoloDac home">
-            <span className="grid h-9 w-9 place-items-center rounded-full bg-lime text-ink transition-transform duration-200 group-hover:rotate-12 sm:h-10 sm:w-10">
-              <span className="h-3 w-3 rounded-full bg-ink sm:h-3.5 sm:w-3.5" />
-            </span>
-            <span className="font-display text-[1.35rem] font-black tracking-[-0.08em] sm:text-[1.7rem]">SoloDac</span>
-          </a>
-
-          <nav className="hidden items-center gap-1 rounded-full bg-white/[0.035] p-1 text-[11px] font-bold uppercase tracking-[0.16em] text-white/55 md:flex">
-            <button onClick={() => navigate("services")} className={`pill-nav-link rounded-full px-4 py-3 ${activeSection === "services" ? "is-active" : ""}`}>Services</button>
-            <button onClick={() => navigate("network")} className={`pill-nav-link rounded-full px-4 py-3 ${activeSection === "network" ? "is-active" : ""}`}>Network</button>
-            <button onClick={() => navigate("approach")} className={`pill-nav-link rounded-full px-4 py-3 ${activeSection === "approach" ? "is-active" : ""}`}>Approach</button>
-            <button onClick={() => setLocation("/eyeballs")} className="pill-nav-link rounded-full px-4 py-3">Contact</button>
-          </nav>
-
-          <button
-            onClick={() => setLocation("/eyeballs")}
-            className="hidden items-center gap-3 rounded-full border border-white/30 bg-white/[0.08] px-5 py-3 text-[11px] font-bold uppercase tracking-[0.16em] text-paper shadow-inner shadow-white/10 transition-all hover:border-lime hover:bg-lime hover:text-ink md:flex"
-          >
-            Get eyeballs <ArrowUpRight size={14} />
-          </button>
-
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/20 bg-white/[0.06] text-paper md:hidden"
-            aria-label="Toggle navigation"
-          >
-            {menuOpen ? <X size={18} /> : <Menu size={18} />}
-          </button>
-        </div>
-        {menuOpen && (
-          <div className="mx-2 border-t border-white/10 px-3 py-5 md:hidden">
-            <div className="flex flex-col gap-5 text-sm font-bold uppercase tracking-[0.14em]">
-              <button onClick={() => navigate("services")} className={`text-left ${activeSection === "services" ? "text-lime" : "text-white/70"}`}>Services</button>
-              <button onClick={() => navigate("network")} className={`text-left ${activeSection === "network" ? "text-lime" : "text-white/70"}`}>Network</button>
-              <button onClick={() => navigate("approach")} className={`text-left ${activeSection === "approach" ? "text-lime" : "text-white/70"}`}>Approach</button>
-              <button onClick={() => setLocation("/eyeballs")} className="text-left text-lime">Get eyeballs <ArrowUpRight className="ml-1 inline" size={16} /></button>
-            </div>
-          </div>
-        )}
-      </header>
+      <SiteHeader activeSection={activeSection} />
 
       <section id="top" className="relative z-10 w-full overflow-hidden bg-[#0d0f0f]">
         <img src={heroImage} alt="SoloDac signal artwork" className="hero-art block h-[58svh] min-h-[430px] w-full object-cover object-[70%_center] sm:h-auto sm:min-h-0 sm:object-center" />

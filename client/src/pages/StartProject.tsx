@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { ArrowUpRight, Check, Menu, PenTool, X } from "lucide-react";
+import { ArrowUpRight, Check, PenTool } from "lucide-react";
 import { toast } from "sonner";
-import { Link, useLocation } from "wouter";
+import { Link } from "wouter";
+import SiteHeader from "../components/SiteHeader";
 
 const serviceOptions = [
   "Instagram Marketing",
@@ -30,13 +31,7 @@ const budgetOptions = [
 
 const companyStageOptions = ["Stealth", "Pre-Seed", "Seed", "Series A", "Series B+", "Pre-IPO", "Public", "Private", "Other"];
 
-function scrollToId(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-}
-
 export default function StartProject() {
-  const [, setLocation] = useLocation();
-  const [menuOpen, setMenuOpen] = useState(false);
   const [formSent, setFormSent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
@@ -76,59 +71,10 @@ export default function StartProject() {
     }
   };
 
-  const navigate = (id: string) => {
-    setMenuOpen(false);
-    if (window.location.pathname !== "/") {
-      setLocation("/");
-      window.setTimeout(() => scrollToId(id), 50);
-    } else {
-      scrollToId(id);
-    }
-  };
-
   return (
     <main className="min-h-screen overflow-hidden bg-ink text-paper selection:bg-lime selection:text-ink">
       <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.045] noise" />
-      <header className="relative z-50 border-b border-white/10 bg-ink/90 backdrop-blur-xl">
-        <div className="mx-auto flex h-[76px] max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12">
-          <Link href="/" className="group flex items-center gap-3" aria-label="SoloDac home">
-            <span className="grid h-9 w-9 place-items-center rounded-full bg-lime text-ink transition-transform duration-200 group-hover:rotate-12">
-              <span className="h-3 w-3 rounded-full bg-ink" />
-            </span>
-            <span className="font-display text-[1.7rem] font-black tracking-[-0.08em]">SoloDac</span>
-          </Link>
-
-          <nav className="hidden items-center gap-8 text-[11px] font-bold uppercase tracking-[0.18em] text-white/60 md:flex">
-            <button onClick={() => navigate("services")} className="transition-colors hover:text-lime">Services</button>
-            <button onClick={() => navigate("network")} className="transition-colors hover:text-lime">Network</button>
-            <button onClick={() => navigate("approach")} className="transition-colors hover:text-lime">Approach</button>
-          </nav>
-
-          <Link
-            href="/eyeballs"
-            className="hidden items-center gap-3 rounded-full border border-lime/60 bg-lime px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-ink transition-all md:flex"
-          >
-            Get eyeballs <ArrowUpRight size={14} />
-          </Link>
-
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-paper md:hidden"
-            aria-label="Toggle navigation"
-          >
-            {menuOpen ? <X size={18} /> : <Menu size={18} />}
-          </button>
-        </div>
-        {menuOpen && (
-          <div className="border-t border-white/10 px-5 py-6 md:hidden">
-            <div className="flex flex-col gap-5 text-sm font-bold uppercase tracking-[0.14em]">
-              <button onClick={() => navigate("services")} className="text-left text-white/70">Services</button>
-              <button onClick={() => navigate("network")} className="text-left text-white/70">Network</button>
-              <button onClick={() => navigate("approach")} className="text-left text-white/70">Approach</button>
-            </div>
-          </div>
-        )}
-      </header>
+      <SiteHeader />
 
       <section className="relative z-10 px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <div className="mx-auto grid max-w-[1100px] gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
