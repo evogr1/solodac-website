@@ -3,7 +3,6 @@ import {
   ArrowDownRight,
   ArrowUpRight,
   Bot,
-  Check,
   ChevronDown,
   Clapperboard,
   Code2,
@@ -106,14 +105,7 @@ export const services = [
   },
 ];
 
-const deliverables = [
-  "A sharper point of view",
-  "A repeatable content engine",
-  "A brand people remember",
-  "A digital home that converts",
-];
-
-const ownedHandles = ["@millionairesformula", "@successfularcs", "@archiveofceos", "@businessedgex", "@bourseindia", "@virodhindia", "@lucreindia"];
+const ownedHandles = ["@millionairesformula", "@successfularcs", "@archiveofceos", "@businessedgex", "@bourseindia", "@virodhindia", "@lucreindia", "@howaitechworks", "@explorenow.ai"];
 const extendedHandles = ["@archiveofoceans", "@ceosformula", "@krefion", "@motivation_hustling", "@themillionairemagnate", "@powerbymindset", "@bizknock"];
 const demographicBreakdown = [
   { label: "Region", value: "India", note: "Primary market supplied for the SoloDac network." },
@@ -218,9 +210,6 @@ export default function Home() {
           </div>
           <div className="max-w-3xl">
             <p className="text-2xl font-medium leading-tight tracking-[-0.03em] sm:text-4xl">We don&apos;t make content for the sake of having content. We build <span className="text-coral">momentum</span>—the kind that makes a brand easier to find, easier to choose, and harder to forget.</p>
-            <div className="mt-10 grid gap-4 border-t border-ink/15 pt-6 sm:grid-cols-2">
-              {deliverables.map((item) => <div key={item} className="flex items-center gap-3 text-sm font-bold"><Check size={17} className="text-coral" /> {item}</div>)}
-            </div>
           </div>
         </div>
       </section>
@@ -228,9 +217,9 @@ export default function Home() {
       <section id="network" className="signal-section relative z-10 overflow-hidden border-b border-white/10 bg-[#151a19] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
         <div className="absolute -right-24 top-16 h-80 w-80 rounded-full border-[28px] border-lime/10" />
         <div className="mx-auto max-w-[1440px]">
-          <div className="mb-14 max-w-2xl"><div className="mb-6 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-lime"><span className="h-px w-10 bg-lime" /> The SoloDac network</div><h2 className="font-display text-5xl font-black leading-[0.88] tracking-[-0.08em] sm:text-7xl">Owned attention.<br /><span className="text-white/35">India in focus.</span></h2><p className="mt-7 max-w-xl text-base leading-relaxed text-white/55">A connected network of pages across business, finance, motivation, entrepreneurship, and culture. The handles below are ready to link to their live Instagram profiles.</p></div>
+          <div className="mb-14 max-w-2xl"><div className="mb-6 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-lime"><span className="h-px w-10 bg-lime" /> The SoloDac network</div><h2 className="font-display text-5xl font-black leading-[0.88] tracking-[-0.08em] sm:text-7xl">Owned attention.<br /><span className="text-white/35">World in focus.</span></h2><p className="mt-7 max-w-xl text-base leading-relaxed text-white/55">A connected network of pages across business, finance, motivation, entrepreneurship, and culture.</p></div>
           <div className="grid gap-3 lg:grid-cols-2">
-            <div className="signal-card rounded-3xl border border-lime/35 bg-lime/[0.07] p-6 sm:p-8"><div className="mb-8 flex items-start justify-between"><div><div className="text-[10px] font-bold uppercase tracking-[0.2em] text-lime">01 / Owned network</div><div className="mt-3 font-display text-4xl font-black tracking-[-0.07em]">7 owned pages.</div></div><Instagram size={22} className="text-lime" /></div><div className="grid gap-2 sm:grid-cols-2">{ownedHandles.map((handle) => <a key={handle} href={`https://www.instagram.com/${handle.slice(1)}/`} target="_blank" rel="noreferrer" className="flex items-center justify-between rounded-xl border border-white/10 bg-ink/20 px-3 py-3 text-sm font-bold text-white/75 transition-all hover:-translate-y-0.5 hover:border-lime hover:text-lime"><span>{handle}</span><ArrowUpRight size={14} /></a>)}</div></div>
+            <div className="signal-card rounded-3xl border border-lime/35 bg-lime/[0.07] p-6 sm:p-8"><div className="mb-8 flex items-start justify-between"><div><div className="text-[10px] font-bold uppercase tracking-[0.2em] text-lime">01 / Owned network</div><div className="mt-3 font-display text-4xl font-black tracking-[-0.07em]">{ownedHandles.length} owned pages.</div></div><Instagram size={22} className="text-lime" /></div><div className="grid gap-2 sm:grid-cols-2">{ownedHandles.map((handle) => <a key={handle} href={`https://www.instagram.com/${handle.slice(1)}/`} target="_blank" rel="noreferrer" className="flex items-center justify-between rounded-xl border border-white/10 bg-ink/20 px-3 py-3 text-sm font-bold text-white/75 transition-all hover:-translate-y-0.5 hover:border-lime hover:text-lime"><span>{handle}</span><ArrowUpRight size={14} /></a>)}</div></div>
             <div className="signal-card rounded-3xl border border-blue-300/30 bg-blue-300/[0.07] p-6 sm:p-8"><div className="mb-8 flex items-start justify-between"><div><div className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-200">02 / Extended network</div><div className="mt-3 font-display text-4xl font-black tracking-[-0.07em]">6 extended pages.</div></div><Globe2 size={22} className="text-blue-200" /></div><div className="grid gap-2 sm:grid-cols-2">{extendedHandles.map((handle) => <a key={handle} href={`https://www.instagram.com/${handle.slice(1)}/`} target="_blank" rel="noreferrer" className="flex items-center justify-between rounded-xl border border-white/10 bg-ink/20 px-3 py-3 text-sm font-bold text-white/75 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:text-blue-200"><span>{handle}</span><ArrowUpRight size={14} /></a>)}</div></div>
           </div>
           <div className="signal-card mt-3 rounded-3xl border border-coral/30 bg-coral/[0.07] p-6 sm:p-8"><div className="mb-8 flex items-start justify-between"><div><div className="text-[10px] font-bold uppercase tracking-[0.2em] text-coral">03 / Indian audience profile</div><div className="mt-3 font-display text-4xl font-black tracking-[-0.07em]">Demographics, ready to map.</div></div><Target size={22} className="text-coral" /></div><div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{demographicBreakdown.map((item) => <div key={item.label} className="rounded-2xl border border-white/10 bg-ink/20 p-4"><div className="text-[10px] font-bold uppercase tracking-[0.16em] text-coral">{item.label}</div><div className="mt-3 font-display text-2xl font-black tracking-[-0.05em]">{item.value}</div><p className="mt-2 text-xs leading-relaxed text-white/45">{item.note}</p></div>)}</div><p className="mt-6 text-xs leading-relaxed text-white/40">Only “Indian region” was supplied so far. State, city, age, gender, language, and interest values are intentionally marked as pending rather than fabricated. They can be filled from Instagram Insights once available.</p></div>
