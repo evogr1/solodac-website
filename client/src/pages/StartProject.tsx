@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { ArrowUpRight, Check, PenTool } from "lucide-react";
+import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { Link } from "wouter";
 import SiteHeader from "../components/SiteHeader";
+
+const easeOut = [0.23, 1, 0.32, 1] as const;
 
 const serviceOptions = [
   "Instagram Marketing",
@@ -121,14 +124,20 @@ export default function StartProject() {
 
       <section className="relative z-10 px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <div className="mx-auto grid max-w-[1100px] gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
-          <div>
+          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: easeOut }}>
             <div className="mb-6 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.25em] text-white/45"><span className="h-px w-10 bg-coral" /> Large-scale social marketing</div>
             <h1 className="max-w-md font-display text-5xl font-black leading-[0.9] tracking-[-0.06em] sm:text-6xl">Get eyeballs.</h1>
             <p className="mt-7 max-w-md text-lg leading-relaxed text-white/60">Our network of owned and extended pages generates <span className="text-lime">18B+ views</span> a year. Amplify your brand, founder, or product narrative with a managed SoloDac campaign.</p>
             <p className="mt-5 max-w-md text-base leading-relaxed text-white/45">Tell us what you&apos;re building, your budget, and your timeline—we&apos;ll come back with a point of view and a plan to scale your reach.</p>
-          </div>
+          </motion.div>
 
-          <form onSubmit={handleSubmit} className="signal-card rounded-3xl border border-lime/20 bg-[#151a19] p-6 sm:p-10">
+          <motion.form
+            initial={{ opacity: 0, y: 24, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.15, ease: easeOut }}
+            onSubmit={handleSubmit}
+            className="signal-card rounded-3xl border border-lime/20 bg-[#151a19] p-6 sm:p-10"
+          >
             <div className="mb-8 flex items-center justify-between">
               <span className="font-display text-2xl font-black tracking-[-0.06em]">Marketing form</span>
               <PenTool size={20} className="text-lime" />
@@ -268,7 +277,7 @@ export default function StartProject() {
                 </button>
               </div>
             )}
-          </form>
+          </motion.form>
         </div>
       </section>
 
