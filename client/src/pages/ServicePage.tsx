@@ -3,15 +3,20 @@ import { motion } from "framer-motion";
 import { Link, useLocation, useRoute } from "wouter";
 import Reveal from "../components/Reveal";
 import SiteHeader from "../components/SiteHeader";
+import { useScrollToTop } from "../hooks/useScrollToTop";
 import { services } from "../lib/services";
 
 export default function ServicePage() {
-  const [, params] = useRoute("/services/:slug");
+  useScrollToTop();
+  const [match, params] = useRoute("/services/:slug");
   const [, setLocation] = useLocation();
   const service = services.find((item) => item.slug === params?.slug);
 
-  if (!service) {
+  if (match && !service) {
     setLocation("/404");
+    return null;
+  }
+  if (!service) {
     return null;
   }
 

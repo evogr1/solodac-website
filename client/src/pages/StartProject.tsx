@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { Link } from "wouter";
 import SiteHeader from "../components/SiteHeader";
+import { useScrollToTop } from "../hooks/useScrollToTop";
 
 const easeOut = [0.23, 1, 0.32, 1] as const;
 
@@ -45,6 +46,7 @@ const continentCountries: Record<string, string[]> = {
 const continents = Object.keys(continentCountries);
 
 export default function StartProject() {
+  useScrollToTop();
   const [formSent, setFormSent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);

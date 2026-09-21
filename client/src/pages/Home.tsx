@@ -21,6 +21,7 @@ import { toast } from "sonner";
 import { useLocation } from "wouter";
 import Reveal from "../components/Reveal";
 import SiteHeader from "../components/SiteHeader";
+import { useScrollToTop } from "../hooks/useScrollToTop";
 import { services } from "../lib/services";
 import heroImage from "../assets/solodac-signal.jpg";
 
@@ -40,6 +41,7 @@ const demographicBreakdown = [
 ];
 
 export default function Home() {
+  useScrollToTop();
   const [, setLocation] = useLocation();
   const [expandedService, setExpandedService] = useState<string | null>(null);
   const [activeSection, setActiveSection] = useState("top");

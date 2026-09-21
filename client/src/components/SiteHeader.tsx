@@ -1,6 +1,7 @@
 import { ArrowUpRight, Boxes, BarChart2, BookOpen, Briefcase, ChevronDown, MessageCircle, Menu, PlayCircle, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
+import { setPendingSection } from "../lib/scrollIntent";
 
 const sauceItems = [
   { icon: PlayCircle, label: "What we do", id: "services" },
@@ -18,6 +19,15 @@ const navItems = [
 
 function scrollToId(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+}
+
+function scrollToIdWhenReady(id: string, attempts = 30) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth" });
+  } else if (attempts > 0) {
+    window.requestAnimationFrame(() => scrollToIdWhenReady(id, attempts - 1));
+  }
 }
 
 export default function SiteHeader({ activeSection }: { activeSection?: string }) {
@@ -46,8 +56,9 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
     setMenuOpen(false);
     setSauceOpen(false);
     if (location !== "/") {
+      setPendingSection(id);
       setLocation("/");
-      window.setTimeout(() => scrollToId(id), 60);
+      scrollToIdWhenReady(id);
     } else {
       scrollToId(id);
     }
@@ -58,8 +69,9 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
     setMenuOpen(false);
     setSauceOpen(false);
     if (location !== "/") {
+      setPendingSection("top");
       setLocation("/");
-      window.setTimeout(() => scrollToId("top"), 60);
+      scrollToIdWhenReady("top");
     } else {
       scrollToId("top");
     }
