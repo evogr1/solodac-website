@@ -45,16 +45,21 @@ export default function StartProject() {
   const [formSent, setFormSent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
-  const [selectedContinent, setSelectedContinent] = useState<string | null>(null);
+  const [selectedContinents, setSelectedContinents] = useState<string[]>([]);
   const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
 
   const toggleService = (service: string) => {
     setSelectedServices((prev) => (prev.includes(service) ? prev.filter((s) => s !== service) : [...prev, service]));
   };
 
-  const selectContinent = (continent: string) => {
-    setSelectedContinent(continent);
-    setSelectedCountries([]);
+  const toggleContinent = (continent: string) => {
+    setSelectedContinents((prev) => {
+      if (prev.includes(continent)) {
+        setSelectedCountries((countries) => countries.filter((c) => !continentCountries[continent].includes(c)));
+        return prev.filter((c) => c !== continent);
+      }
+      return [...prev, continent];
+    });
   };
 
   const toggleCountry = (country: string) => {
@@ -63,13 +68,27 @@ export default function StartProject() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (selectedServices.length === 0) {
+      toast.error("Please select at least one service of interest.");
+      return;
+    }
+    if (selectedContinents.length === 0) {
+      toast.error("Please select at least one continent.");
+      return;
+    }
+    if (selectedCountries.length === 0) {
+      toast.error("Please select at least one country.");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
       const form = event.currentTarget;
       const formData = new FormData(form);
       formData.set("services_of_interest", selectedServices.join(", "));
-      formData.set("target_continent", selectedContinent ?? "");
+      formData.set("target_continents", selectedContinents.join(", "));
       formData.set("target_countries", selectedCountries.join(", "));
       formData.append("access_key", "fa96ec00-da5f-49aa-89cf-6cd11dd05a95");
       formData.append("subject", "New SoloDac project inquiry");
@@ -124,8 +143,8 @@ export default function StartProject() {
             ) : (
               <div className="space-y-5">
                 <label className="block text-xs font-bold uppercase tracking-[0.14em] text-white/45">
-                  Name
-                  <input name="name" placeholder="Your Name" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" />
+                  Name <span className="text-coral">*</span>
+                  <input required name="name" placeholder="Your Name" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" />
                 </label>
 
                 <label className="block text-xs font-bold uppercase tracking-[0.14em] text-white/45">
@@ -134,8 +153,8 @@ export default function StartProject() {
                 </label>
 
                 <label className="block text-xs font-bold uppercase tracking-[0.14em] text-white/45">
-                  Phone (optional)
-                  <input name="phone" placeholder="Your Phone Number (Optional)" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" />
+                  Phone <span className="text-coral">*</span>
+                  <input required name="phone" placeholder="Your Phone Number" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" />
                 </label>
 
                 <div className="block text-xs font-bold uppercase tracking-[0.14em] text-white/45">
@@ -160,15 +179,15 @@ export default function StartProject() {
                 </div>
 
                 <div className="block text-xs font-bold uppercase tracking-[0.14em] text-white/45">
-                  Where do you want to be seen?
+                  Where do you want to be seen? <span className="text-coral">*</span>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {continents.map((continent) => {
-                      const active = selectedContinent === continent;
+                      const active = selectedContinents.includes(continent);
                       return (
                         <button
                           key={continent}
                           type="button"
-                          onClick={() => selectContinent(continent)}
+                          onClick={() => toggleContinent(continent)}
                           className={`rounded-full border px-3 py-2 text-[11px] font-bold normal-case tracking-normal transition-colors ${
                             active ? "border-lime bg-lime text-ink" : "border-white/20 text-white/60 hover:border-lime hover:text-lime"
                           }`}
@@ -179,26 +198,30 @@ export default function StartProject() {
                     })}
                   </div>
 
-                  {selectedContinent && (
-                    <div className="mt-4 border-t border-white/10 pt-4">
-                      <div className="mb-2 text-[10px] font-bold uppercase tracking-[0.14em] text-white/35">Countries in {selectedContinent}</div>
-                      <div className="flex flex-wrap gap-2">
-                        {continentCountries[selectedContinent].map((country) => {
-                          const active = selectedCountries.includes(country);
-                          return (
-                            <button
-                              key={country}
-                              type="button"
-                              onClick={() => toggleCountry(country)}
-                              className={`rounded-full border px-3 py-2 text-[11px] font-bold normal-case tracking-normal transition-colors ${
-                                active ? "border-coral bg-coral text-ink" : "border-white/20 text-white/60 hover:border-coral hover:text-coral"
-                              }`}
-                            >
-                              {country}
-                            </button>
-                          );
-                        })}
-                      </div>
+                  {selectedContinents.length > 0 && (
+                    <div className="mt-4 space-y-4 border-t border-white/10 pt-4">
+                      {selectedContinents.map((continent) => (
+                        <div key={continent}>
+                          <div className="mb-2 text-[10px] font-bold uppercase tracking-[0.14em] text-white/35">Countries in {continent} <span className="text-coral">*</span></div>
+                          <div className="flex flex-wrap gap-2">
+                            {continentCountries[continent].map((country) => {
+                              const active = selectedCountries.includes(country);
+                              return (
+                                <button
+                                  key={country}
+                                  type="button"
+                                  onClick={() => toggleCountry(country)}
+                                  className={`rounded-full border px-3 py-2 text-[11px] font-bold normal-case tracking-normal transition-colors ${
+                                    active ? "border-coral bg-coral text-ink" : "border-white/20 text-white/60 hover:border-coral hover:text-coral"
+                                  }`}
+                                >
+                                  {country}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   )}
                 </div>
@@ -212,21 +235,22 @@ export default function StartProject() {
                 </label>
 
                 <label className="block text-xs font-bold uppercase tracking-[0.14em] text-white/45">
-                  Company
-                  <input name="company" placeholder="Your Company" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" />
+                  Company <span className="text-coral">*</span>
+                  <input required name="company" placeholder="Your Company" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" />
                 </label>
 
                 <label className="block text-xs font-bold uppercase tracking-[0.14em] text-white/45">
-                  Company stage
-                  <select name="company_stage" defaultValue="" className="mt-2 w-full border-b border-white/20 bg-[#151a19] pb-3 text-base font-medium text-paper outline-none transition-colors focus:border-lime">
+                  Company stage <span className="text-coral">*</span>
+                  <select required name="company_stage" defaultValue="" className="mt-2 w-full border-b border-white/20 bg-[#151a19] pb-3 text-base font-medium text-paper outline-none transition-colors focus:border-lime">
                     <option value="" disabled>Please select one</option>
                     {companyStageOptions.map((option) => <option key={option}>{option}</option>)}
                   </select>
                 </label>
 
                 <label className="block text-xs font-bold uppercase tracking-[0.14em] text-white/45">
-                  Message
+                  Message <span className="text-coral">*</span>
                   <textarea
+                    required
                     name="message"
                     rows={4}
                     placeholder="Please tell us more about your goals, and desired campaign start date. Include your company social profile and/or company name so that we can learn more prior to getting in touch. Thank you!"
