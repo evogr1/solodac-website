@@ -28,7 +28,7 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
 
   return (
     <header className="sticky top-2 z-50 bg-transparent px-2 pt-2 sm:top-3 sm:px-4 sm:pt-3">
-      <div className="mx-auto flex min-h-[52px] max-w-[1440px] items-center justify-between gap-3 rounded-full border border-white/10 bg-black/40 px-3 py-1.5 shadow-[0_18px_60px_rgba(0,0,0,.28)] backdrop-blur-xl sm:min-h-[56px] sm:px-4 lg:px-5">
+      <div className="mx-auto flex min-h-[52px] w-full max-w-[1440px] items-center justify-between gap-3 rounded-full border border-white/10 bg-black/40 px-3 py-1.5 shadow-[0_18px_60px_rgba(0,0,0,.28)] backdrop-blur-xl sm:min-h-[56px] sm:px-4 md:w-fit md:justify-normal md:gap-10 lg:gap-14 lg:px-6">
         <Link href="/" className="group flex items-center gap-2" aria-label="SoloDac home">
           <span className="grid h-7 w-7 place-items-center rounded-full bg-lime text-ink transition-transform duration-200 group-hover:rotate-12">
             <span className="h-2.5 w-2.5 rounded-full bg-ink" />
