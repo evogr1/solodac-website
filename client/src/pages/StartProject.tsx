@@ -105,10 +105,10 @@ export default function StartProject() {
           </nav>
 
           <Link
-            href="/start-a-project"
+            href="/eyeballs"
             className="hidden items-center gap-3 rounded-full border border-lime/60 bg-lime px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-ink transition-all md:flex"
           >
-            Start a project <ArrowUpRight size={14} />
+            Get eyeballs <ArrowUpRight size={14} />
           </Link>
 
           <button
@@ -134,14 +134,9 @@ export default function StartProject() {
         <div className="mx-auto grid max-w-[1100px] gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
           <div>
             <div className="mb-6 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.25em] text-white/45"><span className="h-px w-10 bg-coral" /> Large-scale social marketing</div>
-            <h1 className="max-w-md font-display text-5xl font-black leading-[0.9] tracking-[-0.06em] sm:text-6xl">Start a project.</h1>
+            <h1 className="max-w-md font-display text-5xl font-black leading-[0.9] tracking-[-0.06em] sm:text-6xl">Get eyeballs.</h1>
             <p className="mt-7 max-w-md text-lg leading-relaxed text-white/60">Our network of owned and extended pages generates <span className="text-lime">18B+ views</span> a year. Amplify your brand, founder, or product narrative with a managed SoloDac campaign.</p>
             <p className="mt-5 max-w-md text-base leading-relaxed text-white/45">Tell us what you&apos;re building, your budget, and your timeline—we&apos;ll come back with a point of view and a plan to scale your reach.</p>
-            <div className="mt-10 flex flex-wrap gap-3">
-              <span className="rounded-full border border-white/15 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-white/60">Social</span>
-              <span className="rounded-full border border-white/15 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-white/60">Content</span>
-              <span className="rounded-full border border-white/15 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-white/60">Digital</span>
-            </div>
           </div>
 
           <form onSubmit={handleSubmit} className="signal-card rounded-3xl border border-lime/20 bg-[#151a19] p-6 sm:p-10">
