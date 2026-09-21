@@ -1,12 +1,19 @@
-import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
+import { ArrowUpRight, Boxes, BarChart2, BookOpen, Briefcase, ChevronDown, MessageCircle, Menu, PlayCircle, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "wouter";
-import { services } from "../lib/services";
+import { useLocation } from "wouter";
+
+const sauceItems = [
+  { icon: PlayCircle, label: "What we do", id: "services" },
+  { icon: BarChart2, label: "Campaigns", id: "case-studies" },
+  { icon: BookOpen, label: "Our thesis", id: "approach" },
+  { icon: Briefcase, label: "Case studies", id: "case-studies" },
+  { icon: MessageCircle, label: "Testimonials", id: "network" },
+  { icon: Boxes, label: "Portfolio", id: "case-studies" },
+];
 
 const navItems = [
-  { id: "services", label: "Services" },
-  { id: "network", label: "Network" },
-  { id: "approach", label: "Approach" },
+  { id: "approach", label: "About" },
+  { id: "case-studies", label: "Careers" },
 ];
 
 function scrollToId(id: string) {
@@ -16,7 +23,7 @@ function scrollToId(id: string) {
 export default function SiteHeader({ activeSection }: { activeSection?: string }) {
   const [location, setLocation] = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
+  const [sauceOpen, setSauceOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const isFormPage = location === "/eyeballs";
 
@@ -30,7 +37,7 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
 
   const goToSection = (id: string) => {
     setMenuOpen(false);
-    setServicesOpen(false);
+    setSauceOpen(false);
     if (location !== "/") {
       setLocation("/");
       window.setTimeout(() => scrollToId(id), 60);
@@ -42,7 +49,7 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
   const goHome = (event: React.MouseEvent) => {
     event.preventDefault();
     setMenuOpen(false);
-    setServicesOpen(false);
+    setSauceOpen(false);
     if (location !== "/") {
       setLocation("/");
       window.setTimeout(() => scrollToId("top"), 60);
@@ -70,10 +77,33 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
         </a>
 
         <nav
-          className={`hidden items-center gap-1 overflow-hidden rounded-full bg-white/[0.035] text-[11px] font-bold uppercase tracking-[0.14em] text-white/55 transition-all duration-300 md:flex ${
-            scrolled ? "max-w-0 p-0 opacity-0" : "max-w-[400px] p-1 opacity-100"
+          className={`hidden items-center gap-1 rounded-full bg-white/[0.035] text-[11px] font-bold uppercase tracking-[0.14em] text-white/55 transition-all duration-300 md:flex ${
+            scrolled ? "max-w-0 overflow-hidden p-0 opacity-0" : "max-w-[400px] overflow-visible p-1 opacity-100"
           }`}
         >
+          <div className="relative" onMouseEnter={() => setSauceOpen(true)} onMouseLeave={() => setSauceOpen(false)}>
+            <button
+              className={`pill-nav-link flex items-center gap-1 whitespace-nowrap rounded-full px-3 py-2 ${activeSection === "services" ? "is-active" : ""}`}
+            >
+              Sauce <ChevronDown size={12} className={`transition-transform duration-200 ${sauceOpen ? "rotate-180" : ""}`} />
+            </button>
+            {sauceOpen && (
+              <div className="absolute left-1/2 top-full w-56 -translate-x-1/2 pt-2">
+                <div className="overflow-hidden rounded-2xl border border-white/10 bg-black/90 py-2 normal-case shadow-[0_18px_60px_rgba(0,0,0,.4)] backdrop-blur-xl">
+                  {sauceItems.map((item) => (
+                    <button
+                      key={item.label}
+                      onClick={() => goToSection(item.id)}
+                      className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-xs font-medium normal-case tracking-normal text-white/70 transition-colors hover:bg-white/[0.06] hover:text-paper"
+                    >
+                      <item.icon size={15} className="text-white/40" />
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
           {navItems.map((item) => (
             <button
               key={item.id}
@@ -97,7 +127,7 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
         <button
           onClick={() => {
             setMenuOpen(!menuOpen);
-            setServicesOpen(false);
+            setSauceOpen(false);
           }}
           className={`grid shrink-0 place-items-center rounded-full border border-white/20 bg-white/[0.06] text-paper transition-all duration-300 md:hidden ${
             scrolled ? "h-7 w-7" : "h-8 w-8"
@@ -112,33 +142,32 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
           <div className="flex flex-col divide-y divide-white/10 text-lg font-medium">
             <div>
               <button
-                onClick={() => setServicesOpen(!servicesOpen)}
+                onClick={() => setSauceOpen(!sauceOpen)}
                 className="flex w-full items-center justify-between px-5 py-4 text-left text-paper"
               >
-                Services
-                <ChevronDown size={18} className={`text-white/50 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
+                Sauce
+                <ChevronDown size={18} className={`text-white/50 transition-transform duration-300 ${sauceOpen ? "rotate-180" : ""}`} />
               </button>
-              {servicesOpen && (
+              {sauceOpen && (
                 <div className="flex flex-col gap-1 px-5 pb-4 text-sm text-white/60">
-                  {services.map((service) => (
-                    <Link
-                      key={service.slug}
-                      href={`/services/${service.slug}`}
-                      onClick={() => setMenuOpen(false)}
-                      className="rounded-xl px-3 py-2 transition-colors hover:bg-white/[0.06] hover:text-paper"
+                  {sauceItems.map((item) => (
+                    <button
+                      key={item.label}
+                      onClick={() => goToSection(item.id)}
+                      className="flex items-center gap-3 rounded-xl px-3 py-2 text-left transition-colors hover:bg-white/[0.06] hover:text-paper"
                     >
-                      {service.title}
-                    </Link>
+                      <item.icon size={16} className="text-white/40" />
+                      {item.label}
+                    </button>
                   ))}
                 </div>
               )}
             </div>
-            <button onClick={() => goToSection("network")} className="px-5 py-4 text-left text-paper">
-              Network
-            </button>
-            <button onClick={() => goToSection("approach")} className="px-5 py-4 text-left text-paper">
-              Approach
-            </button>
+            {navItems.map((item) => (
+              <button key={item.id} onClick={() => goToSection(item.id)} className="px-5 py-4 text-left text-paper">
+                {item.label}
+              </button>
+            ))}
           </div>
           <div className="p-3">
             <button
