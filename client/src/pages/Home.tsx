@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowDownRight,
   ArrowUpRight,
@@ -10,6 +10,7 @@ import {
   Globe2,
   Instagram,
   Layers3,
+  LoaderCircle,
   Menu,
   Megaphone,
   MoveRight,
@@ -117,16 +118,12 @@ const deliverables = [
 const ownedHandles = ["@millionairesformula", "@successfularcs", "@archiveofceos", "@businessedgex", "@bourseindia", "@virodhindia", "@lucreindia"];
 const extendedHandles = ["@archiveofoceans", "@ceosformula", "@krefion", "@motivation_hustling", "@themillionairemagnate", "@powerbymindset", "@bizknock"];
 const demographicBreakdown = [
-  { label: "Followers", value: "15.4M", note: "Our Network — total followers across owned pages." },
-  { label: "Newsletter subs", value: "101K", note: "Our Network — subscribed newsletter audience." },
-  { label: "Annual views", value: "18.2B+", note: "Our Network — total annual content views." },
-  { label: "Accounts reached", value: "121M", note: "Our Network — unique accounts reached." },
-  { label: "Interactions", value: "89.6M", note: "Our Network — total audience interactions." },
-  { label: "Top AI & tech pages", value: "45", note: "Extended Network — partner pages in the network." },
-  { label: "Extended followers", value: "17.1M", note: "Extended Network — total followers across partner pages." },
-  { label: "Extended newsletter subs", value: "2.3M", note: "Extended Network — subscribed newsletter audience." },
-  { label: "Extended annual views", value: "15B+", note: "Extended Network — total annual content views." },
-  { label: "Extended accounts reached", value: "100M", note: "Extended Network — unique accounts reached." },
+  { label: "Region", value: "India", note: "Primary market supplied for the SoloDac network." },
+  { label: "States & cities", value: "Pending Insights", note: "Add the strongest states, metros, and emerging cities from Instagram analytics." },
+  { label: "Age groups", value: "Pending Insights", note: "Add the audience age split for media planning and sponsorship decks." },
+  { label: "Gender", value: "Pending Insights", note: "Add the audience gender distribution from the connected pages." },
+  { label: "Languages", value: "Pending Insights", note: "Add English, Hindi, regional-language, or multilingual audience shares." },
+  { label: "Interests", value: "Pending Insights", note: "Add business, finance, motivation, entrepreneurship, or other interest clusters." },
 ];
 
 function scrollToId(id: string) {
@@ -139,6 +136,28 @@ export default function Home() {
   const [expandedService, setExpandedService] = useState<string | null>(null);
   const [formSent, setFormSent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [activeSection, setActiveSection] = useState("top");
+
+  useEffect(() => {
+    const sectionIds = ["top", "services", "network", "approach", "contact"];
+    const updateActiveSection = () => {
+      const marker = window.scrollY + 150;
+      let current = "top";
+      for (const id of sectionIds) {
+        const section = document.getElementById(id);
+        if (section && section.offsetTop <= marker) current = id;
+      }
+      setActiveSection(current);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
+  }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -178,43 +197,43 @@ export default function Home() {
   return (
     <main className="min-h-screen overflow-hidden bg-ink text-paper selection:bg-lime selection:text-ink">
       <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.045] noise" />
-      <header className="relative z-50 border-b border-white/10 bg-ink/90 backdrop-blur-xl">
-        <div className="mx-auto flex h-[76px] max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12">
+      <header className="sticky top-2 z-50 bg-transparent px-2 pt-2 sm:top-3 sm:px-4 sm:pt-3">
+        <div className="mx-auto flex min-h-[68px] max-w-[1440px] items-center justify-between gap-3 rounded-full border border-white/10 bg-black/90 px-4 py-3 shadow-[0_18px_60px_rgba(0,0,0,.28)] backdrop-blur-xl sm:min-h-[76px] sm:px-7 lg:px-10">
           <a href="#top" className="group flex items-center gap-3" aria-label="SoloDac home">
-            <span className="grid h-9 w-9 place-items-center rounded-full bg-lime text-ink transition-transform duration-200 group-hover:rotate-12">
-              <span className="h-3 w-3 rounded-full bg-ink" />
+            <span className="grid h-9 w-9 place-items-center rounded-full bg-lime text-ink transition-transform duration-200 group-hover:rotate-12 sm:h-10 sm:w-10">
+              <span className="h-3 w-3 rounded-full bg-ink sm:h-3.5 sm:w-3.5" />
             </span>
-            <span className="font-display text-[1.7rem] font-black tracking-[-0.08em]">SoloDac</span>
+            <span className="font-display text-[1.35rem] font-black tracking-[-0.08em] sm:text-[1.7rem]">SoloDac</span>
           </a>
 
-          <nav className="hidden items-center gap-8 text-[11px] font-bold uppercase tracking-[0.18em] text-white/60 md:flex">
-            <button onClick={() => navigate("services")} className="transition-colors hover:text-lime">Services</button>
-            <button onClick={() => navigate("network")} className="transition-colors hover:text-lime">Network</button>
-            <button onClick={() => navigate("approach")} className="transition-colors hover:text-lime">Approach</button>
-            <button onClick={() => navigate("contact")} className="transition-colors hover:text-lime">Contact</button>
+          <nav className="hidden items-center gap-1 rounded-full bg-white/[0.035] p-1 text-[11px] font-bold uppercase tracking-[0.16em] text-white/55 md:flex">
+            <button onClick={() => navigate("services")} className={`pill-nav-link rounded-full px-4 py-3 ${activeSection === "services" ? "is-active" : ""}`}>Services</button>
+            <button onClick={() => navigate("network")} className={`pill-nav-link rounded-full px-4 py-3 ${activeSection === "network" ? "is-active" : ""}`}>Network</button>
+            <button onClick={() => navigate("approach")} className={`pill-nav-link rounded-full px-4 py-3 ${activeSection === "approach" ? "is-active" : ""}`}>Approach</button>
+            <button onClick={() => navigate("contact")} className={`pill-nav-link rounded-full px-4 py-3 ${activeSection === "contact" ? "is-active" : ""}`}>Contact</button>
           </nav>
 
           <button
             onClick={() => navigate("contact")}
-            className="hidden items-center gap-3 rounded-full border border-lime/60 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-lime transition-all hover:bg-lime hover:text-ink md:flex"
+            className="hidden items-center gap-3 rounded-full border border-white/30 bg-white/[0.08] px-5 py-3 text-[11px] font-bold uppercase tracking-[0.16em] text-paper shadow-inner shadow-white/10 transition-all hover:border-lime hover:bg-lime hover:text-ink md:flex"
           >
             Start a project <ArrowUpRight size={14} />
           </button>
 
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-paper md:hidden"
+            className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/20 bg-white/[0.06] text-paper md:hidden"
             aria-label="Toggle navigation"
           >
             {menuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
         {menuOpen && (
-          <div className="border-t border-white/10 px-5 py-6 md:hidden">
+          <div className="mx-2 border-t border-white/10 px-3 py-5 md:hidden">
             <div className="flex flex-col gap-5 text-sm font-bold uppercase tracking-[0.14em]">
-              <button onClick={() => navigate("services")} className="text-left text-white/70">Services</button>
-              <button onClick={() => navigate("network")} className="text-left text-white/70">Network</button>
-              <button onClick={() => navigate("approach")} className="text-left text-white/70">Approach</button>
+              <button onClick={() => navigate("services")} className={`text-left ${activeSection === "services" ? "text-lime" : "text-white/70"}`}>Services</button>
+              <button onClick={() => navigate("network")} className={`text-left ${activeSection === "network" ? "text-lime" : "text-white/70"}`}>Network</button>
+              <button onClick={() => navigate("approach")} className={`text-left ${activeSection === "approach" ? "text-lime" : "text-white/70"}`}>Approach</button>
               <button onClick={() => navigate("contact")} className="text-left text-lime">Start a project <ArrowUpRight className="ml-1 inline" size={16} /></button>
             </div>
           </div>
@@ -222,7 +241,7 @@ export default function Home() {
       </header>
 
       <section id="top" className="relative z-10 w-full overflow-hidden bg-[#0d0f0f]">
-        <img src={heroImage} alt="SoloDac signal artwork" className="block h-auto min-h-[420px] w-full object-cover object-center sm:min-h-0" />
+        <img src={heroImage} alt="SoloDac signal artwork" className="hero-art block h-[58svh] min-h-[430px] w-full object-cover object-[70%_center] sm:h-auto sm:min-h-0 sm:object-center" />
       </section>
 
       <section className="signal-section relative z-10 border-y border-ink/10 bg-paper text-ink">
@@ -248,7 +267,7 @@ export default function Home() {
             <div className="signal-card rounded-3xl border border-lime/35 bg-lime/[0.07] p-6 sm:p-8"><div className="mb-8 flex items-start justify-between"><div><div className="text-[10px] font-bold uppercase tracking-[0.2em] text-lime">01 / Owned network</div><div className="mt-3 font-display text-4xl font-black tracking-[-0.07em]">7 owned pages.</div></div><Instagram size={22} className="text-lime" /></div><div className="grid gap-2 sm:grid-cols-2">{ownedHandles.map((handle) => <a key={handle} href={`https://www.instagram.com/${handle.slice(1)}/`} target="_blank" rel="noreferrer" className="flex items-center justify-between rounded-xl border border-white/10 bg-ink/20 px-3 py-3 text-sm font-bold text-white/75 transition-all hover:-translate-y-0.5 hover:border-lime hover:text-lime"><span>{handle}</span><ArrowUpRight size={14} /></a>)}</div></div>
             <div className="signal-card rounded-3xl border border-blue-300/30 bg-blue-300/[0.07] p-6 sm:p-8"><div className="mb-8 flex items-start justify-between"><div><div className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-200">02 / Extended network</div><div className="mt-3 font-display text-4xl font-black tracking-[-0.07em]">6 extended pages.</div></div><Globe2 size={22} className="text-blue-200" /></div><div className="grid gap-2 sm:grid-cols-2">{extendedHandles.map((handle) => <a key={handle} href={`https://www.instagram.com/${handle.slice(1)}/`} target="_blank" rel="noreferrer" className="flex items-center justify-between rounded-xl border border-white/10 bg-ink/20 px-3 py-3 text-sm font-bold text-white/75 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:text-blue-200"><span>{handle}</span><ArrowUpRight size={14} /></a>)}</div></div>
           </div>
-          <div className="signal-card mt-3 rounded-3xl border border-coral/30 bg-coral/[0.07] p-6 sm:p-8"><div className="mb-8 flex items-start justify-between"><div><div className="text-[10px] font-bold uppercase tracking-[0.2em] text-coral">03 / Network reach</div><div className="mt-3 font-display text-4xl font-black tracking-[-0.07em]">Reach, at a glance.</div></div><Target size={22} className="text-coral" /></div><div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{demographicBreakdown.map((item) => <div key={item.label} className="rounded-2xl border border-white/10 bg-ink/20 p-4"><div className="text-[10px] font-bold uppercase tracking-[0.16em] text-coral">{item.label}</div><div className="mt-3 font-display text-2xl font-black tracking-[-0.05em]">{item.value}</div><p className="mt-2 text-xs leading-relaxed text-white/45">{item.note}</p></div>)}</div></div>
+          <div className="signal-card mt-3 rounded-3xl border border-coral/30 bg-coral/[0.07] p-6 sm:p-8"><div className="mb-8 flex items-start justify-between"><div><div className="text-[10px] font-bold uppercase tracking-[0.2em] text-coral">03 / Indian audience profile</div><div className="mt-3 font-display text-4xl font-black tracking-[-0.07em]">Demographics, ready to map.</div></div><Target size={22} className="text-coral" /></div><div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{demographicBreakdown.map((item) => <div key={item.label} className="rounded-2xl border border-white/10 bg-ink/20 p-4"><div className="text-[10px] font-bold uppercase tracking-[0.16em] text-coral">{item.label}</div><div className="mt-3 font-display text-2xl font-black tracking-[-0.05em]">{item.value}</div><p className="mt-2 text-xs leading-relaxed text-white/45">{item.note}</p></div>)}</div><p className="mt-6 text-xs leading-relaxed text-white/40">Only “Indian region” was supplied so far. State, city, age, gender, language, and interest values are intentionally marked as pending rather than fabricated. They can be filled from Instagram Insights once available.</p></div>
         </div>
       </section>
 
@@ -304,7 +323,7 @@ export default function Home() {
           <div><div className="mb-6 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.25em] text-ink/55"><span className="h-px w-10 bg-ink/60" /> Start a conversation</div><h2 className="max-w-xl font-display text-6xl font-black leading-[0.84] tracking-[-0.09em] sm:text-8xl">Have a good problem?</h2><p className="mt-8 max-w-md text-lg leading-relaxed text-ink/70">Tell us what you&apos;re building, where it&apos;s stuck, or where you want it to go. We&apos;ll come back with a point of view.</p><div className="mt-10 flex flex-wrap gap-3"><span className="rounded-full border border-ink/25 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em]">Social</span><span className="rounded-full border border-ink/25 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em]">Content</span><span className="rounded-full border border-ink/25 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em]">Digital</span></div></div>
           <form onSubmit={handleSubmit} className="signal-card rounded-3xl bg-ink p-6 text-paper sm:p-10">
             <div className="mb-8 flex items-center justify-between"><span className="font-display text-2xl font-black tracking-[-0.06em]">Project brief</span><PenTool size={20} className="text-lime" /></div>
-            {formSent ? <div className="flex min-h-[320px] flex-col items-center justify-center text-center"><div className="mb-5 grid h-16 w-16 place-items-center rounded-full bg-lime text-ink"><Check size={28} /></div><h3 className="font-display text-4xl font-black tracking-[-0.06em]">Signal received.</h3><p className="mt-3 max-w-sm text-sm leading-relaxed text-white/55">Your project brief has been sent. We&apos;ll come back with a point of view.</p><button type="button" onClick={() => setFormSent(false)} className="mt-7 text-xs font-bold uppercase tracking-[0.18em] text-lime hover:underline">Send another brief</button></div> : <div className="space-y-5"><div className="grid gap-5 sm:grid-cols-2"><label className="text-xs font-bold uppercase tracking-[0.14em] text-white/45">Your name<input required name="name" placeholder="Jane Smith" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" /></label><label className="text-xs font-bold uppercase tracking-[0.14em] text-white/45">Company / brand<input required name="company" placeholder="Your company" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" /></label></div><div className="grid gap-5 sm:grid-cols-2"><label className="text-xs font-bold uppercase tracking-[0.14em] text-white/45">Email<input required type="email" name="email" placeholder="you@company.com" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" /></label><label className="text-xs font-bold uppercase tracking-[0.14em] text-white/45">Phone / WhatsApp<input name="phone" placeholder="Optional" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" /></label></div><label className="block text-xs font-bold uppercase tracking-[0.14em] text-white/45">What can we help with?<select required name="service" defaultValue="" className="mt-2 w-full border-b border-white/20 bg-ink pb-3 text-base font-medium text-paper outline-none transition-colors focus:border-lime"><option value="" disabled>Select a direction</option><option>Social media management</option><option>Content production</option><option>AI content generation</option><option>Website / digital build</option><option>SEO or performance marketing</option><option>Not sure yet</option></select></label><label className="block text-xs font-bold uppercase tracking-[0.14em] text-white/45">A little context<textarea required name="message" rows={4} placeholder="What are you trying to make happen?" className="mt-2 w-full resize-none border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" /></label><button type="submit" disabled={isSubmitting} className="group flex w-full items-center justify-between rounded-full bg-lime px-5 py-4 text-sm font-black text-ink transition-colors hover:bg-[#d8ff2f] disabled:cursor-wait disabled:opacity-60">{isSubmitting ? "Sending brief…" : "Send project brief"} <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></button></div>}
+            {formSent ? <div className="success-panel flex min-h-[320px] flex-col items-center justify-center overflow-hidden rounded-2xl border border-lime/25 bg-gradient-to-br from-lime/15 via-white/[0.03] to-transparent px-6 py-10 text-center"><div className="success-check mb-6 grid h-20 w-20 place-items-center rounded-full bg-lime text-ink shadow-[0_0_0_10px_rgba(204,255,42,.08),0_0_50px_rgba(204,255,42,.22)]"><Check size={32} strokeWidth={3} /></div><div className="mb-3 text-[10px] font-black uppercase tracking-[0.28em] text-lime">Brief delivered</div><h3 className="font-display text-4xl font-black tracking-[-0.06em] sm:text-5xl">You&apos;re on the radar.</h3><p className="mt-4 max-w-sm text-sm leading-relaxed text-white/60">Thanks for reaching out to SoloDac. Your brief is in our inbox, and we&apos;ll get back to you with a clear next move.</p><button type="button" onClick={() => setFormSent(false)} className="mt-8 rounded-full border border-lime/40 px-5 py-3 text-xs font-bold uppercase tracking-[0.18em] text-lime transition-colors hover:bg-lime hover:text-ink">Send another brief</button></div> : <div className="space-y-5"><div className="grid gap-5 sm:grid-cols-2"><label className="text-xs font-bold uppercase tracking-[0.14em] text-white/45">Your name<input required name="name" placeholder="Jane Smith" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" /></label><label className="text-xs font-bold uppercase tracking-[0.14em] text-white/45">Company / brand<input required name="company" placeholder="Your company" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" /></label></div><div className="grid gap-5 sm:grid-cols-2"><label className="text-xs font-bold uppercase tracking-[0.14em] text-white/45">Email<input required type="email" name="email" placeholder="you@company.com" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" /></label><label className="text-xs font-bold uppercase tracking-[0.14em] text-white/45">Phone / WhatsApp<input name="phone" placeholder="Optional" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" /></label></div><label className="block text-xs font-bold uppercase tracking-[0.14em] text-white/45">What can we help with?<select required name="service" defaultValue="" className="mt-2 w-full border-b border-white/20 bg-ink pb-3 text-base font-medium text-paper outline-none transition-colors focus:border-lime"><option value="" disabled>Select a direction</option><option>Social media management</option><option>Content production</option><option>AI content generation</option><option>Website / digital build</option><option>SEO or performance marketing</option><option>Not sure yet</option></select></label><label className="block text-xs font-bold uppercase tracking-[0.14em] text-white/45">A little context<textarea required name="message" rows={4} placeholder="What are you trying to make happen?" className="mt-2 w-full resize-none border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" /></label><button type="submit" disabled={isSubmitting} className="group flex w-full items-center justify-between rounded-full bg-lime px-5 py-4 text-sm font-black text-ink transition-colors hover:bg-[#d8ff2f] disabled:cursor-wait disabled:opacity-60">{isSubmitting ? <span className="flex items-center gap-3"><LoaderCircle size={18} className="animate-spin" /> Sending brief…</span> : <span>Send project brief</span>} <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></button></div>}
           </form>
         </div>
       </section>
