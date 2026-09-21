@@ -31,13 +31,34 @@ const budgetOptions = [
 
 const companyStageOptions = ["Stealth", "Pre-Seed", "Seed", "Series A", "Series B+", "Pre-IPO", "Public", "Private", "Other"];
 
+const continentCountries: Record<string, string[]> = {
+  "North America": ["United States", "Canada", "Mexico", "Guatemala", "Costa Rica", "Panama"],
+  "South America": ["Brazil", "Argentina", "Chile", "Colombia", "Peru", "Ecuador", "Uruguay"],
+  Europe: ["United Kingdom", "Germany", "France", "Spain", "Italy", "Netherlands", "Sweden", "Poland", "Ireland", "Switzerland"],
+  Asia: ["India", "China", "Japan", "South Korea", "Singapore", "Indonesia", "Philippines", "Vietnam", "Thailand", "United Arab Emirates", "Saudi Arabia"],
+  Africa: ["Nigeria", "South Africa", "Kenya", "Egypt", "Ghana", "Morocco"],
+  Oceania: ["Australia", "New Zealand", "Fiji"],
+};
+const continents = Object.keys(continentCountries);
+
 export default function StartProject() {
   const [formSent, setFormSent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [selectedContinent, setSelectedContinent] = useState<string | null>(null);
+  const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
 
   const toggleService = (service: string) => {
     setSelectedServices((prev) => (prev.includes(service) ? prev.filter((s) => s !== service) : [...prev, service]));
+  };
+
+  const selectContinent = (continent: string) => {
+    setSelectedContinent(continent);
+    setSelectedCountries([]);
+  };
+
+  const toggleCountry = (country: string) => {
+    setSelectedCountries((prev) => (prev.includes(country) ? prev.filter((c) => c !== country) : [...prev, country]));
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -48,6 +69,8 @@ export default function StartProject() {
       const form = event.currentTarget;
       const formData = new FormData(form);
       formData.set("services_of_interest", selectedServices.join(", "));
+      formData.set("target_continent", selectedContinent ?? "");
+      formData.set("target_countries", selectedCountries.join(", "));
       formData.append("access_key", "fa96ec00-da5f-49aa-89cf-6cd11dd05a95");
       formData.append("subject", "New SoloDac project inquiry");
       formData.append("from_name", "SoloDac website");
@@ -134,6 +157,50 @@ export default function StartProject() {
                       );
                     })}
                   </div>
+                </div>
+
+                <div className="block text-xs font-bold uppercase tracking-[0.14em] text-white/45">
+                  Where do you want to be seen?
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {continents.map((continent) => {
+                      const active = selectedContinent === continent;
+                      return (
+                        <button
+                          key={continent}
+                          type="button"
+                          onClick={() => selectContinent(continent)}
+                          className={`rounded-full border px-3 py-2 text-[11px] font-bold normal-case tracking-normal transition-colors ${
+                            active ? "border-lime bg-lime text-ink" : "border-white/20 text-white/60 hover:border-lime hover:text-lime"
+                          }`}
+                        >
+                          {continent}
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {selectedContinent && (
+                    <div className="mt-4 border-t border-white/10 pt-4">
+                      <div className="mb-2 text-[10px] font-bold uppercase tracking-[0.14em] text-white/35">Countries in {selectedContinent}</div>
+                      <div className="flex flex-wrap gap-2">
+                        {continentCountries[selectedContinent].map((country) => {
+                          const active = selectedCountries.includes(country);
+                          return (
+                            <button
+                              key={country}
+                              type="button"
+                              onClick={() => toggleCountry(country)}
+                              className={`rounded-full border px-3 py-2 text-[11px] font-bold normal-case tracking-normal transition-colors ${
+                                active ? "border-coral bg-coral text-ink" : "border-white/20 text-white/60 hover:border-coral hover:text-coral"
+                              }`}
+                            >
+                              {country}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <label className="block text-xs font-bold uppercase tracking-[0.14em] text-white/45">
