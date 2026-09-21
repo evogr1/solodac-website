@@ -18,9 +18,10 @@ export default function ServicePage() {
   const isPaper = service.color === "paper";
 
   return (
-    <main className="min-h-screen overflow-hidden bg-ink text-paper selection:bg-lime selection:text-ink">
+    <>
       <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.045] noise" />
       <SiteHeader />
+      <main className="min-h-screen overflow-hidden bg-ink text-paper selection:bg-lime selection:text-ink">
 
       <section className="relative z-10 border-b border-white/10 px-5 pb-20 pt-14 sm:px-8 sm:pt-20 lg:px-12 lg:pb-28 lg:pt-24">
         <div className="absolute right-[-10%] top-[-10%] h-[520px] w-[520px] rounded-full bg-lime/10 blur-[120px]" />
@@ -40,6 +41,7 @@ export default function ServicePage() {
       <section id="service-brief" className="relative z-10 bg-coral px-5 py-20 text-ink sm:px-8 lg:px-12 lg:py-24"><div className="mx-auto flex max-w-[1440px] flex-col justify-between gap-8 sm:flex-row sm:items-end"><div><div className="mb-4 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.25em] text-ink/55"><span className="h-px w-10 bg-ink/60" /> Ready when you are</div><h2 className="max-w-2xl font-display text-5xl font-black leading-[0.86] tracking-[-0.08em] sm:text-7xl">Let&apos;s make this<br />the good kind of busy.</h2></div><Link href="/eyeballs" className="group flex shrink-0 items-center gap-4 rounded-full bg-ink px-6 py-4 text-sm font-black text-paper transition-transform hover:-translate-y-1">Send a brief <ArrowUpRight size={18} className="text-lime transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></Link></div></section>
 
       <footer className="relative z-10 bg-ink px-5 py-8 text-paper sm:px-8 lg:px-12"><div className="mx-auto flex max-w-[1440px] items-center justify-between border-t border-white/10 pt-7"><Link href="/" className="flex items-center gap-3"><span className="grid h-8 w-8 place-items-center rounded-full bg-lime text-ink"><span className="h-2.5 w-2.5 rounded-full bg-ink" /></span><span className="font-display text-2xl font-black tracking-[-0.08em]">SoloDac</span></Link><span className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/35">Digital media, content & growth.</span></div></footer>
-    </main>
+      </main>
+    </>
   );
 }

@@ -147,9 +147,10 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen overflow-hidden bg-ink text-paper selection:bg-lime selection:text-ink">
+    <>
       <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.045] noise" />
       <SiteHeader activeSection={activeSection} />
+      <main className="min-h-screen overflow-hidden bg-ink text-paper selection:bg-lime selection:text-ink">
 
       <section id="top" className="relative z-10 w-full overflow-hidden bg-[#0d0f0f]">
         <img src={heroImage} alt="SoloDac signal artwork" className="hero-art block h-[58svh] min-h-[430px] w-full object-cover object-[70%_center] sm:h-auto sm:min-h-0 sm:object-center" />
@@ -229,6 +230,7 @@ export default function Home() {
       <footer className="relative z-10 bg-ink px-5 py-8 text-paper sm:px-8 lg:px-12">
         <div className="mx-auto flex max-w-[1440px] flex-col justify-between gap-8 border-t border-white/10 pt-7 sm:flex-row sm:items-end"><div><div className="flex items-center gap-3"><span className="grid h-8 w-8 place-items-center rounded-full bg-lime text-ink"><span className="h-2.5 w-2.5 rounded-full bg-ink" /></span><span className="font-display text-2xl font-black tracking-[-0.08em]">SoloDac</span></div><p className="mt-3 text-xs text-white/40">Digital media, content & growth.</p></div><div className="flex items-center gap-5 text-[10px] font-bold uppercase tracking-[0.18em] text-white/40"><a href="#services" className="hover:text-lime">Services</a><a href="#approach" className="hover:text-lime">Approach</a><button onClick={() => setLocation("/eyeballs")} className="hover:text-lime">Contact</button><span>© 2026</span></div></div>
       </footer>
-    </main>
+      </main>
+    </>
   );
 }

@@ -114,9 +114,10 @@ export default function StartProject() {
   };
 
   return (
-    <main className="min-h-screen overflow-hidden bg-ink text-paper selection:bg-lime selection:text-ink">
+    <>
       <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.045] noise" />
       <SiteHeader />
+      <main className="min-h-screen overflow-hidden bg-ink text-paper selection:bg-lime selection:text-ink">
 
       <section className="relative z-10 px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <div className="mx-auto grid max-w-[1100px] gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
@@ -286,6 +287,7 @@ export default function StartProject() {
           </div>
         </div>
       </footer>
-    </main>
+      </main>
+    </>
   );
 }

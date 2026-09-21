@@ -184,12 +184,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .pill-nav-link:focus-visible {
   color: #fff;
   background: rgba(255,255,255,.1);
-  transform: translateY(-1px);
-}
-.pill-nav-link:hover::after,
-.pill-nav-link:focus-visible::after {
-  opacity: 1;
-  transform: translate(-50%, 0) scaleX(1);
 }
 .pill-nav-link.is-active {
   color: #fff;
