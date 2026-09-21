@@ -117,12 +117,16 @@ const deliverables = [
 const ownedHandles = ["@millionairesformula", "@successfularcs", "@archiveofceos", "@businessedgex", "@bourseindia", "@virodhindia", "@lucreindia"];
 const extendedHandles = ["@archiveofoceans", "@ceosformula", "@krefion", "@motivation_hustling", "@themillionairemagnate", "@powerbymindset", "@bizknock"];
 const demographicBreakdown = [
-  { label: "Region", value: "India", note: "Primary market supplied for the SoloDac network." },
-  { label: "States & cities", value: "Pending Insights", note: "Add the strongest states, metros, and emerging cities from Instagram analytics." },
-  { label: "Age groups", value: "Pending Insights", note: "Add the audience age split for media planning and sponsorship decks." },
-  { label: "Gender", value: "Pending Insights", note: "Add the audience gender distribution from the connected pages." },
-  { label: "Languages", value: "Pending Insights", note: "Add English, Hindi, regional-language, or multilingual audience shares." },
-  { label: "Interests", value: "Pending Insights", note: "Add business, finance, motivation, entrepreneurship, or other interest clusters." },
+  { label: "Followers", value: "15.4M", note: "Our Network — total followers across owned pages." },
+  { label: "Newsletter subs", value: "101K", note: "Our Network — subscribed newsletter audience." },
+  { label: "Annual views", value: "18.2B+", note: "Our Network — total annual content views." },
+  { label: "Accounts reached", value: "121M", note: "Our Network — unique accounts reached." },
+  { label: "Interactions", value: "89.6M", note: "Our Network — total audience interactions." },
+  { label: "Top AI & tech pages", value: "45", note: "Extended Network — partner pages in the network." },
+  { label: "Extended followers", value: "17.1M", note: "Extended Network — total followers across partner pages." },
+  { label: "Extended newsletter subs", value: "2.3M", note: "Extended Network — subscribed newsletter audience." },
+  { label: "Extended annual views", value: "15B+", note: "Extended Network — total annual content views." },
+  { label: "Extended accounts reached", value: "100M", note: "Extended Network — unique accounts reached." },
 ];
 
 function scrollToId(id: string) {
@@ -244,7 +248,7 @@ export default function Home() {
             <div className="signal-card rounded-3xl border border-lime/35 bg-lime/[0.07] p-6 sm:p-8"><div className="mb-8 flex items-start justify-between"><div><div className="text-[10px] font-bold uppercase tracking-[0.2em] text-lime">01 / Owned network</div><div className="mt-3 font-display text-4xl font-black tracking-[-0.07em]">7 owned pages.</div></div><Instagram size={22} className="text-lime" /></div><div className="grid gap-2 sm:grid-cols-2">{ownedHandles.map((handle) => <a key={handle} href={`https://www.instagram.com/${handle.slice(1)}/`} target="_blank" rel="noreferrer" className="flex items-center justify-between rounded-xl border border-white/10 bg-ink/20 px-3 py-3 text-sm font-bold text-white/75 transition-all hover:-translate-y-0.5 hover:border-lime hover:text-lime"><span>{handle}</span><ArrowUpRight size={14} /></a>)}</div></div>
             <div className="signal-card rounded-3xl border border-blue-300/30 bg-blue-300/[0.07] p-6 sm:p-8"><div className="mb-8 flex items-start justify-between"><div><div className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-200">02 / Extended network</div><div className="mt-3 font-display text-4xl font-black tracking-[-0.07em]">6 extended pages.</div></div><Globe2 size={22} className="text-blue-200" /></div><div className="grid gap-2 sm:grid-cols-2">{extendedHandles.map((handle) => <a key={handle} href={`https://www.instagram.com/${handle.slice(1)}/`} target="_blank" rel="noreferrer" className="flex items-center justify-between rounded-xl border border-white/10 bg-ink/20 px-3 py-3 text-sm font-bold text-white/75 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:text-blue-200"><span>{handle}</span><ArrowUpRight size={14} /></a>)}</div></div>
           </div>
-          <div className="signal-card mt-3 rounded-3xl border border-coral/30 bg-coral/[0.07] p-6 sm:p-8"><div className="mb-8 flex items-start justify-between"><div><div className="text-[10px] font-bold uppercase tracking-[0.2em] text-coral">03 / Indian audience profile</div><div className="mt-3 font-display text-4xl font-black tracking-[-0.07em]">Demographics, ready to map.</div></div><Target size={22} className="text-coral" /></div><div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{demographicBreakdown.map((item) => <div key={item.label} className="rounded-2xl border border-white/10 bg-ink/20 p-4"><div className="text-[10px] font-bold uppercase tracking-[0.16em] text-coral">{item.label}</div><div className="mt-3 font-display text-2xl font-black tracking-[-0.05em]">{item.value}</div><p className="mt-2 text-xs leading-relaxed text-white/45">{item.note}</p></div>)}</div><p className="mt-6 text-xs leading-relaxed text-white/40">Only “Indian region” was supplied so far. State, city, age, gender, language, and interest values are intentionally marked as pending rather than fabricated. They can be filled from Instagram Insights once available.</p></div>
+          <div className="signal-card mt-3 rounded-3xl border border-coral/30 bg-coral/[0.07] p-6 sm:p-8"><div className="mb-8 flex items-start justify-between"><div><div className="text-[10px] font-bold uppercase tracking-[0.2em] text-coral">03 / Network reach</div><div className="mt-3 font-display text-4xl font-black tracking-[-0.07em]">Reach, at a glance.</div></div><Target size={22} className="text-coral" /></div><div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{demographicBreakdown.map((item) => <div key={item.label} className="rounded-2xl border border-white/10 bg-ink/20 p-4"><div className="text-[10px] font-bold uppercase tracking-[0.16em] text-coral">{item.label}</div><div className="mt-3 font-display text-2xl font-black tracking-[-0.05em]">{item.value}</div><p className="mt-2 text-xs leading-relaxed text-white/45">{item.note}</p></div>)}</div></div>
         </div>
       </section>
 
