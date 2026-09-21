@@ -29,7 +29,14 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
 
   useEffect(() => {
     if (isFormPage) return;
-    const updateScrolled = () => setScrolled(window.scrollY > 40);
+    const updateScrolled = () => {
+      const isScrolled = window.scrollY > 40;
+      setScrolled(isScrolled);
+      if (isScrolled) {
+        setMenuOpen(false);
+        setSauceOpen(false);
+      }
+    };
     updateScrolled();
     window.addEventListener("scroll", updateScrolled, { passive: true });
     return () => window.removeEventListener("scroll", updateScrolled);
@@ -117,8 +124,8 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
 
         <button
           onClick={() => setLocation("/eyeballs")}
-          className={`hidden items-center gap-2 rounded-full border border-white/30 bg-white/[0.08] text-[11px] font-bold uppercase tracking-[0.14em] text-paper shadow-inner shadow-white/10 transition-all duration-300 hover:border-lime hover:bg-lime hover:text-ink md:flex ${
-            scrolled ? "px-3 py-1.5" : "px-4 py-2"
+          className={`items-center gap-2 rounded-full border border-white/30 bg-white/[0.08] text-[11px] font-bold uppercase tracking-[0.14em] text-paper shadow-inner shadow-white/10 transition-all duration-300 hover:border-lime hover:bg-lime hover:text-ink md:flex ${
+            scrolled ? "flex px-3 py-1.5" : "hidden px-4 py-2"
           }`}
         >
           Get eyeballs <ArrowUpRight size={13} />
@@ -129,9 +136,9 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
             setMenuOpen(!menuOpen);
             setSauceOpen(false);
           }}
-          className={`grid shrink-0 place-items-center rounded-full border border-white/20 bg-white/[0.06] text-paper transition-all duration-300 md:hidden ${
-            scrolled ? "h-7 w-7" : "h-8 w-8"
-          }`}
+          className={`shrink-0 place-items-center rounded-full border border-white/20 bg-white/[0.06] text-paper transition-all duration-300 md:hidden ${
+            scrolled ? "hidden" : "grid"
+          } ${scrolled ? "h-7 w-7" : "h-8 w-8"}`}
           aria-label="Toggle navigation"
         >
           {menuOpen ? <X size={16} /> : <Menu size={16} />}
