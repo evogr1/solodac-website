@@ -1,7 +1,7 @@
 import { ArrowLeft, ArrowUpRight, Check, ChevronRight, Instagram, Sparkles } from "lucide-react";
 import { Link, useLocation, useRoute } from "wouter";
 import SiteHeader from "../components/SiteHeader";
-import { services } from "./Home";
+import { services } from "../lib/services";
 
 export default function ServicePage() {
   const [, params] = useRoute("/services/:slug");

@@ -1,6 +1,7 @@
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
+import { services } from "../lib/services";
 
 const navItems = [
   { id: "services", label: "Services" },
@@ -15,6 +16,7 @@ function scrollToId(id: string) {
 export default function SiteHeader({ activeSection }: { activeSection?: string }) {
   const [location, setLocation] = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const isFormPage = location === "/eyeballs";
 
@@ -28,6 +30,7 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
 
   const goToSection = (id: string) => {
     setMenuOpen(false);
+    setServicesOpen(false);
     if (location !== "/") {
       setLocation("/");
       window.setTimeout(() => scrollToId(id), 60);
@@ -39,6 +42,7 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
   const goHome = (event: React.MouseEvent) => {
     event.preventDefault();
     setMenuOpen(false);
+    setServicesOpen(false);
     if (location !== "/") {
       setLocation("/");
       window.setTimeout(() => scrollToId("top"), 60);
@@ -91,7 +95,10 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
         </button>
 
         <button
-          onClick={() => setMenuOpen(!menuOpen)}
+          onClick={() => {
+            setMenuOpen(!menuOpen);
+            setServicesOpen(false);
+          }}
           className={`grid shrink-0 place-items-center rounded-full border border-white/20 bg-white/[0.06] text-paper transition-all duration-300 md:hidden ${
             scrolled ? "h-7 w-7" : "h-8 w-8"
           }`}
@@ -101,19 +108,47 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
         </button>
       </div>
       {menuOpen && (
-        <div className="mx-2 mt-2 rounded-3xl border border-white/10 bg-black/60 px-3 py-5 backdrop-blur-xl md:hidden">
-          <div className="flex flex-col gap-5 text-sm font-bold uppercase tracking-[0.14em]">
-            {navItems.map((item) => (
+        <div className="mx-2 mt-2 overflow-hidden rounded-3xl border border-white/10 bg-black/80 shadow-[0_18px_60px_rgba(0,0,0,.4)] backdrop-blur-xl md:hidden">
+          <div className="flex flex-col divide-y divide-white/10 text-lg font-medium">
+            <div>
               <button
-                key={item.id}
-                onClick={() => goToSection(item.id)}
-                className={`text-left ${activeSection === item.id ? "text-lime" : "text-white/70"}`}
+                onClick={() => setServicesOpen(!servicesOpen)}
+                className="flex w-full items-center justify-between px-5 py-4 text-left text-paper"
               >
-                {item.label}
+                Services
+                <ChevronDown size={18} className={`text-white/50 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
               </button>
-            ))}
-            <button onClick={() => setLocation("/eyeballs")} className="text-left text-lime">
-              Get eyeballs <ArrowUpRight className="ml-1 inline" size={16} />
+              {servicesOpen && (
+                <div className="flex flex-col gap-1 px-5 pb-4 text-sm text-white/60">
+                  {services.map((service) => (
+                    <Link
+                      key={service.slug}
+                      href={`/services/${service.slug}`}
+                      onClick={() => setMenuOpen(false)}
+                      className="rounded-xl px-3 py-2 transition-colors hover:bg-white/[0.06] hover:text-paper"
+                    >
+                      {service.title}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+            <button onClick={() => goToSection("network")} className="px-5 py-4 text-left text-paper">
+              Network
+            </button>
+            <button onClick={() => goToSection("approach")} className="px-5 py-4 text-left text-paper">
+              Approach
+            </button>
+          </div>
+          <div className="p-3">
+            <button
+              onClick={() => {
+                setMenuOpen(false);
+                setLocation("/eyeballs");
+              }}
+              className="flex w-full items-center justify-center gap-2 rounded-full border border-white/20 bg-white/[0.04] py-3.5 text-sm font-bold uppercase tracking-[0.14em] text-paper transition-colors hover:border-lime hover:text-lime"
+            >
+              Get eyeballs <ArrowUpRight size={16} />
             </button>
           </div>
         </div>
