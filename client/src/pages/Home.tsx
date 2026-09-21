@@ -10,11 +10,9 @@ import {
   Globe2,
   Instagram,
   Layers3,
-  LoaderCircle,
   Menu,
   Megaphone,
   MoveRight,
-  PenTool,
   Play,
   Search,
   Sparkles,
@@ -134,12 +132,10 @@ export default function Home() {
   const [, setLocation] = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [expandedService, setExpandedService] = useState<string | null>(null);
-  const [formSent, setFormSent] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeSection, setActiveSection] = useState("top");
 
   useEffect(() => {
-    const sectionIds = ["top", "services", "network", "approach", "contact"];
+    const sectionIds = ["top", "services", "network", "approach"];
     const updateActiveSection = () => {
       const marker = window.scrollY + 150;
       let current = "top";
@@ -158,36 +154,6 @@ export default function Home() {
       window.removeEventListener("resize", updateActiveSection);
     };
   }, []);
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const form = event.currentTarget;
-      const formData = new FormData(form);
-      formData.append("access_key", "fa96ec00-da5f-49aa-89cf-6cd11dd05a95");
-      formData.append("subject", "New SoloDac project brief");
-      formData.append("from_name", "SoloDac website");
-
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData,
-      });
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
-        throw new Error(data.message || "Unable to send the project brief.");
-      }
-
-      setFormSent(true);
-      toast.success("Project brief sent.");
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Unable to send the project brief.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   const navigate = (id: string) => {
     setMenuOpen(false);
@@ -210,7 +176,7 @@ export default function Home() {
             <button onClick={() => navigate("services")} className={`pill-nav-link rounded-full px-4 py-3 ${activeSection === "services" ? "is-active" : ""}`}>Services</button>
             <button onClick={() => navigate("network")} className={`pill-nav-link rounded-full px-4 py-3 ${activeSection === "network" ? "is-active" : ""}`}>Network</button>
             <button onClick={() => navigate("approach")} className={`pill-nav-link rounded-full px-4 py-3 ${activeSection === "approach" ? "is-active" : ""}`}>Approach</button>
-            <button onClick={() => navigate("contact")} className={`pill-nav-link rounded-full px-4 py-3 ${activeSection === "contact" ? "is-active" : ""}`}>Contact</button>
+            <button onClick={() => setLocation("/start-a-project")} className="pill-nav-link rounded-full px-4 py-3">Contact</button>
           </nav>
 
           <button
@@ -318,18 +284,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className="signal-section relative z-10 bg-coral px-5 py-20 text-ink sm:px-8 lg:px-12 lg:py-28">
-        <div className="mx-auto grid max-w-[1440px] gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-24">
-          <div><div className="mb-6 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.25em] text-ink/55"><span className="h-px w-10 bg-ink/60" /> Start a conversation</div><h2 className="max-w-xl font-display text-6xl font-black leading-[0.84] tracking-[-0.09em] sm:text-8xl">Have a good problem?</h2><p className="mt-8 max-w-md text-lg leading-relaxed text-ink/70">Tell us what you&apos;re building, where it&apos;s stuck, or where you want it to go. We&apos;ll come back with a point of view.</p><div className="mt-10 flex flex-wrap gap-3"><span className="rounded-full border border-ink/25 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em]">Social</span><span className="rounded-full border border-ink/25 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em]">Content</span><span className="rounded-full border border-ink/25 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em]">Digital</span></div></div>
-          <form onSubmit={handleSubmit} className="signal-card rounded-3xl bg-ink p-6 text-paper sm:p-10">
-            <div className="mb-8 flex items-center justify-between"><span className="font-display text-2xl font-black tracking-[-0.06em]">Project brief</span><PenTool size={20} className="text-lime" /></div>
-            {formSent ? <div className="success-panel flex min-h-[320px] flex-col items-center justify-center overflow-hidden rounded-2xl border border-lime/25 bg-gradient-to-br from-lime/15 via-white/[0.03] to-transparent px-6 py-10 text-center"><div className="success-check mb-6 grid h-20 w-20 place-items-center rounded-full bg-lime text-ink shadow-[0_0_0_10px_rgba(204,255,42,.08),0_0_50px_rgba(204,255,42,.22)]"><Check size={32} strokeWidth={3} /></div><div className="mb-3 text-[10px] font-black uppercase tracking-[0.28em] text-lime">Brief delivered</div><h3 className="font-display text-4xl font-black tracking-[-0.06em] sm:text-5xl">You&apos;re on the radar.</h3><p className="mt-4 max-w-sm text-sm leading-relaxed text-white/60">Thanks for reaching out to SoloDac. Your brief is in our inbox, and we&apos;ll get back to you with a clear next move.</p><button type="button" onClick={() => setFormSent(false)} className="mt-8 rounded-full border border-lime/40 px-5 py-3 text-xs font-bold uppercase tracking-[0.18em] text-lime transition-colors hover:bg-lime hover:text-ink">Send another brief</button></div> : <div className="space-y-5"><div className="grid gap-5 sm:grid-cols-2"><label className="text-xs font-bold uppercase tracking-[0.14em] text-white/45">Your name<input required name="name" placeholder="Jane Smith" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" /></label><label className="text-xs font-bold uppercase tracking-[0.14em] text-white/45">Company / brand<input required name="company" placeholder="Your company" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" /></label></div><div className="grid gap-5 sm:grid-cols-2"><label className="text-xs font-bold uppercase tracking-[0.14em] text-white/45">Email<input required type="email" name="email" placeholder="you@company.com" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" /></label><label className="text-xs font-bold uppercase tracking-[0.14em] text-white/45">Phone / WhatsApp<input name="phone" placeholder="Optional" className="mt-2 w-full border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" /></label></div><label className="block text-xs font-bold uppercase tracking-[0.14em] text-white/45">What can we help with?<select required name="service" defaultValue="" className="mt-2 w-full border-b border-white/20 bg-ink pb-3 text-base font-medium text-paper outline-none transition-colors focus:border-lime"><option value="" disabled>Select a direction</option><option>Social media management</option><option>Content production</option><option>AI content generation</option><option>Website / digital build</option><option>SEO or performance marketing</option><option>Not sure yet</option></select></label><label className="block text-xs font-bold uppercase tracking-[0.14em] text-white/45">A little context<textarea required name="message" rows={4} placeholder="What are you trying to make happen?" className="mt-2 w-full resize-none border-b border-white/20 bg-transparent pb-3 text-base font-medium text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime" /></label><button type="submit" disabled={isSubmitting} className="group flex w-full items-center justify-between rounded-full bg-lime px-5 py-4 text-sm font-black text-ink transition-colors hover:bg-[#d8ff2f] disabled:cursor-wait disabled:opacity-60">{isSubmitting ? <span className="flex items-center gap-3"><LoaderCircle size={18} className="animate-spin" /> Sending brief…</span> : <span>Send project brief</span>} <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></button></div>}
-          </form>
-        </div>
-      </section>
-
       <footer className="relative z-10 bg-ink px-5 py-8 text-paper sm:px-8 lg:px-12">
-        <div className="mx-auto flex max-w-[1440px] flex-col justify-between gap-8 border-t border-white/10 pt-7 sm:flex-row sm:items-end"><div><div className="flex items-center gap-3"><span className="grid h-8 w-8 place-items-center rounded-full bg-lime text-ink"><span className="h-2.5 w-2.5 rounded-full bg-ink" /></span><span className="font-display text-2xl font-black tracking-[-0.08em]">SoloDac</span></div><p className="mt-3 text-xs text-white/40">Digital media, content & growth.</p></div><div className="flex items-center gap-5 text-[10px] font-bold uppercase tracking-[0.18em] text-white/40"><a href="#services" className="hover:text-lime">Services</a><a href="#approach" className="hover:text-lime">Approach</a><a href="#contact" className="hover:text-lime">Contact</a><span>© 2026</span></div></div>
+        <div className="mx-auto flex max-w-[1440px] flex-col justify-between gap-8 border-t border-white/10 pt-7 sm:flex-row sm:items-end"><div><div className="flex items-center gap-3"><span className="grid h-8 w-8 place-items-center rounded-full bg-lime text-ink"><span className="h-2.5 w-2.5 rounded-full bg-ink" /></span><span className="font-display text-2xl font-black tracking-[-0.08em]">SoloDac</span></div><p className="mt-3 text-xs text-white/40">Digital media, content & growth.</p></div><div className="flex items-center gap-5 text-[10px] font-bold uppercase tracking-[0.18em] text-white/40"><a href="#services" className="hover:text-lime">Services</a><a href="#approach" className="hover:text-lime">Approach</a><button onClick={() => setLocation("/start-a-project")} className="hover:text-lime">Contact</button><span>© 2026</span></div></div>
       </footer>
     </main>
   );
