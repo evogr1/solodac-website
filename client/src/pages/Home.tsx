@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { useLocation } from "wouter";
+import heroImage from "../assets/solodac-signal.jpg";
 
 export const services = [
   {
@@ -192,7 +193,7 @@ export default function Home() {
       </header>
 
       <section id="top" className="relative z-10 w-full overflow-hidden bg-[#0d0f0f]">
-        <img src="/manus-storage/solodac-signal_65229d7f.jpg" alt="SoloDac signal artwork" className="block h-auto min-h-[420px] w-full object-cover object-center sm:min-h-0" />
+        <img src={heroImage} alt="SoloDac signal artwork" className="block h-auto min-h-[420px] w-full object-cover object-center sm:min-h-0" />
       </section>
 
       <section className="relative z-10 border-y border-ink/10 bg-paper text-ink">
