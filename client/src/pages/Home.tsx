@@ -113,11 +113,15 @@ const deliverables = [
   "A digital home that converts",
 ];
 
-const networkChannels = [
-  { label: "Instagram", handle: "@yourpage", reach: "Owned network", audience: "India · 18–34", accent: "#ccff2a" },
-  { label: "YouTube", handle: "Your channel", reach: "Video network", audience: "India · Global", accent: "#ff765f" },
-  { label: "X / Twitter", handle: "@yourhandle", reach: "Conversation layer", audience: "Tech · Culture", accent: "#b5a6ff" },
-  { label: "Web", handle: "solodac.com", reach: "Owned home", audience: "High-intent", accent: "#7db4ff" },
+const ownedHandles = ["@millionairesformula", "@successfularcs", "@archiveofceos", "@businessedgex", "@bourseindia", "@virodhindia", "@lucreindia"];
+const extendedHandles = ["@archiveofoceans", "@ceosformula", "@krefion", "@motivation_hustling", "@themillionairemagnate", "@powerbymindset", "@bizknock"];
+const demographicBreakdown = [
+  { label: "Region", value: "India", note: "Primary market supplied for the SoloDac network." },
+  { label: "States & cities", value: "Pending Insights", note: "Add the strongest states, metros, and emerging cities from Instagram analytics." },
+  { label: "Age groups", value: "Pending Insights", note: "Add the audience age split for media planning and sponsorship decks." },
+  { label: "Gender", value: "Pending Insights", note: "Add the audience gender distribution from the connected pages." },
+  { label: "Languages", value: "Pending Insights", note: "Add English, Hindi, regional-language, or multilingual audience shares." },
+  { label: "Interests", value: "Pending Insights", note: "Add business, finance, motivation, entrepreneurship, or other interest clusters." },
 ];
 
 function scrollToId(id: string) {
@@ -128,7 +132,6 @@ export default function Home() {
   const [, setLocation] = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [expandedService, setExpandedService] = useState<string | null>(null);
-  const [selectedChannel, setSelectedChannel] = useState(0);
   const [formSent, setFormSent] = useState(false);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -188,50 +191,8 @@ export default function Home() {
         )}
       </header>
 
-      <section id="top" className="relative z-10 mx-auto max-w-[1440px] px-5 pb-20 pt-14 sm:px-8 sm:pt-20 lg:px-12 lg:pb-28 lg:pt-24">
-        <div className="absolute right-[-10%] top-[-20%] h-[680px] w-[680px] rounded-full bg-lime/10 blur-[120px]" />
-        <div className="grid items-end gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-          <div className="relative z-10">
-            <div className="mb-8 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.28em] text-lime">
-              <span className="h-px w-10 bg-lime" /> Independent digital media company
-            </div>
-            <h1 className="max-w-4xl font-display text-[clamp(4.6rem,11vw,10.5rem)] font-black leading-[0.82] tracking-[-0.095em] text-paper">
-              Make your<br /><span className="text-lime">signal</span> louder.
-            </h1>
-            <p className="mt-10 max-w-xl text-lg leading-relaxed text-white/62 sm:text-xl">
-              SoloDac builds the content, channels, and digital experiences that turn good businesses into brands people notice, trust, and remember.
-            </p>
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <button onClick={() => navigate("contact")} className="group flex items-center gap-4 rounded-full bg-lime px-6 py-4 text-sm font-black text-ink transition-all duration-200 hover:-translate-y-1 hover:bg-[#d8ff2f]">
-                Let&apos;s build something <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </button>
-              <button onClick={() => navigate("services")} className="flex items-center gap-3 px-3 py-3 text-sm font-bold text-paper/70 transition-colors hover:text-paper">
-                Explore capabilities <MoveRight size={17} />
-              </button>
-            </div>
-          </div>
-
-          <div className="relative min-h-[420px] lg:min-h-[520px]">
-            <div className="absolute right-0 top-0 h-full w-full overflow-hidden rounded-[2rem] border border-white/15 bg-[#171a1a] shadow-2xl shadow-black/40">
-              <img src="/manus-storage/solodac-signal_65229d7f.jpg" alt="SoloDac signal artwork" className="absolute inset-0 h-full w-full bg-[#0d0f0f] object-contain" />
-              <div className="absolute bottom-[76px] left-7 right-7 z-10 rounded-2xl border border-white/15 bg-ink/45 p-3 backdrop-blur-md sm:left-10 sm:right-10"><div className="mb-2 flex items-center justify-between text-[9px] font-bold uppercase tracking-[0.16em] text-white/45"><span>Owned network</span><span className="text-lime">{networkChannels[selectedChannel].audience}</span></div><div className="flex flex-wrap gap-1.5">{networkChannels.map((channel, index) => <button key={channel.label} type="button" onClick={() => setSelectedChannel(index)} className={`rounded-full border px-2.5 py-1.5 text-[9px] font-bold uppercase tracking-[0.1em] transition-all ${selectedChannel === index ? "border-white/70 bg-paper text-ink" : "border-white/15 bg-white/5 text-white/55 hover:border-white/40 hover:text-paper"}`}>{channel.label}</button>)}</div><div className="mt-2 flex items-center justify-between text-[9px] text-white/45"><span>{networkChannels[selectedChannel].handle}</span><span>{networkChannels[selectedChannel].reach}</span></div></div>
-              <div className="absolute left-7 top-8 max-w-[190px] font-display text-2xl font-black leading-[0.95] tracking-[-0.06em] text-paper/90 sm:left-10 sm:top-10 sm:text-3xl">
-                The<br /><span className="text-lime">attention</span><br />economy.
-              </div>
-              <div className="absolute bottom-7 left-7 right-7 flex items-end justify-between sm:bottom-10 sm:left-10 sm:right-10">
-                <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.18em] text-white/60"><span className="h-2 w-2 animate-pulse rounded-full bg-lime" /> Live signal</div>
-                <div className="font-display text-5xl font-black leading-none tracking-[-0.08em] text-paper sm:text-7xl">∞</div>
-              </div>
-            </div>
-            <div className="absolute -bottom-5 -left-3 z-10 flex max-w-[240px] items-center gap-3 rounded-2xl border border-ink/10 bg-paper px-4 py-3 text-ink shadow-xl sm:-left-8">
-              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-ink text-lime"><Zap size={18} fill="currentColor" /></div>
-              <div><div className="text-[10px] font-black uppercase tracking-[0.16em] text-ink/50">Built for</div><div className="text-sm font-bold">Brands with something to say.</div></div>
-            </div>
-          </div>
-        </div>
-        <div className="mt-24 flex items-center justify-between border-t border-white/10 pt-5 text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">
-          <span>Scroll to explore</span><ChevronDown size={16} className="animate-bounce text-lime" /><span>01 / 06</span>
-        </div>
+      <section id="top" className="relative z-10 w-full overflow-hidden bg-[#0d0f0f]">
+        <img src="/manus-storage/solodac-signal_65229d7f.jpg" alt="SoloDac signal artwork" className="block h-auto min-h-[420px] w-full object-cover object-center sm:min-h-0" />
       </section>
 
       <section className="relative z-10 border-y border-ink/10 bg-paper text-ink">
@@ -252,14 +213,12 @@ export default function Home() {
       <section id="network" className="relative z-10 overflow-hidden border-b border-white/10 bg-[#151a19] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
         <div className="absolute -right-24 top-16 h-80 w-80 rounded-full border-[28px] border-lime/10" />
         <div className="mx-auto max-w-[1440px]">
-          <div className="grid gap-12 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
-            <div><div className="mb-6 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-lime"><span className="h-px w-10 bg-lime" /> The SoloDac network</div><h2 className="max-w-xl font-display text-5xl font-black leading-[0.88] tracking-[-0.08em] sm:text-7xl">Own the audience.<br /><span className="text-white/35">Understand the room.</span></h2><p className="mt-7 max-w-md text-base leading-relaxed text-white/55">Bring your Instagram pages, YouTube channels, X accounts, and web properties into one clear network story. Add your real links when you&apos;re ready—we&apos;ve built the structure to show what is owned, what is extended, and who you reach.</p><button onClick={() => toast.info("Add your live channel URLs to the network configuration when ready.")} className="mt-8 flex items-center gap-3 text-sm font-bold text-lime transition-colors hover:text-paper">Add your channels <ArrowUpRight size={17} /></button></div>
-            <div className="relative z-10 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-3xl border border-lime/35 bg-lime/[0.07] p-6"><div className="mb-12 flex items-start justify-between"><span className="text-[10px] font-bold uppercase tracking-[0.2em] text-lime">01 / Owned network</span><Instagram size={19} className="text-lime" /></div><div className="font-display text-4xl font-black tracking-[-0.07em]">Your pages.</div><p className="mt-3 text-sm leading-relaxed text-white/50">Instagram, YouTube, X, newsletters, communities, and websites that you directly manage.</p><div className="mt-8 flex flex-wrap gap-2">{networkChannels.slice(0, 3).map((channel) => <button key={channel.label} type="button" onClick={() => toast.info(`Add the live ${channel.label} link to this tile.`)} className="rounded-full border border-white/15 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.12em] text-white/60 transition-colors hover:border-lime hover:text-lime">{channel.label}</button>)}</div></div>
-              <div className="rounded-3xl border border-blue-300/30 bg-blue-300/[0.07] p-6"><div className="mb-12 flex items-start justify-between"><span className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-200">02 / Extended network</span><Globe2 size={19} className="text-blue-200" /></div><div className="font-display text-4xl font-black tracking-[-0.07em]">More reach.</div><p className="mt-3 text-sm leading-relaxed text-white/50">Partner pages, creator relationships, publisher placements, and media surfaces that amplify the signal.</p><div className="mt-8 flex flex-wrap gap-2"><button type="button" onClick={() => toast.info("Add extended network partners here.")} className="rounded-full border border-white/15 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.12em] text-white/60 hover:border-blue-200 hover:text-blue-200">Partners</button><button type="button" onClick={() => toast.info("Add publisher and creator links here.")} className="rounded-full border border-white/15 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.12em] text-white/60 hover:border-blue-200 hover:text-blue-200">Creators</button></div></div>
-              <div className="rounded-3xl border border-coral/30 bg-coral/[0.07] p-6 sm:col-span-2"><div className="mb-8 flex items-start justify-between"><span className="text-[10px] font-bold uppercase tracking-[0.2em] text-coral">03 / Audience lens</span><Target size={19} className="text-coral" /></div><div className="grid gap-6 sm:grid-cols-[0.65fr_1.35fr] sm:items-end"><div><div className="font-display text-4xl font-black tracking-[-0.07em]">India first.</div><p className="mt-3 text-sm leading-relaxed text-white/50">Demographics that make the network useful—not just impressive.</p></div><div className="flex flex-wrap gap-2 sm:justify-end"><span className="rounded-full border border-coral/40 bg-coral/10 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-coral">Indian region</span><span className="rounded-full border border-white/15 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-white/60">Language</span><span className="rounded-full border border-white/15 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-white/60">Age range</span><span className="rounded-full border border-white/15 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-white/60">Interest graph</span></div></div></div>
-            </div>
+          <div className="mb-14 max-w-2xl"><div className="mb-6 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-lime"><span className="h-px w-10 bg-lime" /> The SoloDac network</div><h2 className="font-display text-5xl font-black leading-[0.88] tracking-[-0.08em] sm:text-7xl">Owned attention.<br /><span className="text-white/35">India in focus.</span></h2><p className="mt-7 max-w-xl text-base leading-relaxed text-white/55">A connected network of pages across business, finance, motivation, entrepreneurship, and culture. The handles below are ready to link to their live Instagram profiles.</p></div>
+          <div className="grid gap-3 lg:grid-cols-2">
+            <div className="rounded-3xl border border-lime/35 bg-lime/[0.07] p-6 sm:p-8"><div className="mb-8 flex items-start justify-between"><div><div className="text-[10px] font-bold uppercase tracking-[0.2em] text-lime">01 / Owned network</div><div className="mt-3 font-display text-4xl font-black tracking-[-0.07em]">7 owned pages.</div></div><Instagram size={22} className="text-lime" /></div><div className="grid gap-2 sm:grid-cols-2">{ownedHandles.map((handle) => <a key={handle} href={`https://www.instagram.com/${handle.slice(1)}/`} target="_blank" rel="noreferrer" className="flex items-center justify-between rounded-xl border border-white/10 bg-ink/20 px-3 py-3 text-sm font-bold text-white/75 transition-all hover:-translate-y-0.5 hover:border-lime hover:text-lime"><span>{handle}</span><ArrowUpRight size={14} /></a>)}</div></div>
+            <div className="rounded-3xl border border-blue-300/30 bg-blue-300/[0.07] p-6 sm:p-8"><div className="mb-8 flex items-start justify-between"><div><div className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-200">02 / Extended network</div><div className="mt-3 font-display text-4xl font-black tracking-[-0.07em]">6 extended pages.</div></div><Globe2 size={22} className="text-blue-200" /></div><div className="grid gap-2 sm:grid-cols-2">{extendedHandles.map((handle) => <a key={handle} href={`https://www.instagram.com/${handle.slice(1)}/`} target="_blank" rel="noreferrer" className="flex items-center justify-between rounded-xl border border-white/10 bg-ink/20 px-3 py-3 text-sm font-bold text-white/75 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:text-blue-200"><span>{handle}</span><ArrowUpRight size={14} /></a>)}</div></div>
           </div>
+          <div className="mt-3 rounded-3xl border border-coral/30 bg-coral/[0.07] p-6 sm:p-8"><div className="mb-8 flex items-start justify-between"><div><div className="text-[10px] font-bold uppercase tracking-[0.2em] text-coral">03 / Indian audience profile</div><div className="mt-3 font-display text-4xl font-black tracking-[-0.07em]">Demographics, ready to map.</div></div><Target size={22} className="text-coral" /></div><div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{demographicBreakdown.map((item) => <div key={item.label} className="rounded-2xl border border-white/10 bg-ink/20 p-4"><div className="text-[10px] font-bold uppercase tracking-[0.16em] text-coral">{item.label}</div><div className="mt-3 font-display text-2xl font-black tracking-[-0.05em]">{item.value}</div><p className="mt-2 text-xs leading-relaxed text-white/45">{item.note}</p></div>)}</div><p className="mt-6 text-xs leading-relaxed text-white/40">Only “Indian region” was supplied so far. State, city, age, gender, language, and interest values are intentionally marked as pending rather than fabricated. They can be filled from Instagram Insights once available.</p></div>
         </div>
       </section>
 
@@ -285,6 +244,10 @@ export default function Home() {
             })}
           </div>
         </div>
+      </section>
+
+      <section id="case-studies" className="relative z-10 border-t border-white/10 bg-[#151a19] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+        <div className="mx-auto max-w-[1440px]"><div className="mb-14 flex flex-col justify-between gap-8 lg:flex-row lg:items-end"><div><div className="mb-6 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-lime"><span className="h-px w-10 bg-lime" /> Selected work</div><h2 className="font-display text-5xl font-black leading-[0.88] tracking-[-0.08em] sm:text-7xl">Work that makes<br /><span className="text-white/35">the system visible.</span></h2></div><p className="max-w-sm text-sm leading-relaxed text-white/50">A space for SoloDac projects in AI content generation and web development. Client details and outcomes can be added when you are ready.</p></div><div className="grid gap-3 lg:grid-cols-2"><article className="group relative min-h-[360px] overflow-hidden rounded-3xl border border-lime/30 bg-lime/[0.08] p-7 transition-all hover:-translate-y-1 hover:border-lime/70 sm:p-10"><div className="absolute -right-14 -top-14 h-52 w-52 rounded-full border-[24px] border-lime/20 transition-transform duration-500 group-hover:scale-125" /><div className="relative z-10 flex h-full flex-col justify-between"><div className="flex items-start justify-between"><span className="text-[10px] font-bold uppercase tracking-[0.2em] text-lime">Case study 01 / AI</span><Bot className="text-lime" size={22} /></div><div><div className="mb-4 font-mono text-xs text-white/35">CLIENT / TO BE ADDED</div><h3 className="max-w-md font-display text-4xl font-black leading-[0.9] tracking-[-0.07em] sm:text-5xl">One idea.<br /><span className="text-lime">Many useful outputs.</span></h3><p className="mt-5 max-w-lg text-sm leading-relaxed text-white/55">AI-generated articles, social captions, website copy, and repurposed content shaped around a real brand voice. Add the client, platform, workflow, and outcome here.</p><button type="button" onClick={() => toast.info("Add this AI content case study when the client details are ready.")} className="mt-7 flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-lime">Add case details <ArrowUpRight size={15} /></button></div></div></article><article className="group relative min-h-[360px] overflow-hidden rounded-3xl border border-blue-300/30 bg-blue-300/[0.08] p-7 transition-all hover:-translate-y-1 hover:border-blue-200/70 sm:p-10"><div className="absolute -bottom-20 -right-10 h-64 w-64 rotate-12 border-[28px] border-blue-300/15 transition-transform duration-500 group-hover:rotate-45" /><div className="relative z-10 flex h-full flex-col justify-between"><div className="flex items-start justify-between"><span className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-200">Case study 02 / Web</span><Code2 className="text-blue-200" size={22} /></div><div><div className="mb-4 font-mono text-xs text-white/35">CLIENT / TO BE ADDED</div><h3 className="max-w-md font-display text-4xl font-black leading-[0.9] tracking-[-0.07em] sm:text-5xl">A digital home<br /><span className="text-blue-200">built to move.</span></h3><p className="mt-5 max-w-lg text-sm leading-relaxed text-white/55">Responsive websites and landing pages designed around clarity, brand, experience, and conversion. Add the URL, scope, stack, and result here.</p><button type="button" onClick={() => toast.info("Add this web development case study when the project details are ready.")} className="mt-7 flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-blue-200">Add case details <ArrowUpRight size={15} /></button></div></div></article></div></div>
       </section>
 
       <section id="approach" className="relative z-10 overflow-hidden bg-[#d9ff3f] text-ink">
