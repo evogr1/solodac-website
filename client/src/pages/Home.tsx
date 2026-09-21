@@ -23,10 +23,12 @@ import {
   Zap,
 } from "lucide-react";
 import { toast } from "sonner";
+import { useLocation } from "wouter";
 
-const services = [
+export const services = [
   {
     number: "01",
+    slug: "social-media-management",
     icon: Megaphone,
     title: "Social media systems",
     description:
@@ -39,6 +41,7 @@ const services = [
   },
   {
     number: "02",
+    slug: "content-production",
     icon: Clapperboard,
     title: "Content production",
     description:
@@ -51,6 +54,7 @@ const services = [
   },
   {
     number: "03",
+    slug: "ai-content-generation",
     icon: Bot,
     title: "AI content studio",
     description:
@@ -63,6 +67,7 @@ const services = [
   },
   {
     number: "04",
+    slug: "web-development",
     icon: Code2,
     title: "Web & digital builds",
     description:
@@ -75,6 +80,7 @@ const services = [
   },
   {
     number: "05",
+    slug: "seo-search-visibility",
     icon: Search,
     title: "Search & visibility",
     description:
@@ -87,6 +93,7 @@ const services = [
   },
   {
     number: "06",
+    slug: "performance-marketing",
     icon: Target,
     title: "Performance marketing",
     description:
@@ -106,13 +113,22 @@ const deliverables = [
   "A digital home that converts",
 ];
 
+const networkChannels = [
+  { label: "Instagram", handle: "@yourpage", reach: "Owned network", audience: "India · 18–34", accent: "#ccff2a" },
+  { label: "YouTube", handle: "Your channel", reach: "Video network", audience: "India · Global", accent: "#ff765f" },
+  { label: "X / Twitter", handle: "@yourhandle", reach: "Conversation layer", audience: "Tech · Culture", accent: "#b5a6ff" },
+  { label: "Web", handle: "solodac.com", reach: "Owned home", audience: "High-intent", accent: "#7db4ff" },
+];
+
 function scrollToId(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 }
 
 export default function Home() {
+  const [, setLocation] = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [expandedService, setExpandedService] = useState<string | null>(null);
+  const [selectedChannel, setSelectedChannel] = useState(0);
   const [formSent, setFormSent] = useState(false);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -140,6 +156,7 @@ export default function Home() {
 
           <nav className="hidden items-center gap-8 text-[11px] font-bold uppercase tracking-[0.18em] text-white/60 md:flex">
             <button onClick={() => navigate("services")} className="transition-colors hover:text-lime">Services</button>
+            <button onClick={() => navigate("network")} className="transition-colors hover:text-lime">Network</button>
             <button onClick={() => navigate("approach")} className="transition-colors hover:text-lime">Approach</button>
             <button onClick={() => navigate("contact")} className="transition-colors hover:text-lime">Contact</button>
           </nav>
@@ -163,6 +180,7 @@ export default function Home() {
           <div className="border-t border-white/10 px-5 py-6 md:hidden">
             <div className="flex flex-col gap-5 text-sm font-bold uppercase tracking-[0.14em]">
               <button onClick={() => navigate("services")} className="text-left text-white/70">Services</button>
+              <button onClick={() => navigate("network")} className="text-left text-white/70">Network</button>
               <button onClick={() => navigate("approach")} className="text-left text-white/70">Approach</button>
               <button onClick={() => navigate("contact")} className="text-left text-lime">Start a project <ArrowUpRight className="ml-1 inline" size={16} /></button>
             </div>
@@ -200,6 +218,9 @@ export default function Home() {
               <div className="absolute inset-0 opacity-50 [background-image:linear-gradient(rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.12)_1px,transparent_1px)] [background-size:42px_42px]" />
               <div className="absolute -right-10 top-14 h-72 w-72 rounded-full border-[34px] border-lime/80 shadow-[0_0_100px_rgba(204,255,42,0.35)] sm:h-96 sm:w-96" />
               <div className="absolute -bottom-28 left-8 h-72 w-[150%] rotate-[-16deg] rounded-[50%] border-[24px] border-blue-500/70 blur-[1px] sm:h-96" />
+              <div className="signal-shark absolute left-[29%] top-[37%] z-20" aria-hidden="true"><span className="shark-tail" /><span className="shark-body" /><span className="shark-fin" /><span className="shark-eye" /></div>
+              <div className="signal-runner absolute left-[16%] top-[49%] z-10 h-3 w-3 rounded-full bg-paper shadow-[0_0_18px_rgba(243,240,232,0.95)]" aria-hidden="true" />
+              <div className="absolute bottom-[76px] left-7 right-7 z-10 rounded-2xl border border-white/15 bg-ink/45 p-3 backdrop-blur-md sm:left-10 sm:right-10"><div className="mb-2 flex items-center justify-between text-[9px] font-bold uppercase tracking-[0.16em] text-white/45"><span>Owned network</span><span className="text-lime">{networkChannels[selectedChannel].audience}</span></div><div className="flex flex-wrap gap-1.5">{networkChannels.map((channel, index) => <button key={channel.label} type="button" onClick={() => setSelectedChannel(index)} className={`rounded-full border px-2.5 py-1.5 text-[9px] font-bold uppercase tracking-[0.1em] transition-all ${selectedChannel === index ? "border-white/70 bg-paper text-ink" : "border-white/15 bg-white/5 text-white/55 hover:border-white/40 hover:text-paper"}`}>{channel.label}</button>)}</div><div className="mt-2 flex items-center justify-between text-[9px] text-white/45"><span>{networkChannels[selectedChannel].handle}</span><span>{networkChannels[selectedChannel].reach}</span></div></div>
               <div className="absolute left-7 top-8 max-w-[190px] font-display text-2xl font-black leading-[0.95] tracking-[-0.06em] text-paper/90 sm:left-10 sm:top-10 sm:text-3xl">
                 The<br /><span className="text-lime">attention</span><br />economy.
               </div>
@@ -234,6 +255,20 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="network" className="relative z-10 overflow-hidden border-b border-white/10 bg-[#151a19] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+        <div className="absolute -right-24 top-16 h-80 w-80 rounded-full border-[28px] border-lime/10" />
+        <div className="mx-auto max-w-[1440px]">
+          <div className="grid gap-12 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
+            <div><div className="mb-6 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-lime"><span className="h-px w-10 bg-lime" /> The SoloDac network</div><h2 className="max-w-xl font-display text-5xl font-black leading-[0.88] tracking-[-0.08em] sm:text-7xl">Own the audience.<br /><span className="text-white/35">Understand the room.</span></h2><p className="mt-7 max-w-md text-base leading-relaxed text-white/55">Bring your Instagram pages, YouTube channels, X accounts, and web properties into one clear network story. Add your real links when you&apos;re ready—we&apos;ve built the structure to show what is owned, what is extended, and who you reach.</p><button onClick={() => toast.info("Add your live channel URLs to the network configuration when ready.")} className="mt-8 flex items-center gap-3 text-sm font-bold text-lime transition-colors hover:text-paper">Add your channels <ArrowUpRight size={17} /></button></div>
+            <div className="relative z-10 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-3xl border border-lime/35 bg-lime/[0.07] p-6"><div className="mb-12 flex items-start justify-between"><span className="text-[10px] font-bold uppercase tracking-[0.2em] text-lime">01 / Owned network</span><Instagram size={19} className="text-lime" /></div><div className="font-display text-4xl font-black tracking-[-0.07em]">Your pages.</div><p className="mt-3 text-sm leading-relaxed text-white/50">Instagram, YouTube, X, newsletters, communities, and websites that you directly manage.</p><div className="mt-8 flex flex-wrap gap-2">{networkChannels.slice(0, 3).map((channel) => <button key={channel.label} type="button" onClick={() => toast.info(`Add the live ${channel.label} link to this tile.`)} className="rounded-full border border-white/15 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.12em] text-white/60 transition-colors hover:border-lime hover:text-lime">{channel.label}</button>)}</div></div>
+              <div className="rounded-3xl border border-blue-300/30 bg-blue-300/[0.07] p-6"><div className="mb-12 flex items-start justify-between"><span className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-200">02 / Extended network</span><Globe2 size={19} className="text-blue-200" /></div><div className="font-display text-4xl font-black tracking-[-0.07em]">More reach.</div><p className="mt-3 text-sm leading-relaxed text-white/50">Partner pages, creator relationships, publisher placements, and media surfaces that amplify the signal.</p><div className="mt-8 flex flex-wrap gap-2"><button type="button" onClick={() => toast.info("Add extended network partners here.")} className="rounded-full border border-white/15 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.12em] text-white/60 hover:border-blue-200 hover:text-blue-200">Partners</button><button type="button" onClick={() => toast.info("Add publisher and creator links here.")} className="rounded-full border border-white/15 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.12em] text-white/60 hover:border-blue-200 hover:text-blue-200">Creators</button></div></div>
+              <div className="rounded-3xl border border-coral/30 bg-coral/[0.07] p-6 sm:col-span-2"><div className="mb-8 flex items-start justify-between"><span className="text-[10px] font-bold uppercase tracking-[0.2em] text-coral">03 / Audience lens</span><Target size={19} className="text-coral" /></div><div className="grid gap-6 sm:grid-cols-[0.65fr_1.35fr] sm:items-end"><div><div className="font-display text-4xl font-black tracking-[-0.07em]">India first.</div><p className="mt-3 text-sm leading-relaxed text-white/50">Demographics that make the network useful—not just impressive.</p></div><div className="flex flex-wrap gap-2 sm:justify-end"><span className="rounded-full border border-coral/40 bg-coral/10 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-coral">Indian region</span><span className="rounded-full border border-white/15 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-white/60">Language</span><span className="rounded-full border border-white/15 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-white/60">Age range</span><span className="rounded-full border border-white/15 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-white/60">Interest graph</span></div></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="services" className="relative z-10 bg-ink px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
         <div className="mx-auto max-w-[1440px]">
           <div className="mb-14 flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
@@ -248,9 +283,9 @@ export default function Home() {
               const Icon = service.icon;
               const isExpanded = expandedService === service.number;
               const isPaper = service.color === "paper";
-              return <article key={service.number} className={`group relative min-h-[330px] overflow-hidden rounded-3xl border border-white/10 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/25 hover:shadow-2xl hover:shadow-black/20 ${isPaper ? "bg-paper text-ink" : "bg-white/[0.045]"}`}>
+              return <article key={service.number} role="link" tabIndex={0} onClick={() => setLocation(`/services/${service.slug}`)} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") setLocation(`/services/${service.slug}`); }} className={`group relative min-h-[330px] cursor-pointer overflow-hidden rounded-3xl border border-white/10 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/25 hover:shadow-2xl hover:shadow-black/20 ${isPaper ? "bg-paper text-ink" : "bg-white/[0.045]"}`}>
                 <div className="flex items-start justify-between"><span className={`font-mono text-xs ${isPaper ? "text-ink/45" : "text-white/35"}`}>{service.number}</span><div className={`grid h-10 w-10 place-items-center rounded-full transition-transform duration-300 group-hover:rotate-12 ${service.color === "lime" ? "bg-lime text-ink" : service.color === "blue" ? "bg-blue-400 text-ink" : service.color === "coral" ? "bg-coral text-ink" : isPaper ? "bg-ink text-paper" : service.color === "violet" ? "bg-violet-400 text-ink" : "bg-orange-300 text-ink"}`}><Icon size={18} /></div></div>
-                <div className="absolute bottom-6 left-6 right-6"><h3 className="max-w-[280px] font-display text-3xl font-black leading-[0.95] tracking-[-0.06em]">{service.title}</h3><p className={`mt-4 max-w-[330px] text-sm leading-relaxed ${isPaper ? "text-ink/60" : "text-white/55"}`}>{service.description}</p><div className={`grid transition-all duration-300 ${isExpanded ? "mt-4 max-h-48 opacity-100" : "max-h-0 overflow-hidden opacity-0"}`}><p className={`text-sm leading-relaxed ${isPaper ? "text-ink/70" : "text-white/65"}`}>{service.more}</p><p className={`mt-3 text-[10px] font-bold uppercase leading-relaxed tracking-[0.12em] ${isPaper ? "text-ink/45" : "text-lime/80"}`}>{service.includes}</p></div><div className="mt-5 flex items-center justify-between gap-3"><div className={`flex flex-wrap gap-2 text-[9px] font-bold uppercase tracking-[0.14em] ${isPaper ? "text-ink/45" : "text-white/35"}`}>{service.tags.map((tag) => <span key={tag} className="rounded-full border border-current px-2 py-1">{tag}</span>)}</div><button type="button" onClick={() => setExpandedService(isExpanded ? null : service.number)} aria-expanded={isExpanded} className={`flex shrink-0 items-center gap-1 text-[10px] font-black uppercase tracking-[0.12em] transition-colors ${isPaper ? "text-ink hover:text-coral" : "text-lime hover:text-white"}`}>{isExpanded ? "Less" : "Read more"}<ChevronDown size={14} className={`transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`} /></button></div></div>
+                <div className="absolute bottom-6 left-6 right-6"><h3 className="max-w-[280px] font-display text-3xl font-black leading-[0.95] tracking-[-0.06em]">{service.title}</h3><p className={`mt-4 max-w-[330px] text-sm leading-relaxed ${isPaper ? "text-ink/60" : "text-white/55"}`}>{service.description}</p><div className={`grid transition-all duration-300 ${isExpanded ? "mt-4 max-h-48 opacity-100" : "max-h-0 overflow-hidden opacity-0"}`}><p className={`text-sm leading-relaxed ${isPaper ? "text-ink/70" : "text-white/65"}`}>{service.more}</p><p className={`mt-3 text-[10px] font-bold uppercase leading-relaxed tracking-[0.12em] ${isPaper ? "text-ink/45" : "text-lime/80"}`}>{service.includes}</p></div><div className="mt-5 flex items-center justify-between gap-3"><div className={`flex flex-wrap gap-2 text-[9px] font-bold uppercase tracking-[0.14em] ${isPaper ? "text-ink/45" : "text-white/35"}`}>{service.tags.map((tag) => <span key={tag} className="rounded-full border border-current px-2 py-1">{tag}</span>)}</div><button type="button" onClick={(event) => { event.stopPropagation(); setExpandedService(isExpanded ? null : service.number); }} aria-expanded={isExpanded} className={`flex shrink-0 items-center gap-1 text-[10px] font-black uppercase tracking-[0.12em] transition-colors ${isPaper ? "text-ink hover:text-coral" : "text-lime hover:text-white"}`}>{isExpanded ? "Less" : "Read more"}<ChevronDown size={14} className={`transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`} /></button></div></div>
                 <ArrowUpRight size={18} className="absolute right-6 top-[82px] opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:opacity-100" />
               </article>;
             })}

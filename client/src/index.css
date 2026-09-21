@@ -80,6 +80,26 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 }
 .signal-float { animation: float-signal 7s ease-in-out infinite; }
 
+@keyframes signal-run {
+  0% { transform: translate3d(-12vw, 14px, 0) scale(0.8); opacity: 0; }
+  12%, 78% { opacity: 1; }
+  92%, 100% { transform: translate3d(42vw, -42px, 0) scale(1.35); opacity: 0; }
+}
+.signal-runner { animation: signal-run 5.8s cubic-bezier(0.23, 1, 0.32, 1) infinite; }
+
+@keyframes shark-swim {
+  0% { transform: translate3d(-18px, 34px, 0) rotate(9deg) scale(0.78); opacity: 0; }
+  14% { opacity: 1; }
+  48% { transform: translate3d(108px, -6px, 0) rotate(-7deg) scale(1); }
+  78% { opacity: 1; }
+  100% { transform: translate3d(260px, 18px, 0) rotate(8deg) scale(0.74); opacity: 0; }
+}
+.signal-shark { width: 118px; height: 60px; animation: shark-swim 7.2s cubic-bezier(0.23, 1, 0.32, 1) infinite; filter: drop-shadow(0 0 14px rgba(204,255,42,.55)); }
+.shark-body { position: absolute; left: 14px; top: 11px; width: 86px; height: 38px; border-radius: 62% 48% 42% 62%; background: linear-gradient(135deg, #f3f0e8 0%, #ccff2a 45%, #6f9f00 100%); clip-path: polygon(0 50%, 15% 19%, 58% 0, 91% 23%, 100% 50%, 87% 80%, 54% 100%, 14% 84%); }
+.shark-tail { position: absolute; left: 0; top: 13px; width: 34px; height: 36px; background: #ccff2a; clip-path: polygon(100% 50%, 0 0, 18% 49%, 0 100%); }
+.shark-fin { position: absolute; left: 47px; top: -2px; width: 25px; height: 25px; background: #ccff2a; clip-path: polygon(0 100%, 48% 0, 100% 100%); transform: rotate(-10deg); }
+.shark-eye { position: absolute; left: 82px; top: 22px; width: 5px; height: 5px; border-radius: 999px; background: #101313; box-shadow: 0 0 0 2px rgba(243,240,232,.7); }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
 }
