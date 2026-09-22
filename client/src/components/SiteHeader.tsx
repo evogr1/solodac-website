@@ -13,7 +13,7 @@ const sauceItems = [
 
 const navItems = [
   { href: "/approach", label: "About" },
-  { href: "/network", label: "Careers" },
+  { href: "/careers", label: "Careers" },
 ];
 
 export default function SiteHeader({ activeSection }: { activeSection?: string }) {
