@@ -31,6 +31,23 @@ export default function Home() {
           alt="SoloDac signal artwork"
           className="hero-art block h-[58svh] min-h-[430px] w-full object-cover object-[70%_center] sm:h-auto sm:min-h-0 sm:object-center"
         />
+        <Reveal delay={0.2} className="border-y border-dotted border-white/20 bg-[#0d0f0f] px-5 py-8 sm:px-8 lg:px-12">
+          <div className="mx-auto flex max-w-[1440px] flex-wrap justify-between gap-x-10 gap-y-8">
+            {[
+              { value: "15.4M", label: "Followers" },
+              { value: "101K", label: "Newsletter subs" },
+              { value: "18.2B+", label: "Annual views" },
+              { value: "121M", label: "Accounts reached" },
+              { value: "89.6M", label: "Interactions" },
+            ].map((stat) => (
+              <div key={stat.label}>
+                <div className="font-display text-3xl font-black tracking-[-0.04em] text-paper sm:text-5xl">{stat.value}</div>
+                <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.16em] text-white/45 sm:text-[11px]">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+          <p className="mx-auto mt-8 max-w-2xl text-sm leading-relaxed text-white/45">The extended network adds 45 more partner pages on top of that — another 17.1M followers and 15B+ annual views we can put a campaign in front of.</p>
+        </Reveal>
       </section>
 
       <section className="signal-section relative z-10 border-y border-ink/10 bg-paper text-ink">
