@@ -7,7 +7,7 @@ import { useScrollToTop } from "../hooks/useScrollToTop";
 const principles = [
   { icon: Zap, title: "Creative first", text: "The ad has to earn the click before the targeting even matters. We treat the hook like it's the whole job, because it basically is." },
   { icon: Target, title: "Kill fast, scale faster", text: "We know within days if a campaign's working, not weeks. Losers get cut before they burn real budget. Winners get more fuel, immediately." },
-  { icon: TrendingUp, title: "One team, one number", text: "The people making the creative also watch the dashboard. No handoff, no blame game between the 'creative team' and the 'media team' — there's just us." },
+  { icon: TrendingUp, title: "One team, one number", text: "The people making the creative also watch the dashboard. No handoff, no blame game between the 'creative team' and the 'media team'. Just us." },
 ];
 
 export default function Campaigns() {

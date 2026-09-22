@@ -28,13 +28,13 @@ export default function Network() {
             <Reveal className="mb-14 max-w-2xl">
               <div className="mb-6 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-lime"><span className="h-px w-10 bg-lime" /> The SoloDac network</div>
               <h1 className="font-display text-5xl font-black leading-[0.88] tracking-[-0.08em] sm:text-7xl">We don&apos;t rent the audience.<br /><span className="text-white/35">We own it.</span></h1>
-              <p className="mt-7 max-w-xl text-base leading-relaxed text-white/55">Sixteen pages, one network, no ad spend required to get in front of people — across business, finance, motivation, and culture.</p>
+              <p className="mt-7 max-w-xl text-base leading-relaxed text-white/55">Sixteen pages, one network, no ad spend required to get in front of people across business, finance, motivation, and culture.</p>
             </Reveal>
 
             <Reveal delay={0.08} className="grid gap-10 border-t border-white/10 pt-12 lg:grid-cols-[0.32fr_0.68fr] lg:gap-16">
               <div>
                 <div className="font-display text-8xl font-black leading-none tracking-[-0.04em] text-lime">{ownedHandles.length + extendedHandles.length}</div>
-                <p className="mt-4 max-w-[220px] text-sm leading-relaxed text-white/55">Instagram pages we run directly or partner with. Every handle below is real and live — click through, we dare you.</p>
+                <p className="mt-4 max-w-[220px] text-sm leading-relaxed text-white/55">Instagram pages we run directly or partner with. Every handle below is real and live. Click through, we dare you.</p>
               </div>
               <div className="flex flex-wrap content-start gap-2">
                 {ownedHandles.map((handle) => <a key={handle} href={`https://www.instagram.com/${handle.slice(1)}/`} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 rounded-full border border-lime/40 bg-lime/[0.06] px-3 py-2 text-xs font-bold text-white/80 transition-all hover:-translate-y-0.5 hover:border-lime hover:text-lime">{handle}<ArrowUpRight size={12} /></a>)}
@@ -46,7 +46,7 @@ export default function Network() {
               <div className="flex flex-wrap justify-between gap-x-10 gap-y-8">
                 {demographicBreakdown.map((item) => <div key={item.label}><div className="font-display text-3xl font-black tracking-[-0.04em] sm:text-5xl">{item.value}</div><div className="mt-2 text-[10px] font-bold uppercase tracking-[0.16em] text-white/45 sm:text-[11px]">{item.label}</div></div>)}
               </div>
-              <p className="mt-8 max-w-2xl text-sm leading-relaxed text-white/45">The extended network adds 45 more partner pages on top of that — another 17.1M followers and 15B+ annual views we can put a campaign in front of.</p>
+              <p className="mt-8 max-w-2xl text-sm leading-relaxed text-white/45">The extended network adds 45 more partner pages on top of that: another 17.1M followers and 15B+ annual views we can put a campaign in front of.</p>
             </Reveal>
           </div>
         </section>

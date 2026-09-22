@@ -36,8 +36,8 @@ export default function Careers() {
               <h1 className="max-w-2xl font-display text-6xl font-black leading-[0.9] tracking-[-0.07em] sm:text-8xl">Job posts:<br /><span className="text-white/35">coming soon™.</span></h1>
             </Reveal>
             <Reveal delay={0.1}>
-              <p className="mt-8 max-w-xl text-xl leading-relaxed text-white/60">We&apos;re a small team that&apos;s currently too busy actually doing the work to write a careers page about it. Ironic, we know — we make content for a living.</p>
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/45">When we do open something up, it&apos;ll land here first — not a job board, not LinkedIn, here. Bookmark this page if you&apos;re into that kind of commitment.</p>
+              <p className="mt-8 max-w-xl text-xl leading-relaxed text-white/60">We&apos;re a small team that&apos;s currently too busy actually doing the work to write a careers page about it. Ironic, we know. We make content for a living.</p>
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/45">When we do open something up, it&apos;ll land here first, not a job board, not LinkedIn, here. Bookmark this page if you&apos;re into that kind of commitment.</p>
             </Reveal>
 
             <Reveal delay={0.18} className="mt-14 rounded-3xl border border-white/10 bg-white/[0.04] p-7 sm:p-10">

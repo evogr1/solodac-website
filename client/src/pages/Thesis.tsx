@@ -5,7 +5,7 @@ import SiteHeader from "../components/SiteHeader";
 import { useScrollToTop } from "../hooks/useScrollToTop";
 
 const beliefs = [
-  { number: "01", text: "Attention is earned per second, not booked per quarter. If people can leave, assume they will — every three seconds you keep them is a small win." },
+  { number: "01", text: "Attention is earned per second, not booked per quarter. If people can leave, assume they will. Every three seconds you keep them is a small win." },
   { number: "02", text: "Consistency beats a viral hit you can't repeat. One lucky post is a fluke. A system that works every week is a business." },
   { number: "03", text: "If you can't measure it, you're guessing with a bigger budget. Vanity metrics are just guesses wearing a suit." },
 ];

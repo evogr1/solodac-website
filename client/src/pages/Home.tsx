@@ -7,9 +7,9 @@ import { useScrollToTop } from "../hooks/useScrollToTop";
 import heroImage from "../assets/solodac-signal.jpg";
 
 const exploreLinks = [
-  { href: "/services", eyebrow: "01", title: "Services", description: "Six things we do. Pick one or hand us the whole engine." },
-  { href: "/network", eyebrow: "02", title: "Network", description: "16 pages, real audiences, no ad spend required." },
-  { href: "/approach", eyebrow: "03", title: "Approach", description: "How we work, and the proof it holds up." },
+  { href: "/services", eyebrow: "01", title: "Services", description: "Six things we do. Pick one, or hand us the whole engine.", stat: "6", statLabel: "services" },
+  { href: "/network", eyebrow: "02", title: "Network", description: "Sixteen pages we already own. No ad spend required to reach them.", stat: "16", statLabel: "pages" },
+  { href: "/approach", eyebrow: "03", title: "Approach", description: "How we actually work, and the proof it holds up.", stat: "3", statLabel: "steps" },
 ];
 
 export default function Home() {
@@ -47,7 +47,7 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <p className="mx-auto mt-6 max-w-2xl text-xs leading-relaxed text-white/50 sm:text-sm">The extended network adds 45 more partner pages on top of that — another 17.1M followers and 15B+ annual views we can put a campaign in front of.</p>
+          <p className="mx-auto mt-6 max-w-2xl text-xs leading-relaxed text-white/50 sm:text-sm">The extended network adds 45 more partner pages on top of that: another 17.1M followers and 15B+ annual views we can put a campaign in front of.</p>
         </Reveal>
       </section>
 
@@ -58,24 +58,37 @@ export default function Home() {
             <h1 className="max-w-md font-display text-5xl font-black leading-[0.9] tracking-[-0.075em] sm:text-7xl">If it doesn&apos;t move, it doesn&apos;t count.</h1>
           </Reveal>
           <Reveal delay={0.1} className="max-w-3xl">
-            <p className="text-2xl font-medium leading-tight tracking-[-0.03em] sm:text-4xl">Most brands publish and hope. We&apos;d rather publish, watch what actually gets <span className="text-coral">watched</span>, and do more of that — until being easy to find turns into being hard to forget.</p>
+            <p className="text-2xl font-medium leading-tight tracking-[-0.03em] sm:text-4xl">Most brands publish and hope. We&apos;d rather publish, watch what actually gets <span className="text-coral">watched</span>, and do more of that, until being easy to find turns into being hard to forget.</p>
           </Reveal>
         </div>
       </section>
 
       <section className="signal-section relative z-10 bg-ink px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
         <div className="mx-auto max-w-[1440px]">
-          <Reveal className="mb-12">
-            <div className="mb-6 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-lime"><span className="h-px w-10 bg-lime" /> Where to next</div>
-            <h2 className="max-w-2xl font-display text-4xl font-black leading-[0.9] tracking-[-0.06em] sm:text-6xl">Three pages. Everything you need to know.</h2>
+          <Reveal className="mb-4 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+            <div>
+              <div className="mb-6 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-lime"><span className="h-px w-10 bg-lime" /> Where to next</div>
+              <h2 className="max-w-2xl font-display text-4xl font-black leading-[0.9] tracking-[-0.06em] sm:text-6xl">Nothing here is filler. Pick a page.</h2>
+            </div>
+            <p className="max-w-xs text-sm text-white/40">No fifteen-tab menu to dig through. Three things, and each one earns its own page.</p>
           </Reveal>
-          <div className="grid gap-3 md:grid-cols-3">
+          <div className="mt-10 border-t border-white/10">
             {exploreLinks.map((item, index) => (
-              <Reveal key={item.href} delay={index * 0.08}>
-                <Link href={item.href} className="group block min-h-[220px] rounded-3xl border border-white/10 bg-white/[0.045] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-lime/50 hover:bg-white/[0.08]">
-                  <div className="flex items-start justify-between"><span className="font-mono text-xs text-white/35">{item.eyebrow}</span><ArrowUpRight size={18} className="text-lime transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></div>
-                  <h3 className="mt-10 font-display text-3xl font-black tracking-[-0.06em]">{item.title}</h3>
-                  <p className="mt-3 max-w-[280px] text-sm leading-relaxed text-white/55">{item.description}</p>
+              <Reveal key={item.href} delay={index * 0.06}>
+                <Link
+                  href={item.href}
+                  className="group grid grid-cols-[auto_1fr_auto] items-center gap-6 border-b border-white/10 py-8 transition-colors hover:bg-white/[0.03] sm:grid-cols-[auto_1fr_auto_auto] sm:gap-10 sm:px-4"
+                >
+                  <span className="font-mono text-xs text-white/30">{item.eyebrow}</span>
+                  <div>
+                    <h3 className="font-display text-3xl font-black tracking-[-0.05em] transition-colors group-hover:text-lime sm:text-5xl">{item.title}</h3>
+                    <p className="mt-2 max-w-sm text-sm leading-relaxed text-white/50">{item.description}</p>
+                  </div>
+                  <div className="hidden text-right sm:block">
+                    <div className="font-display text-3xl font-black tracking-[-0.04em] text-white/80">{item.stat}</div>
+                    <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-white/35">{item.statLabel}</div>
+                  </div>
+                  <ArrowUpRight size={22} className="shrink-0 text-white/30 transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-lime" />
                 </Link>
               </Reveal>
             ))}

@@ -17,7 +17,7 @@ export default function NotFound() {
           <div className="mb-6 flex items-center justify-center gap-3 text-[10px] font-black uppercase tracking-[0.25em] text-white/45"><span className="h-px w-10 bg-coral" /> Signal lost <span className="h-px w-10 bg-coral" /></div>
           <h1 className="font-display text-8xl font-black leading-none tracking-[-0.05em] text-lime sm:text-9xl">404</h1>
           <h2 className="mt-6 font-display text-3xl font-black leading-[0.95] tracking-[-0.05em] sm:text-5xl">This page ghosted us.</h2>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-white/55">Wrong link, old bookmark, or you're just poking around — either way, there's nothing here. Unlike everything else we make, this page did not earn your attention.</p>
+          <p className="mt-6 max-w-md text-base leading-relaxed text-white/55">Wrong link, old bookmark, or you're just poking around. Either way, there's nothing here. Unlike everything else we make, this page did not earn your attention.</p>
         </motion.div>
 
         <motion.div

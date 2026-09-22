@@ -30,7 +30,7 @@ export default function Testimonials() {
             >
               <Quote size={28} className="text-lime/50" />
               <p className="mt-4 font-display text-2xl font-black leading-tight tracking-[-0.02em] text-white/40">&quot;[Your name could go here. No pressure.]&quot;</p>
-              <p className="mt-4 text-xs font-bold uppercase tracking-[0.14em] text-white/30">— A future client, probably</p>
+              <p className="mt-4 text-xs font-bold uppercase tracking-[0.14em] text-white/30">A future client, probably</p>
             </motion.div>
 
             <Reveal delay={0.25}>

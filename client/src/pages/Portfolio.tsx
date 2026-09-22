@@ -22,7 +22,7 @@ export default function Portfolio() {
             <Reveal className="max-w-2xl">
               <div className="mb-6 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-lime"><span className="h-px w-10 bg-lime" /> Portfolio</div>
               <h1 className="font-display text-5xl font-black leading-[0.9] tracking-[-0.075em] sm:text-7xl">Not a mockup. A live network.</h1>
-              <p className="mt-7 text-lg leading-relaxed text-white/60">Most agencies show you a Figma file. We can show you {allHandles.length} channels that already exist, already post, and already have an audience. Tap any handle — it goes straight to the real profile.</p>
+              <p className="mt-7 text-lg leading-relaxed text-white/60">Most agencies show you a Figma file. We can show you {allHandles.length} channels that already exist, already post, and already have an audience. Tap any handle and it goes straight to the real profile.</p>
             </Reveal>
 
             <Reveal delay={0.1} className="mt-14 flex flex-wrap gap-2">
