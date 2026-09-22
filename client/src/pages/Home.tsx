@@ -22,17 +22,18 @@ export default function Home() {
       <SiteHeader activeSection="top" />
       <main className="min-h-screen overflow-hidden bg-ink text-paper selection:bg-lime selection:text-ink">
 
-      <section id="top" className="relative z-10 w-full overflow-hidden bg-[#0d0f0f]">
+      <section id="top" className="relative z-10 min-h-[85svh] w-full overflow-hidden bg-[#0d0f0f] sm:min-h-[92vh]">
         <motion.img
           initial={{ opacity: 0, scale: 1.04 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
           src={heroImage}
           alt="SoloDac signal artwork"
-          className="hero-art block h-[58svh] min-h-[430px] w-full object-cover object-[70%_center] sm:h-auto sm:min-h-0 sm:object-center"
+          className="hero-art absolute inset-0 h-full w-full object-cover object-[70%_center] sm:object-center"
         />
-        <Reveal delay={0.2} className="border-y border-dotted border-white/20 bg-[#0d0f0f] px-5 py-8 sm:px-8 lg:px-12">
-          <div className="mx-auto flex max-w-[1440px] flex-wrap justify-between gap-x-10 gap-y-8">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black via-black/70 to-transparent" />
+        <Reveal delay={0.2} className="absolute inset-x-0 bottom-0 px-5 py-8 sm:px-8 sm:py-10 lg:px-12">
+          <div className="mx-auto flex max-w-[1440px] flex-wrap justify-between gap-x-10 gap-y-6 border-t border-dotted border-white/25 pt-6">
             {[
               { value: "15.4M", label: "Followers" },
               { value: "101K", label: "Newsletter subs" },
@@ -41,12 +42,12 @@ export default function Home() {
               { value: "89.6M", label: "Interactions" },
             ].map((stat) => (
               <div key={stat.label}>
-                <div className="font-display text-3xl font-black tracking-[-0.04em] text-paper sm:text-5xl">{stat.value}</div>
-                <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.16em] text-white/45 sm:text-[11px]">{stat.label}</div>
+                <div className="font-display text-2xl font-black tracking-[-0.04em] text-paper sm:text-4xl">{stat.value}</div>
+                <div className="mt-1.5 text-[9px] font-bold uppercase tracking-[0.16em] text-white/55 sm:text-[10px]">{stat.label}</div>
               </div>
             ))}
           </div>
-          <p className="mx-auto mt-8 max-w-2xl text-sm leading-relaxed text-white/45">The extended network adds 45 more partner pages on top of that — another 17.1M followers and 15B+ annual views we can put a campaign in front of.</p>
+          <p className="mx-auto mt-6 max-w-2xl text-xs leading-relaxed text-white/50 sm:text-sm">The extended network adds 45 more partner pages on top of that — another 17.1M followers and 15B+ annual views we can put a campaign in front of.</p>
         </Reveal>
       </section>
 
