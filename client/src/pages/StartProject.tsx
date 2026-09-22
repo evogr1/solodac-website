@@ -149,8 +149,8 @@ export default function StartProject() {
               <div className="flex min-h-[420px] flex-col items-center justify-center text-center">
                 <div className="mb-5 grid h-16 w-16 place-items-center rounded-full bg-lime text-ink"><Check size={28} /></div>
                 <h3 className="font-display text-4xl font-black tracking-[-0.06em]">Signal received.</h3>
-                <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/55">Your project brief has been sent. We&apos;ll come back with a point of view.</p>
-                <button type="button" onClick={() => setFormSent(false)} className="mt-7 text-xs font-bold uppercase tracking-[0.18em] text-lime hover:underline">Send another brief</button>
+                <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/55">Your brief just landed in our inbox and, statistically, someone is reading it right now. We&apos;ll come back with a real point of view, not a form-letter reply.</p>
+                <button type="button" onClick={() => setFormSent(false)} className="mt-7 text-xs font-bold uppercase tracking-[0.18em] text-lime hover:underline">Got more to say? Send another</button>
               </div>
             ) : (
               <div className="space-y-5">
@@ -265,7 +265,7 @@ export default function StartProject() {
                     required
                     name="message"
                     rows={4}
-                    placeholder="Please tell us more about your goals, and desired campaign start date. Include your company social profile and/or company name so that we can learn more prior to getting in touch. Thank you!"
+                    placeholder="What are you trying to make happen, and by when? Drop your company name or a link so we can snoop around before we reply."
                     className="mt-2 w-full resize-none border-b border-white/20 bg-transparent pb-3 text-sm font-medium leading-relaxed text-paper outline-none transition-colors placeholder:text-white/25 focus:border-lime"
                   />
                 </label>

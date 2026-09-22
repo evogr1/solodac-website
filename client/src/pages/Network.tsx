@@ -34,7 +34,7 @@ export default function Network() {
             <Reveal delay={0.08} className="grid gap-10 border-t border-white/10 pt-12 lg:grid-cols-[0.32fr_0.68fr] lg:gap-16">
               <div>
                 <div className="font-display text-8xl font-black leading-none tracking-[-0.04em] text-lime">{ownedHandles.length + extendedHandles.length}</div>
-                <p className="mt-4 max-w-[220px] text-sm leading-relaxed text-white/55">Instagram pages we run directly or partner with. Every handle below is real and live — click through and see for yourself.</p>
+                <p className="mt-4 max-w-[220px] text-sm leading-relaxed text-white/55">Instagram pages we run directly or partner with. Every handle below is real and live — click through, we dare you.</p>
               </div>
               <div className="flex flex-wrap content-start gap-2">
                 {ownedHandles.map((handle) => <a key={handle} href={`https://www.instagram.com/${handle.slice(1)}/`} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 rounded-full border border-lime/40 bg-lime/[0.06] px-3 py-2 text-xs font-bold text-white/80 transition-all hover:-translate-y-0.5 hover:border-lime hover:text-lime">{handle}<ArrowUpRight size={12} /></a>)}
@@ -53,7 +53,7 @@ export default function Network() {
 
         <section className="relative z-10 bg-coral px-5 py-16 text-ink sm:px-8 lg:px-12 lg:py-20">
           <div className="mx-auto flex max-w-[1440px] flex-col justify-between gap-8 sm:flex-row sm:items-center">
-            <h2 className="max-w-xl font-display text-4xl font-black leading-[0.9] tracking-[-0.07em] sm:text-5xl">Want your brand in front of this network?</h2>
+            <h2 className="max-w-xl font-display text-4xl font-black leading-[0.9] tracking-[-0.07em] sm:text-5xl">Want your brand in front of 121M accounts? Yeah, thought so.</h2>
             <Link href="/eyeballs" className="group flex shrink-0 items-center gap-4 rounded-full bg-ink px-6 py-4 text-sm font-black text-paper transition-transform hover:-translate-y-1">Book a call <ArrowUpRight size={18} className="text-lime transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></Link>
           </div>
         </section>
