@@ -6,12 +6,17 @@ import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Approach from "./pages/Approach";
+import Campaigns from "./pages/Campaigns";
 import Careers from "./pages/Careers";
+import CaseStudies from "./pages/CaseStudies";
 import Home from "./pages/Home";
 import Network from "./pages/Network";
+import Portfolio from "./pages/Portfolio";
 import ServicePage from "./pages/ServicePage";
 import Services from "./pages/Services";
 import StartProject from "./pages/StartProject";
+import Testimonials from "./pages/Testimonials";
+import Thesis from "./pages/Thesis";
 
 
 function Router() {
@@ -33,6 +38,11 @@ function Router() {
           <Route path={"/network"} component={Network} />
           <Route path={"/approach"} component={Approach} />
           <Route path={"/careers"} component={Careers} />
+          <Route path={"/campaigns"} component={Campaigns} />
+          <Route path={"/thesis"} component={Thesis} />
+          <Route path={"/case-studies"} component={CaseStudies} />
+          <Route path={"/testimonials"} component={Testimonials} />
+          <Route path={"/portfolio"} component={Portfolio} />
           <Route path={"/eyeballs"} component={StartProject} />
           <Route path={"/404"} component={NotFound} />
           {/* Final fallback route */}
