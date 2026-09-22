@@ -203,9 +203,21 @@ function vitePluginStorageProxy(): Plugin {
   };
 }
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginStorageProxy()];
+export default defineConfig(({ mode }) => {
+  const isProduction = mode === "production";
 
-export default defineConfig({
+  const plugins = [
+    react(),
+    tailwindcss(),
+    jsxLocPlugin(),
+    // Manus's live-editing runtime, debug log collector, and storage proxy are dev-only
+    // tooling for their builder environment. They must never ship to production: the
+    // runtime plugin alone was injecting ~300KB of unminified inline JS (including a
+    // duplicate copy of React) into every page, which is what was choking real phones.
+    ...(isProduction ? [] : [vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginStorageProxy()]),
+  ];
+
+  return {
   plugins,
   resolve: {
     alias: {
@@ -238,4 +250,5 @@ export default defineConfig({
       deny: ["**/.*"],
     },
   },
+  };
 });
