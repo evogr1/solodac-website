@@ -11,7 +11,6 @@ import {
   MoveRight,
   Play,
   Sparkles,
-  Target,
   X,
   Youtube,
   Zap,
@@ -100,11 +99,22 @@ export default function Home() {
         <div className="absolute -right-24 top-16 h-80 w-80 rounded-full border-[28px] border-lime/10" />
         <div className="mx-auto max-w-[1440px]">
           <Reveal className="mb-14 max-w-2xl"><div className="mb-6 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-lime"><span className="h-px w-10 bg-lime" /> The SoloDac network</div><h2 className="font-display text-5xl font-black leading-[0.88] tracking-[-0.08em] sm:text-7xl">We don&apos;t rent the audience.<br /><span className="text-white/35">We own it.</span></h2><p className="mt-7 max-w-xl text-base leading-relaxed text-white/55">Fifteen pages, one network, no ad spend required to get in front of people — across business, finance, motivation, and culture.</p></Reveal>
-          <div className="grid gap-3 lg:grid-cols-2">
-            <div className="signal-card rounded-3xl border border-lime/35 bg-lime/[0.07] p-6 sm:p-8"><div className="mb-8 flex items-start justify-between"><div><div className="text-[10px] font-bold uppercase tracking-[0.2em] text-lime">01 / Owned network</div><div className="mt-3 font-display text-4xl font-black tracking-[-0.07em]">{ownedHandles.length} owned pages.</div></div><Instagram size={22} className="text-lime" /></div><div className="grid gap-2 sm:grid-cols-2">{ownedHandles.map((handle) => <a key={handle} href={`https://www.instagram.com/${handle.slice(1)}/`} target="_blank" rel="noreferrer" className="flex items-center justify-between rounded-xl border border-white/10 bg-ink/20 px-3 py-3 text-sm font-bold text-white/75 transition-all hover:-translate-y-0.5 hover:border-lime hover:text-lime"><span>{handle}</span><ArrowUpRight size={14} /></a>)}</div></div>
-            <div className="signal-card rounded-3xl border border-blue-300/30 bg-blue-300/[0.07] p-6 sm:p-8"><div className="mb-8 flex items-start justify-between"><div><div className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-200">02 / Extended network</div><div className="mt-3 font-display text-4xl font-black tracking-[-0.07em]">6 extended pages.</div></div><Globe2 size={22} className="text-blue-200" /></div><div className="grid gap-2 sm:grid-cols-2">{extendedHandles.map((handle) => <a key={handle} href={`https://www.instagram.com/${handle.slice(1)}/`} target="_blank" rel="noreferrer" className="flex items-center justify-between rounded-xl border border-white/10 bg-ink/20 px-3 py-3 text-sm font-bold text-white/75 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:text-blue-200"><span>{handle}</span><ArrowUpRight size={14} /></a>)}</div></div>
-          </div>
-          <div className="signal-card mt-3 rounded-3xl border border-coral/30 bg-coral/[0.07] p-6 sm:p-8"><div className="mb-8 flex items-start justify-between"><div><div className="text-[10px] font-bold uppercase tracking-[0.2em] text-coral">03 / Network reach</div><div className="mt-3 font-display text-4xl font-black tracking-[-0.07em]">Reach, at a glance.</div></div><Target size={22} className="text-coral" /></div><div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{demographicBreakdown.map((item) => <div key={item.label} className="rounded-2xl border border-white/10 bg-ink/20 p-4"><div className="text-[10px] font-bold uppercase tracking-[0.16em] text-coral">{item.label}</div><div className="mt-3 font-display text-2xl font-black tracking-[-0.05em]">{item.value}</div><p className="mt-2 text-xs leading-relaxed text-white/45">{item.note}</p></div>)}</div></div>
+          <Reveal delay={0.08} className="grid gap-10 border-t border-white/10 pt-12 lg:grid-cols-[0.32fr_0.68fr] lg:gap-16">
+            <div>
+              <div className="font-display text-8xl font-black leading-none tracking-[-0.04em] text-lime">{ownedHandles.length + extendedHandles.length}</div>
+              <p className="mt-4 max-w-[220px] text-sm leading-relaxed text-white/55">Instagram pages we run directly or partner with. Every handle below is real and live — click through and see for yourself.</p>
+            </div>
+            <div className="flex flex-wrap content-start gap-2">
+              {ownedHandles.map((handle) => <a key={handle} href={`https://www.instagram.com/${handle.slice(1)}/`} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 rounded-full border border-lime/40 bg-lime/[0.06] px-3 py-2 text-xs font-bold text-white/80 transition-all hover:-translate-y-0.5 hover:border-lime hover:text-lime">{handle}<ArrowUpRight size={12} /></a>)}
+              {extendedHandles.map((handle) => <a key={handle} href={`https://www.instagram.com/${handle.slice(1)}/`} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 rounded-full border border-blue-300/30 bg-blue-300/[0.05] px-3 py-2 text-xs font-bold text-white/70 transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:text-blue-200">{handle}<ArrowUpRight size={12} /></a>)}
+            </div>
+          </Reveal>
+          <Reveal delay={0.16} className="mt-16 border-y border-white/10 py-8">
+            <div className="flex flex-wrap justify-between gap-x-10 gap-y-8">
+              {demographicBreakdown.slice(0, 5).map((item) => <div key={item.label}><div className="font-display text-3xl font-black tracking-[-0.04em] sm:text-5xl">{item.value}</div><div className="mt-2 text-[10px] font-bold uppercase tracking-[0.16em] text-white/45 sm:text-[11px]">{item.label}</div></div>)}
+            </div>
+            <p className="mt-8 max-w-2xl text-sm leading-relaxed text-white/45">The extended network adds 45 more partner pages on top of that — another 17.1M followers and 15B+ annual views we can put a campaign in front of.</p>
+          </Reveal>
         </div>
       </section>
 
