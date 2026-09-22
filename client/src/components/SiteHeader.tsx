@@ -1,34 +1,20 @@
 import { ArrowUpRight, Boxes, BarChart2, BookOpen, Briefcase, ChevronDown, MessageCircle, Menu, PlayCircle, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
-import { setPendingSection } from "../lib/scrollIntent";
 
 const sauceItems = [
-  { icon: PlayCircle, label: "What we do", id: "services" },
-  { icon: BarChart2, label: "Campaigns", id: "case-studies" },
-  { icon: BookOpen, label: "Our thesis", id: "approach" },
-  { icon: Briefcase, label: "Case studies", id: "case-studies" },
-  { icon: MessageCircle, label: "Testimonials", id: "network" },
-  { icon: Boxes, label: "Portfolio", id: "case-studies" },
+  { icon: PlayCircle, label: "What we do", href: "/services" },
+  { icon: BarChart2, label: "Campaigns", href: "/approach#case-studies" },
+  { icon: BookOpen, label: "Our thesis", href: "/approach" },
+  { icon: Briefcase, label: "Case studies", href: "/approach#case-studies" },
+  { icon: MessageCircle, label: "Testimonials", href: "/network" },
+  { icon: Boxes, label: "Portfolio", href: "/network" },
 ];
 
 const navItems = [
-  { id: "approach", label: "About" },
-  { id: "case-studies", label: "Careers" },
+  { href: "/approach", label: "About" },
+  { href: "/network", label: "Careers" },
 ];
-
-function scrollToId(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-}
-
-function scrollToIdWhenReady(id: string, attempts = 30) {
-  const el = document.getElementById(id);
-  if (el) {
-    el.scrollIntoView({ behavior: "smooth" });
-  } else if (attempts > 0) {
-    window.requestAnimationFrame(() => scrollToIdWhenReady(id, attempts - 1));
-  }
-}
 
 export default function SiteHeader({ activeSection }: { activeSection?: string }) {
   const [location, setLocation] = useLocation();
@@ -52,29 +38,17 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
     return () => window.removeEventListener("scroll", updateScrolled);
   }, [isFormPage]);
 
-  const goToSection = (id: string) => {
+  const goTo = (href: string) => {
     setMenuOpen(false);
     setSauceOpen(false);
-    if (location !== "/") {
-      setPendingSection(id);
-      setLocation("/");
-      scrollToIdWhenReady(id);
-    } else {
-      scrollToId(id);
-    }
+    setLocation(href);
   };
 
   const goHome = (event: React.MouseEvent) => {
     event.preventDefault();
     setMenuOpen(false);
     setSauceOpen(false);
-    if (location !== "/") {
-      setPendingSection("top");
-      setLocation("/");
-      scrollToIdWhenReady("top");
-    } else {
-      scrollToId("top");
-    }
+    setLocation("/");
   };
 
   return (
@@ -112,7 +86,7 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
                   {sauceItems.map((item) => (
                     <button
                       key={item.label}
-                      onClick={() => goToSection(item.id)}
+                      onClick={() => goTo(item.href)}
                       className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-xs font-medium normal-case tracking-normal text-white/70 transition-colors hover:bg-white/[0.06] hover:text-paper"
                     >
                       <item.icon size={15} className="text-white/40" />
@@ -125,9 +99,9 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
           </div>
           {navItems.map((item) => (
             <button
-              key={item.id}
-              onClick={() => goToSection(item.id)}
-              className={`pill-nav-link whitespace-nowrap rounded-full px-3 py-2 ${activeSection === item.id ? "is-active" : ""}`}
+              key={item.href}
+              onClick={() => goTo(item.href)}
+              className={`pill-nav-link whitespace-nowrap rounded-full px-3 py-2 ${location === item.href ? "is-active" : ""}`}
             >
               {item.label}
             </button>
@@ -140,7 +114,7 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
             scrolled ? "flex px-3 py-1.5" : "hidden px-4 py-2"
           }`}
         >
-          Get eyeballs <ArrowUpRight size={13} />
+          Book a call <ArrowUpRight size={13} />
         </button>
 
         <button
@@ -172,7 +146,7 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
                   {sauceItems.map((item) => (
                     <button
                       key={item.label}
-                      onClick={() => goToSection(item.id)}
+                      onClick={() => goTo(item.href)}
                       className="flex items-center gap-3 rounded-xl px-3 py-2 text-left transition-colors hover:bg-white/[0.06] hover:text-paper"
                     >
                       <item.icon size={16} className="text-white/40" />
@@ -183,7 +157,7 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
               )}
             </div>
             {navItems.map((item) => (
-              <button key={item.id} onClick={() => goToSection(item.id)} className="px-5 py-4 text-left text-paper">
+              <button key={item.href} onClick={() => goTo(item.href)} className="px-5 py-4 text-left text-paper">
                 {item.label}
               </button>
             ))}
@@ -196,7 +170,7 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
               }}
               className="flex w-full items-center justify-center gap-2 rounded-full border border-white/20 bg-white/[0.04] py-3.5 text-sm font-bold uppercase tracking-[0.14em] text-paper transition-colors hover:border-lime hover:text-lime"
             >
-              Get eyeballs <ArrowUpRight size={16} />
+              Book a call <ArrowUpRight size={16} />
             </button>
           </div>
         </div>

@@ -5,8 +5,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import Approach from "./pages/Approach";
 import Home from "./pages/Home";
+import Network from "./pages/Network";
 import ServicePage from "./pages/ServicePage";
+import Services from "./pages/Services";
 import StartProject from "./pages/StartProject";
 
 
@@ -24,7 +27,10 @@ function Router() {
       >
         <Switch location={location}>
           <Route path={"/"} component={Home} />
+          <Route path={"/services"} component={Services} />
           <Route path={"/services/:slug"} component={ServicePage} />
+          <Route path={"/network"} component={Network} />
+          <Route path={"/approach"} component={Approach} />
           <Route path={"/eyeballs"} component={StartProject} />
           <Route path={"/404"} component={NotFound} />
           {/* Final fallback route */}
