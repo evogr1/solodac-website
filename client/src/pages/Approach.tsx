@@ -1,4 +1,4 @@
-import { ArrowDownRight, ArrowUpRight, Globe2, Instagram, Layers3, X, Youtube } from "lucide-react";
+import { ArrowUpRight, Globe2, Instagram, Layers3, X, Youtube } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import Reveal from "../components/Reveal";
 import SiteHeader from "../components/SiteHeader";
@@ -17,8 +17,28 @@ export default function Approach() {
           <div className="absolute -right-10 top-10 h-64 w-64 rounded-full border-[38px] border-ink/10 sm:h-96 sm:w-96" />
           <div className="mx-auto grid max-w-[1440px] gap-12 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24 lg:px-12">
             <Reveal><div className="mb-6 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.25em] text-ink/50"><span className="h-px w-10 bg-ink/45" /> About SoloDac</div><h1 className="max-w-lg font-display text-5xl font-black leading-[0.88] tracking-[-0.08em] sm:text-7xl">We&apos;d rather make one thing people <span className="text-coral">share</span> than ten things they scroll past.</h1></Reveal>
-            <div className="relative z-10 divide-y divide-ink/20">
-              {["Find the real story", "Build the system", "Make it travel"].map((title, index) => <Reveal key={title} delay={index * 0.08}><div className="group flex gap-6 py-6 first:pt-0 last:pb-0 sm:gap-10"><span className="font-mono text-xs text-ink/50">0{index + 1}</span><div className="flex-1"><h3 className="font-display text-3xl font-black tracking-[-0.06em] sm:text-4xl">{title}</h3><p className="mt-2 max-w-lg text-sm leading-relaxed text-ink/65">{index === 0 ? "Every business has one thing that's actually true and interesting about it. We find that, not whatever trend is working for everyone else this month." : index === 1 ? "Content, channels, creative, tracking, built as one system your team can keep running after we hand it off. Not a pile of one-off posts." : "We publish, watch what happens, cut what isn't working, and push on what is, until the work shows up where your audience already spends time."}</p></div><ArrowDownRight className="mt-1 shrink-0 transition-transform duration-200 group-hover:translate-x-1 group-hover:translate-y-1" /></div></Reveal>)}
+            <div className="relative z-10 flex flex-col">
+              {["Find the real story", "Build the system", "Make it travel"].map((title, index) => (
+                <Reveal key={title} delay={index * 0.08}>
+                  <div className="relative border-l-2 border-ink/15 py-2 pl-8 sm:pl-10">
+                    <span
+                      aria-hidden
+                      className="pointer-events-none absolute -left-4 -top-6 font-display text-[7rem] font-black leading-none text-ink/[0.07] sm:-top-8 sm:text-[9rem]"
+                    >
+                      {index + 1}
+                    </span>
+                    <span className="absolute -left-[7px] top-3 h-3 w-3 rounded-full bg-ink" />
+                    <h3 className="font-display text-3xl font-black tracking-[-0.06em] sm:text-4xl">{title}</h3>
+                    <p className="mt-2 max-w-lg pb-8 text-sm leading-relaxed text-ink/65 last:pb-0">
+                      {index === 0
+                        ? "Every business has one thing that's actually true and interesting about it. We find that, not whatever trend is working for everyone else this month."
+                        : index === 1
+                          ? "Content, channels, creative, tracking, built as one system your team can keep running after we hand it off. Not a pile of one-off posts."
+                          : "We publish, watch what happens, cut what isn't working, and push on what is, until the work shows up where your audience already spends time."}
+                    </p>
+                  </div>
+                </Reveal>
+              ))}
             </div>
           </div>
         </section>
@@ -26,7 +46,7 @@ export default function Approach() {
         <section className="signal-section relative z-10 bg-paper px-5 py-20 text-ink sm:px-8 lg:px-12 lg:py-28">
           <div className="mx-auto max-w-[1440px]">
             <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
-              <Reveal><div className="mb-6 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.25em] text-ink/45"><span className="h-px w-10 bg-coral" /> Where we show up</div><h2 className="max-w-3xl font-display text-5xl font-black leading-[0.88] tracking-[-0.08em] sm:text-8xl">Your next customer is mid-scroll <span className="text-coral">right now.</span></h2></Reveal>
+              <Reveal><div className="mb-6 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.25em] text-ink/45"><span className="h-px w-10 bg-coral" /> Where we show up</div><h2 className="max-w-3xl font-display text-5xl font-black leading-[1.05] tracking-[-0.06em] sm:text-7xl">Your next customer is mid-scroll <span className="text-coral">right now.</span></h2></Reveal>
               <Reveal delay={0.1} className="signal-card rounded-3xl bg-ink p-6 text-paper sm:p-8"><div className="mb-10 flex items-center justify-between"><span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/45">The channel mix</span><Layers3 size={19} className="text-lime" /></div><div className="space-y-5"><div className="flex items-center justify-between border-b border-white/10 pb-4"><span className="flex items-center gap-3 font-bold"><Instagram size={18} className="text-pink-400" /> Instagram</span><span className="text-xs text-white/45">Stories · Reels · Community</span></div><div className="flex items-center justify-between border-b border-white/10 pb-4"><span className="flex items-center gap-3 font-bold"><Youtube size={18} className="text-red-400" /> YouTube</span><span className="text-xs text-white/45">Shorts · Long-form · Growth</span></div><div className="flex items-center justify-between border-b border-white/10 pb-4"><span className="flex items-center gap-3 font-bold"><X size={18} /> X / Twitter</span><span className="text-xs text-white/45">Threads · Launches · Voice</span></div><div className="flex items-center justify-between"><span className="flex items-center gap-3 font-bold"><Globe2 size={18} className="text-blue-300" /> Web</span><span className="text-xs text-white/45">Search · UX · Conversion</span></div></div></Reveal>
             </div>
           </div>
