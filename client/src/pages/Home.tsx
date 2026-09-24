@@ -8,6 +8,23 @@ import { useScrollToTop } from "../hooks/useScrollToTop";
 import { useEffect, useState } from "react";
 import heroImage from "../assets/solodac-signal.jpg";
 
+const showcaseCards = [
+  {
+    href: "/network",
+    label: "Owned network",
+    caption: "16 pages we run ourselves. No ad spend to reach them.",
+    handles: ["@millionairesformula", "@archiveofceos", "@bourseindia", "@howaitechworks"],
+    tone: "lime" as const,
+  },
+  {
+    href: "/campaigns",
+    label: "Client campaigns",
+    caption: "Paid, organic, and everything in between, run to one number.",
+    handles: ["Meta ads", "Google ads", "Creative testing", "Conversion tracking"],
+    tone: "coral" as const,
+  },
+];
+
 const exploreLinks = [
   { href: "/services", eyebrow: "01", title: "Services", description: "Six things we do. Pick one, or hand us the whole engine.", stat: "6", statLabel: "services" },
   { href: "/network", eyebrow: "02", title: "Network", description: "Sixteen pages we already own. No ad spend required to reach them.", stat: "16", statLabel: "pages" },
@@ -103,6 +120,51 @@ export default function Home() {
             ))}
           </div>
         </Reveal>
+      </section>
+
+      <section className="signal-section relative z-10 bg-ink px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
+        <div className="mx-auto max-w-[1440px]">
+          <Reveal className="mb-10 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-lime"><span className="h-px w-10 bg-lime" /> Two sides of the same engine</Reveal>
+          <div className="grid gap-5 sm:grid-cols-2">
+            {showcaseCards.map((card, index) => (
+              <Reveal key={card.href} delay={index * 0.1}>
+                <Link href={card.href} className="group relative block aspect-[4/5] overflow-hidden rounded-3xl border border-white/10 sm:aspect-[5/6]">
+                  <div
+                    className={`absolute inset-0 transition-transform duration-500 group-hover:scale-105 ${
+                      card.tone === "lime"
+                        ? "bg-[radial-gradient(circle_at_30%_20%,rgba(204,255,42,0.35),transparent_60%),radial-gradient(circle_at_80%_80%,rgba(204,255,42,0.15),transparent_55%),#0d0f0f]"
+                        : "bg-[radial-gradient(circle_at_30%_20%,rgba(255,118,95,0.35),transparent_60%),radial-gradient(circle_at_80%_80%,rgba(255,118,95,0.15),transparent_55%),#0d0f0f]"
+                    }`}
+                  >
+                    <div className="absolute inset-0 opacity-[0.07] noise" />
+                    <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:36px_36px]" />
+                  </div>
+
+                  <div className="absolute inset-x-6 top-6 flex flex-wrap gap-2 sm:inset-x-8 sm:top-8">
+                    {card.handles.map((handle) => (
+                      <span
+                        key={handle}
+                        className={`rounded-full border px-3 py-1.5 text-[11px] font-bold text-white/80 backdrop-blur-sm ${
+                          card.tone === "lime" ? "border-lime/30 bg-lime/[0.08]" : "border-coral/30 bg-coral/[0.08]"
+                        }`}
+                      >
+                        {handle}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/60 to-transparent px-6 pb-6 pt-16 sm:px-8 sm:pb-8">
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="rounded-full bg-black/70 px-5 py-3 text-sm font-black text-paper backdrop-blur-md sm:text-base">{card.label}</span>
+                      <ArrowUpRight size={20} className={`shrink-0 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 ${card.tone === "lime" ? "text-lime" : "text-coral"}`} />
+                    </div>
+                    <p className="mt-3 max-w-xs text-xs leading-relaxed text-white/55 sm:text-sm">{card.caption}</p>
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="signal-section relative z-10 border-y border-ink/10 bg-paper text-ink">
