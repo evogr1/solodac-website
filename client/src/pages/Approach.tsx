@@ -16,26 +16,22 @@ export default function Approach() {
         <section className="signal-section relative z-10 overflow-hidden bg-[#d9ff3f] pb-20 pt-32 text-ink sm:pt-40 lg:pb-28">
           <div className="absolute -right-10 top-10 h-64 w-64 rounded-full border-[38px] border-ink/10 sm:h-96 sm:w-96" />
           <div className="mx-auto grid max-w-[1440px] gap-12 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24 lg:px-12">
-            <Reveal><div className="mb-6 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.25em] text-ink/50"><span className="h-px w-10 bg-ink/45" /> About SoloDac</div><h1 className="max-w-lg font-display text-5xl font-black leading-[0.88] tracking-[-0.08em] sm:text-7xl">We&apos;d rather make one thing people <span className="text-coral">share</span> than ten things they scroll past.</h1></Reveal>
-            <div className="relative z-10 flex flex-col">
+            <Reveal><div className="mb-6 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.25em] text-ink/50"><span className="h-px w-10 bg-ink/45" /> About SoloDac</div><h1 className="max-w-lg font-display text-5xl font-black leading-[0.88] tracking-[-0.08em] sm:text-7xl">We&apos;d rather make one thing which people <span className="text-coral">share and engage with</span>, rather than ten things they scroll past.</h1></Reveal>
+            <div className="relative z-10 flex flex-col divide-y divide-ink/15 border-t border-ink/15">
               {["Find the real story", "Build the system", "Make it travel"].map((title, index) => (
                 <Reveal key={title} delay={index * 0.08}>
-                  <div className="relative border-l-2 border-ink/15 py-2 pl-8 sm:pl-10">
-                    <span
-                      aria-hidden
-                      className="pointer-events-none absolute -left-4 -top-6 font-display text-[7rem] font-black leading-none text-ink/[0.07] sm:-top-8 sm:text-[9rem]"
-                    >
-                      {index + 1}
-                    </span>
-                    <span className="absolute -left-[7px] top-3 h-3 w-3 rounded-full bg-ink" />
-                    <h3 className="font-display text-3xl font-black tracking-[-0.06em] sm:text-4xl">{title}</h3>
-                    <p className="mt-2 max-w-lg pb-8 text-sm leading-relaxed text-ink/65 last:pb-0">
-                      {index === 0
-                        ? "Every business has one thing that's actually true and interesting about it. We find that, not whatever trend is working for everyone else this month."
-                        : index === 1
-                          ? "Content, channels, creative, tracking, built as one system your team can keep running after we hand it off. Not a pile of one-off posts."
-                          : "We publish, watch what happens, cut what isn't working, and push on what is, until the work shows up where your audience already spends time."}
-                    </p>
+                  <div className="grid grid-cols-[3rem_1fr] gap-4 py-7 sm:grid-cols-[4rem_1fr] sm:gap-6">
+                    <span className="font-mono text-sm font-bold text-ink/40">0{index + 1}</span>
+                    <div>
+                      <h3 className="font-display text-3xl font-black tracking-[-0.06em] sm:text-4xl">{title}</h3>
+                      <p className="mt-2 max-w-lg text-sm leading-relaxed text-ink/65">
+                        {index === 0
+                          ? "Every business has one thing that's actually true and interesting about it. We find that, not whatever trend is working for everyone else this month."
+                          : index === 1
+                            ? "Content, channels, creative, tracking, built as one system your team can keep running after we hand it off. Not a pile of one-off posts."
+                            : "We publish, watch what happens, cut what isn't working, and push on what is, until the work shows up where your audience already spends time."}
+                      </p>
+                    </div>
                   </div>
                 </Reveal>
               ))}
