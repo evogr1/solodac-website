@@ -13,15 +13,15 @@ const showcaseCards = [
     href: "/network",
     label: "Owned network",
     caption: "16 pages we run ourselves. No ad spend to reach them.",
-    handles: ["@millionairesformula", "@archiveofceos", "@bourseindia", "@howaitechworks"],
-    tone: "lime" as const,
+    filter: "none",
+    objectPosition: "65% 35%",
   },
   {
     href: "/campaigns",
     label: "Client campaigns",
     caption: "Paid, organic, and everything in between, run to one number.",
-    handles: ["Meta ads", "Google ads", "Creative testing", "Conversion tracking"],
-    tone: "coral" as const,
+    filter: "hue-rotate(-45deg) saturate(1.3)",
+    objectPosition: "30% 60%",
   },
 ];
 
@@ -128,38 +128,28 @@ export default function Home() {
           <div className="grid gap-5 sm:grid-cols-2">
             {showcaseCards.map((card, index) => (
               <Reveal key={card.href} delay={index * 0.1}>
-                <Link href={card.href} className="group relative block aspect-[4/5] overflow-hidden rounded-3xl border border-white/10 sm:aspect-[5/6]">
-                  <div
-                    className={`absolute inset-0 transition-transform duration-500 group-hover:scale-105 ${
-                      card.tone === "lime"
-                        ? "bg-[radial-gradient(circle_at_30%_20%,rgba(204,255,42,0.35),transparent_60%),radial-gradient(circle_at_80%_80%,rgba(204,255,42,0.15),transparent_55%),#0d0f0f]"
-                        : "bg-[radial-gradient(circle_at_30%_20%,rgba(255,118,95,0.35),transparent_60%),radial-gradient(circle_at_80%_80%,rgba(255,118,95,0.15),transparent_55%),#0d0f0f]"
-                    }`}
-                  >
-                    <div className="absolute inset-0 opacity-[0.07] noise" />
-                    <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:36px_36px]" />
+                <Link href={card.href} className="group relative block aspect-[4/5] overflow-hidden rounded-3xl border border-white/10 bg-[#0d0f0f] sm:aspect-[5/6]">
+                  <motion.img
+                    src={heroImage}
+                    alt=""
+                    aria-hidden
+                    initial={{ scale: 1.06 }}
+                    animate={prefersReducedMotion ? { scale: 1.06 } : { scale: [1.06, 1.16, 1.06] }}
+                    transition={prefersReducedMotion ? { duration: 0.01 } : { duration: 16 + index * 3, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    style={{ objectPosition: card.objectPosition, filter: card.filter }}
+                  />
+                  <div className="absolute inset-0 bg-black/25 transition-colors duration-300 group-hover:bg-black/10" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-black/10" />
+
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="flex items-center gap-2 rounded-full border border-white/20 bg-black/60 px-6 py-3.5 text-sm font-bold text-paper backdrop-blur-md transition-transform duration-300 group-hover:scale-105 sm:text-base">
+                      {card.label}
+                      <ArrowUpRight size={16} className="text-lime transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    </span>
                   </div>
 
-                  <div className="absolute inset-x-6 top-6 flex flex-wrap gap-2 sm:inset-x-8 sm:top-8">
-                    {card.handles.map((handle) => (
-                      <span
-                        key={handle}
-                        className={`rounded-full border px-3 py-1.5 text-[11px] font-bold text-white/80 backdrop-blur-sm ${
-                          card.tone === "lime" ? "border-lime/30 bg-lime/[0.08]" : "border-coral/30 bg-coral/[0.08]"
-                        }`}
-                      >
-                        {handle}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/60 to-transparent px-6 pb-6 pt-16 sm:px-8 sm:pb-8">
-                    <div className="flex items-center justify-between gap-3">
-                      <span className="rounded-full bg-black/70 px-5 py-3 text-sm font-black text-paper backdrop-blur-md sm:text-base">{card.label}</span>
-                      <ArrowUpRight size={20} className={`shrink-0 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 ${card.tone === "lime" ? "text-lime" : "text-coral"}`} />
-                    </div>
-                    <p className="mt-3 max-w-xs text-xs leading-relaxed text-white/55 sm:text-sm">{card.caption}</p>
-                  </div>
+                  <p className="absolute inset-x-0 bottom-0 px-6 pb-6 text-xs leading-relaxed text-white/55 sm:px-8 sm:pb-8 sm:text-sm">{card.caption}</p>
                 </Link>
               </Reveal>
             ))}
