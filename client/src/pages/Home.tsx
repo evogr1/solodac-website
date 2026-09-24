@@ -1,29 +1,10 @@
 import { ArrowUpRight, Flame } from "lucide-react";
-import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
-import type { PointerEvent } from "react";
+import { motion } from "framer-motion";
 import { Link, useLocation } from "wouter";
 import Reveal from "../components/Reveal";
 import SiteHeader from "../components/SiteHeader";
 import { useScrollToTop } from "../hooks/useScrollToTop";
-import { useEffect, useState } from "react";
 import heroImage from "../assets/solodac-signal.jpg";
-
-const showcaseCards = [
-  {
-    href: "/network",
-    label: "Owned network",
-    caption: "16 pages we run ourselves. No ad spend to reach them.",
-    filter: "none",
-    objectPosition: "65% 35%",
-  },
-  {
-    href: "/campaigns",
-    label: "Client campaigns",
-    caption: "Paid, organic, and everything in between, run to one number.",
-    filter: "hue-rotate(-45deg) saturate(1.3)",
-    objectPosition: "30% 60%",
-  },
-];
 
 const exploreLinks = [
   { href: "/services", eyebrow: "01", title: "Services", description: "Six things we do. Pick one, or hand us the whole engine.", stat: "6", statLabel: "services" },
@@ -34,33 +15,6 @@ const exploreLinks = [
 export default function Home() {
   useScrollToTop();
   const [, setLocation] = useLocation();
-  const prefersReducedMotion = useReducedMotion();
-  const [finePointer, setFinePointer] = useState(false);
-  const parallaxX = useSpring(useMotionValue(0), { stiffness: 45, damping: 20, mass: 0.7 });
-  const parallaxY = useSpring(useMotionValue(0), { stiffness: 45, damping: 20, mass: 0.7 });
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(pointer: fine)");
-    const updatePointerCapability = () => setFinePointer(mediaQuery.matches);
-    updatePointerCapability();
-    mediaQuery.addEventListener("change", updatePointerCapability);
-    return () => mediaQuery.removeEventListener("change", updatePointerCapability);
-  }, []);
-
-  const parallaxEnabled = finePointer && !prefersReducedMotion;
-
-  const handleHeroPointerMove = (event: PointerEvent<HTMLElement>) => {
-    if (!parallaxEnabled || event.pointerType !== "mouse") return;
-    const bounds = event.currentTarget.getBoundingClientRect();
-    parallaxX.set(((event.clientX - bounds.left) / bounds.width - 0.5) * 24);
-    parallaxY.set(((event.clientY - bounds.top) / bounds.height - 0.5) * 16);
-  };
-
-  const resetHeroParallax = () => {
-    if (!parallaxEnabled) return;
-    parallaxX.set(0);
-    parallaxY.set(0);
-  };
 
   return (
     <>
@@ -68,17 +22,15 @@ export default function Home() {
       <SiteHeader activeSection="top" />
       <main className="min-h-screen overflow-hidden bg-ink text-paper selection:bg-lime selection:text-ink">
 
-      <section id="top" onPointerMove={handleHeroPointerMove} onPointerLeave={resetHeroParallax} className="relative z-10 min-h-[85svh] w-full overflow-hidden bg-[#0d0f0f] sm:min-h-[92vh]">
-        <motion.div style={{ x: parallaxX, y: parallaxY }} className="absolute -inset-[2%] will-change-transform">
-          <motion.img
-            initial={{ opacity: 0, scale: 1.04 }}
-            animate={prefersReducedMotion ? { opacity: 1, scale: 1.04 } : { opacity: 1, scale: [1.04, 1.07, 1.04], y: [0, -7, 0] }}
-            transition={prefersReducedMotion ? { duration: 0.01 } : { opacity: { duration: 0.9, ease: [0.23, 1, 0.32, 1] }, scale: { duration: 14, repeat: Infinity, ease: "easeInOut" }, y: { duration: 9, repeat: Infinity, ease: "easeInOut" } }}
-            src={heroImage}
-            alt="SoloDac signal artwork"
-            className="hero-art h-full w-full object-cover object-[70%_center] sm:object-center"
-          />
-        </motion.div>
+      <section id="top" className="relative z-10 min-h-[85svh] w-full overflow-hidden bg-[#0d0f0f] sm:min-h-[92vh]">
+        <motion.img
+          initial={{ opacity: 0, scale: 1.04 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
+          src={heroImage}
+          alt="SoloDac signal artwork"
+          className="hero-art absolute inset-0 h-full w-full object-cover object-[70%_center] sm:object-center"
+        />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black via-black/70 to-transparent" />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-52 bg-gradient-to-b from-black/70 to-transparent sm:h-64" />
 
@@ -120,41 +72,6 @@ export default function Home() {
             ))}
           </div>
         </Reveal>
-      </section>
-
-      <section className="signal-section relative z-10 bg-ink px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
-        <div className="mx-auto max-w-[1440px]">
-          <Reveal className="mb-10 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-lime"><span className="h-px w-10 bg-lime" /> Two sides of the same engine</Reveal>
-          <div className="grid gap-5 sm:grid-cols-2">
-            {showcaseCards.map((card, index) => (
-              <Reveal key={card.href} delay={index * 0.1}>
-                <Link href={card.href} className="group relative block aspect-[4/5] overflow-hidden rounded-3xl border border-white/10 bg-[#0d0f0f] sm:aspect-[5/6]">
-                  <motion.img
-                    src={heroImage}
-                    alt=""
-                    aria-hidden
-                    initial={{ scale: 1.06 }}
-                    animate={prefersReducedMotion ? { scale: 1.06 } : { scale: [1.06, 1.16, 1.06] }}
-                    transition={prefersReducedMotion ? { duration: 0.01 } : { duration: 16 + index * 3, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    style={{ objectPosition: card.objectPosition, filter: card.filter }}
-                  />
-                  <div className="absolute inset-0 bg-black/25 transition-colors duration-300 group-hover:bg-black/10" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-black/10" />
-
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="flex items-center gap-2 rounded-full border border-white/20 bg-black/60 px-6 py-3.5 text-sm font-bold text-paper backdrop-blur-md transition-transform duration-300 group-hover:scale-105 sm:text-base">
-                      {card.label}
-                      <ArrowUpRight size={16} className="text-lime transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                    </span>
-                  </div>
-
-                  <p className="absolute inset-x-0 bottom-0 px-6 pb-6 text-xs leading-relaxed text-white/55 sm:px-8 sm:pb-8 sm:text-sm">{card.caption}</p>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-        </div>
       </section>
 
       <section className="signal-section relative z-10 border-y border-ink/10 bg-paper text-ink">
