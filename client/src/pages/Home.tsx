@@ -1,4 +1,4 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Flame } from "lucide-react";
 import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import type { PointerEvent } from "react";
 import { Link, useLocation } from "wouter";
@@ -63,6 +63,26 @@ export default function Home() {
           />
         </motion.div>
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black via-black/70 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-52 bg-gradient-to-b from-black/70 to-transparent sm:h-64" />
+
+        <Reveal delay={0.25} className="absolute inset-x-0 top-[88px] px-5 sm:top-[108px] sm:px-8 lg:px-12">
+          <div className="mx-auto flex max-w-[1440px] flex-col items-start gap-4">
+            <div className="flex items-center gap-2 rounded-full border border-coral/40 bg-coral/10 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-coral">
+              <Flame size={12} className="animate-pulse" />
+              Q4 booking is open, 3 campaign slots left
+            </div>
+            <p className="max-w-sm text-sm leading-snug text-white/70 sm:max-w-md sm:text-base">
+              Every brand sitting on Q4 budget is about to spend it somewhere. Be the thing they see before the quarter closes, not after.
+            </p>
+            <button
+              onClick={() => setLocation("/eyeballs")}
+              className="group flex items-center gap-2 rounded-full bg-lime px-4 py-2.5 text-xs font-black uppercase tracking-[0.12em] text-ink transition-transform hover:-translate-y-0.5 sm:text-sm"
+            >
+              Lock in your Q4 slot <ArrowUpRight size={15} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+            </button>
+          </div>
+        </Reveal>
+
         <Reveal delay={0.2} className="absolute inset-x-0 bottom-0 px-5 py-8 sm:px-8 sm:py-10 lg:px-12">
           <div className="mx-auto flex max-w-[1440px] flex-wrap justify-between gap-x-10 gap-y-6 border-t border-dotted border-white/25 pt-6">
             {[
