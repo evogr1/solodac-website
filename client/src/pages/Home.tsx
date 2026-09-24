@@ -83,22 +83,25 @@ export default function Home() {
           </div>
         </Reveal>
 
-        <Reveal delay={0.2} className="absolute inset-x-0 bottom-0 px-5 py-8 sm:px-8 sm:py-10 lg:px-12">
-          <div className="mx-auto flex max-w-[1440px] flex-wrap justify-between gap-x-10 gap-y-6 border-t border-dotted border-white/25 pt-6">
+      </section>
+
+      <section className="relative z-10 border-y border-white/15 bg-ink px-5 py-10 sm:px-8 sm:py-12 lg:px-12">
+        <Reveal>
+          <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-6">
             {[
-              { value: "15.4M", label: "Followers" },
-              { value: "101K", label: "Newsletter subs" },
               { value: "18.2B+", label: "Annual views" },
               { value: "121M", label: "Accounts reached" },
               { value: "89.6M", label: "Interactions" },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <div className="font-display text-2xl font-black tracking-[-0.04em] text-paper sm:text-4xl">{stat.value}</div>
-                <div className="mt-1.5 text-[9px] font-bold uppercase tracking-[0.16em] text-white/55 sm:text-[10px]">{stat.label}</div>
+            ].map((stat, index) => (
+              <div
+                key={stat.label}
+                className={`flex items-center gap-4 sm:flex-col sm:items-start sm:gap-2 ${index > 0 ? "sm:border-l sm:border-white/15 sm:pl-6" : ""}`}
+              >
+                <span className="font-display text-4xl font-black tracking-[-0.04em] text-paper sm:text-5xl lg:text-6xl">{stat.value}</span>
+                <span className="text-xs font-medium uppercase tracking-[0.14em] text-white/45 sm:text-sm">{stat.label}</span>
               </div>
             ))}
           </div>
-          <p className="mx-auto mt-6 max-w-2xl text-xs leading-relaxed text-white/50 sm:text-sm">The extended network adds 45 more partner pages on top of that: another 17.1M followers and 15B+ annual views we can put a campaign in front of.</p>
         </Reveal>
       </section>
 
