@@ -33,6 +33,7 @@ export default function Home() {
         />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black via-black/70 to-transparent" />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-52 bg-gradient-to-b from-black/70 to-transparent sm:h-64" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-full bg-gradient-to-r from-black/85 via-black/40 to-transparent sm:w-3/4" />
 
         <Reveal delay={0.25} className="absolute inset-x-0 top-[88px] px-5 sm:top-[108px] sm:px-8 lg:px-12">
           <div className="mx-auto flex max-w-[1440px] flex-col items-start gap-5">
@@ -40,7 +41,7 @@ export default function Home() {
               <Flame size={12} className="animate-pulse" />
               Q4 booking is open, 3 campaign slots left
             </div>
-            <h1 className="max-w-lg font-display text-4xl font-black leading-[0.95] tracking-[-0.06em] text-paper drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)] sm:max-w-xl sm:text-6xl lg:text-7xl">
+            <h1 className="max-w-lg font-display text-4xl font-black leading-[0.95] tracking-[-0.06em] text-paper sm:max-w-xl sm:text-6xl lg:text-7xl">
               Get your brand <span className="text-coral">seen at scale.</span>
             </h1>
             <p className="max-w-sm text-sm leading-snug text-white/70 sm:max-w-md sm:text-base">
@@ -55,28 +56,6 @@ export default function Home() {
           </div>
         </Reveal>
 
-      </section>
-
-      <section className="signal-section relative z-10 bg-ink px-5 py-14 sm:px-8 sm:py-16 lg:px-12">
-        <div className="mx-auto max-w-[1440px]">
-          <Reveal className="mb-8 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-lime">
-            <span className="h-px w-10 bg-lime" /> Numbers, not vibes
-          </Reveal>
-          <Reveal delay={0.08}>
-            <div className="flex flex-wrap justify-between gap-x-10 gap-y-8 border-t border-dotted border-white/25 pt-7">
-              {[
-                { value: "18.2B+", label: "Annual views" },
-                { value: "121M", label: "Accounts reached" },
-                { value: "89.6M", label: "Interactions" },
-              ].map((stat) => (
-                <div key={stat.label}>
-                  <div className="font-display text-3xl font-black tracking-[-0.04em] text-paper sm:text-5xl">{stat.value}</div>
-                  <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.16em] text-white/45 sm:text-xs">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </div>
       </section>
 
       <section className="signal-section relative z-10 border-y border-ink/10 bg-paper text-ink">
