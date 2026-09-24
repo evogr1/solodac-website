@@ -35,13 +35,16 @@ export default function Home() {
         <div className="pointer-events-none absolute inset-x-0 top-0 h-52 bg-gradient-to-b from-black/70 to-transparent sm:h-64" />
 
         <Reveal delay={0.25} className="absolute inset-x-0 top-[88px] px-5 sm:top-[108px] sm:px-8 lg:px-12">
-          <div className="mx-auto flex max-w-[1440px] flex-col items-start gap-4">
+          <div className="mx-auto flex max-w-[1440px] flex-col items-start gap-5">
             <div className="flex items-center gap-2 rounded-full border border-coral/40 bg-coral/10 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-coral">
               <Flame size={12} className="animate-pulse" />
               Q4 booking is open, 3 campaign slots left
             </div>
+            <h1 className="max-w-lg font-display text-4xl font-black leading-[0.95] tracking-[-0.06em] text-paper drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)] sm:max-w-xl sm:text-6xl lg:text-7xl">
+              Get your brand <span className="text-coral">seen at scale.</span>
+            </h1>
             <p className="max-w-sm text-sm leading-snug text-white/70 sm:max-w-md sm:text-base">
-              Every brand sitting on Q4 budget is about to spend it somewhere. Be the thing they see before the quarter closes, not after.
+              We build the content, channels, and campaigns that put you in front of people. That&apos;s the whole job, and every brand sitting on Q4 budget is about to give it to someone.
             </p>
             <button
               onClick={() => setLocation("/eyeballs")}
@@ -54,24 +57,26 @@ export default function Home() {
 
       </section>
 
-      <section className="relative z-10 border-y border-white/15 bg-ink px-5 py-10 sm:px-8 sm:py-12 lg:px-12">
-        <Reveal>
-          <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-6">
-            {[
-              { value: "18.2B+", label: "Annual views" },
-              { value: "121M", label: "Accounts reached" },
-              { value: "89.6M", label: "Interactions" },
-            ].map((stat, index) => (
-              <div
-                key={stat.label}
-                className={`flex items-center gap-4 sm:flex-col sm:items-start sm:gap-2 ${index > 0 ? "sm:border-l sm:border-white/15 sm:pl-6" : ""}`}
-              >
-                <span className="font-display text-4xl font-black tracking-[-0.04em] text-paper sm:text-5xl lg:text-6xl">{stat.value}</span>
-                <span className="text-xs font-medium uppercase tracking-[0.14em] text-white/45 sm:text-sm">{stat.label}</span>
-              </div>
-            ))}
-          </div>
-        </Reveal>
+      <section className="signal-section relative z-10 bg-ink px-5 py-14 sm:px-8 sm:py-16 lg:px-12">
+        <div className="mx-auto max-w-[1440px]">
+          <Reveal className="mb-8 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-lime">
+            <span className="h-px w-10 bg-lime" /> Numbers, not vibes
+          </Reveal>
+          <Reveal delay={0.08}>
+            <div className="flex flex-wrap justify-between gap-x-10 gap-y-8 border-t border-dotted border-white/25 pt-7">
+              {[
+                { value: "18.2B+", label: "Annual views" },
+                { value: "121M", label: "Accounts reached" },
+                { value: "89.6M", label: "Interactions" },
+              ].map((stat) => (
+                <div key={stat.label}>
+                  <div className="font-display text-3xl font-black tracking-[-0.04em] text-paper sm:text-5xl">{stat.value}</div>
+                  <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.16em] text-white/45 sm:text-xs">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
       </section>
 
       <section className="signal-section relative z-10 border-y border-ink/10 bg-paper text-ink">
