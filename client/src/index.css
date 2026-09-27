@@ -101,6 +101,16 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .shark-fin { position: absolute; left: 47px; top: -2px; width: 25px; height: 25px; background: #ccff2a; clip-path: polygon(0 100%, 48% 0, 100% 100%); transform: rotate(-10deg); }
 .shark-eye { position: absolute; left: 82px; top: 22px; width: 5px; height: 5px; border-radius: 999px; background: #101313; box-shadow: 0 0 0 2px rgba(243,240,232,.7); }
 
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee-x 38s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
 
 /* SoloDac signal-art system: used below the hero only. */
 .signal-section {

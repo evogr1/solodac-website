@@ -1,18 +1,20 @@
-import { ArrowUpRight, Flame, Play } from "lucide-react";
+import { ArrowUpRight, Flame } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link, useLocation } from "wouter";
+import PartnershipsMarquee, { type Partner } from "../components/PartnershipsMarquee";
 import Reveal from "../components/Reveal";
 import SiteHeader from "../components/SiteHeader";
 import { useScrollToTop } from "../hooks/useScrollToTop";
 import heroImage from "../assets/solodac-signal.jpg";
 
-const partnershipReels = [
-  { handle: "@millionairesformula", href: "https://www.instagram.com/millionairesformula/" },
-  { handle: "@archiveofceos", href: "https://www.instagram.com/archiveofceos/" },
-  { handle: "@bourseindia", href: "https://www.instagram.com/bourseindia/" },
-  { handle: "@howaitechworks", href: "https://www.instagram.com/howaitechworks/" },
-  { handle: "@successfularcs", href: "https://www.instagram.com/successfularcs/" },
-  { handle: "@lucreindia", href: "https://www.instagram.com/lucreindia/" },
+// TODO: swap in real client names, roles, view counts, and video links.
+const partners: Partner[] = [
+  { name: "@millionairesformula", role: "Instagram", views: "TBD" },
+  { name: "@archiveofceos", role: "Instagram", views: "TBD" },
+  { name: "@bourseindia", role: "Instagram", views: "TBD" },
+  { name: "@howaitechworks", role: "Instagram", views: "TBD" },
+  { name: "@successfularcs", role: "Instagram", views: "TBD" },
+  { name: "@lucreindia", role: "Instagram", views: "TBD" },
 ];
 
 const exploreLinks = [
@@ -67,39 +69,19 @@ export default function Home() {
 
       </section>
 
-      <section className="signal-section relative z-10 bg-ink px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
-        <div className="mx-auto max-w-[1440px]">
+      <section className="signal-section relative z-10 overflow-hidden bg-ink py-20 sm:py-28">
+        <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
           <Reveal className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div>
               <div className="mb-6 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-lime"><span className="h-px w-10 bg-lime" /> Partnerships</div>
-              <h2 className="max-w-2xl font-display text-4xl font-black leading-[0.9] tracking-[-0.06em] sm:text-6xl">Reels doing the actual work.</h2>
+              <h2 className="max-w-2xl font-display text-4xl font-black leading-[0.9] tracking-[-0.06em] sm:text-6xl">Videos doing the actual work.</h2>
             </div>
-            <p className="max-w-xs text-sm text-white/40">A handful of the network's clips, pulling real views on real accounts.</p>
+            <p className="max-w-xs text-sm text-white/40">A handful of the network's clips, pulling real views on real accounts. Hover to preview, tap on mobile.</p>
           </Reveal>
-
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-            {partnershipReels.map((reel, index) => (
-              <Reveal key={reel.handle} delay={index * 0.05}>
-                <a
-                  href={reel.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group relative block aspect-[9/16] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] transition-colors hover:border-lime/50"
-                >
-                  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(204,255,42,0.12),transparent_65%)]" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="grid h-11 w-11 place-items-center rounded-full bg-black/60 text-paper backdrop-blur-sm transition-transform duration-300 group-hover:scale-110 group-hover:bg-lime group-hover:text-ink">
-                      <Play size={16} fill="currentColor" className="ml-0.5" />
-                    </span>
-                  </div>
-                  <span className="absolute inset-x-0 bottom-0 truncate bg-gradient-to-t from-black to-transparent px-3 pb-3 pt-8 text-[11px] font-bold text-white/80">
-                    {reel.handle}
-                  </span>
-                </a>
-              </Reveal>
-            ))}
-          </div>
         </div>
+        <Reveal delay={0.1}>
+          <PartnershipsMarquee partners={partners} />
+        </Reveal>
       </section>
 
       <section className="signal-section relative z-10 border-y border-ink/10 bg-paper text-ink">
