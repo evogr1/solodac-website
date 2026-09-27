@@ -38,6 +38,11 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
     return () => window.removeEventListener("scroll", updateScrolled);
   }, [isFormPage]);
 
+  useEffect(() => {
+    document.body.classList.toggle("menu-open", menuOpen);
+    return () => document.body.classList.remove("menu-open");
+  }, [menuOpen]);
+
   const goTo = (href: string) => {
     setMenuOpen(false);
     setSauceOpen(false);

@@ -111,6 +111,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .marquee-track { animation: none; }
 }
 
+main { transition: filter 0.35s ease; }
+body.menu-open main { filter: blur(14px) brightness(0.65); }
+
 
 /* SoloDac signal-art system: used below the hero only. */
 .signal-section {
