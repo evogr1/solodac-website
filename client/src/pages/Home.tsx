@@ -69,7 +69,7 @@ export default function Home() {
 
       </section>
 
-      <section className="signal-section relative z-10 overflow-hidden bg-ink py-20 sm:py-28">
+      <section className="signal-section relative z-10 overflow-hidden bg-ink py-12 sm:py-16">
         <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
           <Reveal className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div>
@@ -85,7 +85,7 @@ export default function Home() {
       </section>
 
       <section className="signal-section relative z-10 border-y border-ink/10 bg-paper text-ink">
-        <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20 lg:px-12 lg:py-28">
+        <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-12 sm:px-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20 lg:px-12 lg:py-16">
           <Reveal>
             <div className="mb-6 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.25em] text-ink/45"><span className="h-px w-10 bg-coral" /> What we believe</div>
             <h1 className="max-w-md font-display text-5xl font-black leading-[0.9] tracking-[-0.075em] sm:text-7xl">If it doesn&apos;t move, it doesn&apos;t count.</h1>
@@ -96,7 +96,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="signal-section relative z-10 bg-ink px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+      <section className="signal-section relative z-10 bg-ink px-5 py-12 sm:px-8 lg:px-12 lg:py-16">
         <div className="mx-auto max-w-[1440px]">
           <Reveal className="mb-4 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div>
@@ -129,7 +129,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative z-10 bg-coral px-5 py-16 text-ink sm:px-8 lg:px-12 lg:py-20">
+      <section className="relative z-10 bg-coral px-5 py-10 text-ink sm:px-8 lg:px-12 lg:py-14">
         <div className="mx-auto flex max-w-[1440px] flex-col justify-between gap-8 sm:flex-row sm:items-center">
           <h2 className="max-w-xl font-display text-4xl font-black leading-[0.9] tracking-[-0.07em] sm:text-5xl">Have a good problem to solve?</h2>
           <button onClick={() => setLocation("/eyeballs")} className="group flex shrink-0 items-center gap-4 rounded-full bg-ink px-6 py-4 text-sm font-black text-paper transition-transform hover:-translate-y-1">Book a call <ArrowUpRight size={18} className="text-lime transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></button>
