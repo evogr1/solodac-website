@@ -1,9 +1,10 @@
-import { ArrowUpRight, Boxes, BarChart2, BookOpen, Briefcase, ChevronDown, MessageCircle, Menu, PlayCircle, X } from "lucide-react";
+import { ArrowUpRight, Boxes, BarChart2, BookOpen, Briefcase, ChevronDown, MessageCircle, Menu, PlayCircle, Scissors, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 
 const sauceItems = [
   { icon: PlayCircle, label: "What we do", href: "/services" },
+  { icon: Scissors, label: "Clipping", href: "/clipping" },
   { icon: BarChart2, label: "Campaigns", href: "/campaigns" },
   { icon: BookOpen, label: "Our thesis", href: "/thesis" },
   { icon: Briefcase, label: "Case studies", href: "/case-studies" },
