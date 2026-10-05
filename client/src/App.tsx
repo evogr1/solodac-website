@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { AnimatePresence, motion } from "framer-motion";
-import { Route, Switch, useLocation } from "wouter";
+import { Redirect, Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Approach from "./pages/Approach";
@@ -45,7 +45,8 @@ function Router() {
           <Route path={"/case-studies"} component={CaseStudies} />
           <Route path={"/testimonials"} component={Testimonials} />
           <Route path={"/portfolio"} component={Portfolio} />
-          <Route path={"/eyeballs"} component={StartProject} />
+          <Route path={"/marketing"} component={StartProject} />
+          <Route path={"/eyeballs"}>{() => <Redirect to="/marketing" />}</Route>
           <Route path={"/404"} component={NotFound} />
           {/* Final fallback route */}
           <Route component={NotFound} />

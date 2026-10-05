@@ -54,7 +54,7 @@ export default function Careers() {
 
             <Reveal delay={0.26} className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
               <p className="text-sm text-white/45">Think you should be first in line anyway?</p>
-              <button onClick={() => setLocation("/eyeballs")} className="group flex shrink-0 items-center gap-3 rounded-full border border-white/20 bg-white/[0.06] px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-paper transition-all hover:border-lime hover:text-lime">Say hi anyway <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></button>
+              <button onClick={() => setLocation("/marketing")} className="group flex shrink-0 items-center gap-3 rounded-full border border-white/20 bg-white/[0.06] px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-paper transition-all hover:border-lime hover:text-lime">Say hi anyway <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></button>
             </Reveal>
           </div>
         </section>
@@ -67,7 +67,7 @@ export default function Careers() {
             </div>
             <div className="flex items-center gap-5 text-[10px] font-bold uppercase tracking-[0.18em] text-white/40">
               <Link href="/approach" className="hover:text-lime">About</Link>
-              <Link href="/eyeballs" className="hover:text-lime">Contact</Link>
+              <Link href="/marketing" className="hover:text-lime">Contact</Link>
               <span>© 2026</span>
             </div>
           </div>

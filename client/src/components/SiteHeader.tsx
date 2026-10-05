@@ -22,7 +22,7 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
   const [menuOpen, setMenuOpen] = useState(false);
   const [sauceOpen, setSauceOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const isFormPage = location === "/eyeballs";
+  const isFormPage = location === "/marketing";
 
   useEffect(() => {
     if (isFormPage) return;
@@ -115,7 +115,7 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
         </nav>
 
         <button
-          onClick={() => setLocation("/eyeballs")}
+          onClick={() => setLocation("/marketing")}
           className={`items-center gap-2 rounded-full border border-white/30 bg-white/[0.08] text-[11px] font-bold uppercase tracking-[0.14em] text-paper shadow-inner shadow-white/10 transition-all duration-300 hover:border-lime hover:bg-lime hover:text-ink md:flex ${
             scrolled ? "flex px-3 py-1.5" : "hidden px-4 py-2"
           }`}
@@ -172,7 +172,7 @@ export default function SiteHeader({ activeSection }: { activeSection?: string }
             <button
               onClick={() => {
                 setMenuOpen(false);
-                setLocation("/eyeballs");
+                setLocation("/marketing");
               }}
               className="flex w-full items-center justify-center gap-2 rounded-full border border-white/20 bg-white/[0.04] py-3.5 text-sm font-bold uppercase tracking-[0.14em] text-paper transition-colors hover:border-lime hover:text-lime"
             >

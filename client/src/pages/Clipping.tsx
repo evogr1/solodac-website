@@ -83,7 +83,7 @@ export default function Clipping() {
                 We clip your podcasts, streams, and videos into short-form that gets watched — then, if you want more than that, we run a network of clip accounts to post it everywhere at once.
               </p>
               <div className="mt-10 flex flex-wrap items-center gap-4">
-                <Link href="/eyeballs" className="group flex items-center gap-4 rounded-full bg-lime px-6 py-4 text-sm font-black text-ink transition-all hover:-translate-y-1 hover:bg-[#d8ff2f]">
+                <Link href="/marketing" className="group flex items-center gap-4 rounded-full bg-lime px-6 py-4 text-sm font-black text-ink transition-all hover:-translate-y-1 hover:bg-[#d8ff2f]">
                   Book a clipping call <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </Link>
                 <button onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })} className="text-xs font-bold uppercase tracking-[0.16em] text-white/50 hover:text-lime">
@@ -182,7 +182,7 @@ export default function Clipping() {
                       ))}
                     </div>
                     <Link
-                      href="/eyeballs"
+                      href="/marketing"
                       className={`mt-8 flex items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-black transition-all hover:-translate-y-1 ${
                         tier.highlight ? "bg-lime text-ink hover:bg-[#d8ff2f]" : "border border-white/20 text-paper hover:border-lime hover:text-lime"
                       }`}
@@ -238,7 +238,7 @@ export default function Clipping() {
               </h2>
             </div>
             <Link
-              href="/eyeballs"
+              href="/marketing"
               className="group flex shrink-0 items-center gap-4 rounded-full bg-ink px-6 py-4 text-sm font-black text-paper transition-transform hover:-translate-y-1"
             >
               Send a brief <TrendingUp size={18} className="text-lime transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />

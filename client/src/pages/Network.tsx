@@ -54,7 +54,7 @@ export default function Network() {
         <section className="relative z-10 bg-coral px-5 py-16 text-ink sm:px-8 lg:px-12 lg:py-20">
           <div className="mx-auto flex max-w-[1440px] flex-col justify-between gap-8 sm:flex-row sm:items-center">
             <h2 className="max-w-xl font-display text-4xl font-black leading-[0.9] tracking-[-0.07em] sm:text-5xl">Want your brand in front of 121M accounts? Yeah, thought so.</h2>
-            <Link href="/eyeballs" className="group flex shrink-0 items-center gap-4 rounded-full bg-ink px-6 py-4 text-sm font-black text-paper transition-transform hover:-translate-y-1">Book a call <ArrowUpRight size={18} className="text-lime transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></Link>
+            <Link href="/marketing" className="group flex shrink-0 items-center gap-4 rounded-full bg-ink px-6 py-4 text-sm font-black text-paper transition-transform hover:-translate-y-1">Book a call <ArrowUpRight size={18} className="text-lime transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></Link>
           </div>
         </section>
 
@@ -67,7 +67,7 @@ export default function Network() {
             <div className="flex items-center gap-5 text-[10px] font-bold uppercase tracking-[0.18em] text-white/40">
               <Link href="/services" className="hover:text-lime">Services</Link>
               <Link href="/approach" className="hover:text-lime">Approach</Link>
-              <Link href="/eyeballs" className="hover:text-lime">Contact</Link>
+              <Link href="/marketing" className="hover:text-lime">Contact</Link>
               <span>© 2026</span>
             </div>
           </div>

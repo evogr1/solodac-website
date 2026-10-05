@@ -27,7 +27,7 @@ export default function NotFound() {
           className="mt-10 flex flex-col items-center gap-4 sm:flex-row"
         >
           <Link href="/" className="group flex items-center gap-3 rounded-full bg-lime px-6 py-4 text-sm font-black text-ink transition-all hover:-translate-y-1 hover:bg-[#d8ff2f]">Take me home <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></Link>
-          <button onClick={() => setLocation("/eyeballs")} className="text-xs font-bold uppercase tracking-[0.16em] text-white/45 transition-colors hover:text-lime">Or just book a call, we won't judge</button>
+          <button onClick={() => setLocation("/marketing")} className="text-xs font-bold uppercase tracking-[0.16em] text-white/45 transition-colors hover:text-lime">Or just book a call, we won't judge</button>
         </motion.div>
       </div>
     </main>
