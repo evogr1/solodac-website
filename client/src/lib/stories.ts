@@ -17,6 +17,8 @@ import aocSuleyman from "../assets/stories/aoc-suleyman.jpg";
 import aocNegotiator from "../assets/stories/aoc-negotiator.jpg";
 import aocStockmarket from "../assets/stories/aoc-stockmarket.jpg";
 import aocSnapclips from "../assets/stories/aoc-snapclips.jpg";
+import lucreJio from "../assets/stories/lucre-jio.jpg";
+import lucreAshneer from "../assets/stories/lucre-ashneer.jpg";
 
 export type Story = {
   title: string;
@@ -35,6 +37,8 @@ const reel = (code: string) => `https://www.instagram.com/reel/${code}/`;
 export const stories: Story[] = [
   { title: "A Small YouTuber Handed Elon Musk A Fix For SpaceX's Booster", excerpt: "During a chat with Everyday Astronaut, Musk realised a Starship booster change could carry over to another part of the design.", category: "Space & Tech", ip: "Successful Arcs", date: "13 Oct'26", views: "794.8K", readTime: "26 sec", image: saSpacex, href: reel("Dea8TEIBako") },
   { title: "J.K. Rowling Went From Welfare To One Of History's Best-Selling Authors", excerpt: "Before Harry Potter, she was a single mother writing in Edinburgh cafes while her daughter slept.", category: "Founders", ip: "Successful Arcs", date: "11 Oct'26", views: "287.1K", readTime: "110 sec", image: saRowling, href: reel("DeXvJmrEt_n") },
+  { title: "How Ambani Changed The Future Of India With Jio", excerpt: "One bet on cheap data put the internet in hundreds of millions of Indian pockets, and rewrote how the country lives online.", category: "Founders", ip: "Lucre", date: "17 Oct'26", views: "172K", readTime: "Reel", image: lucreJio, href: reel("Del8wEsutna") },
+  { title: "Ashneer Grover: Stop Building Your Personal Brand", excerpt: "The BharatPe co-founder's case against chasing a personal brand before you've built the business.", category: "Startups", ip: "Lucre", date: "15 Oct'26", views: "107K", readTime: "Reel", image: lucreAshneer, href: reel("Def0SOMorWD") },
   { title: "The Man Who Used Calculus To Expose A $65 Bn Ponzi Scheme", excerpt: "Harry Markopolos spotted Bernie Madoff's returns didn't add up in 1999, and kept warning the SEC for years.", category: "Markets", ip: "Archive of CEOs", date: "16 Oct'26", views: "57.7K", readTime: "49 sec", image: aocMadoff, href: reel("Deje6VcBmj-") },
   { title: "He Invented A $1 Mn Gym Product While Still In High School", excerpt: "Martin Dimitrov built SnapClips, a lightweight barbell collar that started as a slap-wristband prototype.", category: "Startups", ip: "Archive of CEOs", date: "18 Oct'26", views: "51.3K", readTime: "55 sec", image: aocSnapclips, href: reel("DeoNDL6BOdg") },
   { title: "What A Former FBI Negotiator Says Gets Hostages Released", excerpt: "Chris Voss on the one thing you should never do if you're ever taken captive.", category: "Leadership", ip: "Archive of CEOs", date: "15 Oct'26", views: "31K", readTime: "78 sec", image: aocNegotiator, href: reel("DegDTu8IQ9U") },

@@ -15,7 +15,6 @@ import Portfolio from "./pages/Portfolio";
 import ServicePage from "./pages/ServicePage";
 import Services from "./pages/Services";
 import StartProject from "./pages/StartProject";
-import Testimonials from "./pages/Testimonials";
 import Thesis from "./pages/Thesis";
 import YouTube from "./pages/YouTube";
 
@@ -44,7 +43,7 @@ function Router() {
           <Route path={"/campaigns"} component={Campaigns} />
           <Route path={"/thesis"} component={Thesis} />
           <Route path={"/case-studies"} component={CaseStudies} />
-          <Route path={"/testimonials"} component={Testimonials} />
+          <Route path={"/testimonials"}>{() => <Redirect to="/case-studies" />}</Route>
           <Route path={"/portfolio"} component={Portfolio} />
           <Route path={"/marketing"} component={StartProject} />
           <Route path={"/eyeballs"}>{() => <Redirect to="/marketing" />}</Route>

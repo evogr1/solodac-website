@@ -12,7 +12,7 @@ export default function Portfolio() {
 
   return (
     <PublisherLayout ctaTitle="Want on the network?">
-      <PageHero crumb="Portfolio" kicker="Portfolio" title="Not a mockup. A live network." deck="Most agencies show you a Figma file. We can show you media brands that already exist, already post, and already have an audience." />
+      <PageHero crumb="Portfolio" kicker="Portfolio" title="Not a mockup. A live network." deck="We don't pitch from a deck. Our media brands are live, publishing daily to millions of followers." />
 
       <div className="mt-8">
         <SectionTitle number="01">The IPs</SectionTitle>

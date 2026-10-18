@@ -150,6 +150,19 @@ function vitePluginManusDebugCollector(): Plugin {
   };
 }
 
+function vitePluginTickerApi(): Plugin {
+  return {
+    name: "solodac-ticker-api",
+    configureServer(server: ViteDevServer) {
+      server.middlewares.use("/api/ticker", async (_req, res) => {
+        const { getTicker } = await server.ssrLoadModule(path.join(PROJECT_ROOT, "shared/ticker.ts"));
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify(await getTicker()));
+      });
+    },
+  };
+}
+
 function vitePluginStorageProxy(): Plugin {
   return {
     name: "manus-storage-proxy",
@@ -210,6 +223,7 @@ export default defineConfig(({ mode }) => {
     react(),
     tailwindcss(),
     jsxLocPlugin(),
+    vitePluginTickerApi(),
     // Manus's live-editing runtime, debug log collector, and storage proxy are dev-only
     // tooling for their builder environment. They must never ship to production: the
     // runtime plugin alone was injecting ~300KB of unminified inline JS (including a

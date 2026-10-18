@@ -6,10 +6,10 @@ import Reveal from "../components/Reveal";
 import { useScrollToTop } from "../hooks/useScrollToTop";
 import { stories } from "../lib/stories";
 import { ips } from "../lib/ips";
-const byViews = [...stories];
-const lead = byViews[0];
-const secondary = byViews.slice(1, 3);
-const editorsPick = [byViews[3], byViews[4], byViews[8], byViews[9], byViews[13]];
+const byCode = (code: string) => stories.find((story) => story.href.includes(code))!;
+const lead = byCode("Dea8TEIBako");
+const secondary = [byCode("DeXvJmrEt_n"), byCode("Deje6VcBmj-")];
+const editorsPick = [byCode("Del8wEsutna"), byCode("Dej9qb9sbWV"), byCode("Def0SOMorWD"), byCode("DeoNDL6BOdg"), byCode("DeZPGH0OLjm")];
 const byDate = [...stories].sort((a, b) => parseInt(b.date) - parseInt(a.date));
 
 export default function Home() {
@@ -38,7 +38,7 @@ export default function Home() {
           <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-[#e2365b] to-coral p-6 text-white sm:p-8">
             <div className="relative z-10 max-w-md">
               <h2 className="font-[Georgia,serif] text-3xl font-bold leading-tight sm:text-4xl">The feed never stops.<br />Our IPs never miss it.</h2>
-              <p className="mt-3 text-sm text-white/85">India&apos;s business stories, told daily across five media brands with 626K+ followers.</p>
+              <p className="mt-3 text-sm text-white/85">India&apos;s business stories, every day, to 15.4M+ followers and 18.2B+ annual views across the SoloDac network.</p>
               <button onClick={() => setLocation("/marketing")} className="mt-5 rounded bg-white px-5 py-2.5 text-xs font-black uppercase tracking-wide text-[#e2365b] transition-transform hover:-translate-y-0.5">
                 Advertise with us
               </button>

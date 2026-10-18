@@ -1,5 +1,6 @@
 import { ArrowUpRight, Menu, Search, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import type { TickerQuote } from "@shared/ticker";
 import { Link, useLocation } from "wouter";
 
 const utilityLinks = [
@@ -14,17 +15,31 @@ const utilityLinks = [
 
 export const sections = ["Latest", "Startups", "Founders", "Markets", "Leadership", "Space & Tech", "AI", "Auto"];
 
-export const ipTicker = [
-  { name: "Successful Arcs", value: "280.6K" },
-  { name: "Archive of CEOs", value: "265.4K" },
-  { name: "Virodh", value: "35K" },
-  { name: "Bourse India", value: "29.1K" },
-  { name: "Lucre", value: "15.9K" },
-];
+function useTicker() {
+  const [quotes, setQuotes] = useState<TickerQuote[]>([]);
+  useEffect(() => {
+    let active = true;
+    const load = () =>
+      fetch("/api/ticker")
+        .then((response) => (response.ok ? response.json() : []))
+        .then((data: TickerQuote[]) => active && Array.isArray(data) && data.length && setQuotes(data))
+        .catch(() => {});
+    load();
+    const timer = window.setInterval(load, 60_000);
+    return () => {
+      active = false;
+      window.clearInterval(timer);
+    };
+  }, []);
+  return quotes;
+}
+
+const formatPrice = (quote: TickerQuote) => `${quote.symbol.startsWith("^") ? "" : "₹"}${quote.price.toLocaleString("en-IN", { maximumFractionDigits: 2 })}`;
 
 export default function PublisherHeader({ activeSection, onSection }: { activeSection?: string; onSection?: (section: string) => void }) {
   const [location, setLocation] = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const quotes = useTicker();
 
   return (
     <>
@@ -97,16 +112,23 @@ export default function PublisherHeader({ activeSection, onSection }: { activeSe
         )}
       </header>
 
-      <div className="relative z-10 overflow-hidden bg-[#111] py-2 text-[12px] font-semibold text-white/85">
-        <div className="marquee-track flex w-max gap-10 whitespace-nowrap">
-          {[...ipTicker, ...ipTicker, ...ipTicker, ...ipTicker].map((item, index) => (
-            <span key={index} className="flex items-center gap-2">
-              {item.name}
-              <span className="text-white">{item.value}</span>
-              <span className="text-[#3ddc84]">followers ▲</span>
-            </span>
-          ))}
-        </div>
+      <div className="relative z-10 h-8 overflow-hidden bg-[#111] text-[12px] font-semibold text-white/85">
+        {quotes.length > 0 && (
+          <div className="marquee-track flex h-full w-max items-center gap-10 whitespace-nowrap">
+            {[...quotes, ...quotes].map((quote, index) => {
+              const up = quote.change >= 0;
+              return (
+                <span key={index} className="flex items-center gap-2">
+                  {quote.name}
+                  <span className="text-white">{formatPrice(quote)}</span>
+                  <span className={up ? "text-[#3ddc84]" : "text-[#ff5c5c]"}>
+                    {up ? "+" : ""}{quote.change.toFixed(2)} ({up ? "+" : ""}{quote.changePct.toFixed(2)}%) {up ? "▲" : "▼"}
+                  </span>
+                </span>
+              );
+            })}
+          </div>
+        )}
       </div>
     </>
   );

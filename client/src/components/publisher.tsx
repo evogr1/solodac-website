@@ -38,7 +38,7 @@ export function PublisherLayout({
         <div className="mx-auto grid max-w-[1320px] gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <Link href="/" className="flex items-center gap-2 text-white"><span className="grid h-7 w-7 place-items-center rounded-full bg-coral"><span className="h-2.5 w-2.5 rounded-full bg-[#111]" /></span><span className="font-display text-2xl font-black tracking-[-0.06em]">SoloDac</span></Link>
-            <p className="mt-3 max-w-xs text-sm">A digital media company telling India&apos;s business stories across five IPs.</p>
+            <p className="mt-3 max-w-xs text-sm">SoloDac is a digital media company publishing India&apos;s business, markets, founder and culture stories to 15.4M+ followers.</p>
           </div>
           <div>
             <div className="text-xs font-bold uppercase tracking-wider text-white">Our IPs</div>
