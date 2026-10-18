@@ -1,54 +1,52 @@
-import { ArrowUpRight, BadgeCheck, Flame } from "lucide-react";
-import { motion } from "framer-motion";
+import { ArrowUpRight, BadgeCheck, ChevronLeft, ChevronRight, Eye, Play } from "lucide-react";
+import { useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
-import PartnershipsMarquee, { type Partner } from "../components/PartnershipsMarquee";
+import PublisherHeader from "../components/PublisherHeader";
 import Reveal from "../components/Reveal";
-import SiteHeader from "../components/SiteHeader";
 import { useScrollToTop } from "../hooks/useScrollToTop";
-import heroImage from "../assets/solodac-signal.jpg";
-import aocMadoff from "../assets/partners/aoc-madoff.jpg";
-import aocSnapclips from "../assets/partners/aoc-snapclips.jpg";
-import bourseLogo from "../assets/partners/bourse.jpg";
-import lucreLogo from "../assets/partners/lucre.jpg";
-import saRowling from "../assets/partners/sa-rowling.jpg";
-import saSpacex from "../assets/partners/sa-spacex.jpg";
-import virodhLogo from "../assets/partners/virodh.jpg";
+import { stories, type Story } from "../lib/stories";
 import saLogo from "../assets/partners/successfularcs.jpg";
 import aocLogo from "../assets/partners/archiveofceos.jpg";
-
-const partners: Partner[] = [
-  { name: "Successful Arcs", role: "Business", stat: "794.8K", statLabel: "Views on one reel", image: saSpacex, href: "https://www.instagram.com/reel/Dea8TEIBako/" },
-  { name: "Archive of CEOs", role: "Business", stat: "57.7K", statLabel: "Views on one reel", image: aocMadoff, href: "https://www.instagram.com/reel/Deje6VcBmj-/" },
-  { name: "Virodh", role: "GenZ Bharat", stat: "35K", statLabel: "Followers", image: virodhLogo, imageFit: "logo", href: "https://www.instagram.com/virodhindia/" },
-  { name: "Successful Arcs", role: "Business", stat: "287.1K", statLabel: "Views on one reel", image: saRowling, href: "https://www.instagram.com/reel/DeXvJmrEt_n/" },
-  { name: "Bourse India", role: "News", stat: "29.1K", statLabel: "Followers", image: bourseLogo, imageFit: "logo", href: "https://www.instagram.com/bourseindiaa/" },
-  { name: "Archive of CEOs", role: "Business", stat: "51.3K", statLabel: "Views on one reel", image: aocSnapclips, href: "https://www.instagram.com/reel/DeoNDL6BOdg/" },
-  { name: "Lucre", role: "Founder stories", stat: "15.9K", statLabel: "Followers", image: lucreLogo, imageFit: "logo", href: "https://www.instagram.com/lucreindia/" },
-];
-
-const tickerItems = ["Owned media", "5 IPs", "15.4M followers", "18.2B+ annual views", "121M accounts reached", "Business, markets & founders", "Made in India"];
+import virodhLogo from "../assets/partners/virodh.jpg";
+import bourseLogo from "../assets/partners/bourse.jpg";
+import lucreLogo from "../assets/partners/lucre.jpg";
 
 const ips = [
-  { name: "Successful Arcs", handle: "successfularcs", category: "Business", tagline: "Built for entrepreneurs and future leaders.", followers: "280.6K", logo: saLogo, verified: true },
-  { name: "Archive of CEOs", handle: "archiveofceos", category: "Leadership", tagline: "Preserving the wisdom of great CEOs.", followers: "265.4K", logo: aocLogo, verified: true },
-  { name: "Virodh", handle: "virodhindia", category: "GenZ & culture", tagline: "Run by GenZ, for GenZ. Made for Bharat.", followers: "35K", logo: virodhLogo, verified: false },
-  { name: "Bourse India", handle: "bourseindiaa", category: "News & events", tagline: "India's events, decoded.", followers: "29.1K", logo: bourseLogo, verified: false },
-  { name: "Lucre", handle: "lucreindia", category: "Founders", tagline: "Stories behind India's biggest founders.", followers: "15.9K", logo: lucreLogo, verified: false },
+  { name: "Successful Arcs", handle: "successfularcs", category: "Business", followers: "280.6K", posts: "380", logo: saLogo, verified: true },
+  { name: "Archive of CEOs", handle: "archiveofceos", category: "Leadership", followers: "265.4K", posts: "283", logo: aocLogo, verified: true },
+  { name: "Virodh", handle: "virodhindia", category: "GenZ & Culture", followers: "35K", posts: "194", logo: virodhLogo, verified: false },
+  { name: "Bourse India", handle: "bourseindiaa", category: "News & Events", followers: "29.1K", posts: "766", logo: bourseLogo, verified: false },
+  { name: "Lucre", handle: "lucreindia", category: "Founders", followers: "15.9K", posts: "92", logo: lucreLogo, verified: false },
 ];
 
-const offerings = [
-  { title: "Campaigns across our IPs", body: "Your launch, product or story told natively on pages people already follow for business content.", tags: ["Native reels", "Carousels", "Multi-IP runs"], href: "/campaigns" },
-  { title: "Founder & podcast features", body: "One sit-down turned into weeks of clips that run across the network.", tags: ["Interviews", "Clips", "Cross-posting"], href: "/clipping" },
-  { title: "Funding & launch news", body: "Raised a round or shipped something big? We put it in front of the people who care.", tags: ["Funding news", "Launches", "Milestones"], href: "/services" },
-  { title: "Content for your channels", body: "The team that runs our IPs, running yours: strategy, production and posting.", tags: ["Social", "Video", "Performance"], href: "/services" },
-];
+const byViews = [...stories];
+const lead = byViews[0];
+const secondary = byViews.slice(1, 3);
+const editorsPick = [byViews[3], byViews[4], byViews[8], byViews[9], byViews[13]];
+const byDate = [...stories].sort((a, b) => parseInt(b.date) - parseInt(a.date));
 
-function SectionLabel({ number, label, dark = true }: { number: string; label: string; dark?: boolean }) {
+function Cover({ story, className = "", play = false }: { story: Story; className?: string; play?: boolean }) {
   return (
-    <div className={`mb-5 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] ${dark ? "text-white/50" : "text-ink/50"}`}>
-      <span className={dark ? "text-lime" : "text-coral"}>{number}</span>
-      <span className={`h-px w-8 ${dark ? "bg-white/20" : "bg-ink/20"}`} />
-      {label}
+    <div className={`relative overflow-hidden bg-[#1a1a1a] ${className}`}>
+      <img src={story.image} alt="" aria-hidden className="absolute inset-0 h-full w-full scale-125 object-cover opacity-60 blur-xl" />
+      <img src={story.image} alt={story.title} className="relative mx-auto h-full object-contain transition-transform duration-500 group-hover:scale-105" />
+      {play && (
+        <span className="absolute bottom-3 left-3 flex items-center gap-1.5 rounded-full bg-black/70 px-2.5 py-1 text-[11px] font-bold text-white backdrop-blur">
+          <Play size={11} fill="currentColor" /> {story.readTime}
+        </span>
+      )}
+    </div>
+  );
+}
+
+function Meta({ story, light = false }: { story: Story; light?: boolean }) {
+  return (
+    <div className={`flex flex-wrap items-center gap-x-2 gap-y-1 text-xs ${light ? "text-white/60" : "text-neutral-500"}`}>
+      <span className={`font-semibold ${light ? "text-white/80" : "text-neutral-700"}`}>{story.ip}</span>
+      <span>·</span>
+      <span>{story.date}</span>
+      <span>·</span>
+      <span className="flex items-center gap-1"><Eye size={12} /> {story.views}</span>
     </div>
   );
 }
@@ -56,178 +54,193 @@ function SectionLabel({ number, label, dark = true }: { number: string; label: s
 export default function Home() {
   useScrollToTop();
   const [, setLocation] = useLocation();
+  const [section, setSection] = useState("Latest");
+  const ipRail = useRef<HTMLDivElement>(null);
+  const latestRef = useRef<HTMLElement>(null);
+
+  const filtered = section === "Latest" ? byDate : byDate.filter((story) => story.category === section);
+
+  const pickSection = (next: string) => {
+    setSection(next);
+    latestRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const scrollRail = (direction: number) => ipRail.current?.scrollBy({ left: direction * 320, behavior: "smooth" });
 
   return (
-    <>
-      <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.045] noise" />
-      <SiteHeader activeSection="top" />
-      <main className="min-h-screen overflow-hidden bg-ink text-paper selection:bg-lime selection:text-ink">
+    <div className="min-h-screen bg-[#f2f2f2] text-neutral-900">
+      <PublisherHeader activeSection={section} onSection={pickSection} />
 
-      <section id="top" className="relative z-10 min-h-[88svh] w-full overflow-hidden bg-[#0d0f0f] sm:min-h-[94vh]">
-        <motion.img
-          initial={{ opacity: 0, scale: 1.04 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
-          src={heroImage}
-          alt=""
-          className="hero-art absolute inset-0 h-full w-full object-cover object-[70%_center] sm:object-center"
-        />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/90 via-black/55 to-black/10" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink to-transparent" />
-
-        <Reveal delay={0.2} className="absolute inset-x-0 top-[96px] px-5 sm:top-[120px] sm:px-8 lg:px-12">
-          <div className="mx-auto flex max-w-[1440px] flex-col items-start gap-6">
-            <div className="flex items-center gap-2 rounded-full border border-white/20 bg-black/40 px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-white/70 backdrop-blur">
-              <span className="h-1.5 w-1.5 rounded-full bg-lime" /> A digital media company
-            </div>
-            <h1 className="font-headline max-w-4xl text-[clamp(3rem,9vw,8rem)] leading-[0.88] text-paper">
-              India&apos;s business stories,
-              <br />
-              <span className="font-accent text-coral">told on pages we own.</span>
-            </h1>
-            <p className="max-w-md text-sm leading-relaxed text-white/70 sm:text-base">
-              SoloDac builds and runs media brands for founders, markets and a new generation of India. Brands come to us to reach the audience those IPs have earned.
-            </p>
-            <div className="flex flex-wrap items-center gap-4">
-              <button
-                onClick={() => setLocation("/marketing")}
-                className="group flex items-center gap-2 rounded-full bg-lime px-5 py-3 text-xs font-black uppercase tracking-[0.12em] text-ink transition-transform hover:-translate-y-0.5 sm:text-sm"
-              >
-                Advertise with us <ArrowUpRight size={15} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+      <main className="mx-auto max-w-[1320px] px-4 py-6">
+        <Reveal>
+          <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-[#e2365b] to-coral p-6 text-white sm:p-8">
+            <div className="relative z-10 max-w-md">
+              <h2 className="font-[Georgia,serif] text-3xl font-bold leading-tight sm:text-4xl">The feed never stops.<br />Our IPs never miss it.</h2>
+              <p className="mt-3 text-sm text-white/85">India&apos;s business stories, told daily across five media brands with 626K+ followers.</p>
+              <button onClick={() => setLocation("/marketing")} className="mt-5 rounded bg-white px-5 py-2.5 text-xs font-black uppercase tracking-wide text-[#e2365b] transition-transform hover:-translate-y-0.5">
+                Advertise with us
               </button>
-              <span className="flex items-center gap-1.5 text-xs font-bold text-coral">
-                <Flame size={13} className="animate-pulse" /> Q4 slots open, 3 left
-              </span>
+            </div>
+            <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[45%] items-center justify-end gap-3 pr-6 xl:flex">
+              {stories.slice(0, 4).map((story, index) => (
+                <img key={story.href} src={story.image} alt="" className="h-[85%] rounded-lg object-cover shadow-xl" style={{ transform: `rotate(${(index - 1.5) * 3}deg)` }} />
+              ))}
             </div>
           </div>
         </Reveal>
-      </section>
 
-      <div className="relative z-10 overflow-hidden border-y border-white/10 bg-ink py-4">
-        <div className="marquee-track flex w-max gap-8 whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.22em] text-white/55">
-          {[...tickerItems, ...tickerItems].map((item, index) => (
-            <span key={index} className="flex items-center gap-8">{item}<span className="text-lime">◆</span></span>
-          ))}
-        </div>
-      </div>
-
-      <section className="signal-section relative z-10 bg-ink px-5 py-14 sm:px-8 lg:px-12 lg:py-20">
-        <div className="mx-auto max-w-[1440px]">
-          <Reveal className="mb-10 grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
-            <div>
-              <SectionLabel number="01" label="Our IPs" />
-              <h2 className="font-headline text-5xl leading-[0.9] sm:text-7xl">
-                Media brands we <span className="font-accent text-lime">own and run.</span>
-              </h2>
+        <div className="mt-6 grid gap-5 lg:grid-cols-[1fr_340px]">
+          <div className="grid gap-5 md:grid-cols-[1.35fr_1fr]">
+            <Reveal>
+              <a href={lead.href} target="_blank" rel="noreferrer" className="group block h-full overflow-hidden rounded-xl bg-white shadow-sm">
+                <Cover story={lead} className="h-72 sm:h-96" play />
+                <div className="p-5">
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-[#e2365b]">{lead.category}</div>
+                  <h1 className="mt-2 text-2xl font-extrabold leading-tight tracking-tight group-hover:text-[#e2365b] sm:text-3xl">{lead.title}</h1>
+                  <p className="mt-3 text-sm leading-relaxed text-neutral-600">{lead.excerpt}</p>
+                  <div className="mt-4"><Meta story={lead} /></div>
+                </div>
+              </a>
+            </Reveal>
+            <div className="flex flex-col gap-5">
+              {secondary.map((story, index) => (
+                <Reveal key={story.href} delay={0.05 * (index + 1)}>
+                  <a href={story.href} target="_blank" rel="noreferrer" className="group flex flex-col overflow-hidden rounded-xl bg-white shadow-sm">
+                    <Cover story={story} className="h-40" play />
+                    <div className="flex-1 p-4">
+                      <div className="text-[11px] font-bold uppercase tracking-wider text-[#e2365b]">{story.category}</div>
+                      <h2 className="mt-1.5 text-lg font-extrabold leading-snug group-hover:text-[#e2365b]">{story.title}</h2>
+                      <div className="mt-3"><Meta story={story} /></div>
+                    </div>
+                  </a>
+                </Reveal>
+              ))}
             </div>
-            <p className="max-w-md text-sm leading-relaxed text-white/55 lg:justify-self-end">
-              Each IP has its own voice and its own audience. Together they make SoloDac one of the places India's business-curious scroll to every day.
-            </p>
+          </div>
+
+          <Reveal delay={0.1}>
+            <aside className="h-full rounded-xl bg-white p-5 shadow-sm">
+              <h2 className="font-[Georgia,serif] text-3xl font-bold text-[#e2365b]">Editor&apos;s Pick</h2>
+              <ol className="mt-4 divide-y divide-neutral-200">
+                {editorsPick.map((story, index) => (
+                  <li key={story.href}>
+                    <a href={story.href} target="_blank" rel="noreferrer" className="group flex gap-4 py-4">
+                      <span className="w-6 shrink-0 font-[Georgia,serif] text-3xl font-bold leading-none text-[#e2365b]">{index + 1}</span>
+                      <span className="border-l border-neutral-200 pl-4">
+                        <span className="block text-[15px] font-bold leading-snug group-hover:text-[#e2365b]">{story.title}</span>
+                        <span className="mt-1.5 block text-xs text-neutral-500">By {story.ip} | {story.date} · {story.readTime}</span>
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </aside>
           </Reveal>
-
-          <div className="grid gap-3 md:grid-cols-2">
-            {ips.slice(0, 2).map((ip, index) => (
-              <Reveal key={ip.handle} delay={index * 0.06}>
-                <IpCard ip={ip} large />
-              </Reveal>
-            ))}
-          </div>
-          <div className="mt-3 grid gap-3 sm:grid-cols-3">
-            {ips.slice(2).map((ip, index) => (
-              <Reveal key={ip.handle} delay={0.12 + index * 0.06}>
-                <IpCard ip={ip} />
-              </Reveal>
-            ))}
-          </div>
-
         </div>
-      </section>
 
-      <section className="signal-section relative z-10 border-y border-ink/10 bg-paper px-5 py-14 text-ink sm:px-8 lg:px-12 lg:py-20">
-        <div className="mx-auto max-w-[1440px]">
-          <Reveal className="mb-8">
-            <SectionLabel number="02" label="For brands" dark={false} />
-            <h2 className="font-headline max-w-3xl text-5xl leading-[0.9] sm:text-7xl">
-              Your story, on IPs <span className="font-accent text-coral">people already trust.</span>
-            </h2>
-          </Reveal>
-          <div className="border-t border-ink/15">
-            {offerings.map((item, index) => (
-              <Reveal key={item.title} delay={index * 0.05}>
-                <Link href={item.href} className="group grid gap-4 border-b border-ink/15 py-7 transition-colors hover:bg-ink/[0.03] sm:grid-cols-[3rem_1fr_1fr_auto] sm:items-center sm:gap-8 sm:px-3">
-                  <span className="font-mono text-xs text-ink/40">0{index + 1}</span>
-                  <div>
-                    <h3 className="font-headline text-3xl leading-none sm:text-4xl">{item.title}</h3>
-                    <p className="mt-3 max-w-md text-sm leading-relaxed text-ink/60">{item.body}</p>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {item.tags.map((tag) => <span key={tag} className="rounded-full border border-ink/15 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.1em] text-ink/60">{tag}</span>)}
-                  </div>
-                  <ArrowUpRight size={20} className="hidden text-ink/30 transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-coral sm:block" />
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="signal-section relative z-10 overflow-hidden bg-ink py-14 sm:py-20">
-        <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
-          <Reveal className="mb-10 grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
-            <div>
-              <SectionLabel number="03" label="Selected work" />
-              <h2 className="font-headline text-5xl leading-[0.9] sm:text-7xl">
-                Real reach. <span className="font-accent text-lime">Real reels.</span>
-              </h2>
+        <Reveal>
+          <section className="mt-8 rounded-xl bg-white p-5 shadow-sm">
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="text-xl font-extrabold">Our IPs</h2>
+              <div className="flex gap-2">
+                <button onClick={() => scrollRail(-1)} aria-label="Previous" className="grid h-8 w-8 place-items-center rounded-full border border-neutral-300 hover:border-[#e2365b] hover:text-[#e2365b]"><ChevronLeft size={16} /></button>
+                <button onClick={() => scrollRail(1)} aria-label="Next" className="grid h-8 w-8 place-items-center rounded-full border border-neutral-300 hover:border-[#e2365b] hover:text-[#e2365b]"><ChevronRight size={16} /></button>
+              </div>
             </div>
-            <p className="max-w-md text-sm leading-relaxed text-white/55 lg:justify-self-end">Straight from our IPs. Tap any card to see the post.</p>
-          </Reveal>
-        </div>
-        <Reveal delay={0.1}>
-          <PartnershipsMarquee partners={partners} />
+            <div ref={ipRail} className="flex snap-x gap-4 overflow-x-auto pb-2 [scrollbar-width:none]">
+              {ips.map((ip) => (
+                <a key={ip.handle} href={`https://www.instagram.com/${ip.handle}/`} target="_blank" rel="noreferrer" className="group w-[260px] shrink-0 snap-start rounded-lg border border-neutral-200 p-4 transition-colors hover:border-[#e2365b]">
+                  <div className="flex items-center gap-3">
+                    <img src={ip.logo} alt={`${ip.name} logo`} className="h-12 w-12 rounded-full object-cover" />
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-1 truncate font-extrabold">{ip.name}{ip.verified && <BadgeCheck size={15} className="shrink-0 text-[#e2365b]" />}</div>
+                      <div className="flex items-center gap-1 text-xs font-semibold text-[#e2365b]">Full Profile <ArrowUpRight size={12} /></div>
+                    </div>
+                  </div>
+                  <dl className="mt-4 grid grid-cols-3 gap-2 border-t border-neutral-200 pt-3 text-xs">
+                    <div><dt className="text-neutral-500">Category</dt><dd className="mt-0.5 font-bold">{ip.category}</dd></div>
+                    <div><dt className="text-neutral-500">Followers</dt><dd className="mt-0.5 font-bold">{ip.followers}</dd></div>
+                    <div><dt className="text-neutral-500">Posts</dt><dd className="mt-0.5 font-bold">{ip.posts}</dd></div>
+                  </dl>
+                </a>
+              ))}
+            </div>
+          </section>
         </Reveal>
-      </section>
 
-      <section className="relative z-10 bg-coral px-5 py-10 text-ink sm:px-8 lg:px-12 lg:py-14">
+        <section ref={latestRef} className="mt-8 scroll-mt-20">
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-xl font-extrabold">{section === "Latest" ? "Latest From SoloDac" : section}</h2>
+            {section !== "Latest" && (
+              <button onClick={() => setSection("Latest")} className="text-xs font-bold uppercase tracking-wide text-[#e2365b]">See all</button>
+            )}
+          </div>
+          {filtered.length === 0 ? (
+            <p className="rounded-xl bg-white p-8 text-center text-sm text-neutral-500">Nothing in {section} yet. Check back soon.</p>
+          ) : (
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {filtered.map((story) => (
+                <a key={story.href} href={story.href} target="_blank" rel="noreferrer" className="group flex flex-col overflow-hidden rounded-xl bg-white shadow-sm">
+                  <Cover story={story} className="h-44" play />
+                  <div className="flex flex-1 flex-col p-4">
+                    <div className="text-[11px] font-bold uppercase tracking-wider text-[#e2365b]">{story.category}</div>
+                    <h3 className="mt-1.5 flex-1 font-extrabold leading-snug group-hover:text-[#e2365b]">{story.title}</h3>
+                    <div className="mt-3"><Meta story={story} /></div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          )}
+        </section>
+
+        <Reveal>
+          <section className="mt-8 grid gap-6 rounded-xl bg-[#111] p-6 text-white sm:p-8 md:grid-cols-[1fr_auto] md:items-center">
+            <div>
+              <div className="text-[11px] font-bold uppercase tracking-wider text-coral">SoloDac for brands</div>
+              <h2 className="mt-2 font-[Georgia,serif] text-3xl font-bold leading-tight">Put your story where India&apos;s business audience already is.</h2>
+              <p className="mt-2 max-w-xl text-sm text-white/65">Native campaigns, founder features, funding and launch news, run across our IPs.</p>
+            </div>
+            <Link href="/services" className="flex items-center gap-2 justify-self-start rounded bg-coral px-5 py-3 text-xs font-black uppercase tracking-wide text-ink">
+              What we offer <ArrowUpRight size={14} />
+            </Link>
+          </section>
+        </Reveal>
+      </main>
+
+      <section className="relative z-10 mt-10 bg-coral px-5 py-10 text-ink sm:px-8 lg:px-12 lg:py-14">
         <div className="mx-auto flex max-w-[1440px] flex-col justify-between gap-8 sm:flex-row sm:items-center">
           <h2 className="max-w-xl font-display text-4xl font-black leading-[0.9] tracking-[-0.07em] sm:text-5xl">Have a good problem to solve?</h2>
           <button onClick={() => setLocation("/marketing")} className="group flex shrink-0 items-center gap-4 rounded-full bg-ink px-6 py-4 text-sm font-black text-paper transition-transform hover:-translate-y-1">Book a call <ArrowUpRight size={18} className="text-lime transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></button>
         </div>
       </section>
 
-      <footer className="relative z-10 bg-ink px-5 py-8 text-paper sm:px-8 lg:px-12">
-        <div className="mx-auto flex max-w-[1440px] flex-col justify-between gap-8 border-t border-white/10 pt-7 sm:flex-row sm:items-end"><div><div className="flex items-center gap-3"><span className="grid h-8 w-8 place-items-center rounded-full bg-lime text-ink"><span className="h-2.5 w-2.5 rounded-full bg-ink" /></span><span className="font-display text-2xl font-black tracking-[-0.08em]">SoloDac</span></div><p className="mt-3 text-xs text-white/40">A digital media company.</p></div><div className="flex items-center gap-5 text-[10px] font-bold uppercase tracking-[0.18em] text-white/40"><Link href="/services" className="hover:text-lime">Services</Link><Link href="/network" className="hover:text-lime">Network</Link><Link href="/approach" className="hover:text-lime">About</Link><button onClick={() => setLocation("/marketing")} className="hover:text-lime">Contact</button><span>© 2026</span></div></div>
-      </footer>
-      </main>
-    </>
-  );
-}
-
-function IpCard({ ip, large = false }: { ip: (typeof ips)[number]; large?: boolean }) {
-  return (
-    <a
-      href={`https://www.instagram.com/${ip.handle}/`}
-      target="_blank"
-      rel="noreferrer"
-      className={`group relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] transition-all hover:-translate-y-1 hover:border-lime/50 ${large ? "p-7 sm:p-9" : "p-6"}`}
-    >
-      <img src={ip.logo} alt="" aria-hidden className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full object-cover opacity-[0.07] blur-2xl transition-opacity group-hover:opacity-20" />
-      <div className="relative flex items-start justify-between">
-        <img src={ip.logo} alt={`${ip.name} logo`} className={`rounded-full object-cover ring-1 ring-white/10 ${large ? "h-20 w-20" : "h-14 w-14"}`} />
-        <span className="rounded-full border border-white/15 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-white/55">{ip.category}</span>
-      </div>
-      <div className={`relative flex items-center gap-2 ${large ? "mt-10" : "mt-7"}`}>
-        <h3 className={`font-headline leading-none ${large ? "text-4xl sm:text-5xl" : "text-3xl"}`}>{ip.name}</h3>
-        {ip.verified && <BadgeCheck size={large ? 22 : 18} className="shrink-0 text-lime" />}
-      </div>
-      <p className={`relative mt-3 flex-1 text-white/60 ${large ? "text-base" : "text-sm"}`}>{ip.tagline}</p>
-      <div className="relative mt-7 flex items-end justify-between border-t border-white/10 pt-5">
-        <div>
-          <div className={`font-headline leading-none ${large ? "text-4xl" : "text-3xl"}`}>{ip.followers}</div>
-          <div className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-white/40">Followers · @{ip.handle}</div>
+      <footer className="bg-[#111] px-4 py-10 text-white/70">
+        <div className="mx-auto grid max-w-[1320px] gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <div className="flex items-center gap-2 text-white"><span className="grid h-7 w-7 place-items-center rounded-full bg-coral"><span className="h-2.5 w-2.5 rounded-full bg-[#111]" /></span><span className="font-display text-2xl font-black tracking-[-0.06em]">SoloDac</span></div>
+            <p className="mt-3 max-w-xs text-sm">A digital media company telling India&apos;s business stories across five IPs.</p>
+          </div>
+          <div>
+            <div className="text-xs font-bold uppercase tracking-wider text-white">Our IPs</div>
+            <ul className="mt-3 space-y-2 text-sm">{ips.map((ip) => <li key={ip.handle}><a href={`https://www.instagram.com/${ip.handle}/`} target="_blank" rel="noreferrer" className="hover:text-coral">{ip.name}</a></li>)}</ul>
+          </div>
+          <div>
+            <div className="text-xs font-bold uppercase tracking-wider text-white">Company</div>
+            <ul className="mt-3 space-y-2 text-sm">
+              <li><Link href="/approach" className="hover:text-coral">About</Link></li>
+              <li><Link href="/services" className="hover:text-coral">Services</Link></li>
+              <li><Link href="/clipping" className="hover:text-coral">Clipping</Link></li>
+              <li><Link href="/careers" className="hover:text-coral">Careers</Link></li>
+            </ul>
+          </div>
+          <div>
+            <div className="text-xs font-bold uppercase tracking-wider text-white">Advertise</div>
+            <p className="mt-3 text-sm">Reach our audience across every IP.</p>
+            <a href="mailto:info@solodac.com" className="mt-2 inline-block text-sm font-bold text-coral">info@solodac.com</a>
+          </div>
         </div>
-        <ArrowUpRight size={20} className="text-white/30 transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-lime" />
-      </div>
-    </a>
+        <div className="mx-auto mt-8 max-w-[1320px] border-t border-white/10 pt-5 text-xs text-white/40">© 2026 SoloDac. All rights reserved.</div>
+      </footer>
+    </div>
   );
 }
