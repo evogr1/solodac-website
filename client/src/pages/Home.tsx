@@ -140,18 +140,6 @@ export default function Home() {
             ))}
           </div>
 
-          <Reveal delay={0.1} className="mt-12 grid grid-cols-1 gap-8 border-t border-dotted border-white/20 pt-8 sm:grid-cols-3">
-            {[
-              { value: "5", label: "Owned IPs" },
-              { value: "15.4M", label: "Followers across the network" },
-              { value: "18.2B+", label: "Views a year" },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <div className="font-headline text-5xl text-paper sm:text-6xl">{stat.value}</div>
-                <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.16em] text-white/45">{stat.label}</div>
-              </div>
-            ))}
-          </Reveal>
         </div>
       </section>
 
