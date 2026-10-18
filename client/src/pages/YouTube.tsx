@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Camera, Check, Clapperboard, Compass, Film, Sparkles, Target, Wand2, Youtube } from "lucide-react";
 import Reveal from "../components/Reveal";
 import { PageHero, Panel, PrimaryButton, PublisherLayout, SectionTitle, Tag } from "../components/publisher";
@@ -28,6 +29,12 @@ const steps = [
 
 export default function YouTube() {
   useScrollToTop();
+  useEffect(() => {
+    if (window.location.hash === "#studio") {
+      const timer = window.setTimeout(() => document.getElementById("studio")?.scrollIntoView({ behavior: "smooth" }), 450);
+      return () => window.clearTimeout(timer);
+    }
+  }, []);
 
   return (
     <PublisherLayout ctaTitle="Ready to build a channel that pays you back?">

@@ -50,7 +50,7 @@ export default function Thesis() {
         </Reveal>
 
         <aside className="h-fit rounded-xl bg-white p-5 shadow-sm lg:sticky lg:top-24">
-          <h2 className="font-[Georgia,serif] text-2xl font-bold text-[#e2365b]">Most viewed</h2>
+          <h2 className="font-[Georgia,serif] text-2xl font-bold text-[#e2365b]">Most read</h2>
           <ol className="mt-3 divide-y divide-neutral-200">
             {mostViewed.map((story, index) => (
               <li key={story.href}>
