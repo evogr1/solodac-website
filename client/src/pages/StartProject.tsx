@@ -8,12 +8,11 @@ import { useScrollToTop } from "../hooks/useScrollToTop";
 const easeOut = [0.23, 1, 0.32, 1] as const;
 
 const serviceOptions = [
-  "Instagram Marketing",
+  "YouTube Channel Building",
+  "Longcut Early Access",
+  "Campaigns on Our IPs",
+  "Funding & Launch News",
   "Newsletter Marketing",
-  "Telegram Marketing",
-  "TikTok Marketing",
-  "X (Twitter) Marketing",
-  "YouTube Marketing",
   "Digital PR",
   "Content Production",
   "Web Development",
@@ -48,7 +47,10 @@ export default function StartProject() {
   useScrollToTop();
   const [formSent, setFormSent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [selectedServices, setSelectedServices] = useState<string[]>(() => {
+    const requested = new URLSearchParams(window.location.search).get("service");
+    return requested && serviceOptions.includes(requested) ? [requested] : [];
+  });
   const [selectedContinents, setSelectedContinents] = useState<string[]>([]);
   const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
 
@@ -122,7 +124,7 @@ export default function StartProject() {
       <section className="relative overflow-hidden rounded-xl bg-ink px-5 py-12 text-paper shadow-sm selection:bg-lime selection:text-ink sm:px-8 lg:px-12 lg:py-16">
         <div className="mx-auto grid max-w-[1100px] gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: easeOut }}>
-            <div className="mb-6 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.25em] text-white/45"><span className="h-px w-10 bg-coral" /> Large-scale social marketing</div>
+            <div className="mb-6 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.25em] text-white/45"><span className="h-px w-10 bg-coral" /> YouTube, IPs & growth</div>
             <h1 className="max-w-md font-display text-5xl font-black leading-[0.9] tracking-[-0.06em] sm:text-6xl">Book a call.</h1>
             <p className="mt-7 max-w-md text-lg leading-relaxed text-white/60">Our owned and extended pages pull <span className="text-lime">18B+ views</span> a year. Put your brand, your founder, or your launch in front of that, run properly, not just boosted.</p>
             <p className="mt-5 max-w-md text-base leading-relaxed text-white/45">Tell us what you&apos;re building, what you&apos;ve got to spend, and when it needs to happen. We&apos;ll tell you straight whether we&apos;re the right fit and what we&apos;d actually do.</p>

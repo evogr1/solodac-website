@@ -122,7 +122,7 @@ export default function Home() {
               <div>
                 <div className="text-[11px] font-bold uppercase tracking-wider text-[#e2365b]">New: YouTube channels</div>
                 <h2 className="mt-1 text-2xl font-extrabold leading-tight group-hover:text-[#e2365b]">Everyone&apos;s chasing Instagram. We build long-form YouTube channels for business owners.</h2>
-                <p className="mt-2 text-sm text-neutral-600">Proper shoots, proper edits, and a funnel into your business. Plus our AI video editor, in development.</p>
+                <p className="mt-2 text-sm text-neutral-600">Proper shoots, proper edits, and a funnel into your business. Plus Longcut, our one-prompt AI video editor, in development.</p>
               </div>
             </div>
             <span className="flex shrink-0 items-center gap-2 rounded bg-[#e2365b] px-5 py-3 text-xs font-black uppercase tracking-wide text-white">Build my channel <ArrowUpRight size={14} /></span>

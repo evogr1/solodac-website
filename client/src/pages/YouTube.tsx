@@ -38,7 +38,7 @@ export default function YouTube() {
         deck="We help business owners launch and grow long-form YouTube channels: proper shooting, proper editing, a clear value proposition, and a funnel that turns viewers into clients, students or customers."
       >
         <div className="flex flex-wrap items-center gap-3">
-          <PrimaryButton href="/marketing">Build my channel</PrimaryButton>
+          <PrimaryButton href="/marketing?service=YouTube%20Channel%20Building">Build my channel</PrimaryButton>
           {["Long-form", "Done for you", "Funnel built in"].map((tag) => <Tag key={tag}>{tag}</Tag>)}
         </div>
       </PageHero>
@@ -95,14 +95,14 @@ export default function YouTube() {
         <section id="studio" className="mt-8 scroll-mt-20 overflow-hidden rounded-xl bg-[#111] text-white shadow-sm">
           <div className="grid gap-8 p-6 sm:p-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
             <div>
-              <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-coral"><Sparkles size={13} /> In development</div>
+              <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-coral"><Sparkles size={13} /> Longcut · In development</div>
               <h2 className="mt-3 font-[Georgia,serif] text-3xl font-bold leading-tight sm:text-4xl">One prompt in. A properly edited YouTube video out.</h2>
-              <p className="mt-4 max-w-xl text-white/70">We&apos;re building our own AI editor for long-form YouTube. Give it a prompt and it returns a properly edited, properly synced 10-minute video. Teach it your style and it edits like your team would. No AI slop.</p>
+              <p className="mt-4 max-w-xl text-white/70">Longcut is the AI editor we&apos;re building for long-form YouTube. The long cut, minus the long hours. Give it a prompt and it returns a properly edited, properly synced 10-minute video. Teach it your style and it edits like your team would. No AI slop.</p>
               <p className="mt-3 max-w-xl text-sm text-white/50">It&apos;s our internal tool today and it powers our own production. A public launch is coming.</p>
-              <div className="mt-6"><PrimaryButton href="/marketing">Get early access</PrimaryButton></div>
+              <div className="mt-6"><PrimaryButton href="/marketing?service=Longcut%20Early%20Access">Get early access to Longcut</PrimaryButton></div>
             </div>
             <div className="rounded-lg border border-white/10 bg-white/[0.04] p-5 font-mono text-sm">
-              <div className="flex items-center gap-2 text-white/40"><Wand2 size={14} /> prompt</div>
+              <div className="flex items-center gap-2 text-white/40"><Wand2 size={14} /> longcut prompt</div>
               <p className="mt-2 text-white/85">&quot;10-minute explainer on why most D2C brands fail in year two. Founder talking head, b-roll, chapter cards, my usual style.&quot;</p>
               <div className="mt-5 space-y-2 border-t border-white/10 pt-4 text-xs">
                 {["Script & structure", "Cuts & pacing", "B-roll & graphics", "Captions & sync", "Your house style"].map((step) => (
