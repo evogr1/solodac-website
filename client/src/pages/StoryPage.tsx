@@ -1,4 +1,4 @@
-import { ChevronRight, Eye, Instagram, Share2 } from "lucide-react";
+import { ChevronRight, Share2 } from "lucide-react";
 import { toast } from "sonner";
 import { Link, useLocation, useRoute } from "wouter";
 import Reveal from "../components/Reveal";
@@ -55,7 +55,7 @@ export default function StoryPage() {
                 {ip && <img src={ip.logo} alt="" className="h-9 w-9 rounded-full object-cover" />}
                 <div>
                   <div className="font-bold text-neutral-800">By {story.ip}</div>
-                  <div>{story.date} · <Eye size={11} className="inline" /> {story.views} views on Instagram</div>
+                  <div>{story.date} · {story.readTime}</div>
                 </div>
               </div>
               <button onClick={share} className="flex items-center gap-1.5 rounded border border-neutral-300 px-3 py-1.5 text-xs font-bold hover:border-[#e2365b] hover:text-[#e2365b]">
@@ -71,20 +71,6 @@ export default function StoryPage() {
                   {paragraph}
                 </p>
               ))}
-            </div>
-
-            <div className="mt-10 rounded-xl bg-neutral-50 p-4 sm:p-6">
-              <div className="mb-4 flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2 text-sm font-extrabold"><Instagram size={16} className="text-[#e2365b]" /> Watch the original reel</div>
-                <a href={story.href} target="_blank" rel="noreferrer" className="text-xs font-bold text-[#e2365b] hover:underline">Open on Instagram</a>
-              </div>
-              <iframe
-                src={`https://www.instagram.com/reel/${story.code}/embed`}
-                title={`${story.title} on Instagram`}
-                loading="lazy"
-                className="mx-auto block h-[640px] w-full max-w-[400px] rounded-lg border-0 bg-white"
-                allowFullScreen
-              />
             </div>
 
             {ip && (
@@ -109,7 +95,7 @@ export default function StoryPage() {
                   <span className="w-5 shrink-0 font-[Georgia,serif] text-2xl font-bold leading-none text-[#e2365b]">{index + 1}</span>
                   <span className="border-l border-neutral-200 pl-4">
                     <span className="block text-sm font-bold leading-snug group-hover:text-[#e2365b]">{item.title}</span>
-                    <span className="mt-1 block text-xs text-neutral-500">{item.ip} · {item.views} views</span>
+                    <span className="mt-1 block text-xs text-neutral-500">{item.ip} · {item.readTime}</span>
                   </span>
                 </Link>
               </li>

@@ -1,4 +1,4 @@
-import { ArrowUpRight, BadgeCheck, ChevronRight, Eye, Play } from "lucide-react";
+import { ArrowUpRight, BadgeCheck, ChevronRight } from "lucide-react";
 import type { ReactNode } from "react";
 import { Link, useLocation } from "wouter";
 import PublisherHeader from "./PublisherHeader";
@@ -117,11 +117,6 @@ export function Cover({ story, className = "", play = false }: { story: Story; c
     <div className={`relative overflow-hidden bg-[#1a1a1a] ${className}`}>
       <img src={story.image} alt="" aria-hidden className="absolute inset-0 h-full w-full scale-125 object-cover opacity-60 blur-xl" />
       <img src={story.image} alt={story.title} className="relative mx-auto h-full object-contain transition-transform duration-500 group-hover:scale-105" />
-      {play && (
-        <span className="absolute bottom-3 left-3 flex items-center gap-1.5 rounded-full bg-black/70 px-2.5 py-1 text-[11px] font-bold text-white backdrop-blur">
-          <Play size={11} fill="currentColor" /> {story.readTime}
-        </span>
-      )}
     </div>
   );
 }
@@ -133,7 +128,7 @@ export function StoryMeta({ story }: { story: Story }) {
       <span>·</span>
       <span>{story.date}</span>
       <span>·</span>
-      <span className="flex items-center gap-1"><Eye size={12} /> {story.views}</span>
+      <span>{story.readTime}</span>
     </div>
   );
 }

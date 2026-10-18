@@ -67,7 +67,9 @@ const storyInputs: StoryInput[] = [
 
 export const stories: Story[] = storyInputs.map((story) => {
   const code = story.href.match(/reel\/([^/]+)/)![1];
-  return { ...story, code, ...articles[code] };
+  const article = articles[code];
+  const words = article.body.join(" ").split(/\s+/).length;
+  return { ...story, code, ...article, readTime: `${Math.max(2, Math.ceil(words / 120))} min read` };
 });
 
 export const storyPath = (story: Story) => `/stories/${story.slug}`;

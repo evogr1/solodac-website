@@ -58,7 +58,7 @@ export default function Thesis() {
                   <span className="w-5 shrink-0 font-[Georgia,serif] text-2xl font-bold leading-none text-[#e2365b]">{index + 1}</span>
                   <span className="border-l border-neutral-200 pl-4">
                     <span className="block text-sm font-bold leading-snug group-hover:text-[#e2365b]">{story.title}</span>
-                    <span className="mt-1 block text-xs text-neutral-500">{story.ip} · {story.views} views</span>
+                    <span className="mt-1 block text-xs text-neutral-500">{story.ip} · {story.readTime}</span>
                   </span>
                 </Link>
               </li>

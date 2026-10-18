@@ -1,11 +1,10 @@
-import { ArrowUpRight, ChevronLeft, ChevronRight, Youtube } from "lucide-react";
+import { ArrowUpRight, Youtube } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Cover, IpProfileCard, PublisherLayout, StoryCard, StoryMeta as Meta } from "../components/publisher";
+import { Cover, PublisherLayout, StoryCard, StoryMeta as Meta } from "../components/publisher";
 import Reveal from "../components/Reveal";
 import { useScrollToTop } from "../hooks/useScrollToTop";
 import { stories, storyPath } from "../lib/stories";
-import { ips } from "../lib/ips";
 const byCode = (code: string) => stories.find((story) => story.href.includes(code))!;
 const lead = byCode("Dea8TEIBako");
 const secondary = [byCode("DeXvJmrEt_n"), byCode("Deje6VcBmj-")];
@@ -16,7 +15,6 @@ export default function Home() {
   useScrollToTop();
   const [, setLocation] = useLocation();
   const [section, setSection] = useState(() => new URLSearchParams(window.location.search).get("section") ?? "Latest");
-  const ipRail = useRef<HTMLDivElement>(null);
   const latestRef = useRef<HTMLElement>(null);
 
   const filtered = section === "Latest" ? byDate : byDate.filter((story) => story.category === section);
@@ -30,14 +28,13 @@ export default function Home() {
     if (section !== "Latest") latestRef.current?.scrollIntoView({ block: "start" });
   }, []);
 
-  const scrollRail = (direction: number) => ipRail.current?.scrollBy({ left: direction * 320, behavior: "smooth" });
 
   return (
     <PublisherLayout activeSection={section} onSection={pickSection}>
         <Reveal>
           <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-[#e2365b] to-coral p-6 text-white sm:p-8">
             <div className="relative z-10 max-w-md">
-              <h2 className="font-[Georgia,serif] text-3xl font-bold leading-tight sm:text-4xl">The feed never stops.<br />Our IPs never miss it.</h2>
+              <h2 className="font-[Georgia,serif] text-3xl font-bold leading-tight sm:text-4xl">The feed never stops.<br />Neither do we.</h2>
               <p className="mt-3 text-sm text-white/85">India&apos;s business stories, every day, to 15.4M+ followers and 18.2B+ annual views across the SoloDac network.</p>
               <button onClick={() => setLocation("/marketing")} className="mt-5 rounded bg-white px-5 py-2.5 text-xs font-black uppercase tracking-wide text-[#e2365b] transition-transform hover:-translate-y-0.5">
                 Advertise with us
@@ -100,20 +97,6 @@ export default function Home() {
           </Reveal>
         </div>
 
-        <Reveal>
-          <section className="mt-8 rounded-xl bg-white p-5 shadow-sm">
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-xl font-extrabold">Our IPs</h2>
-              <div className="flex gap-2">
-                <button onClick={() => scrollRail(-1)} aria-label="Previous" className="grid h-8 w-8 place-items-center rounded-full border border-neutral-300 hover:border-[#e2365b] hover:text-[#e2365b]"><ChevronLeft size={16} /></button>
-                <button onClick={() => scrollRail(1)} aria-label="Next" className="grid h-8 w-8 place-items-center rounded-full border border-neutral-300 hover:border-[#e2365b] hover:text-[#e2365b]"><ChevronRight size={16} /></button>
-              </div>
-            </div>
-            <div ref={ipRail} className="flex snap-x gap-4 overflow-x-auto pb-2 [scrollbar-width:none]">
-              {ips.map((ip) => <IpProfileCard key={ip.handle} ip={ip} />)}
-            </div>
-          </section>
-        </Reveal>
 
         <Reveal>
           <Link href="/youtube" className="group mt-8 flex flex-col gap-5 rounded-xl border-2 border-[#e2365b] bg-white p-6 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-8">
