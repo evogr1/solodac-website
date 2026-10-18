@@ -20,7 +20,12 @@ import aocSnapclips from "../assets/stories/aoc-snapclips.jpg";
 import lucreJio from "../assets/stories/lucre-jio.jpg";
 import lucreAshneer from "../assets/stories/lucre-ashneer.jpg";
 
+import { articles } from "./articles";
+
 export type Story = {
+  slug: string;
+  body: string[];
+  code: string;
   title: string;
   excerpt: string;
   category: string;
@@ -34,7 +39,9 @@ export type Story = {
 
 const reel = (code: string) => `https://www.instagram.com/reel/${code}/`;
 
-export const stories: Story[] = [
+type StoryInput = Omit<Story, "slug" | "body" | "code">;
+
+const storyInputs: StoryInput[] = [
   { title: "A Small YouTuber Handed Elon Musk A Fix For SpaceX's Booster", excerpt: "During a chat with Everyday Astronaut, Musk realised a Starship booster change could carry over to another part of the design.", category: "Space & Tech", ip: "Successful Arcs", date: "13 Oct'26", views: "794.8K", readTime: "26 sec", image: saSpacex, href: reel("Dea8TEIBako") },
   { title: "J.K. Rowling Went From Welfare To One Of History's Best-Selling Authors", excerpt: "Before Harry Potter, she was a single mother writing in Edinburgh cafes while her daughter slept.", category: "Founders", ip: "Successful Arcs", date: "11 Oct'26", views: "287.1K", readTime: "110 sec", image: saRowling, href: reel("DeXvJmrEt_n") },
   { title: "How Ambani Changed The Future Of India With Jio", excerpt: "One bet on cheap data put the internet in hundreds of millions of Indian pockets, and rewrote how the country lives online.", category: "Founders", ip: "Lucre", date: "17 Oct'26", views: "172K", readTime: "Reel", image: lucreJio, href: reel("Del8wEsutna") },
@@ -49,7 +56,7 @@ export const stories: Story[] = [
   { title: "The Entire Stock Market Explained In 111 Seconds", excerpt: "A 1952 animated film breaks down why stock markets exist, and it still holds up.", category: "Markets", ip: "Archive of CEOs", date: "14 Oct'26", views: "25.3K", readTime: "111 sec", image: aocStockmarket, href: reel("DefNlriP2DW") },
   { title: "Undercover Boss: A CEO Got Fired From His Own Company", excerpt: "Buffets Inc. CEO Anthony Wedo went undercover and didn't make it through the shift.", category: "Leadership", ip: "Successful Arcs", date: "12 Oct'26", views: "21.1K", readTime: "130 sec", image: saUndercover, href: reel("DeZPGH0OLjm") },
   { title: "Inside Jeff Bezos' 750,000 Sq Ft Rocket Factory", excerpt: "Forget the launches. Blue Origin's factory floor is where the real work happens.", category: "Space & Tech", ip: "Successful Arcs", date: "15 Oct'26", views: "15.4K", readTime: "41 sec", image: saBlueorigin, href: reel("Def6eBgB7dl") },
-  { title: "They Turned Down $1 Mn On Shark Tank. Then The Business Collapsed", excerpt: "Atlas Monroe stayed independent after rejecting a buyout offer in 2019. What happened next.", category: "Startups", ip: "Successful Arcs", date: "15 Oct'26", views: "15K", readTime: "74 sec", image: saAtlas, href: reel("DehXp86xp5l") },
+  { title: "They Turned Down $1 Mn To Stay Independent", excerpt: "Vegan fried chicken brand Atlas Monroe reportedly rejected a $1 Mn buyout in 2019. Was it the right call?", category: "Startups", ip: "Successful Arcs", date: "15 Oct'26", views: "15K", readTime: "74 sec", image: saAtlas, href: reel("DehXp86xp5l") },
   { title: "Who Really Benefits From Your Hard-Earned Taxes", excerpt: "A Senate hearing on how much government fraud quietly costs taxpayers every year.", category: "Policy", ip: "Archive of CEOs", date: "16 Oct'26", views: "11.4K", readTime: "63 sec", image: aocFraud, href: reel("DejDh2PBO_R") },
   { title: "Microsoft's AI Chief On When We Should Shut AI Down", excerpt: "Mustafa Suleyman lists the four capabilities that should be a hard stop.", category: "AI", ip: "Archive of CEOs", date: "15 Oct'26", views: "9K", readTime: "84 sec", image: aocSuleyman, href: reel("Deg6LS3hSrJ") },
   { title: "The Hidden Undersea Cables That Keep The Internet Running", excerpt: "SubCom has laid enough cable to circle the planet many times over.", category: "Space & Tech", ip: "Successful Arcs", date: "14 Oct'26", views: "8.1K", readTime: "84 sec", image: saSubcom, href: reel("DefE73BRm8Q") },
@@ -58,3 +65,9 @@ export const stories: Story[] = [
   { title: "A High Schooler's Barbell Clip Became A Real Business", excerpt: "SnapClips started with slap-wristband prototypes and a simple gym frustration.", category: "Startups", ip: "Successful Arcs", date: "18 Oct'26", views: "5.8K", readTime: "59 sec", image: saSnapclips, href: reel("Deo7vrqPGTR") },
 ];
 
+export const stories: Story[] = storyInputs.map((story) => {
+  const code = story.href.match(/reel\/([^/]+)/)![1];
+  return { ...story, code, ...articles[code] };
+});
+
+export const storyPath = (story: Story) => `/stories/${story.slug}`;

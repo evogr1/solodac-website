@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import Reveal from "../components/Reveal";
 import { PublisherLayout } from "../components/publisher";
 import { useScrollToTop } from "../hooks/useScrollToTop";
-import { stories } from "../lib/stories";
+import { stories, storyPath } from "../lib/stories";
 
 const beliefs = [
   { title: "Attention is earned per second", text: "Not booked per quarter. If people can leave, assume they will. Every three seconds you keep them is a small win." },
@@ -54,13 +54,13 @@ export default function Thesis() {
           <ol className="mt-3 divide-y divide-neutral-200">
             {mostViewed.map((story, index) => (
               <li key={story.href}>
-                <a href={story.href} target="_blank" rel="noreferrer" className="group flex gap-4 py-4">
+                <Link href={storyPath(story)} className="group flex gap-4 py-4">
                   <span className="w-5 shrink-0 font-[Georgia,serif] text-2xl font-bold leading-none text-[#e2365b]">{index + 1}</span>
                   <span className="border-l border-neutral-200 pl-4">
                     <span className="block text-sm font-bold leading-snug group-hover:text-[#e2365b]">{story.title}</span>
                     <span className="mt-1 block text-xs text-neutral-500">{story.ip} · {story.views} views</span>
                   </span>
-                </a>
+                </Link>
               </li>
             ))}
           </ol>

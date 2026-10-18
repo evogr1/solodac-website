@@ -4,7 +4,7 @@ import { Link, useLocation } from "wouter";
 import { Cover, IpProfileCard, PublisherLayout, StoryCard, StoryMeta as Meta } from "../components/publisher";
 import Reveal from "../components/Reveal";
 import { useScrollToTop } from "../hooks/useScrollToTop";
-import { stories } from "../lib/stories";
+import { stories, storyPath } from "../lib/stories";
 import { ips } from "../lib/ips";
 const byCode = (code: string) => stories.find((story) => story.href.includes(code))!;
 const lead = byCode("Dea8TEIBako");
@@ -54,7 +54,7 @@ export default function Home() {
         <div className="mt-6 grid gap-5 lg:grid-cols-[1fr_340px]">
           <div className="grid gap-5 md:grid-cols-[1.35fr_1fr]">
             <Reveal>
-              <a href={lead.href} target="_blank" rel="noreferrer" className="group block h-full overflow-hidden rounded-xl bg-white shadow-sm">
+              <Link href={storyPath(lead)} className="group block h-full overflow-hidden rounded-xl bg-white shadow-sm">
                 <Cover story={lead} className="h-72 sm:h-96" play />
                 <div className="p-5">
                   <div className="text-[11px] font-bold uppercase tracking-wider text-[#e2365b]">{lead.category}</div>
@@ -62,19 +62,19 @@ export default function Home() {
                   <p className="mt-3 text-sm leading-relaxed text-neutral-600">{lead.excerpt}</p>
                   <div className="mt-4"><Meta story={lead} /></div>
                 </div>
-              </a>
+              </Link>
             </Reveal>
             <div className="flex flex-col gap-5">
               {secondary.map((story, index) => (
                 <Reveal key={story.href} delay={0.05 * (index + 1)}>
-                  <a href={story.href} target="_blank" rel="noreferrer" className="group flex flex-col overflow-hidden rounded-xl bg-white shadow-sm">
+                  <Link href={storyPath(story)} className="group flex flex-col overflow-hidden rounded-xl bg-white shadow-sm">
                     <Cover story={story} className="h-40" play />
                     <div className="flex-1 p-4">
                       <div className="text-[11px] font-bold uppercase tracking-wider text-[#e2365b]">{story.category}</div>
                       <h2 className="mt-1.5 text-lg font-extrabold leading-snug group-hover:text-[#e2365b]">{story.title}</h2>
                       <div className="mt-3"><Meta story={story} /></div>
                     </div>
-                  </a>
+                  </Link>
                 </Reveal>
               ))}
             </div>
@@ -86,13 +86,13 @@ export default function Home() {
               <ol className="mt-4 divide-y divide-neutral-200">
                 {editorsPick.map((story, index) => (
                   <li key={story.href}>
-                    <a href={story.href} target="_blank" rel="noreferrer" className="group flex gap-4 py-4">
+                    <Link href={storyPath(story)} className="group flex gap-4 py-4">
                       <span className="w-6 shrink-0 font-[Georgia,serif] text-3xl font-bold leading-none text-[#e2365b]">{index + 1}</span>
                       <span className="border-l border-neutral-200 pl-4">
                         <span className="block text-[15px] font-bold leading-snug group-hover:text-[#e2365b]">{story.title}</span>
                         <span className="mt-1.5 block text-xs text-neutral-500">By {story.ip} | {story.date} · {story.readTime}</span>
                       </span>
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ol>

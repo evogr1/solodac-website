@@ -4,7 +4,7 @@ import { Link, useLocation } from "wouter";
 import PublisherHeader from "./PublisherHeader";
 import Reveal from "./Reveal";
 import { igUrl, ips, type Ip } from "../lib/ips";
-import type { Story } from "../lib/stories";
+import { storyPath, type Story } from "../lib/stories";
 
 export const RED = "#e2365b";
 
@@ -140,14 +140,14 @@ export function StoryMeta({ story }: { story: Story }) {
 
 export function StoryCard({ story }: { story: Story }) {
   return (
-    <a href={story.href} target="_blank" rel="noreferrer" className="group flex flex-col overflow-hidden rounded-xl bg-white shadow-sm">
+    <Link href={storyPath(story)} className="group flex flex-col overflow-hidden rounded-xl bg-white shadow-sm">
       <Cover story={story} className="h-44" play />
       <div className="flex flex-1 flex-col p-4">
         <div className="text-[11px] font-bold uppercase tracking-wider text-[#e2365b]">{story.category}</div>
         <h3 className="mt-1.5 flex-1 font-extrabold leading-snug group-hover:text-[#e2365b]">{story.title}</h3>
         <div className="mt-3"><StoryMeta story={story} /></div>
       </div>
-    </a>
+    </Link>
   );
 }
 
