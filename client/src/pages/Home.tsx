@@ -4,11 +4,10 @@ import { Link } from "wouter";
 import { PrimaryButton, PublisherLayout, StoryCard } from "../components/publisher";
 import Reveal from "../components/Reveal";
 import { useScrollToTop } from "../hooks/useScrollToTop";
-import { stories, storyPath, type Story } from "../lib/stories";
+import { founderOfTheWeek as pickFounderOfTheWeek, stories, storyPath, type Story } from "../lib/stories";
 
 const byCode = (code: string) => stories.find((story) => story.code === code)!;
 const lead = byCode("Dea8TEIBako");
-const founderOfTheWeek = byCode("Del8wEsutna");
 const readThisWeek = [byCode("Def0SOMorWD"), byCode("DeXvJmrEt_n"), byCode("Deje6VcBmj-"), byCode("Dej9qb9sbWV"), byCode("DeoNDL6BOdg")];
 const trending = stories.filter((story) => story.code !== lead.code).slice(0, 10);
 const byDate = [...stories].sort((a, b) => parseInt(b.date) - parseInt(a.date));
@@ -33,6 +32,7 @@ export default function Home() {
   useScrollToTop();
   const [section, setSection] = useState(() => new URLSearchParams(window.location.search).get("section") ?? "Latest");
   const latestRef = useRef<HTMLElement>(null);
+  const founderOfTheWeek = pickFounderOfTheWeek();
   const filtered = section === "Latest" ? byDate : byDate.filter((story) => story.category === section);
 
   const pickSection = (next: string) => {
@@ -107,8 +107,8 @@ export default function Home() {
         <section className="mt-8 grid overflow-hidden rounded-xl bg-white shadow-sm md:grid-cols-[1.3fr_1fr]">
           <div className="flex flex-col justify-center p-6 sm:p-10">
             <div className="text-[11px] font-black uppercase tracking-[0.2em] text-[#e2365b]">Founder of the week</div>
-            <h2 className="mt-3 font-[Georgia,serif] text-5xl font-bold leading-none sm:text-7xl">Mukesh Ambani</h2>
-            <p className="mt-4 max-w-md text-lg text-neutral-700">Bet big on cheap data with Jio, and changed how hundreds of millions of Indians get online.</p>
+            <h2 className="mt-3 font-[Georgia,serif] text-5xl font-bold leading-none sm:text-7xl">{founderOfTheWeek.founder!.name}</h2>
+            <p className="mt-4 max-w-md text-lg text-neutral-700">{founderOfTheWeek.founder!.line}</p>
             <div className="mt-6 flex flex-wrap items-center gap-4">
               <PrimaryButton href={storyPath(founderOfTheWeek)}>Read the story</PrimaryButton>
               <span className="text-xs text-neutral-500">From {founderOfTheWeek.ip} · {founderOfTheWeek.views} views</span>
