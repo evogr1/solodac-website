@@ -9,7 +9,6 @@ import Approach from "./pages/Approach";
 import Campaigns from "./pages/Campaigns";
 import Careers from "./pages/Careers";
 import CaseStudies from "./pages/CaseStudies";
-import Clipping from "./pages/Clipping";
 import Home from "./pages/Home";
 import Network from "./pages/Network";
 import Portfolio from "./pages/Portfolio";
@@ -18,6 +17,7 @@ import Services from "./pages/Services";
 import StartProject from "./pages/StartProject";
 import Testimonials from "./pages/Testimonials";
 import Thesis from "./pages/Thesis";
+import YouTube from "./pages/YouTube";
 
 
 function Router() {
@@ -36,7 +36,8 @@ function Router() {
           <Route path={"/"} component={Home} />
           <Route path={"/services"} component={Services} />
           <Route path={"/services/:slug"} component={ServicePage} />
-          <Route path={"/clipping"} component={Clipping} />
+          <Route path={"/youtube"} component={YouTube} />
+          <Route path={"/clipping"}>{() => <Redirect to="/youtube" />}</Route>
           <Route path={"/network"} component={Network} />
           <Route path={"/approach"} component={Approach} />
           <Route path={"/careers"} component={Careers} />

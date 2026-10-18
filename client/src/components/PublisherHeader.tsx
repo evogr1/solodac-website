@@ -9,7 +9,7 @@ const utilityLinks = [
   { label: "Services", href: "/services" },
   { label: "About", href: "/approach" },
   { label: "Careers", href: "/careers" },
-  { label: "Clipping", href: "/clipping", isNew: true },
+  { label: "YouTube", href: "/youtube", isNew: true },
 ];
 
 export const sections = ["Latest", "Startups", "Founders", "Markets", "Leadership", "Space & Tech", "AI", "Auto"];

@@ -1,4 +1,4 @@
-import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, Youtube } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Cover, IpProfileCard, PublisherLayout, StoryCard, StoryMeta as Meta } from "../components/publisher";
@@ -115,6 +115,20 @@ export default function Home() {
           </section>
         </Reveal>
 
+        <Reveal>
+          <Link href="/youtube" className="group mt-8 flex flex-col gap-5 rounded-xl border-2 border-[#e2365b] bg-white p-6 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-8">
+            <div className="flex items-start gap-4">
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-[#e2365b] text-white"><Youtube size={24} /></span>
+              <div>
+                <div className="text-[11px] font-bold uppercase tracking-wider text-[#e2365b]">New: YouTube channels</div>
+                <h2 className="mt-1 text-2xl font-extrabold leading-tight group-hover:text-[#e2365b]">Everyone&apos;s chasing Instagram. We build long-form YouTube channels for business owners.</h2>
+                <p className="mt-2 text-sm text-neutral-600">Proper shoots, proper edits, and a funnel into your business. Plus our AI video editor, in development.</p>
+              </div>
+            </div>
+            <span className="flex shrink-0 items-center gap-2 rounded bg-[#e2365b] px-5 py-3 text-xs font-black uppercase tracking-wide text-white">Build my channel <ArrowUpRight size={14} /></span>
+          </Link>
+        </Reveal>
+
         <section ref={latestRef} className="mt-8 scroll-mt-20">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-xl font-extrabold">{section === "Latest" ? "Latest From SoloDac" : section}</h2>
@@ -144,12 +158,12 @@ export default function Home() {
             </div>
             <div className="mt-6 grid gap-px overflow-hidden rounded-lg bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
               {[
-                { title: "Campaigns across our IPs", line: "One brief. Every IP." },
-                { title: "Founder & podcast features", line: "One shoot. Many stories." },
-                { title: "Funding & launch news", line: "The right rooms hear about it." },
-                { title: "Native brand placements", line: "Trust, borrowed from the IP." },
+                { title: "Campaigns across our IPs", line: "One brief. Every IP.", href: undefined as string | undefined },
+                { title: "YouTube channels", line: "Long-form, built for you.", href: "/youtube" },
+                { title: "Funding & launch news", line: "The right rooms hear about it.", href: undefined as string | undefined },
+                { title: "Native brand placements", line: "Trust, borrowed from the IP.", href: undefined as string | undefined },
               ].map((item, index) => (
-                <Link key={item.title} href="/services" className="group bg-[#111] p-5 transition-colors hover:bg-white/5">
+                <Link key={item.title} href={item.href ?? "/services"} className="group bg-[#111] p-5 transition-colors hover:bg-white/5">
                   <div className="font-mono text-xs text-coral">0{index + 1}</div>
                   <div className="mt-2 font-extrabold group-hover:text-coral">{item.title}</div>
                   <div className="mt-1 font-[Georgia,serif] text-sm italic text-white/60">{item.line}</div>

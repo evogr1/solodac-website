@@ -8,7 +8,7 @@ import { services } from "../lib/services";
 
 const formats = [
   { title: "Campaigns across our IPs", body: "One team runs it end to end: the idea, the creative, and the sequencing across pages people already follow.", tags: ["Strategy", "Creative", "Sequenced distribution"], line: "One brief. Every IP." },
-  { title: "Founder & podcast features", body: "Sit down once. We turn that conversation into weeks of clips that run across the network.", tags: ["Interviews", "Podcast shoots", "Short-form clips"], line: "One shoot. Many stories." },
+  { title: "YouTube channels, built for you", body: "Long-form YouTube for business owners: positioning, proper shoots, proper edits, and a funnel into your business or program.", tags: ["Long-form", "Shoot & edit", "Funnel"], line: "Not another Instagram play." },
   { title: "Funding, launch & news distribution", body: "Raised a round, shipped a product, hit a milestone? We put it where India's business audience is already reading.", tags: ["Funding news", "Launches", "Milestones"], line: "The right rooms hear about it." },
   { title: "Native brand placements", body: "Brand-safe storytelling inside the formats our audience already watches, not ads they skip.", tags: ["Reels", "Carousels", "Repeat exposure"], line: "Trust, borrowed from the IP." },
 ];
@@ -49,7 +49,7 @@ export default function Services() {
       </Panel>
 
       <div className="mt-8">
-        <SectionTitle number="02" action={<Link href="/clipping" className="text-xs font-bold uppercase tracking-wide text-[#e2365b]">Clipping</Link>}>For your own channels</SectionTitle>
+        <SectionTitle number="02" action={<Link href="/youtube" className="text-xs font-bold uppercase tracking-wide text-[#e2365b]">YouTube channels</Link>}>For your own channels</SectionTitle>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => {
             const Icon = service.icon;

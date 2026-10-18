@@ -50,7 +50,7 @@ export function PublisherLayout({
               <li><Link href="/approach" className="hover:text-coral">About</Link></li>
               <li><Link href="/network" className="hover:text-coral">Our IPs</Link></li>
               <li><Link href="/services" className="hover:text-coral">Services</Link></li>
-              <li><Link href="/clipping" className="hover:text-coral">Clipping</Link></li>
+              <li><Link href="/youtube" className="hover:text-coral">YouTube channels</Link></li>
               <li><Link href="/thesis" className="hover:text-coral">Our thesis</Link></li>
               <li><Link href="/careers" className="hover:text-coral">Careers</Link></li>
             </ul>
