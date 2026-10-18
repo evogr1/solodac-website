@@ -1,68 +1,71 @@
-import { ArrowUpRight } from "lucide-react";
-import { Link, useLocation } from "wouter";
+import { ChevronRight } from "lucide-react";
+import { Link } from "wouter";
 import Reveal from "../components/Reveal";
-import SiteHeader from "../components/SiteHeader";
+import { PublisherLayout } from "../components/publisher";
 import { useScrollToTop } from "../hooks/useScrollToTop";
+import { stories } from "../lib/stories";
 
 const beliefs = [
-  { number: "01", text: "Attention is earned per second, not booked per quarter. If people can leave, assume they will. Every three seconds you keep them is a small win." },
-  { number: "02", text: "Consistency beats a viral hit you can't repeat. One lucky post is a fluke. A system that works every week is a business." },
-  { number: "03", text: "If you can't measure it, you're guessing with a bigger budget. Vanity metrics are just guesses wearing a suit." },
+  { title: "Attention is earned per second", text: "Not booked per quarter. If people can leave, assume they will. Every three seconds you keep them is a small win." },
+  { title: "Consistency beats a viral hit", text: "One lucky post is a fluke. A system that works every week is a business. That's why we run IPs, not one-off campaigns." },
+  { title: "If you can't measure it, you're guessing", text: "With a bigger budget. Vanity metrics are just guesses wearing a suit." },
 ];
 
 export default function Thesis() {
   useScrollToTop();
-  const [, setLocation] = useLocation();
+  const mostViewed = stories.slice(0, 5);
 
   return (
-    <>
-      <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.045] noise" />
-      <SiteHeader activeSection="thesis" />
-      <main className="min-h-screen overflow-hidden bg-ink text-paper selection:bg-lime selection:text-ink">
-        <section className="signal-section relative z-10 border-b border-white/10 px-5 pb-20 pt-32 sm:px-8 sm:pt-40 lg:px-12 lg:pb-28">
-          <div className="mx-auto max-w-[900px]">
-            <Reveal>
-              <div className="mb-6 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-lime"><span className="h-px w-10 bg-lime" /> Our thesis</div>
-              <h1 className="font-display text-5xl font-black leading-[0.92] tracking-[-0.06em] sm:text-7xl">Most content marketing fails for one boring reason: nobody wanted to watch it in the first place.</h1>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/60">Not a targeting problem. Not an algorithm problem. A "we made something nobody asked for" problem. Everything we build starts from the opposite question: would a stranger stop scrolling for this, with nothing riding on it?</p>
-            </Reveal>
-
-            <div className="mt-16 divide-y divide-white/10 border-t border-white/10">
+    <PublisherLayout ctaTitle="Agree with this? Let's talk.">
+      <div className="grid gap-5 lg:grid-cols-[1fr_340px]">
+        <Reveal>
+          <article className="rounded-xl bg-white p-6 shadow-sm sm:p-10">
+            <nav className="flex items-center gap-1 text-xs text-neutral-500">
+              <Link href="/" className="hover:text-[#e2365b]">Home</Link><ChevronRight size={12} /><span className="text-neutral-700">Our thesis</span>
+            </nav>
+            <div className="mt-6 text-[11px] font-bold uppercase tracking-wider text-[#e2365b]">In-depth</div>
+            <h1 className="mt-2 text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl">Most content marketing fails for one boring reason: nobody wanted to watch it.</h1>
+            <div className="mt-5 flex items-center gap-3 border-y border-neutral-200 py-3 text-xs text-neutral-500">
+              <span className="grid h-8 w-8 place-items-center rounded-full bg-[#e2365b]"><span className="h-2.5 w-2.5 rounded-full bg-white" /></span>
+              <span><span className="font-bold text-neutral-800">Team SoloDac</span> · 3 min read</span>
+            </div>
+            <div className="mt-6 space-y-5 text-[17px] leading-relaxed text-neutral-700">
+              <p className="first-letter:float-left first-letter:mr-2 first-letter:font-[Georgia,serif] first-letter:text-6xl first-letter:font-bold first-letter:leading-none first-letter:text-[#e2365b]">
+                Not a targeting problem. Not an algorithm problem. A &quot;we made something nobody asked for&quot; problem. Everything we build starts from the opposite question: would a stranger stop scrolling for this, with nothing riding on it?
+              </p>
+              <p>That question is why SoloDac runs its own media brands. When you publish every day to an audience that chose to follow you, you find out fast what people actually want. We bring what we learn there to every brand we work with.</p>
+            </div>
+            <div className="mt-8 space-y-4">
               {beliefs.map((belief, index) => (
-                <Reveal key={belief.number} delay={0.06 * index}>
-                  <div className="flex gap-6 py-8 first:pt-8 sm:gap-10">
-                    <span className="font-display text-3xl font-black text-lime/70">{belief.number}</span>
-                    <p className="max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">{belief.text}</p>
+                <div key={belief.title} className="flex gap-5 rounded-lg border-l-4 border-[#e2365b] bg-neutral-50 p-5">
+                  <span className="font-[Georgia,serif] text-3xl font-bold leading-none text-[#e2365b]">{index + 1}</span>
+                  <div>
+                    <h2 className="text-lg font-extrabold">{belief.title}</h2>
+                    <p className="mt-1 text-neutral-600">{belief.text}</p>
                   </div>
-                </Reveal>
+                </div>
               ))}
             </div>
-          </div>
-        </section>
+          </article>
+        </Reveal>
 
-        <section className="relative z-10 bg-coral px-5 py-16 text-ink sm:px-8 lg:px-12 lg:py-20">
-          <div className="mx-auto flex max-w-[1440px] flex-col justify-between gap-8 sm:flex-row sm:items-center">
-            <h2 className="max-w-xl font-display text-4xl font-black leading-[0.9] tracking-[-0.07em] sm:text-5xl">Agree with this? Let&apos;s talk.</h2>
-            <button onClick={() => setLocation("/marketing")} className="group flex shrink-0 items-center gap-4 rounded-full bg-ink px-6 py-4 text-sm font-black text-paper transition-transform hover:-translate-y-1">Book a call <ArrowUpRight size={18} className="text-lime transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></button>
-          </div>
-        </section>
-
-        <footer className="relative z-10 bg-ink px-5 py-8 text-paper sm:px-8 lg:px-12">
-          <div className="mx-auto flex max-w-[1440px] flex-col justify-between gap-8 border-t border-white/10 pt-7 sm:flex-row sm:items-end">
-            <div>
-              <Link href="/" className="flex items-center gap-3"><span className="grid h-8 w-8 place-items-center rounded-full bg-lime text-ink"><span className="h-2.5 w-2.5 rounded-full bg-ink" /></span><span className="font-display text-2xl font-black tracking-[-0.08em]">SoloDac</span></Link>
-              <p className="mt-3 text-xs text-white/40">Digital media, content & growth.</p>
-            </div>
-            <div className="flex items-center gap-5 text-[10px] font-bold uppercase tracking-[0.18em] text-white/40">
-              <Link href="/approach" className="hover:text-lime">About</Link>
-              <Link href="/marketing" className="hover:text-lime">Contact</Link>
-              <span>© 2026</span>
-            </div>
-          </div>
-        </footer>
-      </main>
-    </>
+        <aside className="h-fit rounded-xl bg-white p-5 shadow-sm lg:sticky lg:top-24">
+          <h2 className="font-[Georgia,serif] text-2xl font-bold text-[#e2365b]">Most viewed</h2>
+          <ol className="mt-3 divide-y divide-neutral-200">
+            {mostViewed.map((story, index) => (
+              <li key={story.href}>
+                <a href={story.href} target="_blank" rel="noreferrer" className="group flex gap-4 py-4">
+                  <span className="w-5 shrink-0 font-[Georgia,serif] text-2xl font-bold leading-none text-[#e2365b]">{index + 1}</span>
+                  <span className="border-l border-neutral-200 pl-4">
+                    <span className="block text-sm font-bold leading-snug group-hover:text-[#e2365b]">{story.title}</span>
+                    <span className="mt-1 block text-xs text-neutral-500">{story.ip} · {story.views} views</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </aside>
+      </div>
+    </PublisherLayout>
   );
 }

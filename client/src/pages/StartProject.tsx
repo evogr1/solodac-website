@@ -2,8 +2,7 @@ import { useState } from "react";
 import { ArrowUpRight, Check, PenTool } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
-import { Link } from "wouter";
-import SiteHeader from "../components/SiteHeader";
+import { PublisherLayout } from "../components/publisher";
 import { useScrollToTop } from "../hooks/useScrollToTop";
 
 const easeOut = [0.23, 1, 0.32, 1] as const;
@@ -119,12 +118,8 @@ export default function StartProject() {
   };
 
   return (
-    <>
-      <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.045] noise" />
-      <SiteHeader />
-      <main className="min-h-screen overflow-hidden bg-ink text-paper selection:bg-lime selection:text-ink">
-
-      <section className="relative z-10 px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
+    <PublisherLayout hideCta>
+      <section className="relative overflow-hidden rounded-xl bg-ink px-5 py-12 text-paper shadow-sm selection:bg-lime selection:text-ink sm:px-8 lg:px-12 lg:py-16">
         <div className="mx-auto grid max-w-[1100px] gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: easeOut }}>
             <div className="mb-6 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.25em] text-white/45"><span className="h-px w-10 bg-coral" /> Large-scale social marketing</div>
@@ -283,22 +278,6 @@ export default function StartProject() {
         </div>
       </section>
 
-      <footer className="relative z-10 border-t border-white/10 px-5 py-10 sm:px-8 lg:px-12">
-        <div className="mx-auto flex max-w-[1440px] flex-col justify-between gap-8 sm:flex-row sm:items-end">
-          <div>
-            <Link href="/" className="flex items-center gap-3">
-              <span className="grid h-8 w-8 place-items-center rounded-full bg-lime text-ink"><span className="h-2.5 w-2.5 rounded-full bg-ink" /></span>
-              <span className="font-display text-2xl font-black tracking-[-0.08em]">SoloDac</span>
-            </Link>
-            <p className="mt-3 text-xs text-white/40">Digital media, content & growth.</p>
-          </div>
-          <div className="flex items-center gap-5 text-[10px] font-bold uppercase tracking-[0.18em] text-white/40">
-            <Link href="/" className="hover:text-lime">Home</Link>
-            <span>© 2026</span>
-          </div>
-        </div>
-      </footer>
-      </main>
-    </>
+    </PublisherLayout>
   );
 }

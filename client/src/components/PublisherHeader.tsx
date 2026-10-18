@@ -53,7 +53,7 @@ export default function PublisherHeader({ activeSection, onSection }: { activeSe
             {sections.map((section) => (
               <button
                 key={section}
-                onClick={() => (onSection ? onSection(section) : setLocation("/"))}
+                onClick={() => (onSection ? onSection(section) : setLocation(`/?section=${encodeURIComponent(section)}`))}
                 className={`whitespace-nowrap rounded px-3 py-1.5 transition-colors hover:bg-white/15 ${activeSection === section ? "bg-white/20" : ""}`}
               >
                 {section}
@@ -76,7 +76,7 @@ export default function PublisherHeader({ activeSection, onSection }: { activeSe
           {sections.map((section) => (
             <button
               key={section}
-              onClick={() => onSection?.(section)}
+              onClick={() => (onSection ? onSection(section) : setLocation(`/?section=${encodeURIComponent(section)}`))}
               className={`whitespace-nowrap rounded px-2.5 py-1 ${activeSection === section ? "bg-white/25" : "bg-white/10"}`}
             >
               {section}
