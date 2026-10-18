@@ -6,15 +6,22 @@ import Reveal from "../components/Reveal";
 import SiteHeader from "../components/SiteHeader";
 import { useScrollToTop } from "../hooks/useScrollToTop";
 import heroImage from "../assets/solodac-signal.jpg";
+import aocMadoff from "../assets/partners/aoc-madoff.jpg";
+import aocSnapclips from "../assets/partners/aoc-snapclips.jpg";
+import bourseLogo from "../assets/partners/bourse.jpg";
+import lucreLogo from "../assets/partners/lucre.jpg";
+import saRowling from "../assets/partners/sa-rowling.jpg";
+import saSpacex from "../assets/partners/sa-spacex.jpg";
+import virodhLogo from "../assets/partners/virodh.jpg";
 
-// TODO: swap in real client names, roles, view counts, and video links.
 const partners: Partner[] = [
-  { name: "@millionairesformula", role: "Instagram", views: "TBD" },
-  { name: "@archiveofceos", role: "Instagram", views: "TBD" },
-  { name: "@bourseindia", role: "Instagram", views: "TBD" },
-  { name: "@howaitechworks", role: "Instagram", views: "TBD" },
-  { name: "@successfularcs", role: "Instagram", views: "TBD" },
-  { name: "@lucreindia", role: "Instagram", views: "TBD" },
+  { name: "Successful Arcs", role: "Business", stat: "794.8K", statLabel: "Views on one reel", image: saSpacex, href: "https://www.instagram.com/reel/Dea8TEIBako/" },
+  { name: "Archive of CEOs", role: "Business", stat: "57.7K", statLabel: "Views on one reel", image: aocMadoff, href: "https://www.instagram.com/reel/Deje6VcBmj-/" },
+  { name: "Virodh", role: "GenZ Bharat", stat: "35K", statLabel: "Followers", image: virodhLogo, imageFit: "logo", href: "https://www.instagram.com/virodhindia/" },
+  { name: "Successful Arcs", role: "Business", stat: "287.1K", statLabel: "Views on one reel", image: saRowling, href: "https://www.instagram.com/reel/DeXvJmrEt_n/" },
+  { name: "Bourse India", role: "News", stat: "29.1K", statLabel: "Followers", image: bourseLogo, imageFit: "logo", href: "https://www.instagram.com/bourseindiaa/" },
+  { name: "Archive of CEOs", role: "Business", stat: "51.3K", statLabel: "Views on one reel", image: aocSnapclips, href: "https://www.instagram.com/reel/DeoNDL6BOdg/" },
+  { name: "Lucre", role: "Founder stories", stat: "15.9K", statLabel: "Followers", image: lucreLogo, imageFit: "logo", href: "https://www.instagram.com/lucreindia/" },
 ];
 
 const exploreLinks = [
@@ -76,7 +83,7 @@ export default function Home() {
               <div className="mb-6 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-lime"><span className="h-px w-10 bg-lime" /> Partnerships</div>
               <h2 className="max-w-2xl font-display text-4xl font-black leading-[0.9] tracking-[-0.06em] sm:text-6xl">Videos doing the actual work.</h2>
             </div>
-            <p className="max-w-xs text-sm text-white/40">A handful of the network's clips, pulling real views on real accounts. Hover to preview, tap on mobile.</p>
+            <p className="max-w-xs text-sm text-white/40">Real reels from pages we run. Tap any card to see the post.</p>
           </Reveal>
         </div>
         <Reveal delay={0.1}>
