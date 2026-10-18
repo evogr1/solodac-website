@@ -252,3 +252,6 @@ body.menu-open main { filter: blur(14px) brightness(0.65); }
   @media (min-width: 640px) { .container { padding-inline: 2rem; } }
   @media (min-width: 1024px) { .container { max-width: 1440px; padding-inline: 3rem; } }
 }
+
+.font-headline { font-family: "Anton", "Impact", "Arial Narrow", sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.005em; }
+.font-accent { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; text-transform: none; letter-spacing: -0.01em; }
