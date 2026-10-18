@@ -1,4 +1,4 @@
-import { ArrowUpRight, Flame } from "lucide-react";
+import { ArrowUpRight, BadgeCheck, Flame } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link, useLocation } from "wouter";
 import PartnershipsMarquee, { type Partner } from "../components/PartnershipsMarquee";
@@ -13,6 +13,8 @@ import lucreLogo from "../assets/partners/lucre.jpg";
 import saRowling from "../assets/partners/sa-rowling.jpg";
 import saSpacex from "../assets/partners/sa-spacex.jpg";
 import virodhLogo from "../assets/partners/virodh.jpg";
+import saLogo from "../assets/partners/successfularcs.jpg";
+import aocLogo from "../assets/partners/archiveofceos.jpg";
 
 const partners: Partner[] = [
   { name: "Successful Arcs", role: "Business", stat: "794.8K", statLabel: "Views on one reel", image: saSpacex, href: "https://www.instagram.com/reel/Dea8TEIBako/" },
@@ -24,10 +26,21 @@ const partners: Partner[] = [
   { name: "Lucre", role: "Founder stories", stat: "15.9K", statLabel: "Followers", image: lucreLogo, imageFit: "logo", href: "https://www.instagram.com/lucreindia/" },
 ];
 
-const exploreLinks = [
-  { href: "/services", eyebrow: "01", title: "Services", description: "Six things we do. Pick one, or hand us the whole engine.", stat: "6", statLabel: "services" },
-  { href: "/network", eyebrow: "02", title: "Network", description: "Sixteen pages we already own. No ad spend required to reach them.", stat: "16", statLabel: "pages" },
-  { href: "/approach", eyebrow: "03", title: "Approach", description: "How we actually work, and the proof it holds up.", stat: "3", statLabel: "steps" },
+const tickerItems = ["Owned media", "15.4M followers", "18.2B+ annual views", "121M accounts reached", "5 owned brands", "Business, markets & founders", "India to the world"];
+
+const brands = [
+  { name: "Successful Arcs", handle: "successfularcs", niche: "Entrepreneurs & leaders", followers: "280.6K", logo: saLogo, verified: true },
+  { name: "Archive of CEOs", handle: "archiveofceos", niche: "CEO wisdom & business history", followers: "265.4K", logo: aocLogo, verified: true },
+  { name: "Virodh", handle: "virodhindia", niche: "GenZ, made for Bharat", followers: "35K", logo: virodhLogo, verified: false },
+  { name: "Bourse India", handle: "bourseindiaa", niche: "India's events, decoded", followers: "29.1K", logo: bourseLogo, verified: false },
+  { name: "Lucre", handle: "lucreindia", niche: "Stories of India's founders", followers: "15.9K", logo: lucreLogo, verified: false },
+];
+
+const offerings = [
+  { title: "Campaigns on our pages", body: "Your launch, product or story told natively on pages people already follow for business content.", tags: ["Native reels", "Carousels", "Multi-page runs"], href: "/campaigns" },
+  { title: "Founder & podcast features", body: "One sit-down turned into weeks of clips that run across the network.", tags: ["Interviews", "Clips", "Cross-posting"], href: "/clipping" },
+  { title: "Funding & launch announcements", body: "Raised a round or shipped something big? We put it in front of the people who care.", tags: ["Funding news", "Launches", "Milestones"], href: "/services" },
+  { title: "Content for your own channels", body: "The same team that runs our pages, running yours: strategy, production and posting.", tags: ["Social", "Video", "Performance"], href: "/services" },
 ];
 
 export default function Home() {
@@ -76,11 +89,53 @@ export default function Home() {
 
       </section>
 
+      <div className="relative z-10 overflow-hidden border-y border-white/10 bg-ink py-4">
+        <div className="marquee-track flex w-max gap-8 whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.22em] text-white/55">
+          {[...tickerItems, ...tickerItems].map((item, index) => (
+            <span key={index} className="flex items-center gap-8">{item}<span className="text-lime">◆</span></span>
+          ))}
+        </div>
+      </div>
+
+      <section className="signal-section relative z-10 bg-ink px-5 py-12 sm:px-8 lg:px-12 lg:py-16">
+        <div className="mx-auto max-w-[1440px]">
+          <Reveal className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+            <div>
+              <div className="mb-6 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-lime"><span className="h-px w-10 bg-lime" /> The network</div>
+              <h2 className="max-w-2xl font-display text-4xl font-black leading-[0.9] tracking-[-0.06em] sm:text-6xl">Five brands. One audience that wants business stories.</h2>
+            </div>
+            <p className="max-w-xs text-sm text-white/45">626K+ followers on the pages below alone, before the extended partner network.</p>
+          </Reveal>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+            {brands.map((brand, index) => (
+              <Reveal key={brand.handle} delay={index * 0.05}>
+                <a href={`https://www.instagram.com/${brand.handle}/`} target="_blank" rel="noreferrer" className="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-all hover:-translate-y-1 hover:border-lime/50">
+                  <div className="flex items-start justify-between">
+                    <img src={brand.logo} alt={`${brand.name} logo`} className="h-14 w-14 rounded-full object-cover" />
+                    <ArrowUpRight size={16} className="text-white/30 transition-colors group-hover:text-lime" />
+                  </div>
+                  <div className="mt-6 flex items-center gap-1.5 font-display text-xl font-black tracking-[-0.04em]">
+                    {brand.name}
+                    {brand.verified && <BadgeCheck size={16} className="text-lime" />}
+                  </div>
+                  <div className="mt-1 text-xs text-white/40">@{brand.handle}</div>
+                  <p className="mt-3 flex-1 text-sm text-white/55">{brand.niche}</p>
+                  <div className="mt-5 border-t border-white/10 pt-4">
+                    <div className="font-display text-2xl font-black tracking-[-0.04em]">{brand.followers}</div>
+                    <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-white/40">Followers</div>
+                  </div>
+                </a>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="signal-section relative z-10 overflow-hidden bg-ink py-12 sm:py-16">
         <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
           <Reveal className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div>
-              <div className="mb-6 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-lime"><span className="h-px w-10 bg-lime" /> Partnerships</div>
+              <div className="mb-6 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-lime"><span className="h-px w-10 bg-lime" /> Selected work</div>
               <h2 className="max-w-2xl font-display text-4xl font-black leading-[0.9] tracking-[-0.06em] sm:text-6xl">Videos doing the actual work.</h2>
             </div>
             <p className="max-w-xs text-sm text-white/40">Real reels from pages we run. Tap any card to see the post.</p>
@@ -91,44 +146,25 @@ export default function Home() {
         </Reveal>
       </section>
 
-      <section className="signal-section relative z-10 border-y border-ink/10 bg-paper text-ink">
-        <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-12 sm:px-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20 lg:px-12 lg:py-16">
-          <Reveal>
-            <div className="mb-6 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.25em] text-ink/45"><span className="h-px w-10 bg-coral" /> What we believe</div>
-            <h1 className="max-w-md font-display text-5xl font-black leading-[0.9] tracking-[-0.075em] sm:text-7xl">If it doesn&apos;t move, it doesn&apos;t count.</h1>
-          </Reveal>
-          <Reveal delay={0.1} className="max-w-3xl">
-            <p className="text-2xl font-medium leading-tight tracking-[-0.03em] sm:text-4xl">Most brands publish and hope. We&apos;d rather publish, watch what actually gets <span className="text-coral">watched</span>, and do more of that, until being easy to find turns into being hard to forget.</p>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="signal-section relative z-10 bg-ink px-5 py-12 sm:px-8 lg:px-12 lg:py-16">
+      <section className="signal-section relative z-10 border-y border-ink/10 bg-paper px-5 py-12 text-ink sm:px-8 lg:px-12 lg:py-16">
         <div className="mx-auto max-w-[1440px]">
-          <Reveal className="mb-4 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-            <div>
-              <div className="mb-6 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-lime"><span className="h-px w-10 bg-lime" /> Where to next</div>
-              <h2 className="max-w-2xl font-display text-4xl font-black leading-[0.9] tracking-[-0.06em] sm:text-6xl">Nothing here is filler. Pick a page.</h2>
-            </div>
-            <p className="max-w-xs text-sm text-white/40">No fifteen-tab menu to dig through. Three things, and each one earns its own page.</p>
+          <Reveal className="mb-8">
+            <div className="mb-6 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.25em] text-ink/45"><span className="h-px w-10 bg-coral" /> What brands get</div>
+            <h2 className="max-w-2xl font-display text-4xl font-black leading-[0.9] tracking-[-0.06em] sm:text-6xl">Your story, on pages <span className="text-coral">people already trust.</span></h2>
           </Reveal>
-          <div className="mt-10 border-t border-white/10">
-            {exploreLinks.map((item, index) => (
-              <Reveal key={item.href} delay={index * 0.06}>
-                <Link
-                  href={item.href}
-                  className="group grid grid-cols-[auto_1fr_auto] items-center gap-6 border-b border-white/10 py-8 transition-colors hover:bg-white/[0.03] sm:grid-cols-[auto_1fr_auto_auto] sm:gap-10 sm:px-4"
-                >
-                  <span className="font-mono text-xs text-white/30">{item.eyebrow}</span>
+          <div className="border-t border-ink/15">
+            {offerings.map((item, index) => (
+              <Reveal key={item.title} delay={index * 0.05}>
+                <Link href={item.href} className="group grid gap-4 border-b border-ink/15 py-7 transition-colors hover:bg-ink/[0.03] sm:grid-cols-[3rem_1fr_1fr_auto] sm:items-center sm:gap-8 sm:px-3">
+                  <span className="font-mono text-xs text-ink/40">0{index + 1}</span>
                   <div>
-                    <h3 className="font-display text-3xl font-black tracking-[-0.05em] transition-colors group-hover:text-lime sm:text-5xl">{item.title}</h3>
-                    <p className="mt-2 max-w-sm text-sm leading-relaxed text-white/50">{item.description}</p>
+                    <h3 className="font-display text-2xl font-black tracking-[-0.05em] sm:text-3xl">{item.title}</h3>
+                    <p className="mt-2 max-w-md text-sm leading-relaxed text-ink/60">{item.body}</p>
                   </div>
-                  <div className="hidden text-right sm:block">
-                    <div className="font-display text-3xl font-black tracking-[-0.04em] text-white/80">{item.stat}</div>
-                    <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-white/35">{item.statLabel}</div>
+                  <div className="flex flex-wrap gap-2">
+                    {item.tags.map((tag) => <span key={tag} className="rounded-full border border-ink/15 px-3 py-1 text-[11px] font-bold text-ink/60">{tag}</span>)}
                   </div>
-                  <ArrowUpRight size={22} className="shrink-0 text-white/30 transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-lime" />
+                  <ArrowUpRight size={20} className="hidden text-ink/30 transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-coral sm:block" />
                 </Link>
               </Reveal>
             ))}
