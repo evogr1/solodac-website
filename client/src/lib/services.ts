@@ -1,8 +1,51 @@
-import { Bot, Clapperboard, Code2, Megaphone, Search, Target } from "lucide-react";
+import { Bot, Clapperboard, Code2, Megaphone, Palette, Search, Target, UserRound, Youtube } from "lucide-react";
 
-export const services = [
+export type Service = {
+  number: string;
+  slug: string;
+  icon: typeof Bot;
+  title: string;
+  description: string;
+  more: string;
+  includes: string;
+  tags: string[];
+  color: string;
+  href?: string;
+};
+
+const baseServices: Omit<Service, "number">[] = [
   {
-    number: "01",
+    slug: "youtube-channels",
+    icon: Youtube,
+    title: "YouTube channel building",
+    description: "Long-form channels for business owners: positioning, proper shoots, proper edits, and a funnel into your business.",
+    more: "We build the channel end to end and point every video at your business.",
+    includes: "Positioning · Shoot days · Editing · Packaging · Funnel",
+    tags: ["Long-form", "Shoot & edit", "Funnel"],
+    color: "coral",
+    href: "/youtube",
+  },
+  {
+    slug: "personal-branding",
+    icon: UserRound,
+    title: "Personal branding",
+    description: "Founders are the most trusted channel a company has. We turn yours into one people actually follow.",
+    more: "We find what you're genuinely worth listening to, then build it into a consistent presence across LinkedIn, X, Instagram and YouTube: positioning, content, ghostwriting, shoots and a posting rhythm you can keep. The goal isn't fame. It's being the obvious name when your market thinks about your category.",
+    includes: "Positioning · Founder story · LinkedIn & X ghostwriting · Shoot days · Short & long-form video · Speaking & PR · Monthly reporting",
+    tags: ["Founders", "LinkedIn", "Video"],
+    color: "lime",
+  },
+  {
+    slug: "rebranding",
+    icon: Palette,
+    title: "Rebranding & identity",
+    description: "When the company has grown and the brand hasn't, people notice. We rebuild it so the outside matches what's inside.",
+    more: "Strategy first, then the visible parts: name and messaging, logo and visual identity, brand guidelines, and a rollout across your website, socials and decks so the new brand actually lands instead of just existing in a PDF.",
+    includes: "Brand strategy · Naming & messaging · Logo & identity · Brand guidelines · Website refresh · Social rollout · Pitch deck design",
+    tags: ["Strategy", "Identity", "Rollout"],
+    color: "violet",
+  },
+  {
     slug: "social-media-management",
     icon: Megaphone,
     title: "Social media systems",
@@ -15,7 +58,6 @@ export const services = [
     color: "lime",
   },
   {
-    number: "02",
     slug: "content-production",
     icon: Clapperboard,
     title: "Content production",
@@ -28,7 +70,6 @@ export const services = [
     color: "blue",
   },
   {
-    number: "03",
     slug: "ai-content-generation",
     icon: Bot,
     title: "AI content studio",
@@ -41,7 +82,6 @@ export const services = [
     color: "coral",
   },
   {
-    number: "04",
     slug: "web-development",
     icon: Code2,
     title: "Web & digital builds",
@@ -54,7 +94,6 @@ export const services = [
     color: "paper",
   },
   {
-    number: "05",
     slug: "seo-search-visibility",
     icon: Search,
     title: "Search & visibility",
@@ -67,7 +106,6 @@ export const services = [
     color: "violet",
   },
   {
-    number: "06",
     slug: "performance-marketing",
     icon: Target,
     title: "Performance marketing",
@@ -80,3 +118,12 @@ export const services = [
     color: "orange",
   },
 ];
+
+const order = ["youtube-channels", "personal-branding", "rebranding", "web-development", "social-media-management", "content-production", "ai-content-generation", "seo-search-visibility", "performance-marketing"];
+
+export const services: Service[] = order.map((slug, index) => {
+  const service = baseServices.find((item) => item.slug === slug)!;
+  return { ...service, number: String(index + 1).padStart(2, "0") };
+});
+
+export const servicePath = (service: Pick<Service, "slug" | "href">) => service.href ?? `/services/${service.slug}`;

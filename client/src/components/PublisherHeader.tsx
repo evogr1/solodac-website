@@ -4,13 +4,14 @@ import type { TickerQuote } from "@shared/ticker";
 import { Link, useLocation } from "wouter";
 
 const utilityLinks = [
-  { label: "Media", href: "/" },
-  { label: "Our IPs", href: "/network" },
+  { label: "Stories", href: "/" },
+  { label: "Network", href: "/network" },
+  { label: "Events", href: "/events", isNew: true },
+  { label: "Studio", href: "/services" },
+  { label: "YouTube", href: "/youtube" },
   { label: "Advertise", href: "/marketing" },
-  { label: "Services", href: "/services" },
   { label: "About", href: "/approach" },
   { label: "Careers", href: "/careers" },
-  { label: "YouTube", href: "/youtube", isNew: true },
 ];
 
 export const sections = ["Latest", "Startups", "Founders", "Markets", "Leadership", "Space & Tech", "AI", "Auto"];

@@ -1,6 +1,7 @@
 import { ChevronRight, Share2 } from "lucide-react";
 import { toast } from "sonner";
 import { Link, useLocation, useRoute } from "wouter";
+import NewsletterSignup from "../components/NewsletterSignup";
 import Reveal from "../components/Reveal";
 import { Cover, PublisherLayout, SectionTitle, StoryCard } from "../components/publisher";
 import { useScrollToTop } from "../hooks/useScrollToTop";
@@ -71,6 +72,10 @@ export default function StoryPage() {
                   {paragraph}
                 </p>
               ))}
+            </div>
+
+            <div className="mt-10">
+              <NewsletterSignup source={`article: ${story.slug}`} compact />
             </div>
 
             {ip && (

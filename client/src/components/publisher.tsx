@@ -48,8 +48,9 @@ export function PublisherLayout({
             <div className="text-xs font-bold uppercase tracking-wider text-white">Company</div>
             <ul className="mt-3 space-y-2 text-sm">
               <li><Link href="/approach" className="hover:text-coral">About</Link></li>
-              <li><Link href="/network" className="hover:text-coral">Our IPs</Link></li>
-              <li><Link href="/services" className="hover:text-coral">Services</Link></li>
+              <li><Link href="/network" className="hover:text-coral">Network</Link></li>
+              <li><Link href="/services" className="hover:text-coral">SoloDac Studio</Link></li>
+              <li><Link href="/events" className="hover:text-coral">Events</Link></li>
               <li><Link href="/youtube" className="hover:text-coral">YouTube channels</Link></li>
               <li><Link href="/thesis" className="hover:text-coral">Our thesis</Link></li>
               <li><Link href="/careers" className="hover:text-coral">Careers</Link></li>

@@ -2,6 +2,7 @@ import { ArrowUpRight, Eye, Flame, Sparkles, Youtube } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 import { PrimaryButton, PublisherLayout, StoryCard } from "../components/publisher";
+import NewsletterSignup from "../components/NewsletterSignup";
 import Reveal from "../components/Reveal";
 import { useScrollToTop } from "../hooks/useScrollToTop";
 import { founderOfTheWeek as pickFounderOfTheWeek, stories, storyPath, type Story } from "../lib/stories";
@@ -102,6 +103,10 @@ export default function Home() {
           {trending.map((story) => <VerticalCard key={story.code} story={story} />)}
         </div>
       </section>
+
+      <div className="mt-8">
+        <NewsletterSignup source="homepage" />
+      </div>
 
       <Reveal>
         <section className="mt-8 grid overflow-hidden rounded-xl bg-white shadow-sm md:grid-cols-[1.3fr_1fr]">

@@ -3,7 +3,7 @@ import { Link, useLocation, useRoute } from "wouter";
 import Reveal from "../components/Reveal";
 import { PageHero, Panel, PrimaryButton, PublisherLayout, SectionTitle, Tag } from "../components/publisher";
 import { useScrollToTop } from "../hooks/useScrollToTop";
-import { services } from "../lib/services";
+import { servicePath, services } from "../lib/services";
 
 export default function ServicePage() {
   useScrollToTop();
@@ -18,13 +18,17 @@ export default function ServicePage() {
   if (!service) {
     return null;
   }
+  if (service.href) {
+    setLocation(service.href);
+    return null;
+  }
 
   const Icon = service.icon;
   const otherServices = services.filter((item) => item.slug !== service.slug);
 
   return (
     <PublisherLayout ctaTitle="Let's make this the good kind of busy.">
-      <PageHero crumb={service.title} kicker={`Service ${service.number}`} title={service.title} deck={service.description}>
+      <PageHero crumb={service.title} kicker={`SoloDac Studio · ${service.number}`} title={service.title} deck={service.description}>
         <div className="flex flex-wrap items-center gap-3">
           <PrimaryButton href="/marketing">Talk to SoloDac</PrimaryButton>
           {service.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
@@ -54,7 +58,7 @@ export default function ServicePage() {
           <ol className="mt-3 divide-y divide-neutral-200">
             {otherServices.map((item, index) => (
               <li key={item.slug}>
-                <Link href={`/services/${item.slug}`} className="group flex gap-4 py-4">
+                <Link href={servicePath(item)} className="group flex gap-4 py-4">
                   <span className="w-5 shrink-0 font-[Georgia,serif] text-2xl font-bold leading-none text-[#e2365b]">{index + 1}</span>
                   <span className="border-l border-neutral-200 pl-4">
                     <span className="block font-bold leading-snug group-hover:text-[#e2365b]">{item.title}</span>

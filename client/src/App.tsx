@@ -15,6 +15,7 @@ import Portfolio from "./pages/Portfolio";
 import ServicePage from "./pages/ServicePage";
 import Services from "./pages/Services";
 import StartProject from "./pages/StartProject";
+import Events from "./pages/Events";
 import StoryPage from "./pages/StoryPage";
 import Thesis from "./pages/Thesis";
 import YouTube from "./pages/YouTube";
@@ -37,6 +38,8 @@ function Router() {
           <Route path={"/services"} component={Services} />
           <Route path={"/services/:slug"} component={ServicePage} />
           <Route path={"/stories/:slug"} component={StoryPage} />
+          <Route path={"/events"} component={Events} />
+          <Route path={"/studio"}>{() => <Redirect to="/services" />}</Route>
           <Route path={"/youtube"} component={YouTube} />
           <Route path={"/clipping"}>{() => <Redirect to="/youtube" />}</Route>
           <Route path={"/network"} component={Network} />
