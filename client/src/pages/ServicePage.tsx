@@ -38,31 +38,31 @@ export default function ServicePage() {
       <div className="mt-6 grid gap-5 lg:grid-cols-[1fr_340px]">
         <Panel>
           <div className="flex items-center gap-3">
-            <span className="grid h-11 w-11 place-items-center rounded-lg bg-[#e2365b]/10 text-[#e2365b]"><Icon size={20} /></span>
+            <span className="grid h-11 w-11 place-items-center rounded-lg bg-green/10 text-green"><Icon size={20} /></span>
             <SectionTitle>What you get</SectionTitle>
           </div>
-          <p className="mt-2 text-lg leading-relaxed text-neutral-700">{service.more}</p>
+          <p className="mt-2 text-lg leading-relaxed text-ink/75">{service.more}</p>
           <div className="mt-8 grid gap-3 sm:grid-cols-2">
             {service.includes.split(" · ").map((item, index) => (
               <Reveal key={item} delay={(index % 4) * 0.04}>
-                <div className="flex items-center gap-3 rounded-lg border border-neutral-200 p-4 text-sm font-bold">
-                  <Check size={16} className="shrink-0 text-[#e2365b]" /> {item}
+                <div className="flex items-center gap-3 rounded-lg border border-ink/10 p-4 text-sm font-bold">
+                  <Check size={16} className="shrink-0 text-green" /> {item}
                 </div>
               </Reveal>
             ))}
           </div>
         </Panel>
 
-        <aside className="rounded-xl bg-white p-5 shadow-sm">
-          <h2 className="font-[Georgia,serif] text-2xl font-bold text-[#e2365b]">More services</h2>
-          <ol className="mt-3 divide-y divide-neutral-200">
+        <aside className="rounded-2xl border border-ink/10 bg-white/60 p-5">
+          <h2 className="font-accent text-2xl font-bold text-green">More services</h2>
+          <ol className="mt-3 divide-y divide-ink/10">
             {otherServices.map((item, index) => (
               <li key={item.slug}>
                 <Link href={servicePath(item)} className="group flex gap-4 py-4">
-                  <span className="w-5 shrink-0 font-[Georgia,serif] text-2xl font-bold leading-none text-[#e2365b]">{index + 1}</span>
-                  <span className="border-l border-neutral-200 pl-4">
-                    <span className="block font-bold leading-snug group-hover:text-[#e2365b]">{item.title}</span>
-                    <span className="mt-1 block text-xs text-neutral-500">{item.tags.join(" · ")}</span>
+                  <span className="w-5 shrink-0 font-accent text-2xl font-bold leading-none text-green">{index + 1}</span>
+                  <span className="border-l border-ink/10 pl-4">
+                    <span className="block font-bold leading-snug group-hover:text-green">{item.title}</span>
+                    <span className="mt-1 block text-xs text-ink/50">{item.tags.join(" · ")}</span>
                   </span>
                 </Link>
               </li>

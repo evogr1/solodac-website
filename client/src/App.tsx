@@ -17,6 +17,7 @@ import Services from "./pages/Services";
 import StartProject from "./pages/StartProject";
 import Events from "./pages/Events";
 import StoryPage from "./pages/StoryPage";
+import Stories from "./pages/Stories";
 import Thesis from "./pages/Thesis";
 import YouTube from "./pages/YouTube";
 
@@ -37,6 +38,7 @@ function Router() {
           <Route path={"/"} component={Home} />
           <Route path={"/services"} component={Services} />
           <Route path={"/services/:slug"} component={ServicePage} />
+          <Route path={"/stories"} component={Stories} />
           <Route path={"/stories/:slug"} component={StoryPage} />
           <Route path={"/events"} component={Events} />
           <Route path={"/studio"}>{() => <Redirect to="/services" />}</Route>

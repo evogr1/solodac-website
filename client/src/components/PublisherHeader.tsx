@@ -1,23 +1,79 @@
-import { ArrowUpRight, Menu, Search, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import type { TickerQuote } from "@shared/ticker";
 import { Link, useLocation } from "wouter";
+import type { TickerQuote } from "@shared/ticker";
 
-const utilityLinks = [
-  { label: "Stories", href: "/" },
+const navLinks = [
+  { label: "Stories", href: "/stories" },
   { label: "Network", href: "/network" },
-  { label: "Events", href: "/events", isNew: true },
   { label: "Studio", href: "/services" },
+  { label: "Events", href: "/events" },
   { label: "YouTube", href: "/youtube" },
-  { label: "Advertise", href: "/marketing" },
   { label: "About", href: "/approach" },
-  { label: "Careers", href: "/careers" },
 ];
 
-export const sections = ["Latest", "Startups", "Founders", "Markets", "Leadership", "Space & Tech", "AI", "Auto"];
+export default function PublisherHeader() {
+  const [location, setLocation] = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
 
-function useTicker() {
+  useEffect(() => setMenuOpen(false), [location]);
+
+  return (
+    <header className="sticky top-0 z-50 border-b border-ink/10 bg-paper/90 backdrop-blur-md">
+      <div className="mx-auto flex h-16 max-w-[1320px] items-center justify-between gap-6 px-4 sm:px-6">
+        <Link href="/" className="font-headline text-2xl tracking-wide text-ink" aria-label="SoloDac home">
+          SOLODAC<span className="text-pink">.</span>
+        </Link>
+
+        <nav className="hidden items-center gap-1 font-mono text-[12px] uppercase tracking-[0.14em] lg:flex">
+          {navLinks.map((link) => {
+            const active = location === link.href || (link.href !== "/" && location.startsWith(link.href));
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`rounded-full px-3.5 py-2 transition-colors ${active ? "bg-ink text-paper" : "text-ink/60 hover:text-green"}`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setLocation("/marketing")}
+            className="hidden items-center gap-1.5 rounded-full bg-green px-5 py-2.5 font-mono text-[12px] font-bold uppercase tracking-[0.14em] text-paper transition-colors hover:bg-ink sm:flex"
+          >
+            Book a call <ArrowUpRight size={14} />
+          </button>
+          <button onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu" className="grid h-10 w-10 place-items-center rounded-full border border-ink/15 text-ink lg:hidden">
+            {menuOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
+        </div>
+      </div>
+
+      {menuOpen && (
+        <div className="border-t border-ink/10 bg-paper lg:hidden">
+          {navLinks.map((link) => (
+            <Link key={link.href} href={link.href} className="block border-b border-ink/5 px-6 py-4 font-mono text-sm uppercase tracking-[0.14em] text-ink">
+              {link.label}
+            </Link>
+          ))}
+          <div className="p-4">
+            <button onClick={() => setLocation("/marketing")} className="flex w-full items-center justify-center gap-2 rounded-full bg-green py-3.5 font-mono text-xs font-bold uppercase tracking-[0.14em] text-paper">
+              Book a call <ArrowUpRight size={15} />
+            </button>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}
+
+export function StockTicker() {
   const [quotes, setQuotes] = useState<TickerQuote[]>([]);
+
   useEffect(() => {
     let active = true;
     const load = () =>
@@ -32,105 +88,25 @@ function useTicker() {
       window.clearInterval(timer);
     };
   }, []);
-  return quotes;
-}
 
-const formatPrice = (quote: TickerQuote) => `${quote.symbol.startsWith("^") ? "" : "₹"}${quote.price.toLocaleString("en-IN", { maximumFractionDigits: 2 })}`;
-
-export default function PublisherHeader({ activeSection, onSection }: { activeSection?: string; onSection?: (section: string) => void }) {
-  const [location, setLocation] = useLocation();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const quotes = useTicker();
+  if (!quotes.length) return null;
 
   return (
-    <>
-      <div className="hidden bg-black text-[11px] font-semibold uppercase tracking-wide text-white/80 md:block">
-        <div className="mx-auto flex max-w-[1320px] items-stretch px-4">
-          {utilityLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              className={`flex items-center gap-1.5 px-3 py-2 transition-colors hover:bg-white/10 hover:text-white ${location === link.href ? "bg-white/15 text-white" : ""}`}
-            >
-              {link.label}
-              {link.isNew && <span className="rounded-sm bg-coral px-1 py-px text-[8px] leading-none text-white">NEW</span>}
-            </Link>
-          ))}
-        </div>
+    <div className="h-9 overflow-hidden rounded-full border border-ink/10 bg-ink font-mono text-[12px] text-paper/80">
+      <div className="marquee-track flex h-full w-max items-center gap-10 whitespace-nowrap px-4">
+        {[...quotes, ...quotes].map((quote, index) => {
+          const up = quote.change >= 0;
+          return (
+            <span key={index} className="flex items-center gap-2">
+              {quote.name}
+              <span className="text-paper">{quote.symbol.startsWith("^") ? "" : "₹"}{quote.price.toLocaleString("en-IN", { maximumFractionDigits: 2 })}</span>
+              <span className={up ? "text-greenbright" : "text-pink"}>
+                {up ? "+" : ""}{quote.changePct.toFixed(2)}% {up ? "▲" : "▼"}
+              </span>
+            </span>
+          );
+        })}
       </div>
-
-      <header className="sticky top-0 z-50 bg-gradient-to-r from-[#e2365b] via-[#f05a5a] to-coral text-white shadow-[0_2px_12px_rgba(0,0,0,0.15)]">
-        <div className="mx-auto flex h-14 max-w-[1320px] items-center gap-6 px-4">
-          <Link href="/" className="flex shrink-0 items-center gap-2" aria-label="SoloDac home">
-            <span className="grid h-7 w-7 place-items-center rounded-full bg-white"><span className="h-2.5 w-2.5 rounded-full bg-[#e2365b]" /></span>
-            <span className="font-display text-2xl font-black tracking-[-0.06em]">SoloDac</span>
-          </Link>
-          <nav className="hidden flex-1 items-center gap-1 overflow-x-auto [scrollbar-width:none] text-[13px] font-bold uppercase tracking-wide lg:flex">
-            {sections.map((section) => (
-              <button
-                key={section}
-                onClick={() => (onSection ? onSection(section) : setLocation(`/?section=${encodeURIComponent(section)}`))}
-                className={`whitespace-nowrap rounded px-3 py-1.5 transition-colors hover:bg-white/15 ${activeSection === section ? "bg-white/20" : ""}`}
-              >
-                {section}
-              </button>
-            ))}
-          </nav>
-          <div className="ml-auto flex items-center gap-2">
-            <button aria-label="Search" className="hidden h-9 w-9 place-items-center rounded-full hover:bg-white/15 sm:grid">
-              <Search size={18} />
-            </button>
-            <button onClick={() => setLocation("/marketing")} className="hidden items-center gap-1.5 rounded-full bg-white px-4 py-2 text-xs font-black uppercase tracking-wide text-[#e2365b] transition-transform hover:-translate-y-0.5 sm:flex">
-              Book a call <ArrowUpRight size={14} />
-            </button>
-            <button onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu" className="grid h-9 w-9 place-items-center rounded-full hover:bg-white/15 lg:hidden">
-              {menuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
-          </div>
-        </div>
-        <div className="flex gap-1 overflow-x-auto px-3 pb-2 text-[12px] font-bold uppercase tracking-wide lg:hidden [scrollbar-width:none]">
-          {sections.map((section) => (
-            <button
-              key={section}
-              onClick={() => (onSection ? onSection(section) : setLocation(`/?section=${encodeURIComponent(section)}`))}
-              className={`whitespace-nowrap rounded px-2.5 py-1 ${activeSection === section ? "bg-white/25" : "bg-white/10"}`}
-            >
-              {section}
-            </button>
-          ))}
-        </div>
-        {menuOpen && (
-          <div className="border-t border-white/20 bg-[#c92d4f] lg:hidden">
-            {utilityLinks.map((link) => (
-              <Link key={link.label} href={link.href} onClick={() => setMenuOpen(false)} className="block border-b border-white/10 px-5 py-3 text-sm font-bold uppercase tracking-wide">
-                {link.label}
-              </Link>
-            ))}
-            <div className="p-4">
-              <button onClick={() => setLocation("/marketing")} className="w-full rounded-full bg-white py-3 text-sm font-black uppercase tracking-wide text-[#e2365b]">Book a call</button>
-            </div>
-          </div>
-        )}
-      </header>
-
-      <div className="relative z-10 h-8 overflow-hidden bg-[#111] text-[12px] font-semibold text-white/85">
-        {quotes.length > 0 && (
-          <div className="marquee-track flex h-full w-max items-center gap-10 whitespace-nowrap">
-            {[...quotes, ...quotes].map((quote, index) => {
-              const up = quote.change >= 0;
-              return (
-                <span key={index} className="flex items-center gap-2">
-                  {quote.name}
-                  <span className="text-white">{formatPrice(quote)}</span>
-                  <span className={up ? "text-[#3ddc84]" : "text-[#ff5c5c]"}>
-                    {up ? "+" : ""}{quote.change.toFixed(2)} ({up ? "+" : ""}{quote.changePct.toFixed(2)}%) {up ? "▲" : "▼"}
-                  </span>
-                </span>
-              );
-            })}
-          </div>
-        )}
-      </div>
-    </>
+    </div>
   );
 }

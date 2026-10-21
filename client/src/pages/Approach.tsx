@@ -33,7 +33,7 @@ export default function Approach() {
       <PageHero
         crumb="About"
         kicker="About SoloDac"
-        title={<>We&apos;d rather make one thing people <span className="text-[#e2365b]">share and engage with</span>, rather than ten things they scroll past.</>}
+        title={<>We&apos;d rather make one thing people <span className="text-green">share and engage with</span>, rather than ten things they scroll past.</>}
         deck="SoloDac is a digital media company. We build and run business media brands, and we put other brands in front of the audiences those IPs have earned."
       >
         <PrimaryButton href="/network">See our IPs</PrimaryButton>
@@ -43,9 +43,9 @@ export default function Approach() {
         {steps.map((item, index) => (
           <Reveal key={item.title} delay={index * 0.05}>
             <Panel className="h-full">
-              <span className="font-[Georgia,serif] text-4xl font-bold text-[#e2365b]">{index + 1}</span>
-              <h2 className="mt-3 text-2xl font-extrabold">{item.title}</h2>
-              <p className="mt-2 text-sm leading-relaxed text-neutral-600">{item.body}</p>
+              <span className="font-accent text-4xl font-bold text-green">{index + 1}</span>
+              <h2 className="mt-3 text-2xl font-bold tracking-tight">{item.title}</h2>
+              <p className="mt-2 text-sm leading-relaxed text-ink/65">{item.body}</p>
             </Panel>
           </Reveal>
         ))}
@@ -53,12 +53,12 @@ export default function Approach() {
 
       <Panel className="mt-8">
         <SectionTitle number="01">How a campaign runs</SectionTitle>
-        <ol className="grid gap-px overflow-hidden rounded-lg bg-neutral-200 sm:grid-cols-2 lg:grid-cols-5">
+        <ol className="grid gap-px overflow-hidden rounded-lg bg-ink/10 sm:grid-cols-2 lg:grid-cols-5">
           {process.map((item, index) => (
             <li key={item.step} className="bg-white p-5">
-              <div className="font-mono text-xs text-[#e2365b]">0{index + 1}</div>
-              <div className="mt-2 text-lg font-extrabold">{item.step}</div>
-              <p className="mt-1.5 text-sm text-neutral-600">{item.body}</p>
+              <div className="font-mono text-xs text-green">0{index + 1}</div>
+              <div className="mt-2 text-lg font-bold tracking-tight">{item.step}</div>
+              <p className="mt-1.5 text-sm text-ink/65">{item.body}</p>
             </li>
           ))}
         </ol>
@@ -67,11 +67,11 @@ export default function Approach() {
       <div className="mt-8 grid gap-5 lg:grid-cols-[1fr_1.4fr]">
         <Panel>
           <SectionTitle number="02">Where we show up</SectionTitle>
-          <ul className="divide-y divide-neutral-200">
+          <ul className="divide-y divide-ink/10">
             {channels.map((channel) => (
               <li key={channel.name} className="flex items-center justify-between py-3.5">
-                <span className="flex items-center gap-3 font-bold"><channel.icon size={18} className="text-[#e2365b]" /> {channel.name}</span>
-                <span className="text-xs text-neutral-500">{channel.detail}</span>
+                <span className="flex items-center gap-3 font-bold"><channel.icon size={18} className="text-green" /> {channel.name}</span>
+                <span className="text-xs text-ink/50">{channel.detail}</span>
               </li>
             ))}
           </ul>

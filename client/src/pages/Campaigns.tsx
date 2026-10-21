@@ -22,9 +22,9 @@ export default function Campaigns() {
         {principles.map((item, index) => (
           <Reveal key={item.title} delay={index * 0.05}>
             <Panel className="h-full">
-              <span className="grid h-11 w-11 place-items-center rounded-lg bg-[#e2365b]/10 text-[#e2365b]"><item.icon size={20} /></span>
-              <h2 className="mt-5 text-xl font-extrabold">{item.title}</h2>
-              <p className="mt-2 text-sm leading-relaxed text-neutral-600">{item.text}</p>
+              <span className="grid h-11 w-11 place-items-center rounded-lg bg-green/10 text-green"><item.icon size={20} /></span>
+              <h2 className="mt-5 text-xl font-bold tracking-tight">{item.title}</h2>
+              <p className="mt-2 text-sm leading-relaxed text-ink/65">{item.text}</p>
             </Panel>
           </Reveal>
         ))}

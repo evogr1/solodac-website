@@ -27,7 +27,7 @@ export default function Portfolio() {
           action={
             <div className="flex gap-1">
               {filters.map((name) => (
-                <button key={name} onClick={() => setIp(name)} className={`rounded px-3 py-1.5 text-xs font-bold ${ip === name ? "bg-[#e2365b] text-white" : "bg-white text-neutral-600 hover:text-[#e2365b]"}`}>
+                <button key={name} onClick={() => setIp(name)} className={`rounded px-3 py-1.5 text-xs font-bold ${ip === name ? "bg-green text-paper" : "bg-white text-ink/65 hover:text-green"}`}>
                   {name}
                 </button>
               ))}

@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import Reveal from "../components/Reveal";
 import { PageHero, Panel, PrimaryButton, PublisherLayout, SectionTitle } from "../components/publisher";
 import { useScrollToTop } from "../hooks/useScrollToTop";
+import { scrollToId } from "../lib/smoothScroll";
 import { submitForm } from "../lib/web3forms";
 
 const formats = [
@@ -16,7 +17,7 @@ const cities = ["Mumbai", "Delhi NCR", "Bengaluru", "Hyderabad", "Pune", "Other"
 const roles = ["Founder", "Operator", "Creator", "Investor", "Brand / marketer", "Student"];
 
 const pill = (active: boolean) =>
-  `rounded-full border px-3 py-1.5 text-xs font-bold transition-colors ${active ? "border-[#e2365b] bg-[#e2365b] text-white" : "border-neutral-300 text-neutral-600 hover:border-[#e2365b]"}`;
+  `rounded-full border px-3 py-1.5 text-xs font-bold transition-colors ${active ? "border-green bg-green text-paper" : "border-ink/15 text-ink/65 hover:border-green"}`;
 
 export default function Events() {
   useScrollToTop();
@@ -58,7 +59,7 @@ export default function Events() {
         title="The stories we cover, in a room."
         deck="SoloDac Events is coming: founder dinners, creator meetups, and a flagship summit. Register your interest and you'll hear about dates, cities and invites before anyone else."
       >
-        <PrimaryButton onClick={() => document.getElementById("register")?.scrollIntoView({ behavior: "smooth" })}>Register interest</PrimaryButton>
+        <PrimaryButton onClick={() => scrollToId("register")}>Register interest</PrimaryButton>
       </PageHero>
 
       <div className="mt-8">
@@ -68,11 +69,11 @@ export default function Events() {
             <Reveal key={format.name} delay={index * 0.05}>
               <Panel className="h-full">
                 <div className="flex items-start justify-between">
-                  <span className="grid h-11 w-11 place-items-center rounded-lg bg-[#e2365b]/10 text-[#e2365b]"><format.icon size={20} /></span>
-                  <span className="rounded bg-neutral-100 px-2 py-1 text-[10px] font-black uppercase tracking-wider text-neutral-500">Dates soon</span>
+                  <span className="grid h-11 w-11 place-items-center rounded-lg bg-green/10 text-green"><format.icon size={20} /></span>
+                  <span className="rounded bg-ink/5 px-2 py-1 text-[10px] font-bold uppercase tracking-[0.14em] font-mono text-ink/50">Dates soon</span>
                 </div>
-                <h3 className="mt-5 text-xl font-extrabold">{format.name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{format.body}</p>
+                <h3 className="mt-5 text-xl font-bold tracking-tight">{format.name}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink/65">{format.body}</p>
               </Panel>
             </Reveal>
           ))}
@@ -82,9 +83,9 @@ export default function Events() {
       <div id="register" className="mt-8 scroll-mt-20 grid gap-5 lg:grid-cols-[1fr_1.2fr]">
         <Panel>
           <SectionTitle number="02">Be first in the room</SectionTitle>
-          <ul className="space-y-3 text-neutral-700">
+          <ul className="space-y-3 text-ink/75">
             {["Early access to every event before public release", "First pick of cities and dates", "Invites to the small, invite-only formats"].map((item) => (
-              <li key={item} className="flex items-start gap-3"><Check size={18} className="mt-0.5 shrink-0 text-[#e2365b]" />{item}</li>
+              <li key={item} className="flex items-start gap-3"><Check size={18} className="mt-0.5 shrink-0 text-green" />{item}</li>
             ))}
           </ul>
         </Panel>
@@ -92,35 +93,35 @@ export default function Events() {
         <Panel>
           {status === "done" ? (
             <div className="flex h-full flex-col items-center justify-center py-10 text-center">
-              <span className="grid h-14 w-14 place-items-center rounded-full bg-[#e2365b] text-white"><Check size={26} /></span>
-              <h3 className="mt-4 text-2xl font-extrabold">You&apos;re on the list.</h3>
-              <p className="mt-2 max-w-sm text-sm text-neutral-600">We&apos;ll reach out as soon as dates for your city are set.</p>
+              <span className="grid h-14 w-14 place-items-center rounded-full bg-green text-paper"><Check size={26} /></span>
+              <h3 className="mt-4 text-2xl font-bold tracking-tight">You&apos;re on the list.</h3>
+              <p className="mt-2 max-w-sm text-sm text-ink/65">We&apos;ll reach out as soon as dates for your city are set.</p>
             </div>
           ) : (
             <form onSubmit={submit} className="space-y-5">
               <div className="grid gap-4 sm:grid-cols-2">
-                <label className="block text-xs font-bold uppercase tracking-wide text-neutral-500">
+                <label className="block text-xs font-bold uppercase tracking-wide text-ink/50">
                   Name
-                  <input name="name" required className="mt-1.5 w-full rounded border border-neutral-300 px-3 py-2.5 text-sm font-medium normal-case tracking-normal text-neutral-900 outline-none focus:border-[#e2365b]" />
+                  <input name="name" required className="mt-1.5 w-full rounded border border-ink/15 px-3 py-2.5 text-sm font-medium normal-case tracking-normal text-ink outline-none focus:border-green" />
                 </label>
-                <label className="block text-xs font-bold uppercase tracking-wide text-neutral-500">
+                <label className="block text-xs font-bold uppercase tracking-wide text-ink/50">
                   Email
-                  <input name="email" type="email" required className="mt-1.5 w-full rounded border border-neutral-300 px-3 py-2.5 text-sm font-medium normal-case tracking-normal text-neutral-900 outline-none focus:border-[#e2365b]" />
+                  <input name="email" type="email" required className="mt-1.5 w-full rounded border border-ink/15 px-3 py-2.5 text-sm font-medium normal-case tracking-normal text-ink outline-none focus:border-green" />
                 </label>
               </div>
               <fieldset>
-                <legend className="text-xs font-bold uppercase tracking-wide text-neutral-500">Which events?</legend>
+                <legend className="text-xs font-bold uppercase tracking-wide text-ink/50">Which events?</legend>
                 <div className="mt-2 flex flex-wrap gap-2">{formats.map((format) => <button type="button" key={format.name} onClick={() => toggleFormat(format.name)} className={pill(chosenFormats.includes(format.name))}>{format.name}</button>)}</div>
               </fieldset>
               <fieldset>
-                <legend className="text-xs font-bold uppercase tracking-wide text-neutral-500">Your city</legend>
+                <legend className="text-xs font-bold uppercase tracking-wide text-ink/50">Your city</legend>
                 <div className="mt-2 flex flex-wrap gap-2">{cities.map((item) => <button type="button" key={item} onClick={() => setCity(item)} className={pill(city === item)}>{item}</button>)}</div>
               </fieldset>
               <fieldset>
-                <legend className="text-xs font-bold uppercase tracking-wide text-neutral-500">You are a</legend>
+                <legend className="text-xs font-bold uppercase tracking-wide text-ink/50">You are a</legend>
                 <div className="mt-2 flex flex-wrap gap-2">{roles.map((item) => <button type="button" key={item} onClick={() => setRole(item)} className={pill(role === item)}>{item}</button>)}</div>
               </fieldset>
-              <button type="submit" disabled={status === "sending"} className="w-full rounded bg-[#e2365b] py-3 text-xs font-black uppercase tracking-wide text-white disabled:opacity-60">
+              <button type="submit" disabled={status === "sending"} className="w-full rounded bg-green py-3 text-xs font-black uppercase tracking-wide text-paper disabled:opacity-60">
                 {status === "sending" ? "Sending" : "Register interest"}
               </button>
             </form>

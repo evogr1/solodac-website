@@ -32,15 +32,15 @@ export default function Services() {
             const Icon = service.icon;
             return (
               <Reveal key={service.slug} delay={(index % 3) * 0.05}>
-                <Link href={servicePath(service)} className="group flex h-full flex-col rounded-xl bg-white p-6 shadow-sm transition-shadow hover:shadow-md">
+                <Link href={servicePath(service)} className="group flex h-full flex-col rounded-2xl border border-ink/10 bg-white/60 p-6 transition-shadow hover:shadow-md">
                   <div className="flex items-start justify-between">
-                    <span className="grid h-11 w-11 place-items-center rounded-lg bg-[#e2365b]/10 text-[#e2365b]"><Icon size={20} /></span>
-                    <span className="font-mono text-xs text-neutral-400">{service.number}</span>
+                    <span className="grid h-11 w-11 place-items-center rounded-lg bg-green/10 text-green"><Icon size={20} /></span>
+                    <span className="font-mono text-xs text-ink/40">{service.number}</span>
                   </div>
-                  <h3 className="mt-5 text-xl font-extrabold group-hover:text-[#e2365b]">{service.title}</h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-neutral-600">{service.description}</p>
+                  <h3 className="mt-5 text-xl font-bold tracking-tight group-hover:text-green">{service.title}</h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-ink/65">{service.description}</p>
                   <div className="mt-5 flex flex-wrap gap-2">{service.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}</div>
-                  <span className="mt-5 flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-[#e2365b]">Read more <ArrowUpRight size={13} /></span>
+                  <span className="mt-5 flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-green">Read more <ArrowUpRight size={13} /></span>
                 </Link>
               </Reveal>
             );
@@ -49,19 +49,19 @@ export default function Services() {
       </div>
 
       <Panel className="mt-8">
-        <SectionTitle number="02" action={<Link href="/network" className="text-xs font-bold uppercase tracking-wide text-[#e2365b]">See the network</Link>}>Advertise on our network</SectionTitle>
-        <div className="divide-y divide-neutral-200 border-t border-neutral-200">
+        <SectionTitle number="02" action={<Link href="/network" className="text-xs font-bold uppercase tracking-wide text-green">See the network</Link>}>Advertise on our network</SectionTitle>
+        <div className="divide-y divide-ink/10 border-t border-ink/10">
           {networkFormats.map((item, index) => (
             <Reveal key={item.title} delay={index * 0.04}>
               <div className="grid gap-4 py-6 md:grid-cols-[3rem_1.1fr_1fr] md:gap-8">
-                <span className="font-mono text-sm text-[#e2365b]">0{index + 1}</span>
+                <span className="font-mono text-sm text-green">0{index + 1}</span>
                 <div>
-                  <h3 className="text-xl font-extrabold sm:text-2xl">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-neutral-600">{item.body}</p>
+                  <h3 className="text-xl font-bold tracking-tight sm:text-2xl">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink/65">{item.body}</p>
                 </div>
                 <div>
                   <div className="flex flex-wrap gap-2">{item.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}</div>
-                  <p className="mt-3 font-[Georgia,serif] text-lg italic text-[#e2365b]">{item.line}</p>
+                  <p className="mt-3 font-accent text-lg italic text-green">{item.line}</p>
                 </div>
               </div>
             </Reveal>

@@ -26,9 +26,9 @@ export default function Careers() {
         <Reveal>
           <Panel className="h-full">
             <SectionTitle>Open roles</SectionTitle>
-            <div className="rounded-lg border border-dashed border-neutral-300 p-8 text-center">
-              <div className="text-lg font-extrabold">No open roles right now</div>
-              <p className="mx-auto mt-2 max-w-sm text-sm text-neutral-600">New positions are posted here first. Exceptional people can reach out any time.</p>
+            <div className="rounded-lg border border-dashed border-ink/15 p-8 text-center">
+              <div className="text-lg font-bold tracking-tight">No open roles right now</div>
+              <p className="mx-auto mt-2 max-w-sm text-sm text-ink/65">New positions are posted here first. Exceptional people can reach out any time.</p>
             </div>
             <div className="mt-6"><PrimaryButton href="/marketing">Get in touch</PrimaryButton></div>
           </Panel>
@@ -38,10 +38,10 @@ export default function Careers() {
             <SectionTitle>Teams we hire for</SectionTitle>
             <div className="grid gap-4 sm:grid-cols-2">
               {teams.map((team) => (
-                <div key={team.name} className="rounded-lg border border-neutral-200 p-4">
-                  <span className="grid h-9 w-9 place-items-center rounded-lg bg-[#e2365b]/10 text-[#e2365b]"><team.icon size={17} /></span>
-                  <div className="mt-3 font-extrabold">{team.name}</div>
-                  <p className="mt-1 text-sm text-neutral-600">{team.body}</p>
+                <div key={team.name} className="rounded-lg border border-ink/10 p-4">
+                  <span className="grid h-9 w-9 place-items-center rounded-lg bg-green/10 text-green"><team.icon size={17} /></span>
+                  <div className="mt-3 font-bold tracking-tight">{team.name}</div>
+                  <p className="mt-1 text-sm text-ink/65">{team.body}</p>
                 </div>
               ))}
             </div>
