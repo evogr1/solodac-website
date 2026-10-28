@@ -2,6 +2,8 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "wouter";
 import ChopShopMock from "@/components/ChopShopMock";
 import Layout from "@/components/Layout";
+import HeroHeadline from "@/components/effects/HeroHeadline";
+import Magnetic from "@/components/effects/Magnetic";
 import MeshGradient from "@/components/effects/MeshGradient";
 import Reveal from "@/components/Reveal";
 import { CtaBand, GhostButton, Kicker, PrimaryButton, SectionHead } from "@/components/site";
@@ -46,10 +48,14 @@ export default function Home() {
         <div className="container relative">
           <Reveal>
             <Kicker>Media · Agency · Software</Kicker>
-            <h1 className="font-display mt-7 max-w-6xl text-[clamp(3rem,10vw,8.5rem)] leading-[0.88]">
-              We grow pages <br className="hidden sm:block" />
-              for a living. <span className="font-serif-i font-normal text-signal">Ours first.</span>
-            </h1>
+            <HeroHeadline
+              className="font-display mt-7 max-w-6xl text-[clamp(3rem,10vw,8.5rem)] leading-[0.88]"
+              lines={[
+                { breakAfter: true, text: "We grow pages" },
+                { text: "for a living." },
+                { accent: true, className: "font-serif-i font-normal text-signal", text: "Ours first." },
+              ]}
+            />
           </Reveal>
           <Reveal delay={0.1}>
             <div className="mt-10 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
@@ -57,8 +63,8 @@ export default function Home() {
                 SoloDac runs Instagram pages and YouTube channels with audiences in the hundreds of thousands. We use the same team, the same playbook and our own software to grow yours.
               </p>
               <div className="flex flex-wrap gap-3">
-                <PrimaryButton href="/contact">Book a call</PrimaryButton>
-                <GhostButton href="/chop-shop">See Chop Shop</GhostButton>
+                <Magnetic><PrimaryButton href="/contact">Book a call</PrimaryButton></Magnetic>
+                <Magnetic><GhostButton href="/chop-shop">See Chop Shop</GhostButton></Magnetic>
               </div>
             </div>
           </Reveal>

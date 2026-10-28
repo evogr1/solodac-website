@@ -152,3 +152,40 @@ body.menu-open main { filter: blur(10px) brightness(0.6); }
   @media (min-width: 640px) { .container { padding-inline: 2rem; } }
   @media (min-width: 1024px) { .container { max-width: 1320px; padding-inline: 3rem; } }
 }
+
+/* Hero headline: letters rise in on load, then react to the cursor (HeroHeadline.tsx). */
+.hero-letter {
+  display: inline-block;
+  transform-origin: 50% 80%;
+  will-change: transform;
+}
+.hero-letter-in {
+  display: inline-block;
+  animation: hero-letter-in 0.9s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+@keyframes hero-letter-in {
+  from { opacity: 0; transform: translateY(0.55em) rotate(6deg); filter: blur(10px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-letter-in { animation: none; }
+}
+
+/* Mouse follower (CursorFollower.tsx): a dot that becomes a ring over clickable things. */
+.cursor-follower {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  width: 0;
+  height: 0;
+  border-radius: 9999px;
+  pointer-events: none;
+  background: #ff5a1f;
+  mix-blend-mode: difference;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.cursor-follower[data-active="true"] {
+  background: transparent;
+  border: 1.5px solid #f4f1ea;
+}
