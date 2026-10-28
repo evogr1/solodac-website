@@ -45,7 +45,7 @@ export default function Network() {
                     <div className="font-display text-4xl">{page.followers}</div>
                     <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-paper/45">followers · {page.posts} posts</div>
                   </div>
-                  <ArrowUpRight className="text-paper/40 transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-signal" />
+                  <ArrowUpRight className="text-paper/40 transition-[transform,color] duration-200 ease-out group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-signal" />
                 </div>
               </a>
             </Reveal>

@@ -109,7 +109,7 @@ export default function Home() {
                   <h3 className="font-display mt-10 text-4xl">{pillar.title}</h3>
                   <p className="mt-3 leading-relaxed text-paper/60">{pillar.body}</p>
                 </div>
-                <ArrowUpRight className="mt-10 text-paper/40 transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-signal" />
+                <ArrowUpRight className="mt-10 text-paper/40 transition-[transform,color] duration-200 ease-out group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-signal" />
               </Link>
             </Reveal>
           ))}
@@ -143,7 +143,7 @@ export default function Home() {
                 <span className="font-mono text-sm text-ink/40">{service.number}</span>
                 <span className="font-display text-3xl sm:text-4xl">{service.title}</span>
                 <span className="text-ink/60">{service.line}</span>
-                <ArrowUpRight className="hidden text-ink/30 transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-signal sm:block" />
+                <ArrowUpRight className="hidden text-ink/30 transition-[transform,color] duration-200 ease-out group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-signal sm:block" />
               </Link>
             ))}
           </div>

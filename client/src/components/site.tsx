@@ -26,7 +26,7 @@ type ButtonProps = { href: string; children: ReactNode; className?: string; exte
 
 export function PrimaryButton({ href, children, className, external }: ButtonProps) {
   const classes = cn(
-    "group inline-flex items-center gap-2 rounded-full bg-signal px-6 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-paper",
+    "group inline-flex items-center gap-2 rounded-full bg-signal px-6 py-3.5 text-sm font-semibold text-ink transition-[background-color,transform] duration-150 ease-out hover:bg-paper active:scale-[0.97]",
     className,
   );
   const inner = (
@@ -43,7 +43,7 @@ export function GhostButton({ href, children, className }: ButtonProps) {
   return (
     <Link
       href={href}
-      className={cn("inline-flex items-center gap-2 rounded-full border border-paper/20 px-6 py-3.5 text-sm font-semibold text-paper transition-colors hover:border-paper hover:bg-paper hover:text-ink", className)}
+      className={cn("inline-flex items-center gap-2 rounded-full border border-paper/20 px-6 py-3.5 text-sm font-semibold text-paper transition-[background-color,border-color,color,transform] duration-150 ease-out hover:border-paper hover:bg-paper hover:text-ink active:scale-[0.97]", className)}
     >
       {children}
     </Link>
