@@ -24,13 +24,13 @@ export const meshPresets = {
   },
   quiet: {
     colors: [
-      "#0B0B0C", "#141416", "#0B0B0C", "#1D1D20",
-      "#141416", "#5A1D08", "#141416", "#0B0B0C",
-      "#0B0B0C", "#1D1D20", "#0B0B0C", "#141416",
+      "#0B0B0C", "#0B0B0C", "#141416", "#1D1D20",
+      "#0B0B0C", "#141416", "#1D1D20", "#7C2D12",
+      "#0B0B0C", "#0B0B0C", "#141416", "#2A0E05",
     ],
     columns: 4,
     loopSeconds: 34,
-    values: { "motion.positionDrift": 26, "motion.colorDrift": 2, "mix.warp": 20, "mix.swirl": 10, "mix.grain": 6 },
+    values: { "motion.positionDrift": 26, "motion.colorDrift": 2, "mix.warp": 10, "mix.swirl": 4, "mix.grain": 6 },
   },
 } satisfies Record<string, MeshGradientPreset>;
 
