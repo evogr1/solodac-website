@@ -8,8 +8,9 @@ import { cn } from "@/lib/utils";
 
 export function Wordmark({ className }: { className?: string }) {
   return (
-    <span className={cn("font-display text-[1.35rem] tracking-[-0.04em]", className)}>
-      solodac<span className="text-signal">.</span>
+    <span className={cn("font-display whitespace-nowrap text-[1.35rem] tracking-[-0.045em]", className)}>
+      s<span aria-hidden="true" className="ml-[0.01em] mr-[0.035em] inline-block h-[0.52em] w-[0.52em] rounded-full bg-signal align-baseline" />lodac
+      <span className="sr-only">SoloDac</span>
     </span>
   );
 }
