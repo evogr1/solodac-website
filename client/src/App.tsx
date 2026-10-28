@@ -1,26 +1,39 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/NotFound";
 import { AnimatePresence, motion } from "framer-motion";
 import { Redirect, Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import Approach from "./pages/Approach";
-import Campaigns from "./pages/Campaigns";
-import Careers from "./pages/Careers";
-import CaseStudies from "./pages/CaseStudies";
+import About from "./pages/About";
+import ChopShop from "./pages/ChopShop";
+import Contact from "./pages/Contact";
 import Home from "./pages/Home";
+import Legal from "./pages/Legal";
 import Network from "./pages/Network";
-import Portfolio from "./pages/Portfolio";
-import ServicePage from "./pages/ServicePage";
+import NotFound from "./pages/NotFound";
 import Services from "./pages/Services";
-import StartProject from "./pages/StartProject";
-import Events from "./pages/Events";
-import StoryPage from "./pages/StoryPage";
-import Stories from "./pages/Stories";
-import Thesis from "./pages/Thesis";
-import YouTube from "./pages/YouTube";
 
+// Old URLs from the previous site still live in bios, DMs and decks.
+const redirects: Array<[string, string]> = [
+  ["/marketing", "/contact"],
+  ["/eyeballs", "/contact"],
+  ["/youtube", "/services#youtube"],
+  ["/clipping", "/services#youtube"],
+  ["/studio", "/services"],
+  ["/services/:slug", "/services"],
+  ["/approach", "/about"],
+  ["/careers", "/about#careers"],
+  ["/thesis", "/about"],
+  ["/stories", "/network"],
+  ["/stories/:slug", "/network"],
+  ["/events", "/network"],
+  ["/campaigns", "/network"],
+  ["/case-studies", "/network"],
+  ["/testimonials", "/network"],
+  ["/portfolio", "/network"],
+  ["/fireyoureditor", "/chop-shop"],
+  ["/tools", "/chop-shop"],
+];
 
 function Router() {
   const [location] = useLocation();
@@ -32,30 +45,21 @@ function Router() {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -12 }}
-        transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+        transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
       >
         <Switch location={location}>
-          <Route path={"/"} component={Home} />
-          <Route path={"/services"} component={Services} />
-          <Route path={"/services/:slug"} component={ServicePage} />
-          <Route path={"/stories"} component={Stories} />
-          <Route path={"/stories/:slug"} component={StoryPage} />
-          <Route path={"/events"} component={Events} />
-          <Route path={"/studio"}>{() => <Redirect to="/services" />}</Route>
-          <Route path={"/youtube"} component={YouTube} />
-          <Route path={"/clipping"}>{() => <Redirect to="/youtube" />}</Route>
-          <Route path={"/network"} component={Network} />
-          <Route path={"/approach"} component={Approach} />
-          <Route path={"/careers"} component={Careers} />
-          <Route path={"/campaigns"} component={Campaigns} />
-          <Route path={"/thesis"} component={Thesis} />
-          <Route path={"/case-studies"} component={CaseStudies} />
-          <Route path={"/testimonials"}>{() => <Redirect to="/case-studies" />}</Route>
-          <Route path={"/portfolio"} component={Portfolio} />
-          <Route path={"/marketing"} component={StartProject} />
-          <Route path={"/eyeballs"}>{() => <Redirect to="/marketing" />}</Route>
-          <Route path={"/404"} component={NotFound} />
-          {/* Final fallback route */}
+          <Route path="/" component={Home} />
+          <Route path="/services" component={Services} />
+          <Route path="/network" component={Network} />
+          <Route path="/chop-shop" component={ChopShop} />
+          <Route path="/about" component={About} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/privacy">{() => <Legal doc="privacy" />}</Route>
+          <Route path="/terms">{() => <Legal doc="terms" />}</Route>
+          <Route path="/refunds">{() => <Legal doc="refunds" />}</Route>
+          {redirects.map(([from, to]) => (
+            <Route key={from} path={from}>{() => <Redirect to={to} replace />}</Route>
+          ))}
           <Route component={NotFound} />
         </Switch>
       </motion.div>
@@ -63,18 +67,10 @@ function Router() {
   );
 }
 
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
-
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="dark"
-        // switchable
-      >
+      <ThemeProvider defaultTheme="dark">
         <TooltipProvider>
           <Toaster />
           <Router />

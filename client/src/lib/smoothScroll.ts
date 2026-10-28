@@ -18,9 +18,13 @@ export function scrollToTopNow() {
   else window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 }
 
-export function scrollToId(id: string) {
+export function scrollToId(id: string, immediate = false) {
   const element = document.getElementById(id);
   if (!element) return;
-  if (lenis) lenis.scrollTo(element, { offset: -80 });
-  else element.scrollIntoView({ behavior: "smooth" });
+  if (lenis) {
+    // Lenis caches the scroll limit; a freshly mounted page can be taller than it knows.
+    lenis.resize();
+    lenis.scrollTo(element, { offset: -80, immediate, force: immediate });
+  }
+  else element.scrollIntoView({ behavior: immediate ? "auto" : "smooth" });
 }

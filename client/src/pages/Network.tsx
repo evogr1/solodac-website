@@ -1,111 +1,90 @@
-import { ArrowUpRight, BadgeCheck } from "lucide-react";
-import Reveal from "../components/Reveal";
-import { IpProfileCard, PageHero, Panel, PrimaryButton, PublisherLayout, SectionTitle, StatStrip, StoryCard } from "../components/publisher";
-import { useScrollToTop } from "../hooks/useScrollToTop";
-import { igUrl, ips } from "../lib/ips";
-import { stories } from "../lib/stories";
+import { ArrowUpRight } from "lucide-react";
+import Layout from "@/components/Layout";
+import Reveal from "@/components/Reveal";
+import { CtaBand, PageHero, PrimaryButton } from "@/components/site";
+import { igUrl, networkPages } from "@/lib/site";
 
-const ownedHandles = ["millionairesformula", "successfularcs", "archiveofceos", "businessedgex", "bourseindiaa", "virodhindia", "lucreindia", "howaitechworks", "explorenow.ai"];
-const extendedHandles = ["archiveofoceans", "ceosformula", "krefion", "motivation_hustling", "themillionairemagnate", "powerbymindset", "bizknock"];
-
-const niches = [
-  { name: "Business", ip: "Successful Arcs" },
-  { name: "Leadership", ip: "Archive of CEOs" },
-  { name: "Founders", ip: "Lucre" },
-  { name: "News & events", ip: "Bourse India" },
-  { name: "GenZ & culture", ip: "Virodh" },
-  { name: "Markets & tech", ip: "Partner network" },
+const offers = [
+  { title: "Sponsored posts", body: "A reel or carousel about your product, written in the page's own voice so it doesn't read like an ad." },
+  { title: "Story features", body: "Founder and company stories for brands that have one worth telling." },
+  { title: "Launch pushes", body: "One message across several pages in the same week, when a launch needs to land." },
 ];
 
 export default function Network() {
-  useScrollToTop();
-  const [flagship, ...rest] = ips;
-  const flagshipStories = stories.filter((story) => story.ip === flagship.name).slice(0, 3);
-
   return (
-    <PublisherLayout ctaTitle="Want your brand on the network?">
+    <Layout>
       <PageHero
-        crumb="Our IPs"
-        kicker="The SoloDac network"
-        title="We don't rent the audience. We own it."
-        deck="Media brands we built and run, plus a partner network on top. A focused audience when you want one niche, the whole network when you want scale."
-      >
-        <PrimaryButton href="/marketing">Advertise across our IPs</PrimaryButton>
-      </PageHero>
+        kicker="The network"
+        title={<>The pages we run. <span className="text-paper/40">The ones we'll show you.</span></>}
+        intro="These are the pages that carry the SoloDac name. We run more than this across Instagram and YouTube. The rest stay unbranded on purpose."
+      />
 
-      <div className="mt-6">
-        <StatStrip
-          items={[
-            { value: "15.4M", label: "Followers" },
-            { value: "18.2B+", label: "Annual views" },
-            { value: "121M", label: "Accounts reached" },
-            { value: "89.6M", label: "Interactions" },
-            { value: "101K", label: "Newsletter subs" },
-          ]}
-        />
-      </div>
-
-      <Panel className="mt-8">
-        <SectionTitle number="01">Niches we own</SectionTitle>
-        <div className="grid gap-px overflow-hidden rounded-lg bg-ink/10 sm:grid-cols-2 lg:grid-cols-3">
-          {niches.map((niche) => (
-            <div key={niche.name} className="flex items-center justify-between bg-white p-5">
-              <div>
-                <div className="text-lg font-bold tracking-tight">{niche.name}</div>
-                <div className="text-xs text-ink/50">{niche.ip}</div>
-              </div>
-              <span className={`rounded px-2 py-1 text-[10px] font-bold uppercase tracking-[0.14em] font-mono ${niche.ip === "Partner network" ? "bg-ink/5 text-ink/50" : "bg-green/10 text-green"}`}>
-                {niche.ip === "Partner network" ? "Partner" : "Owned"}
-              </span>
-            </div>
+      <section className="container py-20 sm:py-28">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {networkPages.map((page, index) => (
+            <Reveal key={page.handle} delay={(index % 3) * 0.06}>
+              <a
+                href={igUrl(page.handle)}
+                target="_blank"
+                rel="noreferrer"
+                className="group flex h-full flex-col rounded-2xl border border-paper/10 bg-ink-2 p-7 transition-colors hover:border-signal/60"
+              >
+                <div className="flex items-start justify-between">
+                  <img src={page.logo} alt={`${page.name} logo`} className="h-16 w-16 rounded-full object-cover" />
+                  <span className="rounded-full border border-paper/15 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-paper/55">{page.category}</span>
+                </div>
+                <h2 className="font-display mt-8 text-3xl">{page.name}</h2>
+                <div className="text-sm text-paper/45">@{page.handle}</div>
+                <p className="mt-4 flex-1 leading-relaxed text-paper/65">{page.tagline}</p>
+                <div className="mt-8 flex items-end justify-between border-t border-paper/10 pt-6">
+                  <div>
+                    <div className="font-display text-4xl">{page.followers}</div>
+                    <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-paper/45">followers · {page.posts} posts</div>
+                  </div>
+                  <ArrowUpRight className="text-paper/40 transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-signal" />
+                </div>
+              </a>
+            </Reveal>
           ))}
-        </div>
-      </Panel>
 
-      <div className="mt-8">
-        <SectionTitle number="02">Flagship IP</SectionTitle>
-        <div className="grid gap-5 lg:grid-cols-[360px_1fr]">
-          <Reveal>
-            <a href={igUrl(flagship.handle)} target="_blank" rel="noreferrer" className="group flex h-full flex-col rounded-xl bg-green p-6 text-paper">
-              <img src={flagship.logo} alt={`${flagship.name} logo`} className="h-20 w-20 rounded-full object-cover ring-4 ring-white/30" />
-              <div className="mt-6 flex items-center gap-2 text-3xl font-bold tracking-tight">{flagship.name} <BadgeCheck size={22} /></div>
-              <p className="mt-2 flex-1 text-paper/85">{flagship.tagline}</p>
-              <div className="mt-6 grid grid-cols-2 gap-4 border-t border-white/25 pt-4">
-                <div><div className="text-2xl font-bold tracking-tight">{flagship.followers}</div><div className="text-[11px] uppercase tracking-wider text-paper/75">Followers</div></div>
-                <div><div className="text-2xl font-bold tracking-tight">794.8K</div><div className="text-[11px] uppercase tracking-wider text-paper/75">Views, top reel</div></div>
+          <Reveal delay={0.12}>
+            <div className="flex h-full flex-col justify-between rounded-2xl border border-dashed border-paper/20 p-7">
+              <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-signal">And the rest</div>
+              <div>
+                <h2 className="font-display mt-8 text-3xl">Pages and channels we don't name.</h2>
+                <p className="mt-4 leading-relaxed text-paper/60">
+                  Long-form YouTube channels and niche Instagram pages across the US, UK and India. Ask us on a call and we'll walk you through the ones that fit your brief.
+                </p>
               </div>
-              <span className="mt-5 flex items-center gap-1 text-xs font-bold uppercase tracking-wide">Follow on Instagram <ArrowUpRight size={13} /></span>
-            </a>
+            </div>
           </Reveal>
-          <div className="grid gap-5 sm:grid-cols-3">
-            {flagshipStories.map((story) => <StoryCard key={story.href} story={story} />)}
+        </div>
+      </section>
+
+      <section className="border-y border-paper/10 bg-paper text-ink">
+        <div className="container grid gap-12 py-20 sm:py-28 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
+          <div>
+            <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-ink/55">
+              <span className="h-1.5 w-1.5 rounded-full bg-signal" /> For brands
+            </div>
+            <h2 className="font-display mt-5 text-[clamp(2.2rem,5vw,3.75rem)] leading-[0.98]">Put your brand in front of these audiences.</h2>
+            <p className="mt-5 max-w-md text-ink/65">We only take partnerships that fit the page. That's why people still trust what the pages post.</p>
+            <div className="mt-9">
+              <PrimaryButton href="/contact?service=Brand%20partnership" className="hover:bg-ink hover:text-paper">Advertise with us</PrimaryButton>
+            </div>
+          </div>
+          <div className="grid gap-3">
+            {offers.map((offer) => (
+              <div key={offer.title} className="rounded-2xl border border-ink/10 bg-paper-2 p-6 sm:p-7">
+                <div className="font-display text-2xl">{offer.title}</div>
+                <p className="mt-2 text-ink/65">{offer.body}</p>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="mt-8">
-        <SectionTitle number="03">All our IPs</SectionTitle>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {rest.map((ip) => <IpProfileCard key={ip.handle} ip={ip} wide />)}
-        </div>
-      </div>
-
-      <Panel className="mt-8">
-        <SectionTitle number="04">Network directory</SectionTitle>
-        <p className="-mt-2 mb-5 max-w-2xl text-sm text-ink/65">Every handle here is real and live. The extended partner network adds 45 more pages on top: another 17.1M followers and 15B+ annual views.</p>
-        <div className="text-[11px] font-bold uppercase tracking-wider text-green">Owned</div>
-        <div className="mt-2 flex flex-wrap gap-2">
-          {ownedHandles.map((handle) => (
-            <a key={handle} href={igUrl(handle)} target="_blank" rel="noreferrer" className="flex items-center gap-1 rounded-full border border-green/30 bg-green/5 px-3 py-1.5 text-xs font-bold text-ink/85 hover:border-green hover:text-green">@{handle}<ArrowUpRight size={11} /></a>
-          ))}
-        </div>
-        <div className="mt-5 text-[11px] font-bold uppercase tracking-wider text-ink/50">Extended network</div>
-        <div className="mt-2 flex flex-wrap gap-2">
-          {extendedHandles.map((handle) => (
-            <a key={handle} href={igUrl(handle)} target="_blank" rel="noreferrer" className="flex items-center gap-1 rounded-full border border-ink/10 px-3 py-1.5 text-xs font-bold text-ink/65 hover:border-neutral-400">@{handle}<ArrowUpRight size={11} /></a>
-          ))}
-        </div>
-      </Panel>
-    </PublisherLayout>
+      <CtaBand title="Want a page like these for your brand?" body="We build and run pages for founders and companies with the same team that runs ours." />
+    </Layout>
   );
 }

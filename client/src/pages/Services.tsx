@@ -1,73 +1,74 @@
-import { ArrowUpRight } from "lucide-react";
-import { Link } from "wouter";
-import Reveal from "../components/Reveal";
-import { PageHero, Panel, PrimaryButton, PublisherLayout, SectionTitle, Tag } from "../components/publisher";
-import { useScrollToTop } from "../hooks/useScrollToTop";
-import { servicePath, services } from "../lib/services";
-
-const networkFormats = [
-  { title: "Campaigns across our network", body: "One team runs it end to end: the idea, the creative, and the sequencing across pages people already follow.", tags: ["Strategy", "Creative", "Sequenced distribution"], line: "One brief. Every page." },
-  { title: "Funding, launch & news distribution", body: "Raised a round, shipped a product, hit a milestone? We put it where India's business audience is already reading.", tags: ["Funding news", "Launches", "Milestones"], line: "The right rooms hear about it." },
-  { title: "Native brand placements", body: "Brand-safe storytelling inside the formats our audience already watches, not ads they skip.", tags: ["Reels", "Carousels", "Repeat exposure"], line: "Trust, borrowed from the feed." },
-];
+import { Check } from "lucide-react";
+import Layout from "@/components/Layout";
+import Reveal from "@/components/Reveal";
+import { CtaBand, PageHero, PrimaryButton } from "@/components/site";
+import { scrollToId } from "@/lib/smoothScroll";
+import { alsoDo, services } from "@/lib/site";
 
 export default function Services() {
-  useScrollToTop();
-
   return (
-    <PublisherLayout ctaTitle="Not sure which one you need? That's what the call is for.">
+    <Layout>
       <PageHero
-        crumb="Studio"
-        kicker="SoloDac Studio"
-        title="The team behind a media company, working for you."
-        deck="The people who build and run SoloDac's own media brands, available to founders and companies: YouTube channels, personal brands, rebrands, websites and more."
+        kicker="Services"
+        title={<>We do three things. <span className="text-paper/40">Properly.</span></>}
+        intro="Every service here is something we run on our own pages first. If it doesn't work for us, we don't sell it to you."
       >
-        <PrimaryButton href="/marketing">Book a call</PrimaryButton>
-      </PageHero>
-
-      <div className="mt-8">
-        <SectionTitle number="01">What the Studio does</SectionTitle>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => {
-            const Icon = service.icon;
-            return (
-              <Reveal key={service.slug} delay={(index % 3) * 0.05}>
-                <Link href={servicePath(service)} className="group flex h-full flex-col rounded-2xl border border-ink/10 bg-white/60 p-6 transition-shadow hover:shadow-md">
-                  <div className="flex items-start justify-between">
-                    <span className="grid h-11 w-11 place-items-center rounded-lg bg-green/10 text-green"><Icon size={20} /></span>
-                    <span className="font-mono text-xs text-ink/40">{service.number}</span>
-                  </div>
-                  <h3 className="mt-5 text-xl font-bold tracking-tight group-hover:text-green">{service.title}</h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-ink/65">{service.description}</p>
-                  <div className="mt-5 flex flex-wrap gap-2">{service.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}</div>
-                  <span className="mt-5 flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-green">Read more <ArrowUpRight size={13} /></span>
-                </Link>
-              </Reveal>
-            );
-          })}
-        </div>
-      </div>
-
-      <Panel className="mt-8">
-        <SectionTitle number="02" action={<Link href="/network" className="text-xs font-bold uppercase tracking-wide text-green">See the network</Link>}>Advertise on our network</SectionTitle>
-        <div className="divide-y divide-ink/10 border-t border-ink/10">
-          {networkFormats.map((item, index) => (
-            <Reveal key={item.title} delay={index * 0.04}>
-              <div className="grid gap-4 py-6 md:grid-cols-[3rem_1.1fr_1fr] md:gap-8">
-                <span className="font-mono text-sm text-green">0{index + 1}</span>
-                <div>
-                  <h3 className="text-xl font-bold tracking-tight sm:text-2xl">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink/65">{item.body}</p>
-                </div>
-                <div>
-                  <div className="flex flex-wrap gap-2">{item.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}</div>
-                  <p className="mt-3 font-accent text-lg italic text-green">{item.line}</p>
-                </div>
-              </div>
-            </Reveal>
+        <div className="mt-10 flex flex-wrap gap-2">
+          {services.map((service) => (
+            <a key={service.id} href={`#${service.id}`} onClick={(event) => { event.preventDefault(); scrollToId(service.id); }} className="rounded-full border border-paper/15 px-4 py-2 text-sm text-paper/70 transition-colors hover:border-paper hover:text-paper">
+              {service.title}
+            </a>
           ))}
         </div>
-      </Panel>
-    </PublisherLayout>
+      </PageHero>
+
+      {services.map((service, index) => (
+        <section key={service.id} id={service.id} className={index % 2 === 1 ? "bg-paper text-ink" : ""}>
+          <div className="container grid gap-12 py-20 sm:py-28 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
+            <Reveal>
+              <div className={`font-mono text-sm ${index % 2 === 1 ? "text-ink/40" : "text-paper/40"}`}>{service.number}</div>
+              <h2 className="font-display mt-4 text-[clamp(2.6rem,6vw,5rem)] leading-[0.92]">{service.title}</h2>
+              <p className="font-serif-i mt-5 text-2xl text-signal sm:text-3xl">{service.line}</p>
+              <p className={`mt-6 max-w-xl text-base leading-relaxed sm:text-lg ${index % 2 === 1 ? "text-ink/65" : "text-paper/65"}`}>{service.body}</p>
+              <div className="mt-9">
+                <PrimaryButton href={`/contact?service=${encodeURIComponent(serviceOption(service.id))}`} className={index % 2 === 1 ? "hover:bg-ink hover:text-paper" : undefined}>Talk to us about this</PrimaryButton>
+              </div>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div className={`rounded-2xl border p-7 sm:p-9 ${index % 2 === 1 ? "border-ink/10 bg-paper-2" : "border-paper/10 bg-ink-2"}`}>
+                <div className={`font-mono text-[11px] uppercase tracking-[0.18em] ${index % 2 === 1 ? "text-ink/50" : "text-paper/45"}`}>What's included</div>
+                <ul className="mt-6 space-y-4">
+                  {service.includes.map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-base sm:text-lg">
+                      <Check size={18} className="mt-1 shrink-0 text-signal" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      ))}
+
+      <section className="border-t border-paper/10">
+        <div className="container py-16 sm:py-20">
+          <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-paper/45">We also do</div>
+          <div className="mt-6 flex flex-wrap gap-3">
+            {alsoDo.map((item) => (
+              <span key={item} className="rounded-full border border-paper/15 px-5 py-2.5 text-paper/80">{item}</span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <CtaBand title="Not sure which one you need?" body="Most people aren't. Book a call and we'll work it out together." />
+    </Layout>
   );
+}
+
+function serviceOption(id: string) {
+  if (id === "youtube") return "YouTube channel";
+  if (id === "instagram") return "Instagram page";
+  return "Editing";
 }
