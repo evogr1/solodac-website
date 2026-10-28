@@ -50,10 +50,23 @@ export function GhostButton({ href, children, className }: ButtonProps) {
   );
 }
 
-export function PageHero({ kicker, title, intro, children }: { kicker: string; title: ReactNode; intro?: ReactNode; children?: ReactNode }) {
+export function PageHero({
+  kicker,
+  title,
+  intro,
+  children,
+  backdrop,
+}: {
+  kicker: string;
+  title: ReactNode;
+  intro?: ReactNode;
+  children?: ReactNode;
+  backdrop?: ReactNode;
+}) {
   return (
     <section className="relative overflow-hidden border-b border-paper/10 pb-16 pt-32 sm:pb-24 sm:pt-44">
       <div className="grid-bg pointer-events-none absolute inset-0" />
+      {backdrop}
       <div className="container relative">
         <Kicker>{kicker}</Kicker>
         <h1 className="font-display mt-6 max-w-5xl text-[clamp(2.75rem,8vw,6.5rem)] leading-[0.92]">{title}</h1>

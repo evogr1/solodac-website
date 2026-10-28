@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import Layout from "@/components/Layout";
+import NetworkGlobe from "@/components/effects/NetworkGlobe";
 import Reveal from "@/components/Reveal";
 import { CtaBand, PageHero, PrimaryButton } from "@/components/site";
 import { igUrl, networkPages } from "@/lib/site";
@@ -14,6 +15,9 @@ export default function Network() {
   return (
     <Layout>
       <PageHero
+        backdrop={
+          <NetworkGlobe className="pointer-events-none absolute -right-48 top-[52%] h-[420px] w-[420px] opacity-25 sm:-right-32 sm:top-24 sm:h-[560px] sm:w-[560px] sm:opacity-60 lg:left-[calc(50%+290px)] lg:right-auto lg:top-14 lg:h-[620px] lg:w-[620px] lg:opacity-100" />
+        }
         kicker="The network"
         title={<>The pages we run. <span className="text-paper/40">The ones we'll show you.</span></>}
         intro="These are the pages that carry the SoloDac name. We run more than this across Instagram and YouTube. The rest stay unbranded on purpose."
