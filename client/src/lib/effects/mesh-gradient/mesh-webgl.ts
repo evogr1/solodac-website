@@ -178,7 +178,7 @@ export function createMeshGlResource(canvas: HTMLCanvasElement): MeshGlResource 
     antialias: true,
     depth: false,
     premultipliedAlpha: false,
-    preserveDrawingBuffer: true,
+    preserveDrawingBuffer: false,
     stencil: false,
   });
   if (!gl) throw new Error("Mesh Gradient requires WebGL2.");
