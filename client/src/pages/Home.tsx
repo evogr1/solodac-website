@@ -2,6 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "wouter";
 import ChopShopMock from "@/components/ChopShopMock";
 import Layout from "@/components/Layout";
+import MeshGradient from "@/components/effects/MeshGradient";
 import Reveal from "@/components/Reveal";
 import { CtaBand, GhostButton, Kicker, PrimaryButton, SectionHead } from "@/components/site";
 import { igUrl, networkPages, services } from "@/lib/site";
@@ -39,8 +40,9 @@ export default function Home() {
     <Layout>
       {/* Hero */}
       <section className="relative overflow-hidden pb-16 pt-32 sm:pb-24 sm:pt-44">
-        <div className="grid-bg pointer-events-none absolute inset-0" />
-        <div className="glow pointer-events-none absolute -right-40 top-10 h-[520px] w-[520px]" />
+        <div className="pointer-events-none absolute -inset-x-[12%] -inset-y-[18%]"><MeshGradient /></div>
+        <div className="grid-bg pointer-events-none absolute inset-0 opacity-60" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-ink" />
         <div className="container relative">
           <Reveal>
             <Kicker>Media · Agency · Software</Kicker>
