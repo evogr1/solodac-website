@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import Layout from "@/components/Layout";
+import ParticleWord from "@/components/effects/ParticleWord";
 import Reveal from "@/components/Reveal";
 import { CtaBand, PageHero, SectionHead } from "@/components/site";
 import { company } from "@/lib/site";
@@ -27,6 +28,12 @@ export default function About() {
         title={<>A media company that also <span className="font-serif-i font-normal text-signal">does the work.</span></>}
         intro="SoloDac started with a few pages about business and founders. Today we run a network of pages and channels, a team of editors and writers, and the software that ties it together."
       />
+
+      <section className="border-b border-paper/10" aria-label="SoloDac">
+        <div className="container">
+          <ParticleWord className="h-[220px] sm:h-[340px] lg:h-[420px]" />
+        </div>
+      </section>
 
       <section className="container grid gap-12 py-20 sm:py-28 lg:grid-cols-2 lg:gap-20">
         <Reveal>

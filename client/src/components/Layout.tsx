@@ -4,6 +4,7 @@ import { Link, useLocation } from "wouter";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
 import { scrollToId } from "@/lib/smoothScroll";
 import { company, nav } from "@/lib/site";
+import CursorFollower from "@/components/effects/CursorFollower";
 import { cn } from "@/lib/utils";
 
 export function Wordmark({ className }: { className?: string }) {
@@ -167,6 +168,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <Header />
       <main>{children}</main>
       <Footer />
+      <CursorFollower />
     </>
   );
 }

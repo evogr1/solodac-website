@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import Layout from "@/components/Layout";
+import MeshGradient, { meshPresets } from "@/components/effects/MeshGradient";
 import Reveal from "@/components/Reveal";
 import { CtaBand, PageHero, PrimaryButton } from "@/components/site";
 import { scrollToId } from "@/lib/smoothScroll";
@@ -9,6 +10,7 @@ export default function Services() {
   return (
     <Layout>
       <PageHero
+        backdrop={<div className="pointer-events-none absolute -inset-x-[12%] -inset-y-[18%]"><MeshGradient preset={meshPresets.quiet} /></div>}
         kicker="Services"
         title={<>We do three things. <span className="text-paper/40">Properly.</span></>}
         intro="Every service here is something we run on our own pages first. If it doesn't work for us, we don't sell it to you."

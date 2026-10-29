@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import Layout from "@/components/Layout";
+import MeshGradient, { meshPresets } from "@/components/effects/MeshGradient";
 import LeadForm from "@/components/LeadForm";
 import { Kicker } from "@/components/site";
 import { company, serviceOptions } from "@/lib/site";
@@ -11,7 +12,8 @@ export default function Contact() {
   return (
     <Layout>
       <section className="relative overflow-hidden pb-24 pt-32 sm:pt-44">
-        <div className="grid-bg pointer-events-none absolute inset-0" />
+        <div className="pointer-events-none absolute -inset-x-[12%] -inset-y-[18%]"><MeshGradient preset={meshPresets.quiet} /></div>
+        <div className="grid-bg pointer-events-none absolute inset-0 opacity-60" />
         <div className="container relative grid gap-14 lg:grid-cols-[1fr_1.25fr] lg:gap-20">
           <div>
             <Kicker>Book a call</Kicker>

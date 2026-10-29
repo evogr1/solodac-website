@@ -2,6 +2,9 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "wouter";
 import ChopShopMock from "@/components/ChopShopMock";
 import Layout from "@/components/Layout";
+import HeroHeadline from "@/components/effects/HeroHeadline";
+import Magnetic from "@/components/effects/Magnetic";
+import MeshGradient from "@/components/effects/MeshGradient";
 import Reveal from "@/components/Reveal";
 import { CtaBand, GhostButton, Kicker, PrimaryButton, SectionHead } from "@/components/site";
 import { igUrl, networkPages, services } from "@/lib/site";
@@ -39,15 +42,20 @@ export default function Home() {
     <Layout>
       {/* Hero */}
       <section className="relative overflow-hidden pb-16 pt-32 sm:pb-24 sm:pt-44">
-        <div className="grid-bg pointer-events-none absolute inset-0" />
-        <div className="glow pointer-events-none absolute -right-40 top-10 h-[520px] w-[520px]" />
+        <div className="pointer-events-none absolute -inset-x-[12%] -inset-y-[18%]"><MeshGradient /></div>
+        <div className="grid-bg pointer-events-none absolute inset-0 opacity-60" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-ink" />
         <div className="container relative">
           <Reveal>
             <Kicker>Media · Agency · Software</Kicker>
-            <h1 className="font-display mt-7 max-w-6xl text-[clamp(3rem,10vw,8.5rem)] leading-[0.88]">
-              We grow pages <br className="hidden sm:block" />
-              for a living. <span className="font-serif-i font-normal text-signal">Ours first.</span>
-            </h1>
+            <HeroHeadline
+              className="font-display mt-7 max-w-6xl text-[clamp(3rem,10vw,8.5rem)] leading-[0.88]"
+              lines={[
+                { breakAfter: true, text: "We grow pages" },
+                { text: "for a living." },
+                { accent: true, className: "font-serif-i font-normal text-signal", text: "Ours first." },
+              ]}
+            />
           </Reveal>
           <Reveal delay={0.1}>
             <div className="mt-10 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
@@ -55,8 +63,8 @@ export default function Home() {
                 SoloDac runs Instagram pages and YouTube channels with audiences in the hundreds of thousands. We use the same team, the same playbook and our own software to grow yours.
               </p>
               <div className="flex flex-wrap gap-3">
-                <PrimaryButton href="/contact">Book a call</PrimaryButton>
-                <GhostButton href="/chop-shop">See Chop Shop</GhostButton>
+                <Magnetic><PrimaryButton href="/contact">Book a call</PrimaryButton></Magnetic>
+                <Magnetic><GhostButton href="/chop-shop">See Chop Shop</GhostButton></Magnetic>
               </div>
             </div>
           </Reveal>
@@ -101,7 +109,7 @@ export default function Home() {
                   <h3 className="font-display mt-10 text-4xl">{pillar.title}</h3>
                   <p className="mt-3 leading-relaxed text-paper/60">{pillar.body}</p>
                 </div>
-                <ArrowUpRight className="mt-10 text-paper/40 transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-signal" />
+                <ArrowUpRight className="mt-10 text-paper/40 transition-[transform,color] duration-200 ease-out group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-signal" />
               </Link>
             </Reveal>
           ))}
@@ -135,7 +143,7 @@ export default function Home() {
                 <span className="font-mono text-sm text-ink/40">{service.number}</span>
                 <span className="font-display text-3xl sm:text-4xl">{service.title}</span>
                 <span className="text-ink/60">{service.line}</span>
-                <ArrowUpRight className="hidden text-ink/30 transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-signal sm:block" />
+                <ArrowUpRight className="hidden text-ink/30 transition-[transform,color] duration-200 ease-out group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-signal sm:block" />
               </Link>
             ))}
           </div>

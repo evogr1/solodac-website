@@ -1,5 +1,6 @@
 import ChopShopMock from "@/components/ChopShopMock";
 import Layout from "@/components/Layout";
+import MeshGradient from "@/components/effects/MeshGradient";
 import LeadForm from "@/components/LeadForm";
 import Reveal from "@/components/Reveal";
 import { Kicker, SectionHead } from "@/components/site";
@@ -17,8 +18,8 @@ export default function ChopShop() {
   return (
     <Layout>
       <section className="relative overflow-hidden pb-20 pt-32 sm:pb-28 sm:pt-44">
-        <div className="grid-bg pointer-events-none absolute inset-0" />
-        <div className="glow pointer-events-none absolute -right-32 top-24 h-[520px] w-[520px]" />
+        <div className="pointer-events-none absolute -inset-x-[12%] -inset-y-[18%]"><MeshGradient /></div>
+        <div className="grid-bg pointer-events-none absolute inset-0 opacity-60" />
         <div className="container relative grid gap-14 lg:grid-cols-[1fr_1.15fr] lg:items-center">
           <Reveal>
             <Kicker>Chop Shop by SoloDac · Waitlist open</Kicker>
