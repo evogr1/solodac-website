@@ -1,6 +1,6 @@
 # SoloDac website: project status
 
-Last updated: 28 October 2026. This note is the source of truth for where the SoloDac site, logo and tooling work stands. Facts here were checked against the repo and the live preview, not recalled from chat.
+Last updated: 29 October 2026. This note is the source of truth for where the SoloDac site, logo and tooling work stands. Facts here were checked against the repo and the live preview, not recalled from chat.
 
 ## Where to see things
 
@@ -24,6 +24,7 @@ Effects adapted from Toolcraft examples (MIT, Pixel Point). Ported renderers in 
 
 - **Home hero:** mesh gradient (Toolcraft mesh-gradient) with an orange glow that follows the mouse and rests bottom right. Headline animates in letter by letter. Letters near the cursor lift, grow and warm to orange; the orange "Ours first." flips to cream instead. Buttons are magnetic. A small orange dot follows the cursor on every page and becomes a ring over links.
 - **Network hero:** dotted globe (Toolcraft neon-globe) with the sample brand logos swapped for SoloDac page names: Arcs, CEOs, Virodh, Bourse. Loads only on that page (22 KB gzipped).
+- **Network page cards:** a procedural "web crawler" spider (two-bone IK legs, alternating gait) walks card to card; each card glows orange while it is read. With a mouse in that section it chases the cursor. Idea from the genai.works reel. `client/src/components/effects/CrawlerSpider.tsx`.
 - **About:** band where "solodac" forms from orange and cream particles, holds, scatters, repeats (Toolcraft particle-typography). Loops on its own; not cursor driven.
 - **Chop Shop hero:** same gradient as home. **Services and Contact:** a quieter gradient.
 - All effects pause off-screen and respect reduced motion. Cursor effects only run with a mouse.

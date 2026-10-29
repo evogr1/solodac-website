@@ -1,5 +1,7 @@
+import { useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
 import Layout from "@/components/Layout";
+import CrawlerSpider from "@/components/effects/CrawlerSpider";
 import NetworkGlobe from "@/components/effects/NetworkGlobe";
 import Reveal from "@/components/Reveal";
 import { CtaBand, PageHero, PrimaryButton } from "@/components/site";
@@ -12,6 +14,7 @@ const offers = [
 ];
 
 export default function Network() {
+  const cardsRef = useRef<HTMLElement>(null);
   return (
     <Layout>
       <PageHero
@@ -23,7 +26,8 @@ export default function Network() {
         intro="These are the pages that carry the SoloDac name. We run more than this across Instagram and YouTube. The rest stay unbranded on purpose."
       />
 
-      <section className="container py-20 sm:py-28">
+      <section ref={cardsRef} className="container relative py-20 sm:py-28">
+        <CrawlerSpider areaRef={cardsRef} />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {networkPages.map((page, index) => (
             <Reveal key={page.handle} delay={(index % 3) * 0.06}>
@@ -31,7 +35,8 @@ export default function Network() {
                 href={igUrl(page.handle)}
                 target="_blank"
                 rel="noreferrer"
-                className="group flex h-full flex-col rounded-2xl border border-paper/10 bg-ink-2 p-7 transition-colors hover:border-signal/60"
+                data-crawl-target=""
+                className="crawl-card group flex h-full flex-col rounded-2xl border border-paper/10 bg-ink-2 p-7 transition-colors hover:border-signal/60"
               >
                 <div className="flex items-start justify-between">
                   <img src={page.logo} alt={`${page.name} logo`} className="h-16 w-16 rounded-full object-cover" />
