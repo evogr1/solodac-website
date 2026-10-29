@@ -6,15 +6,15 @@ Last updated: 29 October 2026. This note is the source of truth for where the So
 
 | What | Link | State |
 | --- | --- | --- |
-| Live site | https://solodac.com | The rebuilt site from `main` (commit 982d1d4). None of the design effects are live yet. |
-| Latest preview | https://design-effects-solodac-website.purple-scene-0a24.workers.dev | Branch `design-effects`. Everything below. Builds on every push. |
+| Live site | https://solodac.com | Everything from `design-effects` went live on 29 October 2026 via PR #2 (merge commit 6eac0f2). |
+| Preview | https://design-effects-solodac-website.purple-scene-0a24.workers.dev | Branch `design-effects`. Use it for the next changes before they go live. |
 | Logo canvas (10 directions) | https://claude.ai/artifact/PybZcnxhPPjSc3G7a5ymYV | Waiting for the final pick. |
 | Repo | https://github.com/evogr1/solodac-website | |
 
 ## Branches
 
 - `main`: live. A push here deploys solodac.com in about a minute. Never push without the owner's OK. A hook in `.claude/settings.json` blocks it.
-- `design-effects`: all design and tooling work since the rebuild. Not merged. Owner has not said "merge it" yet.
+- `design-effects`: design and tooling work. Merged into `main` and live as of PR #2.
 - `logo-tool`: the SoloDac logo builder (Toolcraft app), its own history, not part of the site.
 - `logo-wip`: the Solo dot logo (s + orange dot + lodac) in header, footer and favicon, plus outlined SVGs in `client/public/brand/`. Not merged, not final.
 
@@ -35,7 +35,7 @@ Effects adapted from Toolcraft examples (MIT, Pixel Point). Ported renderers in 
 1. **Final logo:** pick from the 10 directions on the canvas (first pick was 04 Solo dot). Then: header, footer, favicon, brand files, and a liquid-metal version.
 2. **Design direction after the taste-skill review:** home page scored 13 FAIL, 8 WARN. Options given: (1) polish and keep the current look, (2) full restyle by taste rules (drops mono labels, eyebrows, 01/02/03, hairlines, outlined cards, gradients, the "Ours first." accent), (3) mix: strict inner pages, home hero kept as an exception. No answer yet.
 3. **Real pictures:** the site has no photos or footage. Needed for the taste skill's floor and for the Chop Shop dither effect. Ask: stills or thumbnails from the pages, team or office photos.
-4. **Merge `design-effects` to `main`:** only on an explicit "merge it".
+4. **Future merges to `main`:** only on an explicit OK from the owner, every time.
 
 ## Taste-skill findings that are fixes in any direction
 
