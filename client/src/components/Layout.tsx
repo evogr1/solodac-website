@@ -97,7 +97,7 @@ function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-paper/10 bg-ink-2">
+    <footer className="bg-ink-2">
       <div className="container grid gap-12 py-16 sm:py-20 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
           <Wordmark className="text-3xl" />
@@ -110,7 +110,7 @@ function Footer() {
         </div>
 
         <div>
-          <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-paper/40">Company</div>
+          <div className="text-[14px] text-paper/45">Company</div>
           <ul className="mt-5 space-y-3 text-sm">
             {[...nav, { label: "Contact", href: "/contact" }].map((item) => (
               <li key={item.href}>
@@ -121,19 +121,19 @@ function Footer() {
         </div>
 
         <div>
-          <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-paper/40">Where we are</div>
+          <div className="text-[14px] text-paper/45">Where we are</div>
           <ul className="mt-5 space-y-3 text-sm">
             {company.locations.map((place) => (
               <li key={place.city}>
                 <div className="text-paper/85">{place.city}</div>
-                <div className="text-xs text-paper/45">{place.role}</div>
+                <div className="text-[13px] text-paper/45">{place.role}</div>
               </li>
             ))}
           </ul>
         </div>
 
         <div>
-          <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-paper/40">Legal</div>
+          <div className="text-[14px] text-paper/45">Legal</div>
           <ul className="mt-5 space-y-3 text-sm">
             <li><Link href="/privacy" className="text-paper/70 hover:text-paper">Privacy policy</Link></li>
             <li><Link href="/terms" className="text-paper/70 hover:text-paper">Terms of service</Link></li>
@@ -142,8 +142,8 @@ function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-paper/10">
-        <div className="container flex flex-col gap-2 py-6 font-mono text-[11px] uppercase tracking-[0.12em] text-paper/40 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <div className="container flex flex-col gap-2 pb-10 text-[13px] text-paper/40 sm:flex-row sm:items-center sm:justify-between">
           <span>© {year} {company.tradeName}. All rights reserved.</span>
           <span>GSTIN {company.gstin} · Indore, Madhya Pradesh</span>
         </div>
