@@ -45,7 +45,7 @@ export default function About() {
         <Reveal delay={0.08}>
           <div className="space-y-5 text-base leading-relaxed text-paper/65 sm:text-lg">
             <p>We started by building pages about business and founders for Indian audiences. Some of them grew into the hundreds of thousands. Along the way we built a team that could write, edit and design every day without dropping quality.</p>
-            <p>Founders and brands started asking us to do the same for them. So we did. Then we got tired of slow editing and built our own tools. That became Chop Shop.</p>
+            <p>Founders and brands started asking us to do the same for them. So we did. Then we got tired of slow editing and built our own tools. That became Katran.</p>
             <p>SoloDac is founded and run by {company.proprietor}.</p>
           </div>
         </Reveal>

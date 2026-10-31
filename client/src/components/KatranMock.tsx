@@ -1,4 +1,4 @@
-// A drawn editor window used on Home and the Chop Shop page. Pure markup, no screenshots.
+// A drawn editor window used on Home and the Katran page. Pure markup, no screenshots.
 const tracks = [
   { label: "V1", clips: [[0, 22], [23, 41], [42, 70], [71, 100]], tone: "bg-signal/80" },
   { label: "CC", clips: [[2, 18], [20, 38], [40, 58], [60, 79], [81, 98]], tone: "bg-paper/70" },
@@ -6,7 +6,7 @@ const tracks = [
   { label: "M1", clips: [[0, 64], [66, 100]], tone: "bg-signal-soft/40" },
 ];
 
-export default function ChopShopMock() {
+export default function KatranMock() {
   return (
     <div className="relative rounded-2xl border border-paper/10 bg-ink-2 p-3 shadow-[0_30px_80px_rgba(0,0,0,0.45)] sm:p-4">
       <div className="flex items-center justify-between px-1 pb-3">
@@ -15,7 +15,7 @@ export default function ChopShopMock() {
           <span className="h-2.5 w-2.5 rounded-full bg-paper/15" />
           <span className="h-2.5 w-2.5 rounded-full bg-paper/15" />
         </div>
-        <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-paper/40">chop shop · long-form</div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-paper/40">katran · long-form</div>
         <div className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-signal">
           <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-signal" /> rendering
         </div>

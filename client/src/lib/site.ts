@@ -21,7 +21,7 @@ export const company = {
 export const nav = [
   { label: "Services", href: "/services" },
   { label: "Network", href: "/network" },
-  { label: "Chop Shop", href: "/chop-shop" },
+  { label: "Katran", href: "/katran" },
   { label: "About", href: "/about" },
 ];
 
@@ -39,7 +39,7 @@ export type NetworkPage = {
 export const networkPages: NetworkPage[] = [
   { name: "Successful Arcs", handle: "successfularcs", category: "Business", tagline: "Built for entrepreneurs and future leaders.", followers: "280.6K", posts: "380", logo: saLogo },
   { name: "Archive of CEOs", handle: "archiveofceos", category: "Leadership", tagline: "What great CEOs actually said and did.", followers: "265.4K", posts: "283", logo: aocLogo },
-  { name: "Virodh", handle: "virodhindia", category: "GenZ and culture", tagline: "Run by GenZ, for GenZ. Made for Bharat.", followers: "35K", posts: "194", logo: virodhLogo },
+  { name: "Indian Pragati", handle: "indianpragati", category: "GenZ and culture", tagline: "Run by GenZ, for GenZ. Made for Bharat.", followers: "35K", posts: "194", logo: virodhLogo },
   { name: "Bourse India", handle: "bourseindiaa", category: "Markets and news", tagline: "India's business news, decoded.", followers: "29.1K", posts: "766", logo: bourseLogo },
   { name: "Lucre", handle: "lucreindia", category: "Founders", tagline: "Stories behind India's biggest founders.", followers: "15.9K", posts: "92", logo: lucreLogo },
 ];
@@ -84,7 +84,7 @@ export const services: Service[] = [
 
 export const alsoDo = ["Brand partnerships on our pages", "Personal branding for founders", "Brand identity and websites"];
 
-export const chopShopTools = [
+export const katranTools = [
   {
     name: "Long-form editor",
     input: "Voiceover in",
