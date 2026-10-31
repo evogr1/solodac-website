@@ -35,16 +35,14 @@ Effects adapted from Toolcraft examples (MIT, Pixel Point). Ported renderers in 
 - **Chop Shop renamed to "Katran by SoloDac"** (कतरन, clipping). Page moved to `/katran`; `/chop-shop`, `/tools` and `/fireyoureditor` redirect there. Legal pages renamed too.
 - **Virodh renamed to Indian Pragati (@indianpragati).** Tagline, 35K followers, 194 posts and logo are still Virodh's: Instagram blocked reading the new profile without a login. Owner to send the new bio, follower count and profile picture.
 
-## On the preview, not live yet (31 October)
+## Katran page, second rebuild (on the preview, not live yet)
 
-- **Katran page redesigned** after the owner called it AI slop. Built with the taste skill's "sentence is the layout" direction. Code in `client/src/pages/Katran.tsx` and `client/src/components/katran/`.
-  - Hero: "Katran edits / your videos." split across the page, with a strip of sample Katran frames (voiceover, title card, synced captions, carousel) moving through the gap.
-  - A sentence naming the pages Katran already cuts for.
-  - Scene bar: a sample 11:38 founder story cut into five scenes. Point at a scene to see the voiceover line and the caption it became.
-  - Three plain sentences with small product frames inline, a saved-style card, FAQ, a full-screen "Want Katran on your channel?" ask, and the waitlist form.
-  - Gone: eyebrows, mono labels, numbered cards, outlined boxes, gradients.
-  - Taste inspector: page-level checks pass. The 5 FAILs left are the shared footer (mono labels, small caps, hairlines) and the fixed header passing over a frame while scrolling.
-  - All sample content (the founder story, ₹40 crore, the saved style) is labelled as a sample.
+- PR #5 put a redesign live on 31 October. The owner called it AI slop: mock HTML "frames" in place of video, a hero strip that covered the headline at wide screens, empty scene slabs.
+- Rebuilt around real reels from Lucre's YouTube channel (@LucreIndia): five in the hero row, one featured (Ashneer Grover, 52,979 views). Covers are YouTube's own vertical thumbnails saved in `client/src/assets/katran/`; a click plays the YouTube embed in place. View counts as of 31 October.
+- Page: headline and line of copy, the reel row, "Three ways in" (reels, YouTube videos, carousels), the featured reel, FAQ as plain text, waitlist form. Mock components (frames, KatranHero, SceneBar) deleted.
+- Owner to confirm: that these Lucre reels were made with Katran, and the "long stage talk" source line for the Ashneer reel.
+- Found on Lucre's YouTube: two live titles end in leaked pipeline text ("Other options (YOUTUBE_RULES angles): ..."), on 7Tf8SBJ7-Bw and tI5j04Bv884. Left off the page.
+- YouTube blocks the cloud server, so playback could not be tested from here.
 
 ## Decisions waiting on the owner
 
