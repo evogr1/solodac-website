@@ -24,12 +24,11 @@ export default function About() {
   return (
     <Layout>
       <PageHero
-        kicker="About SoloDac"
-        title={<>A media company that also <span className="font-serif-i font-normal text-signal">does the work.</span></>}
+        title={<>A media company that also <span className="text-paper/45">does the work.</span></>}
         intro="SoloDac started with a few pages about business and founders. Today we run a network of pages and channels, a team of editors and writers, and the software that ties it together."
       />
 
-      <section className="border-b border-paper/10" aria-label="SoloDac">
+      <section aria-label="SoloDac">
         <div className="container">
           <ParticleWord className="h-[220px] sm:h-[340px] lg:h-[420px]" />
         </div>
@@ -37,10 +36,7 @@ export default function About() {
 
       <section className="container grid gap-12 py-20 sm:py-28 lg:grid-cols-2 lg:gap-20">
         <Reveal>
-          <SectionHead
-            kicker="The short version"
-            title="We learned on our own pages. Now we do it for others."
-          />
+          <SectionHead title="We learned on our own pages first." />
         </Reveal>
         <Reveal delay={0.08}>
           <div className="space-y-5 text-base leading-relaxed text-paper/65 sm:text-lg">
@@ -51,19 +47,16 @@ export default function About() {
         </Reveal>
       </section>
 
-      <section className="border-y border-paper/10 bg-ink-2">
+      <section className="bg-ink-2">
         <div className="container py-20 sm:py-28">
           <Reveal>
-            <SectionHead kicker="What we believe" title="Three rules we don't bend." />
+            <SectionHead title="Three rules we don't bend." />
           </Reveal>
-          <div className="mt-14 grid gap-4 md:grid-cols-3">
+          <div className="mt-14 grid gap-10 md:grid-cols-3">
             {beliefs.map((belief, index) => (
               <Reveal key={belief.title} delay={index * 0.08}>
-                <div className="h-full rounded-2xl border border-paper/10 bg-ink p-7">
-                  <div className="font-mono text-sm text-signal">0{index + 1}</div>
-                  <h3 className="font-display mt-8 text-3xl">{belief.title}</h3>
-                  <p className="mt-3 leading-relaxed text-paper/60">{belief.body}</p>
-                </div>
+                <h3 className="font-display text-3xl tracking-[-0.02em]">{belief.title}</h3>
+                <p className="mt-3 text-[17px] leading-relaxed text-paper/65">{belief.body}</p>
               </Reveal>
             ))}
           </div>
@@ -72,10 +65,10 @@ export default function About() {
 
       <section className="container grid gap-12 py-20 sm:py-28 lg:grid-cols-2 lg:gap-20">
         <div>
-          <SectionHead kicker="Where we are" title="Three cities. One team." />
-          <div className="mt-10 grid gap-3">
+          <SectionHead title="Three cities. One team." />
+          <div className="mt-10 grid gap-5">
             {company.locations.map((place) => (
-              <div key={place.city} className="flex items-baseline justify-between gap-4 border-b border-paper/10 pb-4">
+              <div key={place.city} className="flex items-baseline justify-between gap-4">
                 <span className="font-display text-3xl">{place.city}</span>
                 <span className="text-right text-sm text-paper/50">{place.role}</span>
               </div>
@@ -83,26 +76,23 @@ export default function About() {
           </div>
         </div>
         <div id="company">
-          <SectionHead kicker="Business details" title="A registered business. Proper invoices." />
-          <dl className="mt-10 overflow-hidden rounded-2xl border border-paper/10">
+          <SectionHead title="A registered business. Proper invoices." />
+          <dl className="mt-10 space-y-4">
             {details.map((row) => (
-              <div key={row.label} className="grid grid-cols-[130px_1fr] gap-4 border-b border-paper/10 px-5 py-4 last:border-0 sm:grid-cols-[160px_1fr]">
-                <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-paper/45">{row.label}</dt>
+              <div key={row.label} className="grid grid-cols-[130px_1fr] gap-4 sm:grid-cols-[160px_1fr]">
+                <dt className="text-[15px] text-paper/50">{row.label}</dt>
                 <dd className="break-all font-medium text-paper/85">{row.value}</dd>
               </div>
             ))}
           </dl>
-          <p className="mt-4 text-sm text-paper/45">All client work is invoiced with GST.</p>
+          <p className="mt-6 text-[15px] text-paper/50">All client work is invoiced with GST.</p>
         </div>
       </section>
 
-      <section id="careers" className="border-t border-paper/10 bg-paper text-ink">
+      <section id="careers" className="bg-paper text-ink">
         <div className="container flex flex-col justify-between gap-8 py-16 sm:py-20 lg:flex-row lg:items-center">
           <div>
-            <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-ink/55">
-              <span className="h-1.5 w-1.5 rounded-full bg-signal" /> Careers
-            </div>
-            <h2 className="font-display mt-4 text-[clamp(2rem,4.5vw,3.25rem)] leading-[1]">Editors, writers and designers.</h2>
+            <h2 className="font-display text-[clamp(2rem,4.5vw,3.25rem)] leading-[1] tracking-[-0.03em]">Editors, writers and designers.</h2>
             <p className="mt-3 max-w-xl text-ink/65">We're always looking. Send us your best three pieces of work and a line about you.</p>
           </div>
           <a href={`mailto:${company.email}?subject=Work%20at%20SoloDac`} className="inline-flex shrink-0 items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-semibold text-paper transition-colors hover:bg-signal hover:text-ink">

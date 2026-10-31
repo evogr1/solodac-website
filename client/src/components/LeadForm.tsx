@@ -44,7 +44,7 @@ export default function LeadForm({
 
   if (status === "sent") {
     return (
-      <div className="success-panel rounded-2xl border border-paper/10 bg-ink-2 p-8 sm:p-10">
+      <div className="success-panel rounded-2xl bg-ink-2 p-8 sm:p-10">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-signal text-ink">
           <Check size={22} />
         </div>
@@ -55,7 +55,7 @@ export default function LeadForm({
   }
 
   return (
-    <form onSubmit={onSubmit} className="grid gap-4 rounded-2xl border border-paper/10 bg-ink-2 p-5 sm:grid-cols-2 sm:p-8">
+    <form onSubmit={onSubmit} className="grid gap-4 rounded-2xl bg-ink-2 p-5 sm:grid-cols-2 sm:p-8">
       {fields.map((field) => (
         <label key={field.name} className={cn("block", field.type === "textarea" || !("half" in field && field.half) ? "sm:col-span-2" : "")}>
           <span className="mb-2 block text-sm font-medium text-paper/75">

@@ -198,12 +198,11 @@ body.menu-open main { filter: blur(10px) brightness(0.6); }
 
 /* Network cards light up while the crawler spider reads them (CrawlerSpider.tsx). */
 .crawl-card {
-  transition: border-color 300ms ease, background-color 300ms ease;
+  transition: background-color 300ms ease;
 }
 .crawl-card[data-crawled="active"] {
-  border-color: rgba(255, 90, 31, 0.8);
-  background-color: #1a1210;
+  background-color: #2a1710;
 }
 .crawl-card[data-crawled="done"] {
-  border-color: rgba(255, 90, 31, 0.25);
+  background-color: #19140f;
 }

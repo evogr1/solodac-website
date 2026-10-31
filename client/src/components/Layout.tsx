@@ -36,7 +36,7 @@ function Header() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <div className={cn("transition-colors duration-300", scrolled || open ? "border-b border-paper/10 bg-ink/85 backdrop-blur-xl" : "bg-transparent")}>
+      <div className={cn("transition-colors duration-300", scrolled || open ? "bg-ink/85 backdrop-blur-xl" : "bg-transparent")}>
         <div className="container flex h-[72px] items-center justify-between gap-6">
           <Link href="/" aria-label="SoloDac home">
             <Wordmark />
@@ -63,7 +63,7 @@ function Header() {
             </Link>
             <button
               type="button"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-paper/15 md:hidden"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-paper/10 md:hidden"
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               onClick={() => setOpen((value) => !value)}
@@ -75,13 +75,13 @@ function Header() {
       </div>
 
       {open && (
-        <div className="border-b border-paper/10 bg-ink md:hidden">
+        <div className="bg-ink md:hidden">
           <nav className="container flex flex-col py-4" aria-label="Mobile">
             {[...nav, { label: "Contact", href: "/contact" }].map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className={cn("font-display border-b border-paper/10 py-4 text-3xl last:border-0", location === item.href ? "text-signal" : "text-paper")}
+                className={cn("font-display py-3 text-3xl", location === item.href ? "text-signal" : "text-paper")}
               >
                 {item.label}
               </Link>

@@ -59,6 +59,15 @@ Effects adapted from Toolcraft examples (MIT, Pixel Point). Ported renderers in 
 - Removed: three outlined cards, the four page cards, numbered service rows, KatranMock, numbered step boxes, the orange CTA box. Replaced with plain text sections.
 - Footer on every page: no mono labels, no divider lines. Secondary button is filled, not outlined.
 
+## Other pages cleanup (on the preview, 31 October)
+
+- Shared pieces: Kicker is now a plain small label (only 404 and Legal use it); SectionHead and PageHero have no kicker; PageHero has no grid background or divider; CtaBand is plain text plus a button instead of the orange box.
+- Services: no 01/02/03, no orange serif lines, filled pills, plain "What's included".
+- Network: filled cards with no outlines, plain category labels, no dashed box; the crawler spider now warms the card background instead of its border.
+- About: no serif accent, belief cards replaced with plain columns, locations and business details without lines or boxes.
+- Contact, Legal, 404: plain labels. Header: no line on scroll, filled menu button, no lines in the phone menu. Lead form: no outline.
+- Taste inspector on Services and About: remaining flags are no photos or video, the cream brand colour, and the smooth-scroll pin artifact.
+
 ## Decisions waiting on the owner
 
 1. **Final logo:** pick from the 10 directions on the canvas (first pick was 04 Solo dot). Then: header, footer, favicon, brand files, and a liquid-metal version.

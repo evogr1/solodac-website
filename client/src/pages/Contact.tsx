@@ -2,7 +2,6 @@ import { ArrowUpRight } from "lucide-react";
 import Layout from "@/components/Layout";
 import MeshGradient, { meshPresets } from "@/components/effects/MeshGradient";
 import LeadForm from "@/components/LeadForm";
-import { Kicker } from "@/components/site";
 import { company, serviceOptions } from "@/lib/site";
 
 export default function Contact() {
@@ -13,24 +12,22 @@ export default function Contact() {
     <Layout>
       <section className="relative overflow-hidden pb-24 pt-32 sm:pt-44">
         <div className="pointer-events-none absolute -inset-x-[12%] -inset-y-[18%]"><MeshGradient preset={meshPresets.quiet} /></div>
-        <div className="grid-bg pointer-events-none absolute inset-0 opacity-60" />
         <div className="container relative grid gap-14 lg:grid-cols-[1fr_1.25fr] lg:gap-20">
           <div>
-            <Kicker>Book a call</Kicker>
-            <h1 className="font-display mt-6 text-[clamp(3rem,8vw,6rem)] leading-[0.9]">Let's talk.</h1>
+            <h1 className="font-display text-[clamp(3rem,8vw,6rem)] leading-[0.9] tracking-[-0.03em]">Let's talk.</h1>
             <p className="mt-6 max-w-md text-base leading-relaxed text-paper/65 sm:text-lg">
               Tell us a bit about what you're building. We reply within one working day with a time for a call.
             </p>
 
             <div className="mt-12 space-y-8">
               <div>
-                <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-paper/45">Email</div>
+                <div className="text-[15px] text-paper/50">Email</div>
                 <a href={`mailto:${company.email}`} className="mt-2 inline-flex items-center gap-1.5 text-xl font-semibold hover:text-signal">
                   {company.email} <ArrowUpRight size={16} />
                 </a>
               </div>
               <div>
-                <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-paper/45">Offices</div>
+                <div className="text-[15px] text-paper/50">Offices</div>
                 <ul className="mt-3 space-y-2">
                   {company.locations.map((place) => (
                     <li key={place.city} className="text-paper/80">
@@ -39,7 +36,7 @@ export default function Contact() {
                   ))}
                 </ul>
               </div>
-              <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-paper/40">GSTIN {company.gstin}</div>
+              <div className="text-[14px] text-paper/45">GSTIN {company.gstin}</div>
             </div>
           </div>
 
