@@ -1,6 +1,6 @@
 import saLogo from "../assets/partners/successfularcs.jpg";
 import aocLogo from "../assets/partners/archiveofceos.jpg";
-import virodhLogo from "../assets/partners/virodh.jpg";
+import pragatiLogo from "../assets/partners/indianpragati.svg";
 import bourseLogo from "../assets/partners/bourse.jpg";
 import lucreLogo from "../assets/partners/lucre.jpg";
 
@@ -39,7 +39,7 @@ export type NetworkPage = {
 export const networkPages: NetworkPage[] = [
   { name: "Successful Arcs", handle: "successfularcs", category: "Business", tagline: "Built for entrepreneurs and future leaders.", followers: "280.1K", posts: "413", logo: saLogo },
   { name: "Archive of CEOs", handle: "archiveofceos", category: "Leadership", tagline: "What great CEOs actually said and did.", followers: "275.1K", posts: "297", logo: aocLogo },
-  { name: "Indian Pragati", handle: "indianpragati", category: "GenZ and culture", tagline: "Run by GenZ, for GenZ. Made for Bharat.", followers: "35K", posts: "194", logo: virodhLogo },
+  { name: "Indian Pragati", handle: "indianpragati", category: "News", tagline: "Sadak se space tak, India ki Pragati. Facts ham denge, opinion aapka.", followers: "34.6K", posts: "230", logo: pragatiLogo },
   { name: "Bourse India", handle: "bourseindiaa", category: "Markets and news", tagline: "India's business news, decoded.", followers: "29K", posts: "804", logo: bourseLogo },
   { name: "Lucre", handle: "lucreindia", category: "Founders", tagline: "Stories behind India's biggest founders.", followers: "17.9K", posts: "104", logo: lucreLogo },
 ];
