@@ -107,7 +107,7 @@ export default function HeroHeadline({ lines, className }: { lines: HeadlineLine
               </Fragment>
             ))}
           </span>
-          {line.breakAfter ? <br className="hidden sm:block" /> : lineIndex < lines.length - 1 ? " " : null}
+          {line.breakAfter ? <>{" "}<br className="hidden sm:block" /></> : lineIndex < lines.length - 1 ? " " : null}
         </Fragment>
       ))}
     </h1>

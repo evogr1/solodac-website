@@ -43,7 +43,7 @@ export function GhostButton({ href, children, className }: ButtonProps) {
   return (
     <Link
       href={href}
-      className={cn("inline-flex items-center gap-2 rounded-full border border-paper/20 px-6 py-3.5 text-sm font-semibold text-paper transition-[background-color,border-color,color,transform] duration-150 ease-out hover:border-paper hover:bg-paper hover:text-ink active:scale-[0.97]", className)}
+      className={cn("inline-flex items-center gap-2 rounded-full bg-paper/10 px-6 py-3.5 text-sm font-semibold text-paper transition-[background-color,color,transform] duration-150 ease-out hover:bg-paper hover:text-ink active:scale-[0.97]", className)}
     >
       {children}
     </Link>
