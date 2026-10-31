@@ -33,7 +33,7 @@ Effects adapted from Toolcraft examples (MIT, Pixel Point). Ported renderers in 
 ## Live since 29 October (PRs #3 and #4)
 
 - **Chop Shop renamed to "Katran by SoloDac"** (कतरन, clipping). Page moved to `/katran`; `/chop-shop`, `/tools` and `/fireyoureditor` redirect there. Legal pages renamed too.
-- **Virodh renamed to Indian Pragati (@indianpragati).** Tagline, 35K followers, 194 posts and logo are still Virodh's: Instagram blocked reading the new profile without a login. Owner to send the new bio, follower count and profile picture.
+- **Virodh renamed to Indian Pragati (@indianpragati).** Tagline, 35K followers, 194 posts and logo are still Virodh's: Instagram blocked reading the new profile without a login. Done on 31 October, see the home page cleanup notes.
 
 ## Katran page, second rebuild (live since 31 October, PR #6)
 
@@ -53,7 +53,7 @@ Effects adapted from Toolcraft examples (MIT, Pixel Point). Ported renderers in 
 
 ## Home page cleanup (live since 31 October, PR #8)
 
-- Pages strip: "637,000 people follow the pages we run" with each page's follower count in large type. Counts refreshed from Instagram on 31 October for Successful Arcs (280.1K), Archive of CEOs (275.1K), Bourse India (29K) and Lucre (17.9K). Indian Pragati still shows Virodh's 35K and logo: Instagram rate-limited the lookup and the session's safety check blocked retries. Owner to send a screenshot of the profile.
+- Pages strip: "637,000 people follow the pages we run" with each page's follower count in large type. Counts refreshed from Instagram on 31 October for Successful Arcs (280.1K), Archive of CEOs (275.1K), Bourse India (29K) and Lucre (17.9K). Indian Pragati updated from the owner's screenshot on 31 October: 34.6K followers, 230 posts, category News, bio as tagline, new logo redrawn as `client/src/assets/partners/indianpragati.svg` (orange circle, navy chevron). Old virodh.jpg removed.
 - Hero: no kicker label, no grid background, "Ours first." in muted cream on its own line instead of orange serif italic.
 - New proof section: the six million-view reels (shared list in `client/src/lib/reels.ts`, also used on /katran), "12 crore views", with See the network and Advertise with us.
 - Removed: three outlined cards, the four page cards, numbered service rows, KatranMock, numbered step boxes, the orange CTA box. Replaced with plain text sections.

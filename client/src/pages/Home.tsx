@@ -18,7 +18,7 @@ const pillars = [
   },
   {
     title: "We run our own",
-    body: "Business, founder, markets and culture pages that people open every day.",
+    body: "Business, leadership, founder, markets and news pages that people open every day.",
     href: "/network",
   },
   {
