@@ -37,11 +37,11 @@ export type NetworkPage = {
 
 // Real follower counts. These are the pages we put our name on, not the full roster.
 export const networkPages: NetworkPage[] = [
-  { name: "Successful Arcs", handle: "successfularcs", category: "Business", tagline: "Built for entrepreneurs and future leaders.", followers: "280.6K", posts: "380", logo: saLogo },
-  { name: "Archive of CEOs", handle: "archiveofceos", category: "Leadership", tagline: "What great CEOs actually said and did.", followers: "265.4K", posts: "283", logo: aocLogo },
+  { name: "Successful Arcs", handle: "successfularcs", category: "Business", tagline: "Built for entrepreneurs and future leaders.", followers: "280.1K", posts: "413", logo: saLogo },
+  { name: "Archive of CEOs", handle: "archiveofceos", category: "Leadership", tagline: "What great CEOs actually said and did.", followers: "275.1K", posts: "297", logo: aocLogo },
   { name: "Indian Pragati", handle: "indianpragati", category: "GenZ and culture", tagline: "Run by GenZ, for GenZ. Made for Bharat.", followers: "35K", posts: "194", logo: virodhLogo },
-  { name: "Bourse India", handle: "bourseindiaa", category: "Markets and news", tagline: "India's business news, decoded.", followers: "29.1K", posts: "766", logo: bourseLogo },
-  { name: "Lucre", handle: "lucreindia", category: "Founders", tagline: "Stories behind India's biggest founders.", followers: "15.9K", posts: "92", logo: lucreLogo },
+  { name: "Bourse India", handle: "bourseindiaa", category: "Markets and news", tagline: "India's business news, decoded.", followers: "29K", posts: "804", logo: bourseLogo },
+  { name: "Lucre", handle: "lucreindia", category: "Founders", tagline: "Stories behind India's biggest founders.", followers: "17.9K", posts: "104", logo: lucreLogo },
 ];
 
 export const igUrl = (handle: string) => `https://www.instagram.com/${handle}/`;

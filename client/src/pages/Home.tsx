@@ -30,6 +30,11 @@ const pillars = [
   },
 ];
 
+// Sum of the pages' follower counts ("280.6K" → 280600), rounded down to the thousand.
+const totalFollowers = `${Math.floor(
+  networkPages.reduce((sum, page) => sum + parseFloat(page.followers) * (page.followers.endsWith("K") ? 1000 : 1), 0) / 1000,
+).toLocaleString("en-US")},000`;
+
 const steps = [
   { title: "Call", body: "Thirty minutes on what you have, what you want and what's in the way." },
   { title: "Plan", body: "We come back with a niche, a format and a posting schedule that we'd bet on." },
@@ -72,18 +77,20 @@ export default function Home() {
       </section>
 
       {/* Network strip */}
-      <section className="border-y border-paper/10 bg-ink-2">
-        <div className="container flex flex-col gap-6 py-8 xl:flex-row xl:items-center xl:gap-10">
-          <div className="shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-paper/45">
-            A few of the pages we run
-          </div>
-          <div className="grid flex-1 grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3 lg:grid-cols-5">
+      <section className="bg-ink-2" aria-labelledby="our-pages">
+        <div className="container py-16 sm:py-20">
+          <h2 id="our-pages" className="text-[clamp(20px,2vw,26px)] font-medium leading-snug text-paper/60">
+            <span className="text-paper">{totalFollowers} people</span> follow the pages we run.
+          </h2>
+          <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-5">
             {networkPages.map((page) => (
-              <a key={page.handle} href={igUrl(page.handle)} target="_blank" rel="noreferrer" className="group flex items-center gap-3">
-                <img src={page.logo} alt="" className="h-10 w-10 rounded-full object-cover grayscale transition group-hover:grayscale-0" />
-                <div className="min-w-0">
-                  <div className="text-sm font-semibold leading-tight text-paper/85 group-hover:text-paper">{page.name}</div>
-                  <div className="font-mono text-[11px] text-paper/45">{page.followers} followers</div>
+              <a key={page.handle} href={igUrl(page.handle)} target="_blank" rel="noreferrer" className="group block">
+                <div className="font-display text-[clamp(40px,4.4vw,68px)] leading-none tracking-[-0.04em] transition-colors duration-200 group-hover:text-signal">
+                  {page.followers}
+                </div>
+                <div className="mt-4 flex items-center gap-2.5">
+                  <img src={page.logo} alt="" className="h-7 w-7 rounded-full object-cover" />
+                  <span className="text-[15px] text-paper/75 transition-colors duration-200 group-hover:text-paper">{page.name}</span>
                 </div>
               </a>
             ))}
