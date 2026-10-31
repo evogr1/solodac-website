@@ -35,7 +35,7 @@ Effects adapted from Toolcraft examples (MIT, Pixel Point). Ported renderers in 
 - **Chop Shop renamed to "Katran by SoloDac"** (कतरन, clipping). Page moved to `/katran`; `/chop-shop`, `/tools` and `/fireyoureditor` redirect there. Legal pages renamed too.
 - **Virodh renamed to Indian Pragati (@indianpragati).** Tagline, 35K followers, 194 posts and logo are still Virodh's: Instagram blocked reading the new profile without a login. Owner to send the new bio, follower count and profile picture.
 
-## Katran page, second rebuild (on the preview, not live yet)
+## Katran page, second rebuild (live since 31 October, PR #6)
 
 - PR #5 put a redesign live on 31 October. The owner called it AI slop: mock HTML "frames" in place of video, a hero strip that covered the headline at wide screens, empty scene slabs.
 - Rebuilt around real reels from Lucre's YouTube channel (@LucreIndia): five in the hero row, one featured (Ashneer Grover, 52,979 views). Covers are YouTube's own vertical thumbnails saved in `client/src/assets/katran/`; a click plays the YouTube embed in place. View counts as of 31 October.
@@ -43,6 +43,13 @@ Effects adapted from Toolcraft examples (MIT, Pixel Point). Ported renderers in 
 - Owner to confirm: that these Lucre reels were made with Katran, and the "long stage talk" source line for the Ashneer reel.
 - Found on Lucre's YouTube: two live titles end in leaked pipeline text ("Other options (YOUTUBE_RULES angles): ..."), on 7Tf8SBJ7-Bw and tI5j04Bv884. Left off the page.
 - YouTube blocks the cloud server, so playback could not be tested from here.
+
+## Katran page, third pass (on the preview, 31 October)
+
+- Headline is now "A full production house. For less than one editor's salary." per the owner.
+- Reel row: six reels over 1M views, in the owner's order. Archive of CEOs: AriZona Iced Tea 29.2M (DccTI1AhTDB), Chadwick Boseman 25.6M (DXkwIYQImSx). Successful Arcs: Huawei MateBook 40.9M (DKGAuS3TKAe), Shark Tank exposure 21.4M (DFQGZ_vPojE). Lucre on YouTube: 70-hour workweek ad 3.6M (ksM-TrcSDvo), Ashneer on BharatPe 3.0M (RL3VW4gj7_w).
+- Instagram reels open on Instagram; YouTube reels play in place. Instagram play counts came from its public reels endpoint (clips/user), which works without a login; the profile lookup is rate-limited and needed retries.
+- FAQ price answer: less than one full-time editor's monthly salary.
 
 ## Decisions waiting on the owner
 
