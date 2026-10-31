@@ -59,7 +59,7 @@ Effects adapted from Toolcraft examples (MIT, Pixel Point). Ported renderers in 
 - Removed: three outlined cards, the four page cards, numbered service rows, KatranMock, numbered step boxes, the orange CTA box. Replaced with plain text sections.
 - Footer on every page: no mono labels, no divider lines. Secondary button is filled, not outlined.
 
-## Other pages cleanup (on the preview, 31 October)
+## Other pages cleanup (live since 31 October, PR #10)
 
 - Shared pieces: Kicker is now a plain small label (only 404 and Legal use it); SectionHead and PageHero have no kicker; PageHero has no grid background or divider; CtaBand is plain text plus a button instead of the orange box.
 - Services: no 01/02/03, no orange serif lines, filled pills, plain "What's included".
