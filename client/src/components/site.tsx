@@ -3,20 +3,15 @@ import type { ReactNode } from "react";
 import { Link } from "wouter";
 import { cn } from "@/lib/utils";
 
+/** A plain small label, for the few places a page needs one (the 404 code, legal pages). */
 export function Kicker({ children, className }: { children: ReactNode; className?: string }) {
-  return (
-    <div className={cn("flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-paper/55", className)}>
-      <span className="h-1.5 w-1.5 rounded-full bg-signal" />
-      {children}
-    </div>
-  );
+  return <div className={cn("text-[15px] text-paper/55", className)}>{children}</div>;
 }
 
-export function SectionHead({ kicker, title, intro, className }: { kicker: string; title: ReactNode; intro?: ReactNode; className?: string }) {
+export function SectionHead({ title, intro, className }: { title: ReactNode; intro?: ReactNode; className?: string }) {
   return (
     <div className={cn("max-w-3xl", className)}>
-      <Kicker>{kicker}</Kicker>
-      <h2 className="font-display mt-5 text-[clamp(2.2rem,5vw,3.75rem)] leading-[0.98]">{title}</h2>
+      <h2 className="font-display text-[clamp(2.2rem,5vw,3.75rem)] leading-[0.98] tracking-[-0.03em]">{title}</h2>
       {intro && <p className="mt-5 max-w-2xl text-base leading-relaxed text-paper/60 sm:text-lg">{intro}</p>}
     </div>
   );
@@ -51,25 +46,21 @@ export function GhostButton({ href, children, className }: ButtonProps) {
 }
 
 export function PageHero({
-  kicker,
   title,
   intro,
   children,
   backdrop,
 }: {
-  kicker: string;
   title: ReactNode;
   intro?: ReactNode;
   children?: ReactNode;
   backdrop?: ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden border-b border-paper/10 pb-16 pt-32 sm:pb-24 sm:pt-44">
-      <div className="grid-bg pointer-events-none absolute inset-0" />
+    <section className="relative overflow-hidden pb-16 pt-32 sm:pb-24 sm:pt-44">
       {backdrop}
       <div className="container relative">
-        <Kicker>{kicker}</Kicker>
-        <h1 className="font-display mt-6 max-w-5xl text-[clamp(2.75rem,8vw,6.5rem)] leading-[0.92]">{title}</h1>
+        <h1 className="font-display max-w-5xl text-[clamp(2.75rem,8vw,6.5rem)] leading-[0.92] tracking-[-0.03em]">{title}</h1>
         {intro && <p className="mt-7 max-w-2xl text-base leading-relaxed text-paper/65 sm:text-lg">{intro}</p>}
         {children}
       </div>
@@ -79,14 +70,11 @@ export function PageHero({
 
 export function CtaBand({ title, body, href = "/contact", label = "Book a call" }: { title: ReactNode; body: ReactNode; href?: string; label?: string }) {
   return (
-    <section className="container py-20 sm:py-28">
-      <div className="relative overflow-hidden rounded-3xl bg-signal px-6 py-14 text-ink sm:px-14 sm:py-20">
-        <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full border-[40px] border-ink/10" />
-        <h2 className="font-display relative max-w-3xl text-[clamp(2.2rem,5.5vw,4.5rem)] leading-[0.95]">{title}</h2>
-        <p className="relative mt-5 max-w-xl text-base leading-relaxed text-ink/75 sm:text-lg">{body}</p>
-        <Link href={href} className="relative mt-9 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-semibold text-paper transition-colors hover:bg-ink-3">
-          {label} <ArrowUpRight size={16} />
-        </Link>
+    <section className="container py-24 sm:py-32">
+      <h2 className="font-display max-w-4xl text-[clamp(2.4rem,5.5vw,4.5rem)] leading-[0.95] tracking-[-0.03em]">{title}</h2>
+      <p className="mt-6 max-w-xl text-[18px] leading-relaxed text-paper/70">{body}</p>
+      <div className="mt-9">
+        <PrimaryButton href={href}>{label}</PrimaryButton>
       </div>
     </section>
   );
