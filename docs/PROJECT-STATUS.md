@@ -30,10 +30,21 @@ Effects adapted from Toolcraft examples (MIT, Pixel Point). Ported renderers in 
 - All effects pause off-screen and respect reduced motion. Cursor effects only run with a mouse.
 - Motion was reviewed with Emil Kowalski's review-animations standards and fixed (transform-only cursor ring, 650 ms headline entrance, reduced-motion fade, button press feedback, named transitions).
 
-## Since the 29 October deploy (on the preview, not live yet)
+## Live since 29 October (PRs #3 and #4)
 
-- **Chop Shop renamed to "Katran by SoloDac"** (कतरन, clipping). Page moved to `/katran`; `/chop-shop`, `/tools` and `/fireyoureditor` redirect there. Hero headline is now "Katran edits for you." Legal pages renamed too.
+- **Chop Shop renamed to "Katran by SoloDac"** (कतरन, clipping). Page moved to `/katran`; `/chop-shop`, `/tools` and `/fireyoureditor` redirect there. Legal pages renamed too.
 - **Virodh renamed to Indian Pragati (@indianpragati).** Tagline, 35K followers, 194 posts and logo are still Virodh's: Instagram blocked reading the new profile without a login. Owner to send the new bio, follower count and profile picture.
+
+## On the preview, not live yet (31 October)
+
+- **Katran page redesigned** after the owner called it AI slop. Built with the taste skill's "sentence is the layout" direction. Code in `client/src/pages/Katran.tsx` and `client/src/components/katran/`.
+  - Hero: "Katran edits / your videos." split across the page, with a strip of sample Katran frames (voiceover, title card, synced captions, carousel) moving through the gap.
+  - A sentence naming the pages Katran already cuts for.
+  - Scene bar: a sample 11:38 founder story cut into five scenes. Point at a scene to see the voiceover line and the caption it became.
+  - Three plain sentences with small product frames inline, a saved-style card, FAQ, a full-screen "Want Katran on your channel?" ask, and the waitlist form.
+  - Gone: eyebrows, mono labels, numbered cards, outlined boxes, gradients.
+  - Taste inspector: page-level checks pass. The 5 FAILs left are the shared footer (mono labels, small caps, hairlines) and the fixed header passing over a frame while scrolling.
+  - All sample content (the founder story, ₹40 crore, the saved style) is labelled as a sample.
 
 ## Decisions waiting on the owner
 
