@@ -35,7 +35,7 @@ Effects adapted from Toolcraft examples (MIT, Pixel Point). Ported renderers in 
 - **Chop Shop renamed to "Katran by SoloDac"** (कतरन, clipping). Page moved to `/katran`; `/chop-shop`, `/tools` and `/fireyoureditor` redirect there. Legal pages renamed too.
 - **Virodh renamed to Indian Pragati (@indianpragati).** Tagline, 35K followers, 194 posts and logo are still Virodh's: Instagram blocked reading the new profile without a login. Owner to send the new bio, follower count and profile picture.
 
-## On the preview, not live yet (31 October)
+## Live since 31 October (PR #5)
 
 - **Katran page redesigned** after the owner called it AI slop. Built with the taste skill's "sentence is the layout" direction. Code in `client/src/pages/Katran.tsx` and `client/src/components/katran/`.
   - Hero: "Katran edits / your videos." split across the page, with a strip of sample Katran frames (voiceover, title card, synced captions, carousel) moving through the gap.
