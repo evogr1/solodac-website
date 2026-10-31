@@ -5,7 +5,7 @@ import { Redirect, Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import About from "./pages/About";
-import ChopShop from "./pages/ChopShop";
+import Katran from "./pages/Katran";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
 import Legal from "./pages/Legal";
@@ -31,8 +31,9 @@ const redirects: Array<[string, string]> = [
   ["/case-studies", "/network"],
   ["/testimonials", "/network"],
   ["/portfolio", "/network"],
-  ["/fireyoureditor", "/chop-shop"],
-  ["/tools", "/chop-shop"],
+  ["/fireyoureditor", "/katran"],
+  ["/tools", "/katran"],
+  ["/chop-shop", "/katran"],
 ];
 
 function Router() {
@@ -51,7 +52,7 @@ function Router() {
           <Route path="/" component={Home} />
           <Route path="/services" component={Services} />
           <Route path="/network" component={Network} />
-          <Route path="/chop-shop" component={ChopShop} />
+          <Route path="/katran" component={Katran} />
           <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />
           <Route path="/privacy">{() => <Legal doc="privacy" />}</Route>

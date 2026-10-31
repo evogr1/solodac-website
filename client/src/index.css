@@ -103,7 +103,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 }
 .pulse-dot { animation: pulse-dot 1.8s ease-in-out infinite; }
 
-/* Timeline bars inside the Chop Shop mock editor */
+/* Timeline bars inside the Katran mock editor */
 @keyframes scan {
   from { transform: translateX(0); }
   to { transform: translateX(var(--scan-distance, 300px)); }

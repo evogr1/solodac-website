@@ -21,7 +21,7 @@ export const company = {
 export const nav = [
   { label: "Services", href: "/services" },
   { label: "Network", href: "/network" },
-  { label: "Chop Shop", href: "/chop-shop" },
+  { label: "Katran", href: "/katran" },
   { label: "About", href: "/about" },
 ];
 
@@ -84,7 +84,7 @@ export const services: Service[] = [
 
 export const alsoDo = ["Brand partnerships on our pages", "Personal branding for founders", "Brand identity and websites"];
 
-export const chopShopTools = [
+export const katranTools = [
   {
     name: "Long-form editor",
     input: "Voiceover in",

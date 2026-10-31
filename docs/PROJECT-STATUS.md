@@ -1,6 +1,6 @@
 # SoloDac website: project status
 
-Last updated: 29 October 2026. This note is the source of truth for where the SoloDac site, logo and tooling work stands. Facts here were checked against the repo and the live preview, not recalled from chat.
+Last updated: 31 October 2026. This note is the source of truth for where the SoloDac site, logo and tooling work stands. Facts here were checked against the repo and the live preview, not recalled from chat.
 
 ## Where to see things
 
@@ -29,6 +29,11 @@ Effects adapted from Toolcraft examples (MIT, Pixel Point). Ported renderers in 
 - **Chop Shop hero:** same gradient as home. **Services and Contact:** a quieter gradient.
 - All effects pause off-screen and respect reduced motion. Cursor effects only run with a mouse.
 - Motion was reviewed with Emil Kowalski's review-animations standards and fixed (transform-only cursor ring, 650 ms headline entrance, reduced-motion fade, button press feedback, named transitions).
+
+## Since the 29 October deploy (on the preview, not live yet)
+
+- **Chop Shop renamed to "Katran by SoloDac"** (कतरन, clipping). Page moved to `/katran`; `/chop-shop`, `/tools` and `/fireyoureditor` redirect there. Hero headline is now "Katran edits for you." Legal pages renamed too.
+- **Virodh renamed to Indian Pragati (@indianpragati).** Tagline, 35K followers, 194 posts and logo are still Virodh's: Instagram blocked reading the new profile without a login. Owner to send the new bio, follower count and profile picture.
 
 ## Decisions waiting on the owner
 

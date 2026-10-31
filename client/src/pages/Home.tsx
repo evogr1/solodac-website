@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "wouter";
-import ChopShopMock from "@/components/ChopShopMock";
+import KatranMock from "@/components/KatranMock";
 import Layout from "@/components/Layout";
 import HeroHeadline from "@/components/effects/HeroHeadline";
 import Magnetic from "@/components/effects/Magnetic";
@@ -25,8 +25,8 @@ const pillars = [
   {
     tag: "Software",
     title: "We built the tools",
-    body: "Chop Shop is the editing software our team uses. Creators get access next.",
-    href: "/chop-shop",
+    body: "Katran is the video editor our team uses. Creators get access next.",
+    href: "/katran",
   },
 ];
 
@@ -64,7 +64,7 @@ export default function Home() {
               </p>
               <div className="flex flex-wrap gap-3">
                 <Magnetic><PrimaryButton href="/contact">Book a call</PrimaryButton></Magnetic>
-                <Magnetic><GhostButton href="/chop-shop">See Chop Shop</GhostButton></Magnetic>
+                <Magnetic><GhostButton href="/katran">See Katran</GhostButton></Magnetic>
               </div>
             </div>
           </Reveal>
@@ -184,24 +184,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Chop Shop */}
+      {/* Katran */}
       <section className="relative overflow-hidden border-y border-paper/10 bg-ink-2">
         <div className="glow pointer-events-none absolute -left-40 bottom-0 h-[460px] w-[460px]" />
         <div className="container relative grid gap-14 py-24 sm:py-32 lg:grid-cols-[1fr_1.25fr] lg:items-center">
           <Reveal>
-            <Kicker>Chop Shop · Coming soon</Kicker>
+            <Kicker>Katran by SoloDac · Coming soon</Kicker>
             <h2 className="font-display mt-5 text-[clamp(2.4rem,5.5vw,4.25rem)] leading-[0.95]">
               The editor our team uses. <span className="font-serif-i font-normal text-signal">Soon yours.</span>
             </h2>
             <p className="mt-6 max-w-lg text-base leading-relaxed text-paper/65 sm:text-lg">
-              Voiceover in, finished YouTube video out. Reference in, reel out. Topic in, carousel out. We built Chop Shop to run our own pages. Now we're opening it to creators.
+              Voiceover in, finished YouTube video out. Reference in, reel out. Topic in, carousel out. We built Katran to run our own pages. Now we're opening it to creators.
             </p>
             <div className="mt-9">
-              <PrimaryButton href="/chop-shop">Join the waitlist</PrimaryButton>
+              <PrimaryButton href="/katran">Join the waitlist</PrimaryButton>
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <ChopShopMock />
+            <KatranMock />
           </Reveal>
         </div>
       </section>
