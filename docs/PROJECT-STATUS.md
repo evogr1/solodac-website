@@ -51,7 +51,7 @@ Effects adapted from Toolcraft examples (MIT, Pixel Point). Ported renderers in 
 - Instagram reels open on Instagram; YouTube reels play in place. Instagram play counts came from its public reels endpoint (clips/user), which works without a login; the profile lookup is rate-limited and needed retries.
 - FAQ price answer: less than one full-time editor's monthly salary.
 
-## Home page cleanup (on the preview, 31 October)
+## Home page cleanup (live since 31 October, PR #8)
 
 - Pages strip: "637,000 people follow the pages we run" with each page's follower count in large type. Counts refreshed from Instagram on 31 October for Successful Arcs (280.1K), Archive of CEOs (275.1K), Bourse India (29K) and Lucre (17.9K). Indian Pragati still shows Virodh's 35K and logo: Instagram rate-limited the lookup and the session's safety check blocked retries. Owner to send a screenshot of the profile.
 - Hero: no kicker label, no grid background, "Ours first." in muted cream on its own line instead of orange serif italic.
