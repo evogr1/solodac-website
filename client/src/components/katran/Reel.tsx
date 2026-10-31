@@ -4,9 +4,16 @@ export type ReelData = {
   id: string;
   title: string;
   poster: string;
+  page: string;
   views: number;
   seconds: number;
 };
+
+/** 3646045 → "3.6M views", 52979 → "52,979 views". */
+function formatViews(views: number) {
+  if (views >= 1_000_000) return `${(Math.floor(views / 100_000) / 10).toFixed(1)}M views`;
+  return `${views.toLocaleString("en-IN")} views`;
+}
 
 /** A real reel from one of our pages. Shows its cover; plays the YouTube video in place on click. */
 export default function Reel({ reel, className }: { reel: ReelData; className?: string }) {
@@ -51,8 +58,8 @@ export default function Reel({ reel, className }: { reel: ReelData; className?: 
         )}
       </div>
       <figcaption className="mt-3 flex justify-between gap-3 text-[14px] text-paper/60">
-        <span>{reel.views.toLocaleString("en-IN")} views</span>
-        <span>{reel.seconds} sec</span>
+        <span className="text-paper">{reel.page}</span>
+        <span>{formatViews(reel.views)}</span>
       </figcaption>
     </figure>
   );
