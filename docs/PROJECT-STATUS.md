@@ -44,7 +44,7 @@ Effects adapted from Toolcraft examples (MIT, Pixel Point). Ported renderers in 
 - Found on Lucre's YouTube: two live titles end in leaked pipeline text ("Other options (YOUTUBE_RULES angles): ..."), on 7Tf8SBJ7-Bw and tI5j04Bv884. Left off the page.
 - YouTube blocks the cloud server, so playback could not be tested from here.
 
-## Katran page, third pass (on the preview, 31 October)
+## Katran page, third pass (live since 31 October, PR #7)
 
 - Headline is now "A full production house. For less than one editor's salary." per the owner.
 - Reel row: six reels over 1M views, in the owner's order. Archive of CEOs: AriZona Iced Tea 29.2M (DccTI1AhTDB), Chadwick Boseman 25.6M (DXkwIYQImSx). Successful Arcs: Huawei MateBook 40.9M (DKGAuS3TKAe), Shark Tank exposure 21.4M (DFQGZ_vPojE). Lucre on YouTube: 70-hour workweek ad 3.6M (ksM-TrcSDvo), Ashneer on BharatPe 3.0M (RL3VW4gj7_w).
