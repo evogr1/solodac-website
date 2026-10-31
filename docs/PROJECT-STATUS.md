@@ -35,7 +35,7 @@ Effects adapted from Toolcraft examples (MIT, Pixel Point). Ported renderers in 
 - **Chop Shop renamed to "Katran by SoloDac"** (कतरन, clipping). Page moved to `/katran`; `/chop-shop`, `/tools` and `/fireyoureditor` redirect there. Legal pages renamed too.
 - **Virodh renamed to Indian Pragati (@indianpragati).** Tagline, 35K followers, 194 posts and logo are still Virodh's: Instagram blocked reading the new profile without a login. Owner to send the new bio, follower count and profile picture.
 
-## Katran page, second rebuild (on the preview, not live yet)
+## Katran page, second rebuild (live since 31 October, PR #6)
 
 - PR #5 put a redesign live on 31 October. The owner called it AI slop: mock HTML "frames" in place of video, a hero strip that covered the headline at wide screens, empty scene slabs.
 - Rebuilt around real reels from Lucre's YouTube channel (@LucreIndia): five in the hero row, one featured (Ashneer Grover, 52,979 views). Covers are YouTube's own vertical thumbnails saved in `client/src/assets/katran/`; a click plays the YouTube embed in place. View counts as of 31 October.
