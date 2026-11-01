@@ -1,6 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
 import Layout from "@/components/Layout";
-import MeshGradient, { meshPresets } from "@/components/effects/MeshGradient";
 import LeadForm from "@/components/LeadForm";
 import { company, serviceOptions } from "@/lib/site";
 
@@ -11,7 +10,6 @@ export default function Contact() {
   return (
     <Layout>
       <section className="relative overflow-hidden pb-24 pt-32 sm:pt-44">
-        <div className="pointer-events-none absolute -inset-x-[12%] -inset-y-[18%]"><MeshGradient preset={meshPresets.quiet} /></div>
         <div className="container relative grid gap-14 lg:grid-cols-[1fr_1.25fr] lg:gap-20">
           <div>
             <h1 className="font-display text-[clamp(3rem,8vw,6rem)] leading-[0.9] tracking-[-0.03em]">Let's talk.</h1>

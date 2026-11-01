@@ -171,13 +171,4 @@ body.menu-open { overflow: hidden; }
   border-color: rgba(244, 241, 234, 0.85);
 }
 
-/* Network cards light up while the crawler spider reads them (CrawlerSpider.tsx). */
-.crawl-card {
-  transition: background-color 300ms ease;
-}
-.crawl-card[data-crawled="active"] {
-  background-color: #2a1710;
-}
-.crawl-card[data-crawled="done"] {
-  background-color: #19140f;
-}
+

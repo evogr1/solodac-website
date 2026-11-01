@@ -1,7 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import type { ReactNode } from "react";
 import Layout from "@/components/Layout";
-import ParticleWord from "@/components/effects/ParticleWord";
 import Reveal from "@/components/Reveal";
 import { CtaBand } from "@/components/site";
 import { company } from "@/lib/site";
@@ -34,12 +33,6 @@ export default function About() {
         <p className="mt-8 max-w-2xl text-[18px] leading-relaxed text-paper/75">
           We run our own pages about business and founders. We grow the same kind of pages for founders, creators and brands. And we build the software that makes both faster.
         </p>
-      </section>
-
-      <section aria-label="SoloDac">
-        <div className="container">
-          <ParticleWord className="h-[200px] sm:h-[300px] lg:h-[360px]" />
-        </div>
       </section>
 
       <Part title="How it started">

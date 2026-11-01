@@ -1,3 +1,4 @@
+import { ArrowUpRight } from "lucide-react";
 import { Link } from "wouter";
 import Layout from "@/components/Layout";
 import HeroHeadline from "@/components/effects/HeroHeadline";
@@ -10,6 +11,7 @@ import Reel from "@/components/katran/Reel";
 import Reveal from "@/components/Reveal";
 import { GhostButton, PrimaryButton } from "@/components/site";
 import { millionViewReels } from "@/lib/reels";
+import { services } from "@/lib/site";
 
 const growing = ["YouTube channels.", "personal brands.", "Instagram pages.", "communities.", "brands.", "newsletters."];
 
@@ -17,33 +19,11 @@ const growing = ["YouTube channels.", "personal brands.", "Instagram pages.", "c
 const reelViewSum = millionViewReels.reduce((sum, reel) => sum + reel.views, 0);
 const totalReelViews = reelViewSum >= 10_000_000 ? `${Math.floor(reelViewSum / 10_000_000)} crore` : `${Math.floor(reelViewSum / 100_000)} lakh`;
 
-// Everything we do, from the services and their "what's included" lists.
-const everything = [
-  "Niche research",
-  "Scripts",
-  "Voiceover",
-  "Long-form edits",
-  "Reels and Shorts",
-  "Podcast clips",
-  "Carousels",
-  "Thumbnails and titles",
-  "Motion graphics",
-  "Captions",
-  "Daily posting",
-  "Community",
-  "YouTube SEO",
-  "Growth reports",
-  "Personal branding",
-  "Brand partnerships",
-  "Brand identity",
-  "Websites",
-  "Our own software",
-];
 
 const comparison = {
   columns: ["Freelancers", "An in-house team", "A typical agency", "SoloDac"],
   rows: [
-    { label: "Scripts, edits, design and posting under one roof", values: ["No", "Yes", "Some", "Yes"] },
+    { label: "Scripts, edits, design and posting from one team", values: ["No", "Yes", "Some", "Yes"] },
     { label: "Runs pages and channels of its own", values: ["No", "No", "Rarely", "Yes"] },
     { label: "Brand deals on pages that already have an audience", values: ["No", "No", "Rarely", "Yes"] },
     { label: "Its own editing software", values: ["No", "No", "No", "Yes, Katran"] },
@@ -63,10 +43,10 @@ const faqs = [
     q: "Do you only make reels?",
     a: "No. We run YouTube channels and Instagram pages, edit for founders and creators, build personal brands, sell brand partnerships on our pages, and make brand identities and websites. Reels are the part people see most.",
   },
-  { q: "Can I advertise on your pages?", a: "Yes. Sponsored posts, story features and launch pushes across several pages. We only take partnerships that fit the page." },
+  { q: "Can I advertise on your pages?", a: "Yes. Sponsored posts, story features and launch pushes across several pages. The Network page has the details." },
   { q: "Do you work outside India?", a: "Yes. Beyond the pages on this site we run unbranded pages and channels for audiences in the US, UK and India." },
   { q: "What is Katran?", a: "The editing software we built for our own pages. Our editors use it every day, and creators can join the waitlist." },
-  { q: "How do we start?", a: "Book a call. Thirty minutes, and we'll tell you honestly what we'd do with your page, channel or brand." },
+  { q: "How do we start?", a: "Book a call. Thirty minutes on where your page, channel or brand is today and where you want it to be." },
 ];
 
 export default function Home() {
@@ -104,8 +84,7 @@ export default function Home() {
       <section className="container py-24 sm:py-32">
         <Reveal>
           <h2 className="font-display max-w-4xl text-[clamp(2.4rem,5vw,4.25rem)] leading-[0.95] tracking-[-0.03em]">
-            Growing one page usually takes five hires.
-            <span className="block text-paper/45">We are all five.</span>
+            Growing a page usually takes five hires. We are all five.
           </h2>
         </Reveal>
         <div className="mt-12">
@@ -121,25 +100,27 @@ export default function Home() {
         <GrowthPicker />
       </section>
 
-      {/* Everything */}
+      {/* Every service */}
       <section className="bg-ink-2" aria-labelledby="everything">
         <div className="container py-24 sm:py-32">
-          <h2 id="everything" className="text-[clamp(20px,2vw,26px)] font-medium text-paper/60">
-            Everything we do, under one roof.
-          </h2>
           <Reveal>
-            <p className="font-display mt-8 text-[clamp(30px,4.2vw,64px)] leading-[1.08] tracking-[-0.03em]">
-              {everything.map((item, index) => (
-                <span key={item} className={index % 2 === 0 ? "text-paper" : "text-paper/40"}>
-                  {item}
-                  {index < everything.length - 1 ? <span className="text-paper/25"> · </span> : "."}
-                </span>
-              ))}
-            </p>
+            <h2 id="everything" className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">
+              What we do.
+            </h2>
           </Reveal>
-          <div className="mt-12">
-            <PrimaryButton href="/services">See every service</PrimaryButton>
-          </div>
+          <ul className="mt-12 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((service) => (
+              <li key={service.id}>
+                <Link href={`/services#${service.id}`} className="group block">
+                  <span className="font-display flex items-center gap-2 text-[clamp(24px,2vw,30px)] leading-tight tracking-[-0.02em] transition-colors duration-200 group-hover:text-signal">
+                    {service.title}
+                    <ArrowUpRight aria-hidden="true" className="h-5 w-5 shrink-0 text-paper/45 transition-[transform,color] duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-signal" />
+                  </span>
+                  <span className="mt-2 block text-[16px] leading-relaxed text-paper/65">{service.line}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -147,10 +128,10 @@ export default function Home() {
       <section className="container py-24 sm:py-32" aria-labelledby="reels">
         <Reveal>
           <h2 id="reels" className="font-display max-w-4xl text-[clamp(2.2rem,5vw,4.25rem)] leading-[0.98] tracking-[-0.03em]">
-            Six reels from our pages. <span className="text-paper/45">{totalReelViews} views.</span>
+            Reels from our own pages.
           </h2>
           <p className="mt-5 max-w-xl text-[18px] leading-relaxed text-paper/70">
-            Each one passed a million views. All six were made with Katran, the editor we built for our own pages.
+            Each one passed a million views. Together they have {totalReelViews}. All six were made with Katran, the editor we built for our own pages.
           </p>
         </Reveal>
         <div className="-mx-4 mt-12 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 sm:-mx-8 sm:scroll-px-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-6 lg:overflow-visible lg:px-0 lg:pb-0">
@@ -171,7 +152,7 @@ export default function Home() {
         <div className="container py-24 sm:py-32">
           <Reveal>
             <h2 id="compare" className="font-display max-w-3xl text-[clamp(2.2rem,5vw,3.75rem)] leading-[0.98] tracking-[-0.03em]">
-              Other ways to grow a page. <span className="text-ink/45">And us.</span>
+              How we compare.
             </h2>
           </Reveal>
           {/* Phones: one block per row, our answer first, so nothing hides off-screen. */}
@@ -241,12 +222,11 @@ export default function Home() {
       <section className="container py-24 sm:py-32">
         <Reveal>
           <h2 className="font-display text-[clamp(2.4rem,5.5vw,4.5rem)] leading-[0.95] tracking-[-0.03em]">
-            Katran. A full production house.
-            <span className="block text-paper/45">For less than one editor's salary.</span>
+            Katran, our own editing software.
           </h2>
           <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-xl text-[18px] leading-relaxed text-paper/70">
-              The software behind our pages. It writes, cuts, captions and designs every day. Creators get access next.
+              It writes, cuts, captions and designs for our pages every day. Creators get access next, for less than one editor's salary.
             </p>
             <PrimaryButton href="/katran" className="self-start sm:self-auto">See Katran</PrimaryButton>
           </div>
