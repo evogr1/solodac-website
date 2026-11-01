@@ -12,7 +12,7 @@ import { GhostButton, PrimaryButton } from "@/components/site";
 import { millionViewReels } from "@/lib/reels";
 import { igUrl, networkPages, totalFollowersInThousands } from "@/lib/site";
 
-const growing = ["YouTube channels.", "Instagram pages.", "personal brands.", "brands."];
+const growing = ["YouTube channels.", "Instagram pages.", "communities.", "newsletters.", "personal brands.", "brands."];
 
 const totalFollowers = `${totalFollowersInThousands.toLocaleString("en-US")},000`;
 
