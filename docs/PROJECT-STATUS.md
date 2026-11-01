@@ -68,7 +68,7 @@ Effects adapted from Toolcraft examples (MIT, Pixel Point). Ported renderers in 
 - Contact, Legal, 404: plain labels. Header: no line on scroll, filled menu button, no lines in the phone menu. Lead form: no outline.
 - Taste inspector on Services and About: remaining flags are no photos or video, the cream brand colour, and the smooth-scroll pin artifact.
 
-## Home page, breadth pass (on the preview, 1 November)
+## Home page, breadth pass (live since 1 November, PR #11)
 
 - Owner: the home page looked like SoloDac does one thing. Reference given: kyre.solutions (story order: problem, interactive "pick yours", every function, comparison, story, FAQ, close). Took the order, not their mono labels.
 - New order: rotating hero ("We grow YouTube channels / Instagram pages / personal brands / brands"), pages strip, "Growing one page usually takes five hires. We are all five." (five chips join into one bar), "What are you growing?" picker (YouTube channel, Instagram page, founder's name, brand, just editing; each with what's included, proof and its own contact link), "Everything we do, under one roof" word wall, the six reels, comparison table against freelancers / in-house / typical agency, Katran, How we work, FAQ, close.
