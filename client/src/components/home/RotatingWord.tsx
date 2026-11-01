@@ -1,47 +1,36 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 /**
- * One word at a time, sliding up out of a masked line. It runs through the list once and
- * settles back on the first word, pauses while the pointer is over it, and holds still for
- * reduced motion, so the motion always ends.
+ * One word at a time, sliding up out of a masked line. Each word holds for the same time on
+ * every device. It runs through the list once and settles back on the first word, and holds
+ * still for reduced motion, so the motion always ends.
  */
-export default function RotatingWord({ words, className, interval = 1300 }: { words: string[]; className?: string; interval?: number }) {
+export default function RotatingWord({ words, className, interval = 2000 }: { words: string[]; className?: string; interval?: number }) {
   const reduce = useReducedMotion();
   const [index, setIndex] = useState(0);
-  const paused = useRef(false);
 
   useEffect(() => {
     if (reduce) return;
-    let timer = 0;
     let steps = 0;
-    const tick = () => {
-      if (paused.current || document.hidden) return;
-      steps += 1;
-      setIndex(steps % words.length);
-      if (steps >= words.length) window.clearInterval(timer);
+    let timer = 0;
+    // A fixed beat: every change is scheduled from the start time, so a busy frame never
+    // pushes the next one later and the rhythm stays even.
+    const start = performance.now();
+    const schedule = () => {
+      const due = start + (steps + 1) * interval;
+      timer = window.setTimeout(() => {
+        steps += 1;
+        setIndex(steps % words.length);
+        if (steps < words.length) schedule();
+      }, Math.max(0, due - performance.now()));
     };
-    // Start after the headline's letters have landed.
-    const delay = window.setTimeout(() => {
-      timer = window.setInterval(tick, interval);
-    }, 1400);
-    return () => {
-      window.clearTimeout(delay);
-      window.clearInterval(timer);
-    };
+    schedule();
+    return () => window.clearTimeout(timer);
   }, [reduce, words.length, interval]);
 
   return (
-    <span
-      aria-hidden="true"
-      className={`relative block overflow-hidden pb-[0.08em] ${className ?? ""}`}
-      onPointerEnter={() => {
-        paused.current = true;
-      }}
-      onPointerLeave={() => {
-        paused.current = false;
-      }}
-    >
+    <span aria-hidden="true" className={`relative block overflow-hidden pb-[0.08em] ${className ?? ""}`}>
       <AnimatePresence mode="popLayout" initial={false}>
         <motion.span
           key={words[index]}
