@@ -1,6 +1,6 @@
 # SoloDac website: project status
 
-Last updated: 31 October 2026. This note is the source of truth for where the SoloDac site, logo and tooling work stands. Facts here were checked against the repo and the live preview, not recalled from chat.
+Last updated: 1 November 2026. This note is the source of truth for where the SoloDac site, logo and tooling work stands. Facts here were checked against the repo and the live preview, not recalled from chat.
 
 ## Where to see things
 
@@ -101,6 +101,22 @@ The pipeline step that writes titles is pasting its alternatives into the title 
 
 - Hero rotates: YouTube channels, Instagram pages, communities, newsletters, personal brands, brands. Communities and newsletters are only in the hero; owner to say what each includes before they become services.
 - Follower strip removed from the home page (owner: it made SoloDac read as Instagram-only). Hero line no longer quotes followers; comparison row is "Runs pages and channels of its own: Yes". The 636K figure stays in the picker's brand track and on the Network page.
+
+## Live on solodac.com as of 1 November (PRs #19 to #24)
+
+- Owner review pass: five-hires row, picker with a newsletter option and smooth switching, comparison on dark, rewritten steps and FAQ, Home in the nav, page and hero entrances, Services in two dark tones with Newsletter marketing (150,000+ readers, 43% average open rate), Network with real page descriptions and a dark brands section showing total reach, Katran rebuilt around "The editor behind 12 crore views" with an email signup in the hero.
+- Indore is the corporate office; Chandigarh and Noida are regional offices. GSTIN only in the footer and legal pages.
+- Page changes: the header stays outside the transition; the old page fades out, the new one rises in.
+- CLAUDE.md records the chosen art direction. `docs/SKILLS.md` lists every installed skill and plugin.
+
+## Still open (1 November)
+
+- WhatsApp or phone number for the bot: owner to send; goes under the email in the footer and on Contact.
+- Turnstile on the forms: Web3Forms Pro, or a free Worker route that verifies Turnstile (needs a site key and a Worker secret).
+- www.solodac.com shows a 522: add a redirect rule in Cloudflare and turn on Always Use HTTPS (or sign in the full Cloudflare connector so a session can do it).
+- Lucre YouTube titles with leaked pipeline text: owner to name the repo that uploads them.
+- Final logo pick from the canvas.
+- Obsidian: cloud sessions cannot reach the Windows PC. Run the sync locally after pulling `main` (see docs/SKILLS.md and the commands in the latest chat).
 
 ## Decisions waiting on the owner
 
