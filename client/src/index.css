@@ -78,9 +78,14 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   filter: blur(20px);
 }
 
-main { transition: filter 0.3s ease; }
 body.menu-open { overflow: hidden; }
-body.menu-open main { filter: blur(10px) brightness(0.6); }
+.menu-sheet { animation: menu-sheet-in 180ms ease-out both; }
+@keyframes menu-sheet-in {
+  from { opacity: 0; transform: translateY(-6px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu-sheet { animation: none; }
+}
 
 .success-panel { animation: success-enter 0.42s cubic-bezier(0.23, 1, 0.32, 1) both; }
 @keyframes success-enter {
