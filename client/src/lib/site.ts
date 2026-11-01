@@ -53,6 +53,8 @@ export type Service = {
   line: string;
   body: string;
   includes: string[];
+  /** The matching option in the contact form's "What do you need?" list. */
+  enquiry: string;
 };
 
 export const services: Service[] = [
@@ -63,6 +65,7 @@ export const services: Service[] = [
     line: "From empty channel to a schedule that runs itself.",
     body: "We pick the niche with real data, write the scripts, voice them, edit them and package them. We have run long-form channels across finance, history, travel and documentary formats, faceless and on-camera. You get a channel that posts on time and gets watched.",
     includes: ["Niche and competitor research", "Scripts and voiceover", "Long-form and Shorts editing", "Thumbnails and titles", "Upload, SEO and analytics"],
+    enquiry: "YouTube channel",
   },
   {
     id: "instagram",
@@ -71,6 +74,7 @@ export const services: Service[] = [
     line: "The same playbook that grew our own pages.",
     body: "Reels, carousels and daily posting for founders, brands and media pages. We source the stories, cut the reels, design the carousels and post on schedule. It is the exact system we run on our own pages every day.",
     includes: ["Content calendar and sourcing", "Reels with synced captions", "Carousels and one-pagers", "Daily posting and community", "Monthly growth reports"],
+    enquiry: "Instagram page",
   },
   {
     id: "editing",
@@ -79,10 +83,36 @@ export const services: Service[] = [
     line: "Send raw footage. Get back something you're proud of.",
     body: "A team of editors for long-form YouTube, reels and podcasts. You send the raw file. We handle cuts, captions, B-roll, music and graphics. Fast turnarounds, and no edits that look like AI made them.",
     includes: ["Long-form YouTube edits", "Reels and Shorts", "Podcast clips", "Motion graphics and captions", "Monthly retainers or per video"],
+    enquiry: "Editing",
+  },
+  {
+    id: "personal-branding",
+    number: "04",
+    title: "Personal branding",
+    line: "Your interviews and ideas, posted every day under your name.",
+    body: "For founders who want to be known for what they know. We cut your interviews and podcasts into reels, write posts in your voice and run the page on schedule. It is the same work we do every day for Archive of CEOs.",
+    includes: ["Reels cut from your interviews and podcasts", "Posts written in your voice", "A page that posts on schedule", "Monthly growth reports"],
+    enquiry: "Personal branding",
+  },
+  {
+    id: "partnerships",
+    number: "05",
+    title: "Brand partnerships",
+    line: "Reach people who already trust the page.",
+    body: "Sponsored posts, story features and launch pushes across our pages. Each one is written in the page's own voice, so it doesn't read like an ad. We only take partnerships that fit the page.",
+    includes: ["Sponsored reels and carousels", "Founder and company story features", "Launch pushes across several pages"],
+    enquiry: "Brand partnership",
+  },
+  {
+    id: "identity",
+    number: "06",
+    title: "Brand identity and websites",
+    line: "A look and a website that match the work.",
+    body: "Logos, brand systems and websites for founders and companies. We designed and built this site the same way.",
+    includes: ["Logo and brand system", "Templates for posts and reels", "Websites"],
+    enquiry: "Brand identity or website",
   },
 ];
-
-export const alsoDo = ["Brand partnerships on our pages", "Personal branding for founders", "Brand identity and websites"];
 
 export const katranTools = [
   {

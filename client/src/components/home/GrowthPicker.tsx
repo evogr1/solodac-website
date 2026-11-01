@@ -45,9 +45,9 @@ const tracks: Track[] = [
   {
     id: "founder",
     tab: "A founder's name",
-    title: "Personal branding",
-    line: "Your interviews and ideas, posted every day under your name.",
-    includes: ["Reels cut from your interviews and podcasts", "Posts written in your voice", "A page that posts on schedule", "Monthly growth reports"],
+    title: service("personal-branding").title,
+    line: service("personal-branding").line,
+    includes: service("personal-branding").includes,
     proof: { kind: "reel", id: "DccTI1AhTDB", note: "We already turn CEO interviews into reels on Archive of CEOs." },
     enquiry: "Personal branding",
   },

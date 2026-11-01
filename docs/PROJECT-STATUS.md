@@ -76,6 +76,27 @@ Effects adapted from Toolcraft examples (MIT, Pixel Point). Ported renderers in 
 - New copy to confirm: personal branding deliverables, the brand track ("Websites like this one"), the comparison table values for the other options.
 - Fixed a site-wide bug: an unlayered `button { font: inherit }` overrode every size and weight class on buttons. Moved into `@layer base`.
 
+## Services page: six services (on the preview, 1 November)
+
+- Hero: "Everything a page needs. Under one roof." Personal branding, Brand partnerships and Brand identity and websites are now full services in `services` (site.ts) with their own sections. `alsoDo` removed. Each service carries its contact-form option (`enquiry`).
+- New copy to confirm: the bodies and "what's included" lists for the three new services.
+
+## Lucre YouTube titles with leaked pipeline text (found 1 November)
+
+Seven live Lucre titles end with the title generator's alternatives ("Other options (YOUTUBE_RULES angles): ..."). Fix in YouTube Studio by cutting everything from "Other options". Clean titles:
+
+| Video | Title to use |
+| --- | --- |
+| https://youtu.be/r7vHAKexATk | Delhi Eats ₹17,000 Caviar With Paratha, Says Nikhil Kamath |
+| https://youtu.be/7Q-T6d4AvDk | PVR vs Producer: Who Really Gets Your ₹200 Ticket? |
+| https://youtu.be/9ytWjs2SeW8 | Raamdeo Agrawal's Top Sector Bet in a Bear Market |
+| https://youtu.be/98ABzFB2Sqo | Why Fast Food Beats Home Cooking in America, Not India |
+| https://youtu.be/xYNT588MOS4 | Sam Altman Told Nikhil Kamath to Buy These 2 Stocks |
+| https://youtu.be/tI5j04Bv884 | 1.3 Crore Indians Bet on Jio. Day One Paid 21% |
+| https://youtu.be/7Tf8SBJ7-Bw | He Drove 1 Million Miles to Sell Indian Tractors in America |
+
+The pipeline step that writes titles is pasting its alternatives into the title field. It needs fixing at the source, or new uploads will keep doing it.
+
 ## Decisions waiting on the owner
 
 1. **Final logo:** pick from the 10 directions on the canvas (first pick was 04 Solo dot). Then: header, footer, favicon, brand files, and a liquid-metal version.
