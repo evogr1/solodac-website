@@ -64,7 +64,7 @@ function Header() {
 
   return (
     <header ref={headerRef} className="fixed inset-x-0 top-0 z-50">
-      <div className={cn("transition-colors duration-300", scrolled || open ? "bg-ink/85 backdrop-blur-xl" : "bg-transparent")}>
+      <div className={cn("transition-colors duration-300", open ? "bg-ink" : scrolled ? "bg-ink/85 backdrop-blur-xl" : "bg-transparent")}>
         <div className="container flex h-[72px] items-center justify-between gap-6">
           <Link href="/" aria-label="SoloDac home">
             <Wordmark />
@@ -103,19 +103,28 @@ function Header() {
         </div>
       </div>
 
+      {/* Phone menu: a solid full-screen sheet under the bar, so nothing from the page shows through. */}
       {open && (
-        <div className="bg-ink md:hidden">
-          <nav className="container flex flex-col py-4" aria-label="Mobile">
+        <div className="menu-sheet fixed inset-x-0 bottom-0 top-[72px] flex flex-col justify-between overflow-y-auto bg-ink md:hidden">
+          <nav className="container flex flex-col pt-6" aria-label="Mobile">
             {[...nav, { label: "Contact", href: "/contact" }].map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className={cn("font-display py-3 text-3xl", location === item.href ? "text-signal" : "text-paper")}
+                className={cn("font-display py-2.5 text-[40px] leading-tight tracking-[-0.03em]", location === item.href ? "text-signal" : "text-paper")}
               >
                 {item.label}
               </Link>
             ))}
           </nav>
+          <div className="container pb-10 pt-8">
+            <Link href="/contact" className="flex items-center justify-center gap-2 rounded-full bg-signal px-6 py-4 text-[16px] font-semibold text-ink">
+              Book a call <ArrowUpRight size={17} />
+            </Link>
+            <a href={`mailto:${company.email}`} className="mt-5 block text-center text-[15px] text-paper/70">
+              {company.email}
+            </a>
+          </div>
         </div>
       )}
     </header>
