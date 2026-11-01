@@ -1,7 +1,9 @@
-import { MotionConfig, motion } from "framer-motion";
+import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import { useEffect } from "react";
 import { Redirect, Route, Switch, useLocation } from "wouter";
+import CursorFollower from "./components/effects/CursorFollower";
 import ErrorBoundary from "./components/ErrorBoundary";
+import { Header } from "./components/Layout";
 import About from "./pages/About";
 import Katran from "./pages/Katran";
 import Contact from "./pages/Contact";
@@ -53,26 +55,33 @@ function Router() {
     document.title = titles[location] ?? "Page not found | SoloDac";
   }, [location]);
 
-  // The incoming page fades in; the old one leaves at once, so a click never waits. Each page's
-  // top section then rises into place on its own (Reveal), which keeps the fixed header still.
+  // The old page fades and lifts away, then the new one rises in. The jump to the top of the
+  // new page happens in between, while nothing is on screen. The header stays outside this.
   return (
-    <motion.div key={location} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.35, ease: "easeOut" }}>
-      <Switch location={location}>
-        <Route path="/" component={Home} />
-        <Route path="/services" component={Services} />
-        <Route path="/network" component={Network} />
-        <Route path="/katran" component={Katran} />
-        <Route path="/about" component={About} />
-        <Route path="/contact" component={Contact} />
-        <Route path="/privacy">{() => <Legal doc="privacy" />}</Route>
-        <Route path="/terms">{() => <Legal doc="terms" />}</Route>
-        <Route path="/refunds">{() => <Legal doc="refunds" />}</Route>
-        {redirects.map(([from, to]) => (
-          <Route key={from} path={from}>{() => <Redirect to={to} replace />}</Route>
-        ))}
-        <Route component={NotFound} />
-      </Switch>
-    </motion.div>
+    <AnimatePresence mode="wait" initial={false}>
+      <motion.div
+        key={location}
+        initial={{ opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.23, 1, 0.32, 1] } }}
+        exit={{ opacity: 0, y: -8, transition: { duration: 0.2, ease: [0.55, 0, 1, 0.45] } }}
+      >
+        <Switch location={location}>
+          <Route path="/" component={Home} />
+          <Route path="/services" component={Services} />
+          <Route path="/network" component={Network} />
+          <Route path="/katran" component={Katran} />
+          <Route path="/about" component={About} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/privacy">{() => <Legal doc="privacy" />}</Route>
+          <Route path="/terms">{() => <Legal doc="terms" />}</Route>
+          <Route path="/refunds">{() => <Legal doc="refunds" />}</Route>
+          {redirects.map(([from, to]) => (
+            <Route key={from} path={from}>{() => <Redirect to={to} replace />}</Route>
+          ))}
+          <Route component={NotFound} />
+        </Switch>
+      </motion.div>
+    </AnimatePresence>
   );
 }
 
@@ -81,7 +90,9 @@ function App() {
     <ErrorBoundary>
       {/* Every Framer animation on the site follows the visitor's reduce-motion setting. */}
       <MotionConfig reducedMotion="user">
+        <Header />
         <Router />
+        <CursorFollower />
       </MotionConfig>
     </ErrorBoundary>
   );

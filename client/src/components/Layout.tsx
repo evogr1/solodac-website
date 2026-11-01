@@ -4,7 +4,6 @@ import { Link, useLocation } from "wouter";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
 import { scrollToId } from "@/lib/smoothScroll";
 import { company, nav } from "@/lib/site";
-import CursorFollower from "@/components/effects/CursorFollower";
 import { cn } from "@/lib/utils";
 
 export function Wordmark({ className }: { className?: string }) {
@@ -15,7 +14,7 @@ export function Wordmark({ className }: { className?: string }) {
   );
 }
 
-function Header() {
+export function Header() {
   const [location] = useLocation();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -201,12 +200,11 @@ export default function Layout({ children }: { children: ReactNode }) {
     return () => window.clearTimeout(timer);
   }, []);
 
+  // The header and cursor live in App, outside the page transition, so they never flicker.
   return (
     <>
-      <Header />
       <main>{children}</main>
       <Footer />
-      <CursorFollower />
     </>
   );
 }
