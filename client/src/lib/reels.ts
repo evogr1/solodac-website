@@ -15,3 +15,7 @@ export const millionViewReels: ReelData[] = [
   { id: "ksM-TrcSDvo", title: "The ad mocking India's 70-hour workweek", poster: workweek, page: "Lucre", views: 3646045 },
   { id: "RL3VW4gj7_w", title: "Ashneer Grover: how Salman Khan and 11 cricketers built BharatPe", poster: bharatpe, page: "Lucre", views: 3021182 },
 ];
+
+// The six reels' views together, said the way our readers count it (lakh below a crore).
+const reelViewSum = millionViewReels.reduce((sum, reel) => sum + reel.views, 0);
+export const totalReelViews = reelViewSum >= 10_000_000 ? `${Math.floor(reelViewSum / 10_000_000)} crore` : `${Math.floor(reelViewSum / 100_000)} lakh`;

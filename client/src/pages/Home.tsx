@@ -10,15 +10,10 @@ import RotatingWord from "@/components/home/RotatingWord";
 import Reel from "@/components/katran/Reel";
 import Reveal from "@/components/Reveal";
 import { GhostButton, PrimaryButton } from "@/components/site";
-import { millionViewReels } from "@/lib/reels";
+import { millionViewReels, totalReelViews } from "@/lib/reels";
 import { services } from "@/lib/site";
 
 const growing = ["YouTube channels.", "personal brands.", "Instagram pages.", "communities.", "brands.", "newsletters."];
-
-// 123.9 million across the six reels, said the way our readers count it (lakh below a crore).
-const reelViewSum = millionViewReels.reduce((sum, reel) => sum + reel.views, 0);
-const totalReelViews = reelViewSum >= 10_000_000 ? `${Math.floor(reelViewSum / 10_000_000)} crore` : `${Math.floor(reelViewSum / 100_000)} lakh`;
-
 
 const comparison = {
   columns: ["Freelancers", "An in-house team", "A typical agency", "SoloDac"],
@@ -32,22 +27,23 @@ const comparison = {
 };
 
 const steps = [
-  { title: "Call", body: "Thirty minutes on what you have, what you want and what's in the way." },
-  { title: "Plan", body: "We come back with a niche, a format and a posting schedule that we'd bet on." },
-  { title: "Build", body: "Scripts, edits, designs and posts go out on schedule. You approve, we ship." },
-  { title: "Report", body: "Every month you see what worked, what didn't and what we're changing." },
-];
+  { title: "A 30-minute call", body: "We look at your page, channel or brand with you and tell you plainly whether we can help." },
+  { title: "A plan in writing", body: "The niche, the formats, the posting schedule and the monthly price, agreed before any work starts." },
+  { title: "Work goes out on schedule", body: "Our team scripts, edits, designs and posts. Nothing goes live without your sign-off." },
+  { title: "A monthly review", body: "The numbers, what worked, what didn't and what we change next month." },
+]
 
 const faqs = [
   {
-    q: "Do you only make reels?",
-    a: "No. We run YouTube channels and Instagram pages, edit for founders and creators, build personal brands, sell brand partnerships on our pages, and make brand identities and websites. Reels are the part people see most.",
+    q: "Is SoloDac only about reels?",
+    a: "No. We run YouTube channels, Instagram pages and newsletters, edit for founders and creators, build personal brands, run brand partnerships on our pages, and design brand identities and websites. Reels are simply the part people see first.",
   },
-  { q: "Can I advertise on your pages?", a: "Yes. Sponsored posts, story features and launch pushes across several pages. The Network page has the details." },
-  { q: "Do you work outside India?", a: "Yes. Beyond the pages on this site we run unbranded pages and channels for audiences in the US, UK and India." },
-  { q: "What is Katran?", a: "The editing software we built for our own pages. Our editors use it every day, and creators can join the waitlist." },
-  { q: "How do we start?", a: "Book a call. Thirty minutes on where your page, channel or brand is today and where you want it to be." },
-];
+  { q: "Can my brand advertise on your pages?", a: "Yes. We offer sponsored posts, story features and launch campaigns across several pages. The Network page lists the audiences." },
+  { q: "Do you work with clients outside India?", a: "Yes. Alongside the pages on this site, we run unbranded pages and channels for audiences in the US, the UK and India." },
+  { q: "How is the work priced?", a: "Most work runs on a monthly retainer. You get the price in writing, with what it covers, before anything starts." },
+  { q: "What is Katran?", a: "The editing software we built for our own pages. Our editors use it every day, and creators can join the waitlist for early access." },
+  { q: "How do we get started?", a: "Book a 30-minute call. We'll look at where your page, channel or brand is today and where you want it to be." },
+]
 
 export default function Home() {
   return (
@@ -148,7 +144,7 @@ export default function Home() {
       </section>
 
       {/* Comparison */}
-      <section className="bg-paper text-ink" aria-labelledby="compare">
+      <section className="bg-ink-2" aria-labelledby="compare">
         <div className="container py-24 sm:py-32">
           <Reveal>
             <h2 id="compare" className="font-display max-w-3xl text-[clamp(2.2rem,5vw,3.75rem)] leading-[0.98] tracking-[-0.03em]">
@@ -162,11 +158,11 @@ export default function Home() {
               return (
                 <div key={row.label}>
                   <dt className="text-[18px] font-semibold leading-snug">{row.label}</dt>
-                  <dd className="mt-3 flex items-baseline justify-between gap-4 rounded-[12px] bg-ink px-4 py-3 text-paper">
-                    <span className="text-[15px]">SoloDac</span>
+                  <dd className="mt-3 flex items-baseline justify-between gap-4 rounded-[12px] bg-paper/[0.07] px-4 py-3">
+                    <span className="text-[15px] font-semibold text-signal">SoloDac</span>
                     <span className="text-[16px] font-semibold">{ours}</span>
                   </dd>
-                  <dd className="mt-2 space-y-1 px-4 text-[15px] text-ink/65">
+                  <dd className="mt-2 space-y-1 px-4 text-[15px] text-paper/65">
                     {comparison.columns.slice(0, -1).map((column, index) => (
                       <div key={column} className="flex justify-between gap-4">
                         <span>{column}</span>
@@ -182,12 +178,12 @@ export default function Home() {
             <table className="w-full border-collapse text-left">
               <thead>
                 <tr>
-                  <th className="w-[34%] pb-5 text-[15px] font-normal text-ink/55" scope="col"><span className="sr-only">Compared on</span></th>
+                  <th className="w-[34%] pb-5 text-[15px] font-normal text-paper/55" scope="col"><span className="sr-only">Compared on</span></th>
                   {comparison.columns.map((column, index) => (
                     <th
                       key={column}
                       scope="col"
-                      className={`pb-5 pl-4 text-[16px] font-semibold ${index === comparison.columns.length - 1 ? "rounded-t-[14px] bg-ink pt-5 text-paper" : "text-ink/70"}`}
+                      className={`pb-5 pl-4 text-[16px] font-semibold ${index === comparison.columns.length - 1 ? "rounded-t-[14px] bg-paper/[0.07] pt-5 text-signal" : "text-paper/70"}`}
                     >
                       {column}
                     </th>
@@ -196,7 +192,7 @@ export default function Home() {
               </thead>
               <tbody>
                 {comparison.rows.map((row, rowIndex) => (
-                  <tr key={row.label} className="border-t border-ink/10">
+                  <tr key={row.label} className="border-t border-paper/10">
                     <th scope="row" className="py-5 pr-6 text-[17px] font-medium">{row.label}</th>
                     {row.values.map((value, index) => {
                       const ours = index === row.values.length - 1;
@@ -204,7 +200,7 @@ export default function Home() {
                       return (
                         <td
                           key={index}
-                          className={`py-5 pl-4 text-[16px] ${ours ? `bg-ink font-semibold text-paper ${last ? "rounded-b-[14px]" : ""}` : value === "No" ? "text-ink/55" : "text-ink/80"}`}
+                          className={`py-5 pl-4 text-[16px] ${ours ? `bg-paper/[0.07] font-semibold text-paper ${last ? "rounded-b-[14px]" : ""}` : value === "No" ? "text-paper/55" : "text-paper/80"}`}
                         >
                           {value}
                         </td>
@@ -237,16 +233,21 @@ export default function Home() {
       <section className="bg-ink-2">
         <div className="container py-24 sm:py-32">
           <Reveal>
-            <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">How we work.</h2>
+            <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">How we work with you.</h2>
           </Reveal>
-          <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          {/* A real sequence, so the steps sit on one line with a marker each, start to finish. */}
+          <ol className="relative mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+            <span aria-hidden="true" className="absolute left-0 right-0 top-[5px] hidden h-px bg-paper/15 lg:block" />
             {steps.map((step, index) => (
-              <Reveal key={step.title} delay={index * 0.06}>
-                <h3 className="font-display text-3xl tracking-[-0.02em]">{step.title}</h3>
-                <p className="mt-3 text-[17px] leading-relaxed text-paper/65">{step.body}</p>
-              </Reveal>
+              <li key={step.title} className="relative">
+                <Reveal delay={index * 0.08} y={16}>
+                  <span aria-hidden="true" className={`block h-[11px] w-[11px] rounded-full ${index === 0 ? "bg-signal" : "bg-paper"}`} />
+                  <h3 className="font-display mt-6 text-[clamp(24px,2vw,30px)] leading-tight tracking-[-0.02em]">{step.title}</h3>
+                  <p className="mt-3 text-[17px] leading-relaxed text-paper/65">{step.body}</p>
+                </Reveal>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
@@ -254,7 +255,7 @@ export default function Home() {
       <section className="container py-24 sm:py-32">
         <div className="grid gap-12 lg:grid-cols-12">
           <Reveal className="lg:col-span-4">
-            <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">Questions we get.</h2>
+            <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">Common questions.</h2>
           </Reveal>
           <dl className="space-y-10 lg:col-span-7 lg:col-start-6">
             {faqs.map((faq, index) => (

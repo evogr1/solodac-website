@@ -3,7 +3,7 @@ import Layout from "@/components/Layout";
 import NetworkGlobe from "@/components/effects/NetworkGlobe";
 import Reveal from "@/components/Reveal";
 import { CtaBand, PageHero, PrimaryButton } from "@/components/site";
-import { igUrl, networkPages } from "@/lib/site";
+import { igUrl, networkPages, totalFollowersInThousands } from "@/lib/site";
 
 const offers = [
   { title: "Sponsored posts", body: "A reel or carousel about your product, written in the page's own voice so it doesn't read like an ad." },
@@ -49,35 +49,40 @@ export default function Network() {
               </a>
             </Reveal>
           ))}
-
-          <Reveal delay={0.12}>
-            <div className="flex h-full flex-col justify-end p-7">
-              <div>
-                <h2 className="font-display text-3xl tracking-[-0.02em]">Pages and channels we don't name.</h2>
-                <p className="mt-4 leading-relaxed text-paper/60">
-                  Long-form YouTube channels and niche Instagram pages across the US, UK and India. Ask us on a call and we'll walk you through the ones that fit your brief.
-                </p>
-              </div>
-            </div>
-          </Reveal>
         </div>
+
+        <Reveal className="mt-4">
+          <div className="flex flex-col gap-6 rounded-2xl bg-ink-2 p-7 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+            <div className="max-w-2xl">
+              <h2 className="text-[20px] font-semibold">We also run pages we don't put our name on.</h2>
+              <p className="mt-2 text-[17px] leading-relaxed text-paper/65">
+                Long-form YouTube channels and niche Instagram pages for audiences in the US, the UK and India. On a call, we'll show you the ones that fit your brief.
+              </p>
+            </div>
+            <PrimaryButton href="/contact?service=Brand%20partnership" className="self-start sm:self-auto">Ask on a call</PrimaryButton>
+          </div>
+        </Reveal>
       </section>
 
-      <section className="bg-paper text-ink">
-        <div className="container grid gap-12 py-20 sm:py-28 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
-          <div>
-            <h2 className="font-display text-[clamp(2.2rem,5vw,3.75rem)] leading-[0.98] tracking-[-0.03em]">Put your brand in front of these audiences.</h2>
-            <p className="mt-5 max-w-md text-ink/65">We only take partnerships that fit the page. That's why people still trust what the pages post.</p>
+      <section className="bg-ink-2" aria-labelledby="brands">
+        <div className="container grid gap-12 py-20 sm:py-28 lg:grid-cols-[1fr_1.3fr] lg:gap-20">
+          <Reveal>
+            <h2 id="brands" className="font-display text-[clamp(2.2rem,5vw,3.75rem)] leading-[0.98] tracking-[-0.03em]">Put your brand in front of these audiences.</h2>
+            <p className="mt-8 font-display text-[clamp(56px,7vw,104px)] leading-none tracking-[-0.04em] text-signal">{totalFollowersInThousands}K</p>
+            <p className="mt-2 text-[17px] text-paper/70">people follow these five pages.</p>
+            <p className="mt-6 max-w-md text-[17px] leading-relaxed text-paper/65">We only take partnerships that fit the page. That's why people still trust what the pages post.</p>
             <div className="mt-9">
-              <PrimaryButton href="/contact?service=Brand%20partnership" className="hover:bg-ink hover:text-paper">Advertise with us</PrimaryButton>
+              <PrimaryButton href="/contact?service=Brand%20partnership">Advertise with us</PrimaryButton>
             </div>
-          </div>
-          <div className="grid gap-3">
-            {offers.map((offer) => (
-              <div key={offer.title} className="rounded-2xl bg-paper-2 p-6 sm:p-7">
-                <div className="font-display text-2xl">{offer.title}</div>
-                <p className="mt-2 text-ink/65">{offer.body}</p>
-              </div>
+          </Reveal>
+          <div className="grid content-start gap-3">
+            {offers.map((offer, index) => (
+              <Reveal key={offer.title} delay={index * 0.06}>
+                <div className="rounded-2xl bg-ink p-6 sm:p-7">
+                  <div className="font-display text-2xl tracking-[-0.02em]">{offer.title}</div>
+                  <p className="mt-2 text-[17px] leading-relaxed text-paper/65">{offer.body}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>

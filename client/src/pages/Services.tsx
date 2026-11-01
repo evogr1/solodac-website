@@ -22,19 +22,19 @@ export default function Services() {
       </PageHero>
 
       {services.map((service, index) => (
-        <section key={service.id} id={service.id} className={index % 2 === 1 ? "bg-paper text-ink" : ""}>
+        <section key={service.id} id={service.id} className={index % 2 === 1 ? "bg-ink-2" : ""}>
           <div className="container grid gap-12 py-20 sm:py-28 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
             <Reveal>
               <h2 className="font-display text-[clamp(2.6rem,6vw,5rem)] leading-[0.92] tracking-[-0.03em]">{service.title}</h2>
-              <p className={`mt-5 text-[22px] leading-snug sm:text-2xl ${index % 2 === 1 ? "text-ink/80" : "text-paper/80"}`}>{service.line}</p>
-              <p className={`mt-6 max-w-xl text-base leading-relaxed sm:text-lg ${index % 2 === 1 ? "text-ink/65" : "text-paper/65"}`}>{service.body}</p>
+              <p className="mt-5 text-[22px] leading-snug text-paper/80 sm:text-2xl">{service.line}</p>
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-paper/65 sm:text-lg">{service.body}</p>
               <div className="mt-9">
-                <PrimaryButton href={`/contact?service=${encodeURIComponent(service.enquiry)}`} className={index % 2 === 1 ? "hover:bg-ink hover:text-paper" : undefined}>Talk to us about this</PrimaryButton>
+                <PrimaryButton href={`/contact?service=${encodeURIComponent(service.enquiry)}`}>Talk to us about this</PrimaryButton>
               </div>
             </Reveal>
             <Reveal delay={0.1}>
-              <div className={`rounded-2xl p-7 sm:p-9 ${index % 2 === 1 ? "bg-paper-2" : "bg-ink-2"}`}>
-                <div className={`text-[15px] ${index % 2 === 1 ? "text-ink/55" : "text-paper/55"}`}>What's included</div>
+              <div className={`rounded-2xl p-7 sm:p-9 ${index % 2 === 1 ? "bg-ink" : "bg-ink-2"}`}>
+                <div className="text-[15px] text-paper/55">What's included</div>
                 <ul className="mt-6 space-y-4">
                   {service.includes.map((item) => (
                     <li key={item} className="flex items-start gap-3 text-base sm:text-lg">

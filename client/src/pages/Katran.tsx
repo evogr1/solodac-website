@@ -1,125 +1,178 @@
-import { motion, useReducedMotion } from "framer-motion";
-import type { ReactNode } from "react";
+import { ArrowRight, Check, Loader2 } from "lucide-react";
+import { useState, type FormEvent } from "react";
 import Reel from "@/components/katran/Reel";
 import Layout from "@/components/Layout";
 import LeadForm from "@/components/LeadForm";
-import { millionViewReels as reels } from "@/lib/reels";
+import Reveal from "@/components/Reveal";
+import { millionViewReels as reels, totalReelViews } from "@/lib/reels";
+import { katranTools } from "@/lib/site";
 import { scrollToId } from "@/lib/smoothScroll";
+import { submitForm } from "@/lib/web3forms";
 
-const ways = [
-  {
-    title: "Reels from long videos",
-    body: "Send a podcast, interview or talk. Katran finds the moment worth posting, cuts it vertical, writes the hook and sets the captions.",
-  },
-  {
-    title: "YouTube videos from a voiceover",
-    body: "Send the voiceover. Katran cuts footage to the script and adds the titles and the music.",
-  },
-  {
-    title: "Carousels from a topic",
-    body: "Send a topic. Katran writes the slides, designs them and checks the facts.",
-  },
+const steps = [
+  { title: "Send something", body: "A podcast or interview link, a voiceover, or just a topic." },
+  { title: "Katran makes the cut", body: "It picks the moment, cuts it, writes the hook, sets the captions and designs the frames in your page's style." },
+  { title: "You check it and post", body: "Change anything you like. Katran remembers your style, so the next one needs fewer changes." },
 ];
 
 const faqs = [
-  { q: "Is it live?", a: "Yes, for us. Our editors and our pages use it every day. Creator access opens in batches, and the waitlist goes first." },
-  { q: "Will my videos look AI-made?", a: "That's the one thing we built it to avoid. If an edit wouldn't pass on our own pages, it doesn't ship." },
-  { q: "Who is it for?", a: "YouTube creators, Instagram page owners and small editing teams who post a lot and want to spend less time on the timeline." },
-  { q: "What will it cost?", a: "Less than one full-time editor's monthly salary. Exact pricing goes to the waitlist first." },
+  { q: "Is it live?", a: "Yes, inside SoloDac. Our editors and our pages use it every day. Creators get access in batches, and the waitlist goes first." },
+  { q: "Will my videos look AI-made?", a: "That is the one thing we built it to avoid. If an edit wouldn't pass on our own pages, it doesn't ship." },
+  { q: "Who is it for?", a: "YouTube creators, Instagram page owners and small editing teams who post often and want to spend less time on the timeline." },
+  { q: "What will it cost?", a: "Less than one full-time editor's monthly salary. The waitlist gets exact pricing first." },
 ];
 
-const ease = [0.16, 1, 0.3, 1] as const;
+/** Email only, right in the hero, for people who are already convinced. */
+function QuickJoin() {
+  const [email, setEmail] = useState("");
+  const [trap, setTrap] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
-/** Rises once into place as it enters; static for reduced motion. */
-function Rise({ children, delay = 0, className }: { children: ReactNode; delay?: number; className?: string }) {
-  const reduce = useReducedMotion();
-  return (
-    <motion.div
-      className={className}
-      initial={reduce ? false : { opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-      transition={{ duration: 0.8, delay, ease }}
-    >
-      {children}
-    </motion.div>
-  );
-}
+  async function onSubmit(event: FormEvent) {
+    event.preventDefault();
+    setStatus("sending");
+    if (trap) return setStatus("sent");
+    try {
+      await submitForm("Katran waitlist", { email });
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
+  }
 
-function JoinButton({ className = "" }: { className?: string }) {
+  if (status === "sent") {
+    return (
+      <p role="status" className="flex items-start gap-3 text-[17px] leading-relaxed text-paper/85">
+        <Check size={20} className="mt-1 shrink-0 text-signal" />
+        <span>
+          You're on the list.{" "}
+          <button type="button" onClick={() => scrollToId("waitlist")} className="underline decoration-paper/30 underline-offset-4 hover:decoration-signal">
+            Tell us what you make
+          </button>{" "}
+          to get in sooner.
+        </span>
+      </p>
+    );
+  }
+
   return (
-    <button
-      type="button"
-      onClick={() => scrollToId("waitlist")}
-      className={`rounded-full bg-signal px-6 py-3.5 text-[15px] font-semibold text-ink transition-[background-color,transform] duration-150 ease-out hover:bg-paper active:scale-[0.97] ${className}`}
-    >
-      Join the waitlist
-    </button>
+    <form onSubmit={onSubmit} className="w-full max-w-[30rem]">
+      <div className="flex flex-col gap-2 rounded-full sm:flex-row sm:bg-ink-2 sm:p-1.5">
+        <label htmlFor="quick-email" className="sr-only">Email</label>
+        <input
+          id="quick-email"
+          type="email"
+          required
+          maxLength={254}
+          placeholder="Your email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          className="min-w-0 flex-1 rounded-full border border-paper/15 bg-ink-2 px-5 py-3.5 text-[16px] text-paper placeholder:text-paper/50 focus:border-signal focus:outline-none sm:border-0 sm:bg-transparent"
+        />
+        <input type="text" name="botcheck" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" value={trap} onChange={(event) => setTrap(event.target.value)} />
+        <button
+          type="submit"
+          disabled={status === "sending"}
+          className="inline-flex items-center justify-center gap-2 rounded-full bg-signal px-6 py-3.5 text-[15px] font-semibold text-ink transition-[background-color,transform] duration-150 ease-out hover:bg-paper active:scale-[0.97] disabled:opacity-60"
+        >
+          {status === "sending" && <Loader2 size={16} className="animate-spin" />}
+          Get early access
+        </button>
+      </div>
+      <p role="alert" className="mt-3 px-2 text-[14px] text-signal-soft">
+        {status === "error" && "That didn't go through. Try again or email info@solodac.com."}
+      </p>
+    </form>
   );
 }
 
 export default function Katran() {
   return (
     <Layout>
-      <section className="container pt-32 sm:pt-36 lg:pt-40">
-        <Rise>
-          <h1 className="font-display text-[clamp(44px,5.6vw,92px)] leading-[0.95] tracking-[-0.04em]">
-            A full production house.
-            <span className="block text-paper/45">For less than one editor's salary.</span>
+      <section className="container pt-32 sm:pt-40">
+        <Reveal>
+          <h1 className="font-display max-w-5xl text-[clamp(44px,6.4vw,104px)] leading-[0.94] tracking-[-0.04em]">
+            The editor behind {totalReelViews} views.
           </h1>
-        </Rise>
-        <Rise delay={0.1} className="mt-10 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="max-w-[36rem] text-[18px] leading-relaxed text-paper/80">
-            Katran writes, cuts, captions and designs for the SoloDac pages. Reels, YouTube videos and carousels, every day.
+        </Reveal>
+        <Reveal delay={0.08}>
+          <p className="mt-8 max-w-2xl text-[19px] leading-relaxed text-paper/80">
+            Katran turns long videos, voiceovers and topics into reels, YouTube videos and carousels. Our own pages post with it every day. Creators get access next, for less than one editor's monthly salary.
           </p>
-          <JoinButton className="self-start sm:self-auto" />
-        </Rise>
+        </Reveal>
+        <Reveal delay={0.16} className="mt-9">
+          <QuickJoin />
+        </Reveal>
       </section>
 
       <section className="pb-24 pt-16 sm:pb-32 lg:pt-20" aria-labelledby="reels">
         <div className="container">
           <h2 id="reels" className="text-[15px] text-paper/60">
-            Made by Katran. Each one passed a million views. Tap to watch.
+            Made with Katran on our own pages. Each one passed a million views.
           </h2>
         </div>
         <div className="container mt-5">
           <div className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 sm:-mx-8 sm:scroll-px-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-6 lg:overflow-visible lg:px-0 lg:pb-0">
             {reels.map((reel, index) => (
-              <Rise key={reel.id} delay={0.15 + index * 0.06} className="w-[62vw] max-w-[260px] shrink-0 snap-start sm:w-[34vw] lg:w-auto lg:max-w-none">
+              <Reveal key={reel.id} delay={0.1 + index * 0.05} className="w-[62vw] max-w-[260px] shrink-0 snap-start sm:w-[34vw] lg:w-auto lg:max-w-none">
                 <Reel reel={reel} />
-              </Rise>
+              </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="bg-ink-2" aria-labelledby="how">
+        <div className="container py-24 sm:py-32">
+          <Reveal>
+            <h2 id="how" className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">How it works.</h2>
+          </Reveal>
+          <ol className="relative mt-14 grid gap-10 md:grid-cols-3 md:gap-8">
+            <span aria-hidden="true" className="absolute left-0 right-0 top-[5px] hidden h-px bg-paper/15 md:block" />
+            {steps.map((step, index) => (
+              <li key={step.title} className="relative">
+                <Reveal delay={index * 0.08} y={16}>
+                  <span aria-hidden="true" className={`block h-[11px] w-[11px] rounded-full ${index === 0 ? "bg-signal" : "bg-paper"}`} />
+                  <h3 className="font-display mt-6 text-[clamp(24px,2vw,30px)] leading-tight tracking-[-0.02em]">{step.title}</h3>
+                  <p className="mt-3 max-w-[22rem] text-[17px] leading-relaxed text-paper/65">{step.body}</p>
+                </Reveal>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="container py-24 sm:py-32" aria-labelledby="makes">
+        <Reveal>
+          <h2 id="makes" className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">What goes in. What comes out.</h2>
+        </Reveal>
+        <div className="mt-14 grid gap-4 md:grid-cols-3">
+          {katranTools.map((tool, index) => (
+            <Reveal key={tool.name} delay={index * 0.06}>
+              <div className="flex h-full flex-col rounded-2xl bg-ink-2 p-7">
+                <p className="flex items-center gap-2 text-[15px] text-paper/60">
+                  {tool.input}
+                  <ArrowRight aria-hidden="true" size={15} className="text-signal" />
+                </p>
+                <h3 className="font-display mt-3 text-[clamp(26px,2.2vw,32px)] leading-tight tracking-[-0.02em]">{tool.output}</h3>
+                <p className="mt-4 text-[16px] leading-relaxed text-paper/65">{tool.body}</p>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </section>
 
       <section className="container pb-24 sm:pb-32">
         <div className="grid gap-12 lg:grid-cols-12">
-          <Rise className="lg:col-span-4">
-            <h2 className="font-display text-[clamp(40px,4.4vw,68px)] leading-[0.98] tracking-[-0.04em]">What it makes.</h2>
-          </Rise>
-          <div className="space-y-12 lg:col-span-7 lg:col-start-6">
-            {ways.map((way, index) => (
-              <Rise key={way.title} delay={index * 0.06}>
-                <h3 className="font-display text-[clamp(26px,2.4vw,36px)] leading-tight tracking-[-0.02em]">{way.title}</h3>
-                <p className="mt-3 max-w-[34rem] text-[18px] leading-relaxed text-paper/75">{way.body}</p>
-              </Rise>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="container py-24 sm:py-32">
-        <div className="grid gap-12 lg:grid-cols-12">
-          <Rise className="lg:col-span-4">
-            <h2 className="font-display text-[clamp(40px,4.4vw,68px)] leading-[0.98] tracking-[-0.04em]">Before you join.</h2>
-          </Rise>
+          <Reveal className="lg:col-span-4">
+            <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">Before you join.</h2>
+          </Reveal>
           <dl className="space-y-10 lg:col-span-7 lg:col-start-6">
             {faqs.map((faq, index) => (
-              <Rise key={faq.q} delay={index * 0.05}>
+              <Reveal key={faq.q} delay={index * 0.05}>
                 <dt className="text-[20px] font-semibold">{faq.q}</dt>
                 <dd className="mt-2 max-w-[34rem] text-[18px] leading-relaxed text-paper/75">{faq.a}</dd>
-              </Rise>
+              </Reveal>
             ))}
           </dl>
         </div>
@@ -127,13 +180,13 @@ export default function Katran() {
 
       <section id="waitlist" className="bg-ink-2">
         <div className="container grid gap-12 py-24 sm:py-32 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <h2 className="font-display text-[clamp(40px,4.4vw,68px)] leading-[0.98] tracking-[-0.04em]">Join the waitlist.</h2>
+          <Reveal className="lg:col-span-4">
+            <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">Get early access.</h2>
             <p className="mt-6 max-w-[26rem] text-[18px] leading-relaxed text-paper/75">
-              Tell us what you make. We open access in batches and pick creators whose work fits each batch.
+              Tell us what you make. We open access in batches and pick the creators whose work fits each one.
             </p>
-          </div>
-          <div className="lg:col-span-7 lg:col-start-6">
+          </Reveal>
+          <Reveal delay={0.08} className="lg:col-span-7 lg:col-start-6">
             <LeadForm
               subject="Katran waitlist"
               submitLabel="Join the waitlist"
@@ -147,7 +200,7 @@ export default function Katran() {
                 { name: "link", label: "Channel or page link", type: "url", placeholder: "https://" },
               ]}
             />
-          </div>
+          </Reveal>
         </div>
       </section>
     </Layout>

@@ -16,7 +16,8 @@ Marketing site for SoloDac (solodac.com): React 19 + Vite + Tailwind v4 + wouter
 ## Business facts
 
 - Trade name SOLODAC, a proprietorship of Harshil Rekhi. GSTIN 23FNWPR3444D1ZO.
-- Locations: Chandigarh (main base), Noida (office), Indore (registered office, legal jurisdiction).
+- Locations: Indore (corporate and registered office, legal jurisdiction), Chandigarh and Noida (regional offices).
+- Do not show the GSTIN on marketing pages. It stays in the footer and the legal pages only.
 - Legal terms on /privacy, /terms and /refunds were approved by the owner.
 
 ## Design
