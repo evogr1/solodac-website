@@ -68,13 +68,34 @@ Effects adapted from Toolcraft examples (MIT, Pixel Point). Ported renderers in 
 - Contact, Legal, 404: plain labels. Header: no line on scroll, filled menu button, no lines in the phone menu. Lead form: no outline.
 - Taste inspector on Services and About: remaining flags are no photos or video, the cream brand colour, and the smooth-scroll pin artifact.
 
-## Home page, breadth pass (on the preview, 1 November)
+## Home page, breadth pass (live since 1 November, PR #11)
 
 - Owner: the home page looked like SoloDac does one thing. Reference given: kyre.solutions (story order: problem, interactive "pick yours", every function, comparison, story, FAQ, close). Took the order, not their mono labels.
 - New order: rotating hero ("We grow YouTube channels / Instagram pages / personal brands / brands"), pages strip, "Growing one page usually takes five hires. We are all five." (five chips join into one bar), "What are you growing?" picker (YouTube channel, Instagram page, founder's name, brand, just editing; each with what's included, proof and its own contact link), "Everything we do, under one roof" word wall, the six reels, comparison table against freelancers / in-house / typical agency, Katran, How we work, FAQ, close.
 - New components in `client/src/components/home/`. Follower total now comes from `totalFollowersInThousands` in `site.ts`.
 - New copy to confirm: personal branding deliverables, the brand track ("Websites like this one"), the comparison table values for the other options.
 - Fixed a site-wide bug: an unlayered `button { font: inherit }` overrode every size and weight class on buttons. Moved into `@layer base`.
+
+## Services page: six services (on the preview, 1 November)
+
+- Hero: "Everything a page needs. Under one roof." Personal branding, Brand partnerships and Brand identity and websites are now full services in `services` (site.ts) with their own sections. `alsoDo` removed. Each service carries its contact-form option (`enquiry`).
+- New copy to confirm: the bodies and "what's included" lists for the three new services.
+
+## Lucre YouTube titles with leaked pipeline text (found 1 November)
+
+Seven live Lucre titles end with the title generator's alternatives ("Other options (YOUTUBE_RULES angles): ..."). Fix in YouTube Studio by cutting everything from "Other options". Clean titles:
+
+| Video | Title to use |
+| --- | --- |
+| https://youtu.be/r7vHAKexATk | Delhi Eats ₹17,000 Caviar With Paratha, Says Nikhil Kamath |
+| https://youtu.be/7Q-T6d4AvDk | PVR vs Producer: Who Really Gets Your ₹200 Ticket? |
+| https://youtu.be/9ytWjs2SeW8 | Raamdeo Agrawal's Top Sector Bet in a Bear Market |
+| https://youtu.be/98ABzFB2Sqo | Why Fast Food Beats Home Cooking in America, Not India |
+| https://youtu.be/xYNT588MOS4 | Sam Altman Told Nikhil Kamath to Buy These 2 Stocks |
+| https://youtu.be/tI5j04Bv884 | 1.3 Crore Indians Bet on Jio. Day One Paid 21% |
+| https://youtu.be/7Tf8SBJ7-Bw | He Drove 1 Million Miles to Sell Indian Tractors in America |
+
+The pipeline step that writes titles is pasting its alternatives into the title field. It needs fixing at the source, or new uploads will keep doing it.
 
 ## Decisions waiting on the owner
 
