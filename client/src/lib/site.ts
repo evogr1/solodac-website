@@ -93,7 +93,7 @@ export const services: Service[] = [
     id: "partnerships",
     title: "Brand partnerships",
     line: "Reach people who already trust the page.",
-    body: "Sponsored posts, story features and launch pushes across our pages. Each one is written in the page's own voice, so it doesn't read like an ad. We only take partnerships that fit the page.",
+    body: "Sponsored posts, story features and launch pushes across our pages. Each one is written in the page's own voice, so it doesn't read like an ad.",
     includes: ["Sponsored reels and carousels", "Founder and company story features", "Launch pushes across several pages"],
     enquiry: "Brand partnership",
   },
