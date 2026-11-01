@@ -1,9 +1,7 @@
-import { Toaster } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { AnimatePresence, motion } from "framer-motion";
+import { MotionConfig, motion } from "framer-motion";
+import { useEffect } from "react";
 import { Redirect, Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
-import { ThemeProvider } from "./contexts/ThemeContext";
 import About from "./pages/About";
 import Katran from "./pages/Katran";
 import Contact from "./pages/Contact";
@@ -36,47 +34,54 @@ const redirects: Array<[string, string]> = [
   ["/chop-shop", "/katran"],
 ];
 
+const titles: Record<string, string> = {
+  "/": "SoloDac | We grow pages, channels and brands",
+  "/services": "Services | SoloDac",
+  "/network": "Our pages | SoloDac",
+  "/katran": "Katran by SoloDac | A full production house",
+  "/about": "About | SoloDac",
+  "/contact": "Book a call | SoloDac",
+  "/privacy": "Privacy policy | SoloDac",
+  "/terms": "Terms of service | SoloDac",
+  "/refunds": "Refunds and cancellation | SoloDac",
+};
+
 function Router() {
   const [location] = useLocation();
 
+  useEffect(() => {
+    document.title = titles[location] ?? "Page not found | SoloDac";
+  }, [location]);
+
+  // A short fade on the incoming page only. The old page leaves at once, so a click never waits.
   return (
-    <AnimatePresence mode="wait" initial={false}>
-      <motion.div
-        key={location}
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -12 }}
-        transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
-      >
-        <Switch location={location}>
-          <Route path="/" component={Home} />
-          <Route path="/services" component={Services} />
-          <Route path="/network" component={Network} />
-          <Route path="/katran" component={Katran} />
-          <Route path="/about" component={About} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/privacy">{() => <Legal doc="privacy" />}</Route>
-          <Route path="/terms">{() => <Legal doc="terms" />}</Route>
-          <Route path="/refunds">{() => <Legal doc="refunds" />}</Route>
-          {redirects.map(([from, to]) => (
-            <Route key={from} path={from}>{() => <Redirect to={to} replace />}</Route>
-          ))}
-          <Route component={NotFound} />
-        </Switch>
-      </motion.div>
-    </AnimatePresence>
+    <motion.div key={location} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2, ease: "easeOut" }}>
+      <Switch location={location}>
+        <Route path="/" component={Home} />
+        <Route path="/services" component={Services} />
+        <Route path="/network" component={Network} />
+        <Route path="/katran" component={Katran} />
+        <Route path="/about" component={About} />
+        <Route path="/contact" component={Contact} />
+        <Route path="/privacy">{() => <Legal doc="privacy" />}</Route>
+        <Route path="/terms">{() => <Legal doc="terms" />}</Route>
+        <Route path="/refunds">{() => <Legal doc="refunds" />}</Route>
+        {redirects.map(([from, to]) => (
+          <Route key={from} path={from}>{() => <Redirect to={to} replace />}</Route>
+        ))}
+        <Route component={NotFound} />
+      </Switch>
+    </motion.div>
   );
 }
 
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="dark">
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
-      </ThemeProvider>
+      {/* Every Framer animation on the site follows the visitor's reduce-motion setting. */}
+      <MotionConfig reducedMotion="user">
+        <Router />
+      </MotionConfig>
     </ErrorBoundary>
   );
 }

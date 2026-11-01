@@ -101,8 +101,8 @@ export default function Legal({ doc }: { doc: keyof typeof docs }) {
         <div className="mx-auto max-w-3xl">
           <Kicker>Legal</Kicker>
           <h1 className="font-display mt-6 text-[clamp(2.5rem,6vw,4.5rem)] leading-[0.95]">{title}</h1>
-          <div className="mt-4 text-[14px] text-paper/45">Last updated {updated}</div>
-          <div className="prose-legal mt-10">{body}</div>
+          <div className="mt-4 text-[14px] text-paper/55">Last updated {updated}</div>
+          <div className="prose-legal mt-10 max-w-[68ch]">{body}</div>
         </div>
       </section>
     </Layout>

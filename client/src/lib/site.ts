@@ -48,7 +48,6 @@ export const igUrl = (handle: string) => `https://www.instagram.com/${handle}/`;
 
 export type Service = {
   id: string;
-  number: string;
   title: string;
   line: string;
   body: string;
@@ -60,7 +59,6 @@ export type Service = {
 export const services: Service[] = [
   {
     id: "youtube",
-    number: "01",
     title: "YouTube channels",
     line: "From empty channel to a schedule that runs itself.",
     body: "We pick the niche with real data, write the scripts, voice them, edit them and package them. We have run long-form channels across finance, history, travel and documentary formats, faceless and on-camera. You get a channel that posts on time and gets watched.",
@@ -69,7 +67,6 @@ export const services: Service[] = [
   },
   {
     id: "instagram",
-    number: "02",
     title: "Instagram pages",
     line: "The same playbook that grew our own pages.",
     body: "Reels, carousels and daily posting for founders, brands and media pages. We source the stories, cut the reels, design the carousels and post on schedule. It is the exact system we run on our own pages every day.",
@@ -78,7 +75,6 @@ export const services: Service[] = [
   },
   {
     id: "editing",
-    number: "03",
     title: "Editing",
     line: "Send raw footage. Get back something you're proud of.",
     body: "A team of editors for long-form YouTube, reels and podcasts. You send the raw file. We handle cuts, captions, B-roll, music and graphics. Fast turnarounds, and no edits that look like AI made them.",
@@ -87,7 +83,6 @@ export const services: Service[] = [
   },
   {
     id: "personal-branding",
-    number: "04",
     title: "Personal branding",
     line: "Your interviews and ideas, posted every day under your name.",
     body: "For founders who want to be known for what they know. We cut your interviews and podcasts into reels, write posts in your voice and run the page on schedule. It is the same work we do every day for Archive of CEOs.",
@@ -96,7 +91,6 @@ export const services: Service[] = [
   },
   {
     id: "partnerships",
-    number: "05",
     title: "Brand partnerships",
     line: "Reach people who already trust the page.",
     body: "Sponsored posts, story features and launch pushes across our pages. Each one is written in the page's own voice, so it doesn't read like an ad. We only take partnerships that fit the page.",
@@ -105,7 +99,6 @@ export const services: Service[] = [
   },
   {
     id: "identity",
-    number: "06",
     title: "Brand identity and websites",
     line: "A look and a website that match the work.",
     body: "Logos, brand systems and websites for founders and companies. We designed and built this site the same way.",
@@ -146,6 +139,8 @@ export const serviceOptions = [
 ];
 
 /** Followers across the network pages, rounded down to the thousand: "280.1K" counts as 280100. */
+const followerUnits: Record<string, number> = { K: 1_000, M: 1_000_000 };
+
 export const totalFollowersInThousands = Math.floor(
-  networkPages.reduce((sum, page) => sum + parseFloat(page.followers) * (page.followers.endsWith("K") ? 1000 : 1), 0) / 1000,
+  networkPages.reduce((sum, page) => sum + parseFloat(page.followers) * (followerUnits[page.followers.slice(-1)] ?? 1), 0) / 1000,
 );

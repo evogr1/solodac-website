@@ -114,3 +114,6 @@ client/public/__manus__/version.json
 
 # taste-skill working files
 .taste-skill/
+
+# Local state from `wrangler dev`
+.wrangler/

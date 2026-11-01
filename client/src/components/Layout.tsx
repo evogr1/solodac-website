@@ -1,5 +1,5 @@
 import { ArrowUpRight, Menu, X } from "lucide-react";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, useLocation } from "wouter";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
 import { scrollToId } from "@/lib/smoothScroll";
@@ -19,6 +19,8 @@ function Header() {
   const [location] = useLocation();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -34,8 +36,34 @@ function Header() {
 
   useEffect(() => setOpen(false), [location]);
 
+  // While the phone menu is open: Escape closes it and returns focus to the menu button,
+  // and Tab cycles inside the header instead of wandering into the page behind it.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        toggleRef.current?.focus();
+        return;
+      }
+      if (event.key !== "Tab" || !headerRef.current) return;
+      const focusable = Array.from(headerRef.current.querySelectorAll<HTMLElement>("a[href], button")).filter((element) => element.offsetParent !== null);
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
+
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header ref={headerRef} className="fixed inset-x-0 top-0 z-50">
       <div className={cn("transition-colors duration-300", scrolled || open ? "bg-ink/85 backdrop-blur-xl" : "bg-transparent")}>
         <div className="container flex h-[72px] items-center justify-between gap-6">
           <Link href="/" aria-label="SoloDac home">
@@ -62,6 +90,7 @@ function Header() {
               Book a call <ArrowUpRight size={15} />
             </Link>
             <button
+              ref={toggleRef}
               type="button"
               className="flex h-11 w-11 items-center justify-center rounded-full bg-paper/10 md:hidden"
               aria-label={open ? "Close menu" : "Open menu"}
@@ -110,7 +139,7 @@ function Footer() {
         </div>
 
         <div>
-          <div className="text-[14px] text-paper/45">Company</div>
+          <div className="text-[14px] text-paper/55">Company</div>
           <ul className="mt-5 space-y-3 text-sm">
             {[...nav, { label: "Contact", href: "/contact" }].map((item) => (
               <li key={item.href}>
@@ -121,19 +150,19 @@ function Footer() {
         </div>
 
         <div>
-          <div className="text-[14px] text-paper/45">Where we are</div>
+          <div className="text-[14px] text-paper/55">Where we are</div>
           <ul className="mt-5 space-y-3 text-sm">
             {company.locations.map((place) => (
               <li key={place.city}>
                 <div className="text-paper/85">{place.city}</div>
-                <div className="text-[13px] text-paper/45">{place.role}</div>
+                <div className="text-[13px] text-paper/55">{place.role}</div>
               </li>
             ))}
           </ul>
         </div>
 
         <div>
-          <div className="text-[14px] text-paper/45">Legal</div>
+          <div className="text-[14px] text-paper/55">Legal</div>
           <ul className="mt-5 space-y-3 text-sm">
             <li><Link href="/privacy" className="text-paper/70 hover:text-paper">Privacy policy</Link></li>
             <li><Link href="/terms" className="text-paper/70 hover:text-paper">Terms of service</Link></li>
@@ -143,7 +172,7 @@ function Footer() {
       </div>
 
       <div>
-        <div className="container flex flex-col gap-2 pb-10 text-[13px] text-paper/40 sm:flex-row sm:items-center sm:justify-between">
+        <div className="container flex flex-col gap-2 pb-10 text-[13px] text-paper/55 sm:flex-row sm:items-center sm:justify-between">
           <span>© {year} {company.tradeName}. All rights reserved.</span>
           <span>GSTIN {company.gstin} · Indore, Madhya Pradesh</span>
         </div>
