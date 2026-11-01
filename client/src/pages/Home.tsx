@@ -69,7 +69,7 @@ export default function Home() {
           <Reveal delay={0.1}>
             <div className="mt-10 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
               <p className="max-w-xl text-[18px] leading-relaxed text-paper/70">
-                Six reels from our own pages have {totalReelViews} views between them. Now we make that kind of work for founders, creators and brands.
+                We grew our own pages first. Now we grow yours.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Magnetic><PrimaryButton href="/contact">Book a call</PrimaryButton></Magnetic>
