@@ -4,6 +4,8 @@ import { useEffect, useRef, type RefObject } from "react";
 // [data-crawl-target], "reads" it for a moment, then moves on. With a mouse in
 // the area it chases the cursor instead. Legs use two-bone IK and step in two
 // alternating groups, so the gait looks like a real spider.
+// It only runs where the cards sit side by side (640px and up). In the single
+// phone column there is no room around the cards, so it would walk over the text.
 
 type Vec = { x: number; y: number };
 
@@ -91,7 +93,8 @@ export default function CrawlerSpider({ areaRef }: { areaRef: RefObject<HTMLElem
     if (!canvas || !area || !context) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const scale = window.matchMedia("(min-width: 640px)").matches ? 1.3 : 0.8;
+    const wide = window.matchMedia("(min-width: 640px)");
+    const scale = 1.3;
     const legs = createLegs();
     const position: Vec = { x: -60, y: 40 };
     const velocity: Vec = { x: 0, y: 0 };
@@ -274,11 +277,21 @@ export default function CrawlerSpider({ areaRef }: { areaRef: RefObject<HTMLElem
       last = now;
       step(dt);
       draw(now);
-      frame = visible && !document.hidden ? requestAnimationFrame(loop) : 0;
+      frame = visible && wide.matches && !document.hidden ? requestAnimationFrame(loop) : 0;
       if (!frame) last = 0;
     };
     const resume = () => {
-      if (!frame && visible && !document.hidden) frame = requestAnimationFrame(loop);
+      if (!frame && visible && wide.matches && !document.hidden) frame = requestAnimationFrame(loop);
+    };
+    // Crossing into the phone layout stops it and wipes the canvas; crossing back starts it again.
+    const onWidth = () => {
+      if (wide.matches) return resume();
+      cancelAnimationFrame(frame);
+      frame = 0;
+      last = 0;
+      context.clearRect(0, 0, width, height);
+      if (reading) setReading(null);
+      targets.forEach((target) => delete target.dataset.crawled);
     };
 
     const onMove = (event: PointerEvent) => {
@@ -301,6 +314,7 @@ export default function CrawlerSpider({ areaRef }: { areaRef: RefObject<HTMLElem
     intersection.observe(area);
     const onVisibility = () => resume();
     document.addEventListener("visibilitychange", onVisibility);
+    wide.addEventListener("change", onWidth);
     window.addEventListener("pointermove", onMove, { passive: true });
     document.documentElement.addEventListener("pointerleave", onLeave);
     resize();
@@ -310,6 +324,7 @@ export default function CrawlerSpider({ areaRef }: { areaRef: RefObject<HTMLElem
       resizeObserver.disconnect();
       intersection.disconnect();
       document.removeEventListener("visibilitychange", onVisibility);
+      wide.removeEventListener("change", onWidth);
       window.removeEventListener("pointermove", onMove);
       document.documentElement.removeEventListener("pointerleave", onLeave);
       targets.forEach((target) => delete target.dataset.crawled);

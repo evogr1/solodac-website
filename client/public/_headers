@@ -1,9 +1,10 @@
 # Security headers for every page and file. Cloudflare applies this to static assets;
 # the Worker (worker/index.ts) only answers /api/* and sets its own headers there.
 # The policy allows only what the site loads: its own files, Google Fonts, the
-# Web3Forms endpoint the forms post to, and YouTube's no-cookie player.
+# Web3Forms endpoint the forms post to, YouTube's no-cookie player, and Cloudflare Web
+# Analytics, which Cloudflare injects on the live domain.
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://api.web3forms.com; frame-src https://www.youtube-nocookie.com; worker-src 'self' blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://api.web3forms.com https://cloudflareinsights.com; frame-src https://www.youtube-nocookie.com; worker-src 'self' blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
