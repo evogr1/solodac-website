@@ -1,99 +1,85 @@
 import { ArrowUpRight } from "lucide-react";
+import type { ReactNode } from "react";
 import Layout from "@/components/Layout";
 import ParticleWord from "@/components/effects/ParticleWord";
 import Reveal from "@/components/Reveal";
-import { CtaBand, PageHero, SectionHead } from "@/components/site";
+import { CtaBand } from "@/components/site";
 import { company } from "@/lib/site";
 
-const beliefs = [
-  { title: "Run it ourselves first", body: "We test every format on our own pages before we sell it. Clients get what already worked, not what might." },
-  { title: "No slop", body: "AI helps us move fast. It never gets the final say on quality. If it looks machine-made, it doesn't go out." },
-  { title: "Say it straight", body: "If your idea won't work, we'll tell you on the first call. It saves both of us a month." },
+const rules = [
+  { lead: "We run it on our own pages first.", body: "Every format we sell has already worked for us. Clients get what worked, not what might." },
+  { lead: "Nothing goes out looking machine-made.", body: "Software helps us move fast. A person on the team decides what is good enough to post." },
+  { lead: "We say it straight.", body: "If an idea won't work, you hear it on the first call. It saves both of us a month." },
 ];
 
+/** One part of the page: a small plain title on the left, the content on the right. */
+function Part({ id, title, children }: { id?: string; title: string; children: ReactNode }) {
+  return (
+    <section id={id} className="container grid gap-6 py-14 sm:py-20 lg:grid-cols-12 lg:gap-8">
+      <h2 className="text-[clamp(20px,1.8vw,24px)] font-semibold lg:col-span-4">{title}</h2>
+      <Reveal className="lg:col-span-7 lg:col-start-6">{children}</Reveal>
+    </section>
+  );
+}
+
 export default function About() {
-  const details = [
-    { label: "Trade name", value: company.tradeName },
-    { label: "Proprietor", value: company.proprietor },
-    { label: "Constitution", value: company.constitution },
-    { label: "GSTIN", value: company.gstin },
-    { label: "Registered in", value: "Indore, Madhya Pradesh" },
-    { label: "Email", value: company.email },
-  ];
+  const [base, office, registered] = company.locations;
 
   return (
     <Layout>
-      <PageHero
-        title={<>A media company that also <span className="text-paper/45">does the work.</span></>}
-        intro="SoloDac started with a few pages about business and founders. Today we run a network of pages and channels, a team of editors and writers, and the software that ties it together."
-      />
+      <section className="container pb-10 pt-32 sm:pt-44">
+        <h1 className="font-display max-w-5xl text-[clamp(2.6rem,6vw,5.5rem)] leading-[0.95] tracking-[-0.03em]">
+          SoloDac is a media company that grows pages, channels and brands.
+        </h1>
+        <p className="mt-8 max-w-2xl text-[18px] leading-relaxed text-paper/75">
+          We run our own pages about business and founders. We grow the same kind of pages for founders, creators and brands. And we build the software that makes both faster.
+        </p>
+      </section>
 
       <section aria-label="SoloDac">
         <div className="container">
-          <ParticleWord className="h-[220px] sm:h-[340px] lg:h-[420px]" />
+          <ParticleWord className="h-[200px] sm:h-[300px] lg:h-[360px]" />
         </div>
       </section>
 
-      <section className="container grid gap-12 py-20 sm:py-28 lg:grid-cols-2 lg:gap-20">
-        <Reveal>
-          <SectionHead title="We learned on our own pages first." />
-        </Reveal>
-        <Reveal delay={0.08}>
-          <div className="space-y-5 text-base leading-relaxed text-paper/65 sm:text-lg">
-            <p>We started by building pages about business and founders for Indian audiences. Some of them grew into the hundreds of thousands. Along the way we built a team that could write, edit and design every day without dropping quality.</p>
-            <p>Founders and brands started asking us to do the same for them. So we did. Then we got tired of slow editing and built our own tools. That became Katran.</p>
-            <p>SoloDac is founded and run by {company.proprietor}.</p>
-          </div>
-        </Reveal>
-      </section>
+      <Part title="How it started">
+        <div className="max-w-[62ch] space-y-5 text-[18px] leading-relaxed text-paper/75">
+          <p>We started by building pages about business and founders for Indian audiences. Some of them grew into the hundreds of thousands. Along the way we built a team that could write, edit and design every day without dropping quality.</p>
+          <p>Founders and brands started asking us to do the same for them. So we did. Then we got tired of slow editing and built our own tools. That became Katran.</p>
+          <p>SoloDac is founded and run by {company.proprietor}.</p>
+        </div>
+      </Part>
 
-      <section className="bg-ink-2">
-        <div className="container py-20 sm:py-28">
-          <Reveal>
-            <SectionHead title="Three rules we don't bend." />
-          </Reveal>
-          <div className="mt-14 grid gap-10 md:grid-cols-3">
-            {beliefs.map((belief, index) => (
-              <Reveal key={belief.title} delay={index * 0.08}>
-                <h3 className="font-display text-3xl tracking-[-0.02em]">{belief.title}</h3>
-                <p className="mt-3 text-[17px] leading-relaxed text-paper/65">{belief.body}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Part title="How we work">
+        <ul className="max-w-[62ch] space-y-6 text-[18px] leading-relaxed">
+          {rules.map((rule) => (
+            <li key={rule.lead}>
+              <span className="font-semibold text-paper">{rule.lead}</span> <span className="text-paper/75">{rule.body}</span>
+            </li>
+          ))}
+        </ul>
+      </Part>
 
-      <section className="container grid gap-12 py-20 sm:py-28 lg:grid-cols-2 lg:gap-20">
-        <div>
-          <SectionHead title="Three cities. One team." />
-          <div className="mt-10 grid gap-5">
-            {company.locations.map((place) => (
-              <div key={place.city} className="flex items-baseline justify-between gap-4">
-                <span className="font-display text-3xl">{place.city}</span>
-                <span className="text-right text-sm text-paper/50">{place.role}</span>
-              </div>
-            ))}
-          </div>
+      <Part id="company" title="Company details">
+        <div className="max-w-[62ch] space-y-5 text-[18px] leading-relaxed text-paper/75">
+          <p>
+            We work from {base?.city}, with an office in {office?.city}. {company.tradeName} is a {company.constitution.toLowerCase()} of {company.proprietor}, registered in {registered?.city}, Madhya Pradesh.
+          </p>
+          <p>
+            GSTIN {company.gstin}. All client work is invoiced with GST. Write to us at{" "}
+            <a href={`mailto:${company.email}`} className="text-paper underline decoration-paper/30 underline-offset-4 transition-colors hover:decoration-signal">
+              {company.email}
+            </a>
+            .
+          </p>
         </div>
-        <div id="company">
-          <SectionHead title="A registered business. Proper invoices." />
-          <dl className="mt-10 space-y-4">
-            {details.map((row) => (
-              <div key={row.label} className="grid grid-cols-[130px_1fr] gap-4 sm:grid-cols-[160px_1fr]">
-                <dt className="text-[15px] text-paper/50">{row.label}</dt>
-                <dd className="break-all font-medium text-paper/85">{row.value}</dd>
-              </div>
-            ))}
-          </dl>
-          <p className="mt-6 text-[15px] text-paper/50">All client work is invoiced with GST.</p>
-        </div>
-      </section>
+      </Part>
 
       <section id="careers" className="bg-paper text-ink">
         <div className="container flex flex-col justify-between gap-8 py-16 sm:py-20 lg:flex-row lg:items-center">
           <div>
-            <h2 className="font-display text-[clamp(2rem,4.5vw,3.25rem)] leading-[1] tracking-[-0.03em]">Editors, writers and designers.</h2>
-            <p className="mt-3 max-w-xl text-ink/65">We're always looking. Send us your best three pieces of work and a line about you.</p>
+            <h2 className="font-display text-[clamp(2rem,4.5vw,3.25rem)] leading-[1] tracking-[-0.03em]">We're hiring editors, writers and designers.</h2>
+            <p className="mt-3 max-w-xl text-[17px] text-ink/70">Send us your best three pieces of work and a line about you.</p>
           </div>
           <a href={`mailto:${company.email}?subject=Work%20at%20SoloDac`} className="inline-flex shrink-0 items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-semibold text-paper transition-colors hover:bg-signal hover:text-ink">
             Send your work <ArrowUpRight size={16} />
@@ -101,7 +87,7 @@ export default function About() {
         </div>
       </section>
 
-      <CtaBand title="Want to work with us?" body="Book a call. We'll tell you if we're the right team for it." />
+      <CtaBand title="Have a page or a brand to grow?" body="Book a call. We'll tell you if we're the right team for it." />
     </Layout>
   );
 }
