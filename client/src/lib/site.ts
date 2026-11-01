@@ -78,7 +78,7 @@ export const services: Service[] = [
     id: "newsletter",
     title: "Newsletter marketing",
     line: "An audience in the inbox that you own outright.",
-    body: "We plan, write, design and send newsletters for founders and brands, and grow the list behind them from your pages and your site. It is the same way we run our own newsletters.",
+    body: "We plan, write, design and send newsletters for founders and brands, and grow the list behind them from your pages and your site. It is the same way we run our own newsletters, which reach 150,000+ readers with an average open rate of 43%.",
     includes: ["Newsletter strategy and format", "Writing and design for every issue", "List growth from your pages and site", "Sending, testing and deliverability", "Monthly open and click reports"],
     enquiry: "Newsletter",
   },
