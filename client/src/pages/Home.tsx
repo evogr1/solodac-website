@@ -11,7 +11,7 @@ import Reveal from "@/components/Reveal";
 import { GhostButton, PrimaryButton } from "@/components/site";
 import { millionViewReels } from "@/lib/reels";
 
-const growing = ["YouTube channels.", "Instagram pages.", "communities.", "newsletters.", "personal brands.", "brands."];
+const growing = ["YouTube channels.", "personal brands.", "Instagram pages.", "communities.", "brands.", "newsletters."];
 
 // 123.9 million across the six reels, said the way our readers count it.
 const totalReelViews = `${Math.floor(millionViewReels.reduce((sum, reel) => sum + reel.views, 0) / 10_000_000)} crore`;

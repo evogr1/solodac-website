@@ -76,7 +76,7 @@ Effects adapted from Toolcraft examples (MIT, Pixel Point). Ported renderers in 
 - New copy to confirm: personal branding deliverables, the brand track ("Websites like this one"), the comparison table values for the other options.
 - Fixed a site-wide bug: an unlayered `button { font: inherit }` overrode every size and weight class on buttons. Moved into `@layer base`.
 
-## Services page: six services (on the preview, 1 November)
+## Services page: six services (live since 1 November, PR #12)
 
 - Hero: "Everything a page needs. Under one roof." Personal branding, Brand partnerships and Brand identity and websites are now full services in `services` (site.ts) with their own sections. `alsoDo` removed. Each service carries its contact-form option (`enquiry`).
 - New copy to confirm: the bodies and "what's included" lists for the three new services.
@@ -96,6 +96,11 @@ Seven live Lucre titles end with the title generator's alternatives ("Other opti
 | https://youtu.be/7Tf8SBJ7-Bw | He Drove 1 Million Miles to Sell Indian Tractors in America |
 
 The pipeline step that writes titles is pasting its alternatives into the title field. It needs fixing at the source, or new uploads will keep doing it.
+
+## Home follow-ups (live since 1 November, PR #12)
+
+- Hero rotates: YouTube channels, Instagram pages, communities, newsletters, personal brands, brands. Communities and newsletters are only in the hero; owner to say what each includes before they become services.
+- Follower strip removed from the home page (owner: it made SoloDac read as Instagram-only). Hero line no longer quotes followers; comparison row is "Runs pages and channels of its own: Yes". The 636K figure stays in the picker's brand track and on the Network page.
 
 ## Decisions waiting on the owner
 
