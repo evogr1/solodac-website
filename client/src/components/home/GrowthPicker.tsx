@@ -59,6 +59,7 @@ const tracks: Track[] = [
     title: service("newsletter").title,
     line: service("newsletter").line,
     includes: service("newsletter").includes,
+    proof: { kind: "number", value: "43%", note: "Average open rate across our own newsletters, read by 150,000+ people." },
     enquiry: service("newsletter").enquiry,
   },
   {
