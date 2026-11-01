@@ -140,7 +140,7 @@ function Footer() {
         <div>
           <Wordmark className="text-3xl" />
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-paper/55">
-            We run pages and channels that millions of people watch. Then we build them for founders, creators and brands.
+            We grow YouTube channels, Instagram pages, newsletters and founder brands. We started with our own and still run them every day.
           </p>
           <a href={`mailto:${company.email}`} className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-paper hover:text-signal">
             {company.email} <ArrowUpRight size={14} />

@@ -12,13 +12,14 @@ export const company = {
   email: "info@solodac.com",
   founderEmail: "harshil@solodac.com",
   locations: [
-    { city: "Chandigarh", role: "Main base" },
-    { city: "Noida", role: "Office" },
-    { city: "Indore", role: "Registered office, Madhya Pradesh" },
+    { city: "Indore", role: "Corporate office, Madhya Pradesh" },
+    { city: "Chandigarh", role: "Regional office" },
+    { city: "Noida", role: "Regional office" },
   ],
 };
 
 export const nav = [
+  { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "Network", href: "/network" },
   { label: "Katran", href: "/katran" },
@@ -37,11 +38,11 @@ export type NetworkPage = {
 
 // Real follower counts. These are the pages we put our name on, not the full roster.
 export const networkPages: NetworkPage[] = [
-  { name: "Successful Arcs", handle: "successfularcs", category: "Business", tagline: "Built for entrepreneurs and future leaders.", followers: "280.1K", posts: "413", logo: saLogo },
-  { name: "Archive of CEOs", handle: "archiveofceos", category: "Leadership", tagline: "What great CEOs actually said and did.", followers: "275.1K", posts: "297", logo: aocLogo },
-  { name: "Indian Pragati", handle: "indianpragati", category: "News", tagline: "Sadak se space tak, India ki Pragati. Facts ham denge, opinion aapka.", followers: "34.6K", posts: "230", logo: pragatiLogo },
-  { name: "Bourse India", handle: "bourseindiaa", category: "Markets and news", tagline: "India's business news, decoded.", followers: "29K", posts: "804", logo: bourseLogo },
-  { name: "Lucre", handle: "lucreindia", category: "Founders", tagline: "Stories behind India's biggest founders.", followers: "17.9K", posts: "104", logo: lucreLogo },
+  { name: "Successful Arcs", handle: "successfularcs", category: "Global business", tagline: "Business stories from outside India. The founders, companies and decisions behind them, cut into short reels for people who want to build something.", followers: "280.1K", posts: "413", logo: saLogo },
+  { name: "Archive of CEOs", handle: "archiveofceos", category: "Global leadership", tagline: "What the world's best-known CEOs said and did. We cut interviews and talks into short lessons on leadership, money and work.", followers: "275.1K", posts: "297", logo: aocLogo },
+  { name: "Indian Pragati", handle: "indianpragati", category: "Indian news", tagline: "Indian news in short reels: policy, infrastructure, space and the economy. We report the facts and leave the opinion to the reader.", followers: "34.6K", posts: "230", logo: pragatiLogo },
+  { name: "Bourse India", handle: "bourseindiaa", category: "Indian politics", tagline: "India's political events, explained. Elections, policy fights and the people behind them, in posts anyone can follow.", followers: "29K", posts: "804", logo: bourseLogo },
+  { name: "Lucre", handle: "lucreindia", category: "Indian founders", tagline: "How India's biggest founders started, what went wrong and how they built companies worth crores. On Instagram and YouTube.", followers: "17.9K", posts: "104", logo: lucreLogo },
 ];
 
 export const igUrl = (handle: string) => `https://www.instagram.com/${handle}/`;
@@ -72,6 +73,14 @@ export const services: Service[] = [
     body: "Reels, carousels and daily posting for founders, brands and media pages. We source the stories, cut the reels, design the carousels and post on schedule. It is the exact system we run on our own pages every day.",
     includes: ["Content calendar and sourcing", "Reels with synced captions", "Carousels and one-pagers", "Daily posting and community", "Monthly growth reports"],
     enquiry: "Instagram page",
+  },
+  {
+    id: "newsletter",
+    title: "Newsletter marketing",
+    line: "An audience in the inbox that you own outright.",
+    body: "We plan, write, design and send newsletters for founders and brands, and grow the list behind them from your pages and your site. It is the same way we run our own newsletters.",
+    includes: ["Newsletter strategy and format", "Writing and design for every issue", "List growth from your pages and site", "Sending, testing and deliverability", "Monthly open and click reports"],
+    enquiry: "Newsletter",
   },
   {
     id: "editing",
@@ -131,6 +140,7 @@ export const katranTools = [
 export const serviceOptions = [
   "YouTube channel",
   "Instagram page",
+  "Newsletter",
   "Editing",
   "Brand partnership",
   "Personal branding",

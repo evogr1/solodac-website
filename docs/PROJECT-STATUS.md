@@ -139,6 +139,6 @@ The pipeline step that writes titles is pasting its alternatives into the title 
 ## Business facts and copy rules
 
 - SOLODAC, proprietorship of Harshil Rekhi, GSTIN 23FNWPR3444D1ZO.
-- Chandigarh (main base), Noida (office), Indore (registered office, legal jurisdiction).
+- Indore (corporate and registered office, legal jurisdiction); Chandigarh and Noida (regional offices). GSTIN only in the footer and legal pages.
 - Legal terms on /privacy, /terms, /refunds: approved by the owner.
 - Copy: no em-dashes, no comma-wrapped asides, no buzzwords.

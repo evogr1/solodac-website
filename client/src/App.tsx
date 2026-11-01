@@ -53,9 +53,10 @@ function Router() {
     document.title = titles[location] ?? "Page not found | SoloDac";
   }, [location]);
 
-  // A short fade on the incoming page only. The old page leaves at once, so a click never waits.
+  // The incoming page fades in; the old one leaves at once, so a click never waits. Each page's
+  // top section then rises into place on its own (Reveal), which keeps the fixed header still.
   return (
-    <motion.div key={location} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2, ease: "easeOut" }}>
+    <motion.div key={location} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.35, ease: "easeOut" }}>
       <Switch location={location}>
         <Route path="/" component={Home} />
         <Route path="/services" component={Services} />

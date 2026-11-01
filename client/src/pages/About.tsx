@@ -22,17 +22,20 @@ function Part({ id, title, children }: { id?: string; title: string; children: R
 }
 
 export default function About() {
-  const [base, office, registered] = company.locations;
 
   return (
     <Layout>
       <section className="container pb-10 pt-32 sm:pt-44">
-        <h1 className="font-display max-w-5xl text-[clamp(2.6rem,6vw,5.5rem)] leading-[0.95] tracking-[-0.03em]">
-          SoloDac is a media company that grows pages, channels and brands.
-        </h1>
-        <p className="mt-8 max-w-2xl text-[18px] leading-relaxed text-paper/75">
-          We run our own pages about business and founders. We grow the same kind of pages for founders, creators and brands. And we build the software that makes both faster.
-        </p>
+        <Reveal>
+          <h1 className="font-display max-w-5xl text-[clamp(2.6rem,6vw,5.5rem)] leading-[0.95] tracking-[-0.03em]">
+            SoloDac is a media company that grows pages, channels and brands.
+          </h1>
+        </Reveal>
+        <Reveal delay={0.08}>
+          <p className="mt-8 max-w-2xl text-[18px] leading-relaxed text-paper/75">
+            We run our own pages about business and founders. We grow the same kind of pages for founders, creators and brands. And we build the software that makes both faster.
+          </p>
+        </Reveal>
       </section>
 
       <Part title="How it started">
@@ -56,10 +59,10 @@ export default function About() {
       <Part id="company" title="Company details">
         <div className="max-w-[62ch] space-y-5 text-[18px] leading-relaxed text-paper/75">
           <p>
-            We work from {base?.city}, with an office in {office?.city}. {company.tradeName} is a {company.constitution.toLowerCase()} of {company.proprietor}, registered in {registered?.city}, Madhya Pradesh.
+            Our corporate office is in Indore, Madhya Pradesh, with regional offices in Chandigarh and Noida. {company.tradeName} is a {company.constitution.toLowerCase()} of {company.proprietor}.
           </p>
           <p>
-            GSTIN {company.gstin}. All client work is invoiced with GST. Write to us at{" "}
+            All client work is invoiced with GST. Write to us at{" "}
             <a href={`mailto:${company.email}`} className="text-paper underline decoration-paper/30 underline-offset-4 transition-colors hover:decoration-signal">
               {company.email}
             </a>

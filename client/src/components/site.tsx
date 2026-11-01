@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import type { ReactNode } from "react";
 import { Link } from "wouter";
+import Reveal from "@/components/Reveal";
 import { cn } from "@/lib/utils";
 
 /** A plain small label, for the few places a page needs one (the 404 code, legal pages). */
@@ -60,9 +61,15 @@ export function PageHero({
     <section className="relative overflow-hidden pb-16 pt-32 sm:pb-24 sm:pt-44">
       {backdrop}
       <div className="container relative">
-        <h1 className="font-display max-w-5xl text-[clamp(2.75rem,8vw,6.5rem)] leading-[0.92] tracking-[-0.03em]">{title}</h1>
-        {intro && <p className="mt-7 max-w-2xl text-base leading-relaxed text-paper/65 sm:text-lg">{intro}</p>}
-        {children}
+        <Reveal>
+          <h1 className="font-display max-w-5xl text-[clamp(2.75rem,8vw,6.5rem)] leading-[0.92] tracking-[-0.03em]">{title}</h1>
+        </Reveal>
+        {intro && (
+          <Reveal delay={0.08}>
+            <p className="mt-7 max-w-2xl text-base leading-relaxed text-paper/65 sm:text-lg">{intro}</p>
+          </Reveal>
+        )}
+        {children && <Reveal delay={0.16}>{children}</Reveal>}
       </div>
     </section>
   );
