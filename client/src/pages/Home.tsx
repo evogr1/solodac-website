@@ -10,11 +10,8 @@ import Reel from "@/components/katran/Reel";
 import Reveal from "@/components/Reveal";
 import { GhostButton, PrimaryButton } from "@/components/site";
 import { millionViewReels } from "@/lib/reels";
-import { igUrl, networkPages, totalFollowersInThousands } from "@/lib/site";
 
 const growing = ["YouTube channels.", "Instagram pages.", "communities.", "newsletters.", "personal brands.", "brands."];
-
-const totalFollowers = `${totalFollowersInThousands.toLocaleString("en-US")},000`;
 
 // 123.9 million across the six reels, said the way our readers count it.
 const totalReelViews = `${Math.floor(millionViewReels.reduce((sum, reel) => sum + reel.views, 0) / 10_000_000)} crore`;
@@ -46,7 +43,7 @@ const comparison = {
   columns: ["Freelancers", "An in-house team", "A typical agency", "SoloDac"],
   rows: [
     { label: "Scripts, edits, design and posting under one roof", values: ["No", "Yes", "Some", "Yes"] },
-    { label: "Runs pages of its own", values: ["No", "No", "Rarely", `Yes, ${totalFollowersInThousands}K followers`] },
+    { label: "Runs pages and channels of its own", values: ["No", "No", "Rarely", "Yes"] },
     { label: "Brand deals on pages that already have an audience", values: ["No", "No", "Rarely", "Yes"] },
     { label: "Its own editing software", values: ["No", "No", "No", "Yes, Katran"] },
     { label: "You manage the people", values: ["Yes", "Yes", "No", "No"] },
@@ -91,7 +88,7 @@ export default function Home() {
           <Reveal delay={0.1}>
             <div className="mt-10 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
               <p className="max-w-xl text-[18px] leading-relaxed text-paper/70">
-                SoloDac is a media company. We run pages that {totalFollowers} people follow, and we do the same work for founders, creators and brands.
+                SoloDac is a media company. We run our own pages and channels, and we do the same work for founders, creators and brands.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Magnetic><PrimaryButton href="/contact">Book a call</PrimaryButton></Magnetic>
@@ -99,28 +96,6 @@ export default function Home() {
               </div>
             </div>
           </Reveal>
-        </div>
-      </section>
-
-      {/* Our pages */}
-      <section className="bg-ink-2" aria-labelledby="our-pages">
-        <div className="container py-16 sm:py-20">
-          <h2 id="our-pages" className="text-[clamp(20px,2vw,26px)] font-medium leading-snug text-paper/60">
-            <span className="text-paper">{totalFollowers} people</span> follow the pages we run.
-          </h2>
-          <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-5">
-            {networkPages.map((page) => (
-              <a key={page.handle} href={igUrl(page.handle)} target="_blank" rel="noreferrer" className="group block">
-                <div className="font-display text-[clamp(40px,4.4vw,68px)] leading-none tracking-[-0.04em] transition-colors duration-200 group-hover:text-signal">
-                  {page.followers}
-                </div>
-                <div className="mt-4 flex items-center gap-2.5">
-                  <img src={page.logo} alt="" className="h-7 w-7 rounded-full object-cover" />
-                  <span className="text-[15px] text-paper/75 transition-colors duration-200 group-hover:text-paper">{page.name}</span>
-                </div>
-              </a>
-            ))}
-          </div>
         </div>
       </section>
 
