@@ -1,46 +1,74 @@
-import { ArrowUpRight } from "lucide-react";
 import { Link } from "wouter";
-import Reel from "@/components/katran/Reel";
 import Layout from "@/components/Layout";
 import HeroHeadline from "@/components/effects/HeroHeadline";
 import Magnetic from "@/components/effects/Magnetic";
 import MeshGradient from "@/components/effects/MeshGradient";
+import FiveHires from "@/components/home/FiveHires";
+import GrowthPicker from "@/components/home/GrowthPicker";
+import RotatingWord from "@/components/home/RotatingWord";
+import Reel from "@/components/katran/Reel";
 import Reveal from "@/components/Reveal";
 import { GhostButton, PrimaryButton } from "@/components/site";
 import { millionViewReels } from "@/lib/reels";
-import { igUrl, networkPages, services } from "@/lib/site";
+import { igUrl, networkPages, totalFollowersInThousands } from "@/lib/site";
 
-const pillars = [
-  {
-    title: "We grow yours",
-    body: "YouTube channels, Instagram pages and editing for founders, creators and brands.",
-    href: "/services",
-  },
-  {
-    title: "We run our own",
-    body: "Business, leadership, founder, markets and news pages that people open every day.",
-    href: "/network",
-  },
-  {
-    title: "We built the tools",
-    body: "Katran is the video editor our team uses. Creators get access next.",
-    href: "/katran",
-  },
-];
+const growing = ["YouTube channels.", "Instagram pages.", "personal brands.", "brands."];
 
-// Sum of the pages' follower counts ("280.6K" → 280600), rounded down to the thousand.
-const totalFollowers = `${Math.floor(
-  networkPages.reduce((sum, page) => sum + parseFloat(page.followers) * (page.followers.endsWith("K") ? 1000 : 1), 0) / 1000,
-).toLocaleString("en-US")},000`;
+const totalFollowers = `${totalFollowersInThousands.toLocaleString("en-US")},000`;
 
 // 123.9 million across the six reels, said the way our readers count it.
 const totalReelViews = `${Math.floor(millionViewReels.reduce((sum, reel) => sum + reel.views, 0) / 10_000_000)} crore`;
+
+// Everything we do, from the services and their "what's included" lists.
+const everything = [
+  "Niche research",
+  "Scripts",
+  "Voiceover",
+  "Long-form edits",
+  "Reels and Shorts",
+  "Podcast clips",
+  "Carousels",
+  "Thumbnails and titles",
+  "Motion graphics",
+  "Captions",
+  "Daily posting",
+  "Community",
+  "YouTube SEO",
+  "Growth reports",
+  "Personal branding",
+  "Brand partnerships",
+  "Brand identity",
+  "Websites",
+  "Our own software",
+];
+
+const comparison = {
+  columns: ["Freelancers", "An in-house team", "A typical agency", "SoloDac"],
+  rows: [
+    { label: "Scripts, edits, design and posting under one roof", values: ["No", "Yes", "Some", "Yes"] },
+    { label: "Runs pages of its own", values: ["No", "No", "Rarely", `Yes, ${totalFollowersInThousands}K followers`] },
+    { label: "Brand deals on pages that already have an audience", values: ["No", "No", "Rarely", "Yes"] },
+    { label: "Its own editing software", values: ["No", "No", "No", "Yes, Katran"] },
+    { label: "You manage the people", values: ["Yes", "Yes", "No", "No"] },
+  ],
+};
 
 const steps = [
   { title: "Call", body: "Thirty minutes on what you have, what you want and what's in the way." },
   { title: "Plan", body: "We come back with a niche, a format and a posting schedule that we'd bet on." },
   { title: "Build", body: "Scripts, edits, designs and posts go out on schedule. You approve, we ship." },
   { title: "Report", body: "Every month you see what worked, what didn't and what we're changing." },
+];
+
+const faqs = [
+  {
+    q: "Do you only make reels?",
+    a: "No. We run YouTube channels and Instagram pages, edit for founders and creators, build personal brands, sell brand partnerships on our pages, and make brand identities and websites. Reels are the part people see most.",
+  },
+  { q: "Can I advertise on your pages?", a: "Yes. Sponsored posts, story features and launch pushes across several pages. We only take partnerships that fit the page." },
+  { q: "Do you work outside India?", a: "Yes. Beyond the pages on this site we run unbranded pages and channels for audiences in the US, UK and India." },
+  { q: "What is Katran?", a: "The editing software we built for our own pages. Our editors use it every day, and creators can join the waitlist." },
+  { q: "How do we start?", a: "Book a call. Thirty minutes, and we'll tell you honestly what we'd do with your page, channel or brand." },
 ];
 
 export default function Home() {
@@ -53,29 +81,28 @@ export default function Home() {
         <div className="container relative">
           <Reveal>
             <HeroHeadline
-              className="font-display max-w-6xl text-[clamp(3rem,10vw,8.5rem)] leading-[0.88]"
-              lines={[
-                { breakAfter: true, text: "We grow pages" },
-                { breakAfter: true, text: "for a living." },
-                { className: "block text-paper/45", text: "Ours first." },
-              ]}
-            />
+              className="font-display max-w-6xl text-[clamp(2.6rem,9vw,8.5rem)] leading-[0.92]"
+              label={`We grow ${growing.join(" ")}`}
+              lines={[{ breakAfter: true, text: "We grow" }]}
+            >
+              <RotatingWord words={growing} className="text-paper/45" />
+            </HeroHeadline>
           </Reveal>
           <Reveal delay={0.1}>
             <div className="mt-10 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-              <p className="max-w-xl text-base leading-relaxed text-paper/65 sm:text-lg">
-                SoloDac runs Instagram pages and YouTube channels with audiences in the hundreds of thousands. We use the same team, the same playbook and our own software to grow yours.
+              <p className="max-w-xl text-[18px] leading-relaxed text-paper/70">
+                SoloDac is a media company. We run pages that {totalFollowers} people follow, and we do the same work for founders, creators and brands.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Magnetic><PrimaryButton href="/contact">Book a call</PrimaryButton></Magnetic>
-                <Magnetic><GhostButton href="/katran">See Katran</GhostButton></Magnetic>
+                <Magnetic><GhostButton href="/services">What we do</GhostButton></Magnetic>
               </div>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* Network strip */}
+      {/* Our pages */}
       <section className="bg-ink-2" aria-labelledby="our-pages">
         <div className="container py-16 sm:py-20">
           <h2 id="our-pages" className="text-[clamp(20px,2vw,26px)] font-medium leading-snug text-paper/60">
@@ -93,6 +120,49 @@ export default function Home() {
                 </div>
               </a>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* The problem */}
+      <section className="container py-24 sm:py-32">
+        <Reveal>
+          <h2 className="font-display max-w-4xl text-[clamp(2.4rem,5vw,4.25rem)] leading-[0.95] tracking-[-0.03em]">
+            Growing one page usually takes five hires.
+            <span className="block text-paper/45">We are all five.</span>
+          </h2>
+        </Reveal>
+        <div className="mt-12">
+          <FiveHires />
+        </div>
+        <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-paper/65">
+          One team that writes, edits, designs, posts and reads the numbers. The same team runs our own pages every day.
+        </p>
+      </section>
+
+      {/* What are you growing */}
+      <section className="container pb-24 sm:pb-32" aria-labelledby="growing">
+        <GrowthPicker />
+      </section>
+
+      {/* Everything */}
+      <section className="bg-ink-2" aria-labelledby="everything">
+        <div className="container py-24 sm:py-32">
+          <h2 id="everything" className="text-[clamp(20px,2vw,26px)] font-medium text-paper/60">
+            Everything we do, under one roof.
+          </h2>
+          <Reveal>
+            <p className="font-display mt-8 text-[clamp(30px,4.2vw,64px)] leading-[1.08] tracking-[-0.03em]">
+              {everything.map((item, index) => (
+                <span key={item} className={index % 2 === 0 ? "text-paper" : "text-paper/40"}>
+                  {item}
+                  {index < everything.length - 1 ? <span className="text-paper/25"> · </span> : "."}
+                </span>
+              ))}
+            </p>
+          </Reveal>
+          <div className="mt-12">
+            <PrimaryButton href="/services">See every service</PrimaryButton>
           </div>
         </div>
       </section>
@@ -120,46 +190,50 @@ export default function Home() {
         </div>
       </section>
 
-      {/* What SoloDac is */}
-      <section className="bg-ink-2">
-        <div className="container grid gap-12 py-24 sm:py-32 lg:grid-cols-12">
-          <Reveal className="lg:col-span-4">
-            <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">One team. Three businesses.</h2>
-          </Reveal>
-          <div className="space-y-12 lg:col-span-7 lg:col-start-6">
-            {pillars.map((pillar, index) => (
-              <Reveal key={pillar.title} delay={index * 0.06}>
-                <Link href={pillar.href} className="group block">
-                  <h3 className="font-display flex items-center gap-3 text-[clamp(26px,2.4vw,36px)] leading-tight tracking-[-0.02em]">
-                    {pillar.title}
-                    <ArrowUpRight className="h-6 w-6 text-paper/40 transition-[transform,color] duration-200 ease-out group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-signal" />
-                  </h3>
-                  <p className="mt-3 max-w-[34rem] text-[18px] leading-relaxed text-paper/70">{pillar.body}</p>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Services */}
-      <section className="bg-paper text-ink">
+      {/* Comparison */}
+      <section className="bg-paper text-ink" aria-labelledby="compare">
         <div className="container py-24 sm:py-32">
-          <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
-            <h2 className="font-display max-w-3xl text-[clamp(2.2rem,5vw,3.75rem)] leading-[0.98] tracking-[-0.03em]">
-              The work we do for our pages, done for yours.
+          <Reveal>
+            <h2 id="compare" className="font-display max-w-3xl text-[clamp(2.2rem,5vw,3.75rem)] leading-[0.98] tracking-[-0.03em]">
+              Other ways to grow a page. <span className="text-ink/45">And us.</span>
             </h2>
-            <Link href="/services" className="inline-flex items-center gap-1.5 text-[15px] font-semibold hover:text-signal">
-              All services <ArrowUpRight size={15} />
-            </Link>
-          </div>
-          <div className="mt-16 space-y-10 sm:space-y-12">
-            {services.map((service) => (
-              <Link key={service.id} href={`/services#${service.id}`} className="group grid gap-2 sm:grid-cols-[1fr_1.2fr] sm:items-baseline sm:gap-10">
-                <span className="font-display text-3xl tracking-[-0.02em] transition-colors duration-200 group-hover:text-signal sm:text-4xl">{service.title}</span>
-                <span className="text-[17px] leading-relaxed text-ink/65">{service.line}</span>
-              </Link>
-            ))}
+          </Reveal>
+          <div className="-mx-4 mt-14 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+            <table className="w-full min-w-[720px] border-collapse text-left">
+              <thead>
+                <tr>
+                  <th className="w-[34%] pb-5 text-[15px] font-normal text-ink/55" scope="col"><span className="sr-only">Compared on</span></th>
+                  {comparison.columns.map((column, index) => (
+                    <th
+                      key={column}
+                      scope="col"
+                      className={`pb-5 pl-4 text-[16px] font-semibold ${index === comparison.columns.length - 1 ? "rounded-t-[14px] bg-ink pt-5 text-paper" : "text-ink/70"}`}
+                    >
+                      {column}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {comparison.rows.map((row, rowIndex) => (
+                  <tr key={row.label} className="border-t border-ink/10">
+                    <th scope="row" className="py-5 pr-6 text-[17px] font-medium">{row.label}</th>
+                    {row.values.map((value, index) => {
+                      const ours = index === row.values.length - 1;
+                      const last = rowIndex === comparison.rows.length - 1;
+                      return (
+                        <td
+                          key={index}
+                          className={`py-5 pl-4 text-[16px] ${ours ? `bg-ink font-semibold text-paper ${last ? "rounded-b-[14px]" : ""}` : value === "No" ? "text-ink/40" : "text-ink/80"}`}
+                        >
+                          {value}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
@@ -173,7 +247,7 @@ export default function Home() {
           </h2>
           <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-xl text-[18px] leading-relaxed text-paper/70">
-              It writes, cuts, captions and designs for our pages every day. Creators get access next.
+              The software behind our pages. It writes, cuts, captions and designs every day. Creators get access next.
             </p>
             <PrimaryButton href="/katran" className="self-start sm:self-auto">See Katran</PrimaryButton>
           </div>
@@ -197,19 +271,39 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Ask */}
+      {/* Questions */}
       <section className="container py-24 sm:py-32">
-        <Reveal>
-          <h2 className="font-display max-w-4xl text-[clamp(2.4rem,5.5vw,4.5rem)] leading-[0.95] tracking-[-0.03em]">
-            Got a page, a channel or a brand that should be bigger?
-          </h2>
-          <p className="mt-6 max-w-xl text-[18px] leading-relaxed text-paper/70">
-            Tell us where it is today. We'll tell you honestly what we'd do with it.
-          </p>
-          <div className="mt-9">
-            <Magnetic><PrimaryButton href="/contact">Book a call</PrimaryButton></Magnetic>
-          </div>
-        </Reveal>
+        <div className="grid gap-12 lg:grid-cols-12">
+          <Reveal className="lg:col-span-4">
+            <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">Questions we get.</h2>
+          </Reveal>
+          <dl className="space-y-10 lg:col-span-7 lg:col-start-6">
+            {faqs.map((faq, index) => (
+              <Reveal key={faq.q} delay={index * 0.05}>
+                <dt className="text-[20px] font-semibold">{faq.q}</dt>
+                <dd className="mt-2 max-w-[36rem] text-[18px] leading-relaxed text-paper/70">{faq.a}</dd>
+              </Reveal>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      {/* Ask */}
+      <section className="bg-ink-2">
+        <div className="container py-24 sm:py-32">
+          <Reveal>
+            <h2 className="font-display max-w-4xl text-[clamp(2.4rem,5.5vw,4.5rem)] leading-[0.95] tracking-[-0.03em]">
+              Got a page, a channel or a brand that should be bigger?
+            </h2>
+            <p className="mt-6 max-w-xl text-[18px] leading-relaxed text-paper/70">
+              Tell us where it is today. We'll tell you honestly what we'd do with it.
+            </p>
+            <div className="mt-9 flex flex-wrap items-center gap-6">
+              <Magnetic><PrimaryButton href="/contact">Book a call</PrimaryButton></Magnetic>
+              <Link href="/services" className="text-[15px] font-semibold text-paper/80 hover:text-paper">Or see every service</Link>
+            </div>
+          </Reveal>
+        </div>
       </section>
     </Layout>
   );

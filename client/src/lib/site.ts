@@ -114,3 +114,8 @@ export const serviceOptions = [
   "Brand identity or website",
   "Something else",
 ];
+
+/** Followers across the network pages, rounded down to the thousand: "280.1K" counts as 280100. */
+export const totalFollowersInThousands = Math.floor(
+  networkPages.reduce((sum, page) => sum + parseFloat(page.followers) * (page.followers.endsWith("K") ? 1000 : 1), 0) / 1000,
+);

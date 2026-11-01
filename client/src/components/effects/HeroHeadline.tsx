@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 export type HeadlineLine = { text: string; className?: string; breakAfter?: boolean; accent?: boolean };
@@ -10,7 +10,8 @@ const paper = [244, 241, 234];
 const signal = [255, 122, 69];
 const accent = [255, 90, 31];
 
-export default function HeroHeadline({ lines, className }: { lines: HeadlineLine[]; className?: string }) {
+/** `children` render inside the heading after the lines (for example a rotating word); pass `label` so screen readers hear the whole heading. */
+export default function HeroHeadline({ lines, className, children, label }: { lines: HeadlineLine[]; className?: string; children?: ReactNode; label?: string }) {
   const rootRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -87,7 +88,7 @@ export default function HeroHeadline({ lines, className }: { lines: HeadlineLine
 
   let letterIndex = 0;
   return (
-    <h1 ref={rootRef} className={cn("hero-headline", className)} aria-label={lines.map((line) => line.text).join(" ")}>
+    <h1 ref={rootRef} className={cn("hero-headline", className)} aria-label={label ?? lines.map((line) => line.text).join(" ")}>
       {lines.map((line, lineIndex) => (
         <Fragment key={lineIndex}>
           <span aria-hidden="true" className={line.className}>
@@ -110,6 +111,7 @@ export default function HeroHeadline({ lines, className }: { lines: HeadlineLine
           {line.breakAfter ? <>{" "}<br className="hidden sm:block" /></> : lineIndex < lines.length - 1 ? " " : null}
         </Fragment>
       ))}
+      {children}
     </h1>
   );
 }

@@ -59,7 +59,7 @@ Effects adapted from Toolcraft examples (MIT, Pixel Point). Ported renderers in 
 - Removed: three outlined cards, the four page cards, numbered service rows, KatranMock, numbered step boxes, the orange CTA box. Replaced with plain text sections.
 - Footer on every page: no mono labels, no divider lines. Secondary button is filled, not outlined.
 
-## Other pages cleanup (on the preview, 31 October)
+## Other pages cleanup (live since 31 October, PR #10)
 
 - Shared pieces: Kicker is now a plain small label (only 404 and Legal use it); SectionHead and PageHero have no kicker; PageHero has no grid background or divider; CtaBand is plain text plus a button instead of the orange box.
 - Services: no 01/02/03, no orange serif lines, filled pills, plain "What's included".
@@ -67,6 +67,14 @@ Effects adapted from Toolcraft examples (MIT, Pixel Point). Ported renderers in 
 - About: no serif accent, belief cards replaced with plain columns, locations and business details without lines or boxes.
 - Contact, Legal, 404: plain labels. Header: no line on scroll, filled menu button, no lines in the phone menu. Lead form: no outline.
 - Taste inspector on Services and About: remaining flags are no photos or video, the cream brand colour, and the smooth-scroll pin artifact.
+
+## Home page, breadth pass (on the preview, 1 November)
+
+- Owner: the home page looked like SoloDac does one thing. Reference given: kyre.solutions (story order: problem, interactive "pick yours", every function, comparison, story, FAQ, close). Took the order, not their mono labels.
+- New order: rotating hero ("We grow YouTube channels / Instagram pages / personal brands / brands"), pages strip, "Growing one page usually takes five hires. We are all five." (five chips join into one bar), "What are you growing?" picker (YouTube channel, Instagram page, founder's name, brand, just editing; each with what's included, proof and its own contact link), "Everything we do, under one roof" word wall, the six reels, comparison table against freelancers / in-house / typical agency, Katran, How we work, FAQ, close.
+- New components in `client/src/components/home/`. Follower total now comes from `totalFollowersInThousands` in `site.ts`.
+- New copy to confirm: personal branding deliverables, the brand track ("Websites like this one"), the comparison table values for the other options.
+- Fixed a site-wide bug: an unlayered `button { font: inherit }` overrode every size and weight class on buttons. Moved into `@layer base`.
 
 ## Decisions waiting on the owner
 
