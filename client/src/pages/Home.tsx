@@ -89,7 +89,7 @@ export default function Home() {
           <Reveal delay={0.1}>
             <div className="mt-10 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
               <p className="max-w-xl text-[18px] leading-relaxed text-paper/70">
-                SoloDac is a media company. We run our own pages and channels, and we do the same work for founders, creators and brands.
+                Six reels from our own pages have {totalReelViews} views between them. Now we make that kind of work for founders, creators and brands.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Magnetic><PrimaryButton href="/contact">Book a call</PrimaryButton></Magnetic>
