@@ -22,6 +22,13 @@ Marketing site for SoloDac (solodac.com): React 19 + Vite + Tailwind v4 + wouter
 
 ## Design
 
-- Palette: ink `#0b0b0c`, paper `#f4f1ea`, signal orange `#ff5a1f`. Type: Bricolage Grotesque (display), Inter (text), JetBrains Mono (labels), Instrument Serif italic (accent).
+- Palette: ink `#0b0b0c` (with ink-2 and ink-3 for section tones), paper `#f4f1ea`, signal orange `#ff5a1f`. Type: Bricolage Grotesque (display) and Inter (text) only. Mono and serif fonts were removed.
+- Art direction (chosen by the owner, November 2026): dark, plain and proof-led. Real work over mock-ups (the million-view reels in `client/src/lib/reels.ts`), real numbers, plain sentences.
+  - No eyebrow or kicker labels, no mono labels, no 01/02/03 numbering, no outlined boxes or divider lines (except real tables and timelines), no serif italic accents.
+  - No cream (paper) section backgrounds; alternate ink and ink-2 instead. Cream is for buttons and small surfaces.
+  - The white-then-grey two-part headline is kept only on the home and Katran heroes. Other headings are one plain sentence.
+  - Orange is for actions and a few markers, not decoration. The orange mesh glow is on the home hero only.
+  - Every page and section animates in (Reveal, page transition in `App.tsx`); keep the smooth scroll. Animations respect reduced motion.
+- Design skills live in `.claude/skills/`: design-taste-frontend (taste skill, with `scripts/lint.mjs` and `scripts/inspect.mjs`), impeccable, and Emil Kowalski's motion skills. Use them for any design work. The taste skill's flag on the cream brand colour is known and accepted.
 - Visual effects in `client/src/components/effects/` are adapted from Toolcraft examples (MIT, Pixel Point); the ported renderers live in `client/src/lib/effects/`. Every effect pauses off-screen and respects `prefers-reduced-motion`; cursor effects only run on fine pointers.
-- Design skills live in `.claude/skills/` (taste skill, impeccable, Emil Kowalski's motion skills). The taste skill's house rules (no mono labels, eyebrows, gradients, hairlines) conflict with the current look; the owner has not yet chosen polish versus restyle.
+- Check every change at 1440px and 390px, including the phone menu.
