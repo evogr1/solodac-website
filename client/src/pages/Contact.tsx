@@ -31,12 +31,12 @@ export default function Contact() {
                 <ul className="mt-3 space-y-2">
                   {company.locations.map((place) => (
                     <li key={place.city} className="text-paper/80">
-                      {place.city} <span className="text-paper/40">· {place.role}</span>
+                      {place.city} <span className="text-paper/55">· {place.role}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="text-[14px] text-paper/45">GSTIN {company.gstin}</div>
+              <div className="text-[14px] text-paper/55">GSTIN {company.gstin}</div>
             </div>
           </div>
 

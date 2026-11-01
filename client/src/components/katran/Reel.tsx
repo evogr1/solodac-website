@@ -8,7 +8,6 @@ export type ReelData = {
   poster: string;
   page: string;
   views: number;
-  seconds: number;
 };
 
 /** 3646045 → "3.6M views", 52979 → "52,979 views". */

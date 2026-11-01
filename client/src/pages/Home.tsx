@@ -13,8 +13,9 @@ import { millionViewReels } from "@/lib/reels";
 
 const growing = ["YouTube channels.", "personal brands.", "Instagram pages.", "communities.", "brands.", "newsletters."];
 
-// 123.9 million across the six reels, said the way our readers count it.
-const totalReelViews = `${Math.floor(millionViewReels.reduce((sum, reel) => sum + reel.views, 0) / 10_000_000)} crore`;
+// 123.9 million across the six reels, said the way our readers count it (lakh below a crore).
+const reelViewSum = millionViewReels.reduce((sum, reel) => sum + reel.views, 0);
+const totalReelViews = reelViewSum >= 10_000_000 ? `${Math.floor(reelViewSum / 10_000_000)} crore` : `${Math.floor(reelViewSum / 100_000)} lakh`;
 
 // Everything we do, from the services and their "what's included" lists.
 const everything = [
@@ -173,8 +174,31 @@ export default function Home() {
               Other ways to grow a page. <span className="text-ink/45">And us.</span>
             </h2>
           </Reveal>
-          <div className="-mx-4 mt-14 overflow-x-auto px-4 sm:mx-0 sm:px-0">
-            <table className="w-full min-w-[720px] border-collapse text-left">
+          {/* Phones: one block per row, our answer first, so nothing hides off-screen. */}
+          <dl className="mt-12 space-y-8 md:hidden">
+            {comparison.rows.map((row) => {
+              const ours = row.values[row.values.length - 1]!;
+              return (
+                <div key={row.label}>
+                  <dt className="text-[18px] font-semibold leading-snug">{row.label}</dt>
+                  <dd className="mt-3 flex items-baseline justify-between gap-4 rounded-[12px] bg-ink px-4 py-3 text-paper">
+                    <span className="text-[15px]">SoloDac</span>
+                    <span className="text-[16px] font-semibold">{ours}</span>
+                  </dd>
+                  <dd className="mt-2 space-y-1 px-4 text-[15px] text-ink/65">
+                    {comparison.columns.slice(0, -1).map((column, index) => (
+                      <div key={column} className="flex justify-between gap-4">
+                        <span>{column}</span>
+                        <span>{row.values[index]}</span>
+                      </div>
+                    ))}
+                  </dd>
+                </div>
+              );
+            })}
+          </dl>
+          <div className="mt-14 hidden md:block">
+            <table className="w-full border-collapse text-left">
               <thead>
                 <tr>
                   <th className="w-[34%] pb-5 text-[15px] font-normal text-ink/55" scope="col"><span className="sr-only">Compared on</span></th>
@@ -199,7 +223,7 @@ export default function Home() {
                       return (
                         <td
                           key={index}
-                          className={`py-5 pl-4 text-[16px] ${ours ? `bg-ink font-semibold text-paper ${last ? "rounded-b-[14px]" : ""}` : value === "No" ? "text-ink/40" : "text-ink/80"}`}
+                          className={`py-5 pl-4 text-[16px] ${ours ? `bg-ink font-semibold text-paper ${last ? "rounded-b-[14px]" : ""}` : value === "No" ? "text-ink/55" : "text-ink/80"}`}
                         >
                           {value}
                         </td>

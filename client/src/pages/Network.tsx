@@ -42,7 +42,7 @@ export default function Network() {
                   <span className="text-[14px] text-paper/55">{page.category}</span>
                 </div>
                 <h2 className="font-display mt-8 text-3xl tracking-[-0.02em]">{page.name}</h2>
-                <div className="text-sm text-paper/45">@{page.handle}</div>
+                <div className="text-sm text-paper/55">@{page.handle}</div>
                 <p className="mt-4 flex-1 leading-relaxed text-paper/65">{page.tagline}</p>
                 <div className="mt-8 flex items-end justify-between">
                   <div>

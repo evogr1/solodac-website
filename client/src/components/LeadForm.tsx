@@ -1,5 +1,5 @@
-import { Check, Loader2 } from "lucide-react";
-import { useState, type FormEvent } from "react";
+import { Check, ChevronDown, Loader2 } from "lucide-react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { submitForm } from "@/lib/web3forms";
 import { cn } from "@/lib/utils";
 
@@ -8,8 +8,11 @@ export type Field =
   | { name: string; label: string; type: "select"; options: string[]; required?: boolean; half?: boolean }
   | { name: string; label: string; type: "textarea"; required?: boolean; placeholder?: string };
 
+// Long enough for any real answer, short enough that a bot can't paste a novel into the inbox.
+const maxLengths = { text: 120, email: 254, tel: 30, url: 300, textarea: 3000 } as const;
+
 const inputClass =
-  "w-full rounded-xl border border-paper/15 bg-ink px-4 py-3.5 text-paper placeholder:text-paper/30 transition-colors focus:border-signal focus:outline-none";
+  "w-full rounded-xl border border-paper/15 bg-ink px-4 py-3.5 text-paper placeholder:text-paper/50 transition-colors focus:border-signal focus:outline-none";
 
 export default function LeadForm({
   subject,
@@ -28,12 +31,23 @@ export default function LeadForm({
 }) {
   const [values, setValues] = useState<Record<string, string>>(initial);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  // A hidden field people never see. Bots fill every field, so a value here means a bot.
+  const [trap, setTrap] = useState("");
+  const successRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    if (status === "sent") successRef.current?.focus();
+  }, [status]);
 
   const set = (name: string, value: string) => setValues((current) => ({ ...current, [name]: value }));
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
     setStatus("sending");
+    if (trap) {
+      setStatus("sent");
+      return;
+    }
     try {
       await submitForm(subject, values);
       setStatus("sent");
@@ -48,7 +62,7 @@ export default function LeadForm({
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-signal text-ink">
           <Check size={22} />
         </div>
-        <h3 className="font-display mt-6 text-3xl">{successTitle}</h3>
+        <h3 ref={successRef} tabIndex={-1} className="font-display mt-6 text-3xl focus:outline-none">{successTitle}</h3>
         <p className="mt-3 max-w-md text-paper/60">{successBody}</p>
       </div>
     );
@@ -56,6 +70,16 @@ export default function LeadForm({
 
   return (
     <form onSubmit={onSubmit} className="grid gap-4 rounded-2xl bg-ink-2 p-5 sm:grid-cols-2 sm:p-8">
+      <input
+        type="text"
+        name="botcheck"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+        value={trap}
+        onChange={(event) => setTrap(event.target.value)}
+      />
       {fields.map((field) => (
         <label key={field.name} className={cn("block", field.type === "textarea" || !("half" in field && field.half) ? "sm:col-span-2" : "")}>
           <span className="mb-2 block text-sm font-medium text-paper/75">
@@ -63,19 +87,23 @@ export default function LeadForm({
             {field.required && <span className="text-signal"> *</span>}
           </span>
           {field.type === "select" ? (
-            <select
-              className={cn(inputClass, "appearance-none")}
-              required={field.required}
-              value={values[field.name] ?? ""}
-              onChange={(event) => set(field.name, event.target.value)}
-            >
-              <option value="" disabled>Choose one</option>
-              {field.options.map((option) => <option key={option} value={option}>{option}</option>)}
-            </select>
+            <span className="relative block">
+              <select
+                className={cn(inputClass, "appearance-none pr-11")}
+                required={field.required}
+                value={values[field.name] ?? ""}
+                onChange={(event) => set(field.name, event.target.value)}
+              >
+                <option value="" disabled>Choose one</option>
+                {field.options.map((option) => <option key={option} value={option}>{option}</option>)}
+              </select>
+              <ChevronDown aria-hidden="true" size={18} className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-paper/55" />
+            </span>
           ) : field.type === "textarea" ? (
             <textarea
               className={cn(inputClass, "min-h-[140px] resize-y")}
               required={field.required}
+              maxLength={maxLengths.textarea}
               placeholder={field.placeholder}
               value={values[field.name] ?? ""}
               onChange={(event) => set(field.name, event.target.value)}
@@ -85,6 +113,7 @@ export default function LeadForm({
               className={inputClass}
               type={field.type}
               required={field.required}
+              maxLength={maxLengths[field.type]}
               placeholder={field.placeholder}
               value={values[field.name] ?? ""}
               onChange={(event) => set(field.name, event.target.value)}
@@ -102,9 +131,9 @@ export default function LeadForm({
           {status === "sending" && <Loader2 size={16} className="animate-spin" />}
           {submitLabel}
         </button>
-        {status === "error" && (
-          <p className="text-sm text-signal-soft">That didn't go through. Try again or email info@solodac.com.</p>
-        )}
+        <p role="alert" className="text-sm text-signal-soft">
+          {status === "error" && "That didn't go through. Try again or email info@solodac.com."}
+        </p>
       </div>
     </form>
   );
