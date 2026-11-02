@@ -69,7 +69,7 @@ export function Header() {
             <Wordmark />
           </Link>
 
-          <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
+          <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
             {nav.map((item) => (
               <Link
                 key={item.href}
@@ -85,13 +85,13 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <Link href="/contact" className="hidden items-center gap-1.5 rounded-full bg-paper px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-signal sm:inline-flex">
+            <Link href="/contact" className="hidden items-center gap-1.5 whitespace-nowrap rounded-full bg-paper px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-signal sm:inline-flex">
               Book a call <ArrowUpRight size={15} />
             </Link>
             <button
               ref={toggleRef}
               type="button"
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-paper/10 md:hidden"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-paper/10 lg:hidden"
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               onClick={() => setOpen((value) => !value)}
@@ -104,7 +104,7 @@ export function Header() {
 
       {/* Phone menu: a solid full-screen sheet under the bar, so nothing from the page shows through. */}
       {open && (
-        <div className="menu-sheet fixed inset-x-0 bottom-0 top-[72px] flex flex-col justify-between overflow-y-auto bg-ink md:hidden">
+        <div className="menu-sheet fixed inset-x-0 bottom-0 top-[72px] flex flex-col justify-between overflow-y-auto bg-ink lg:hidden">
           <nav className="container flex flex-col pt-6" aria-label="Mobile">
             {[...nav, { label: "Contact", href: "/contact" }].map((item) => (
               <Link

@@ -58,7 +58,8 @@ export default function Home() {
     <Layout>
       {/* Hero */}
       <section className="relative overflow-hidden pb-10 pt-32 sm:pb-14 sm:pt-40">
-        <div className="pointer-events-none absolute -inset-x-[12%] -inset-y-[18%]"><MeshGradient /></div>
+        {/* The glow covers the top of the hero and fades out before the numbers and reels. */}
+        <div className="pointer-events-none absolute -inset-x-[12%] -top-[12%] h-[min(105svh,1040px)] [mask-image:linear-gradient(to_bottom,#000_45%,transparent_90%)]"><MeshGradient /></div>
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-ink" />
         <div className="container relative">
           <Reveal>
