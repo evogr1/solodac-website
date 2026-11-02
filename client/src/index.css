@@ -3,9 +3,31 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Stand-ins for Bricolage while it loads, resized to the same width and line height, so headings wrap the same
+   way before and after the real font arrives and nothing on the page jumps. Arial covers iPhone, Mac and Windows;
+   Roboto covers Android. The numbers come from measuring Bricolage 700 against each. */
+@font-face {
+  font-family: "Bricolage Fallback Arial";
+  src: local("Arial Bold"), local("Arial-BoldMT"), local("Liberation Sans Bold"), local("LiberationSans-Bold");
+  font-weight: 700;
+  size-adjust: 90.5%;
+  ascent-override: 102.8%;
+  descent-override: 29.8%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Bricolage Fallback Roboto";
+  src: local("Roboto Bold"), local("Roboto-Bold");
+  font-weight: 700;
+  size-adjust: 96%;
+  ascent-override: 96.9%;
+  descent-override: 28.1%;
+  line-gap-override: 0%;
+}
+
 @theme inline {
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-display: "Bricolage Grotesque", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: "Bricolage Grotesque", "Bricolage Fallback Arial", "Bricolage Fallback Roboto", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   --color-ink: #0b0b0c;
   --color-ink-2: #141416;
   --color-ink-3: #1d1d20;
