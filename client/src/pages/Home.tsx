@@ -13,13 +13,12 @@ import Reveal from "@/components/Reveal";
 import { GhostButton, PrimaryButton } from "@/components/site";
 import { indianNumber } from "@/lib/format";
 import { totalReelViews } from "@/lib/reels";
-import { company, networkPages, newsletterReaders, services, totalFollowers } from "@/lib/site";
+import { networkPages, newsletterReaders, services, totalFollowers } from "@/lib/site";
 
 const heroStats = [
   { value: totalReelViews, label: "views on six of our reels" },
   { value: indianNumber(totalFollowers), label: "people follow our named pages" },
   { value: indianNumber(newsletterReaders), label: "newsletter readers" },
-  { value: String(company.locations.length), label: `offices in ${company.locations.map((office) => office.city).join(", ").replace(/, ([^,]+)$/, " and $1")}` },
 ];
 
 const growing = ["YouTube channels.", "personal brands.", "Instagram pages.", "communities.", "brands.", "newsletters."];
