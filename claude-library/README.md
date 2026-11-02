@@ -26,6 +26,11 @@ bash claude-library/install.sh
 | thedotmack/claude-mem | Memory plugin for Claude Code | Nothing new. It is already installed as a plugin in this repo. |
 | headroomlabs-ai/headroom | A context compression proxy, not a skill | Nothing. See "Headroom" below. |
 | opf/openproject | A full project management web app, not a skill | Nothing. It has no skills. Self-host it with Docker if you want it as an app. |
+| vercel-labs/agent-skills (reel: "Vercel web design") | Vercel's skills | `web-design-guidelines`, `react-best-practices`, `composition-patterns`, `react-view-transitions`, `writing-guidelines` |
+| VoltAgent/awesome-design-md (reel: "Awesome DESIGN.md") | 84 design write-ups of real sites | Wrapped as one skill, `design-md-library` |
+| microsoft/playwright-cli (reel: "Playwright CLI") | A browser automation CLI with a skill | `playwright-cli`. The CLI itself installs with npm, see below. |
+| abi/screenshot-to-code (reel: "Image to code") | A web app, not a skill | Nothing. See "Image to code" below. |
+| Taste skill (reel) | | Already installed as `design-taste-frontend` |
 
 The other 47 OmniRoute skills only drive a running OmniRoute server (its keys, routes, cache and tunnels). They do nothing without one, so they were left out. The other open-seo skills are for developing OpenSEO itself.
 
@@ -40,6 +45,15 @@ The other 47 OmniRoute skills only drive a running OmniRoute server (its keys, r
 - `claude-docs-consultant`: looks things up in the official Claude Code docs.
 - `session-metrics` and `audit-session-metrics`: token use and cost reports from your Claude Code sessions. They need Python 3 (`uv` recommended).
 - `task-observer`: watches your work for corrections and patterns, logs them, and suggests skill updates in a weekly review. It writes its log to a folder you choose (it suggests `~/.claude/skill-observations/`). Never fetches anything on its own.
+
+- `web-design-guidelines`: reviews UI code against Vercel's Web Interface Guidelines. It downloads the latest rules from Vercel's GitHub each time it runs.
+- `react-best-practices`, `composition-patterns`, `react-view-transitions`: Vercel's React guides for speed, component structure and View Transition animations.
+- `writing-guidelines`: reviews docs and prose against Vercel's writing rules.
+- `design-md-library`: design write-ups of 84 sites (Stripe, Linear, Apple, Notion, Raycast, Wise, Zapier and more). Ask for "a page in the style of Linear" and Claude reads that one file. It never copies logos, names or copy.
+
+**Need a one-time install**
+
+- `playwright-cli`: needs the CLI. On the Mac: `npm install -g @playwright/cli@latest`. Then Claude can open a browser, click, type and take screenshots from Claude Code.
 
 **Need an account or key**
 
@@ -68,6 +82,18 @@ uv tool install headroom-ai
 
 Then follow its quickstart at https://docs.headroomlabs.ai/docs/quickstart. Undo with `uv tool uninstall headroom-ai`.
 
+## Image to code (screenshot-to-code)
+
+A separate web app: drop in a screenshot or screen recording, get HTML, React or Vue code back. It needs its own OpenAI, Anthropic or Gemini API key. Claude Code can already do this directly: paste a screenshot and ask for the code. If you want the app anyway, on the Mac:
+
+```
+git clone https://github.com/abi/screenshot-to-code && cd screenshot-to-code
+echo "ANTHROPIC_API_KEY=your-key" > .env
+docker-compose up -d --build
+```
+
+Then open http://localhost:5173. Put the key in that `.env` file only, never in a chat.
+
 ## Licences
 
-open-seo, my-claude-code-setup and OmniRoute are MIT. one-skill-to-rule-them-all is CC BY 4.0 (author: Eoghan Henn). Copies are in `licenses/`.
+open-seo, my-claude-code-setup, OmniRoute, Vercel agent-skills and awesome-design-md are MIT. playwright-cli is Apache 2.0. one-skill-to-rule-them-all is CC BY 4.0 (author: Eoghan Henn). Copies are in `licenses/`.

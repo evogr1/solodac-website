@@ -58,4 +58,4 @@ Total: 24 skills and 2 plugins.
 
 ## Skill library for the whole Mac (added 2 November 2026)
 
-`claude-library/` holds 23 more skills from open-seo, my-claude-code-setup, one-skill-to-rule-them-all and OmniRoute. They are not loaded by this project. `bash claude-library/install.sh` installs them and the project's own skills into `~/.claude/skills` and makes upload zips for the Claude app. See `claude-library/README.md` for what each skill needs.
+`claude-library/` holds 30 more skills from open-seo, my-claude-code-setup, one-skill-to-rule-them-all, OmniRoute, Vercel agent-skills, playwright-cli and awesome-design-md. They are not loaded by this project. `bash claude-library/install.sh` installs them and the project's own skills into `~/.claude/skills` and makes upload zips for the Claude app. See `claude-library/README.md` for what each skill needs.
