@@ -58,7 +58,7 @@ export function PageHero({
   backdrop?: ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden pb-16 pt-32 sm:pb-24 sm:pt-44">
+    <section className="relative overflow-hidden pb-10 pt-32 sm:pb-14 sm:pt-40">
       {backdrop}
       <div className="container relative">
         <Reveal>
@@ -77,7 +77,7 @@ export function PageHero({
 
 export function CtaBand({ title, body, href = "/contact", label = "Book a call" }: { title: ReactNode; body: ReactNode; href?: string; label?: string }) {
   return (
-    <section className="container py-24 sm:py-32">
+    <section className="container py-14 sm:py-20">
       <h2 className="font-display max-w-4xl text-[clamp(2.4rem,5.5vw,4.5rem)] leading-[0.95] tracking-[-0.03em]">{title}</h2>
       <p className="mt-6 max-w-xl text-[18px] leading-relaxed text-paper/70">{body}</p>
       <div className="mt-9">

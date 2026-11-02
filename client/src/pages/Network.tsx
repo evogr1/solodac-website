@@ -22,7 +22,7 @@ export default function Network() {
         intro="These are the pages that carry the SoloDac name. We run more than this across Instagram and YouTube. The rest stay unbranded on purpose."
       />
 
-      <section className="container py-20 sm:py-28">
+      <section className="container py-14 sm:py-20">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {networkPages.map((page, index) => (
             <Reveal key={page.handle} delay={(index % 3) * 0.06}>
@@ -64,8 +64,8 @@ export default function Network() {
         </Reveal>
       </section>
 
-      <section className="bg-ink-2" aria-labelledby="brands">
-        <div className="container grid gap-12 py-20 sm:py-28 lg:grid-cols-[1fr_1.3fr] lg:gap-20">
+      <section aria-labelledby="brands">
+        <div className="container grid gap-12 py-14 sm:py-20 lg:grid-cols-[1fr_1.3fr] lg:gap-20">
           <Reveal>
             <h2 id="brands" className="font-display text-[clamp(2.2rem,5vw,3.75rem)] leading-[0.98] tracking-[-0.03em]">Put your brand in front of these audiences.</h2>
             <p className="mt-8 font-display text-[clamp(56px,7vw,104px)] leading-none tracking-[-0.04em] text-signal">{totalFollowersInThousands}K</p>
@@ -78,7 +78,7 @@ export default function Network() {
           <div className="grid content-start gap-3">
             {offers.map((offer, index) => (
               <Reveal key={offer.title} delay={index * 0.06}>
-                <div className="rounded-2xl bg-ink p-6 sm:p-7">
+                <div className="rounded-2xl bg-ink-2 p-6 sm:p-7">
                   <div className="font-display text-2xl tracking-[-0.02em]">{offer.title}</div>
                   <p className="mt-2 text-[17px] leading-relaxed text-paper/65">{offer.body}</p>
                 </div>

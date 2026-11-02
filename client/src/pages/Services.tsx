@@ -21,9 +21,9 @@ export default function Services() {
         </div>
       </PageHero>
 
-      {services.map((service, index) => (
-        <section key={service.id} id={service.id} className={index % 2 === 1 ? "bg-ink-2" : ""}>
-          <div className="container grid gap-12 py-20 sm:py-28 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
+      {services.map((service) => (
+        <section key={service.id} id={service.id}>
+          <div className="container grid gap-12 py-14 sm:py-20 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
             <Reveal>
               <h2 className="font-display text-[clamp(2.6rem,6vw,5rem)] leading-[0.92] tracking-[-0.03em]">{service.title}</h2>
               <p className="mt-5 text-[22px] leading-snug text-paper/80 sm:text-2xl">{service.line}</p>
@@ -33,7 +33,7 @@ export default function Services() {
               </div>
             </Reveal>
             <Reveal delay={0.1}>
-              <div className={`rounded-2xl p-7 sm:p-9 ${index % 2 === 1 ? "bg-ink" : "bg-ink-2"}`}>
+              <div className="rounded-2xl bg-ink-2 p-7 sm:p-9">
                 <div className="text-[15px] text-paper/55">What's included</div>
                 <ul className="mt-6 space-y-4">
                   {service.includes.map((item) => (

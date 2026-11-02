@@ -6,42 +6,15 @@ import Magnetic from "@/components/effects/Magnetic";
 import MeshGradient from "@/components/effects/MeshGradient";
 import FiveHires from "@/components/home/FiveHires";
 import GrowthPicker from "@/components/home/GrowthPicker";
+import HowItFits from "@/components/home/HowItFits";
 import RotatingWord from "@/components/home/RotatingWord";
 import Reel from "@/components/katran/Reel";
 import Reveal from "@/components/Reveal";
 import { GhostButton, PrimaryButton } from "@/components/site";
 import { millionViewReels, totalReelViews } from "@/lib/reels";
-import { services, totalFollowersInThousands } from "@/lib/site";
+import { services } from "@/lib/site";
 
 const growing = ["YouTube channels.", "personal brands.", "Instagram pages.", "communities.", "brands.", "newsletters."];
-
-// SoloDac's three arms, each with one real number.
-const arms = [
-  {
-    name: "SoloDac Agency",
-    body: "We grow YouTube channels, Instagram pages, newsletters and founder brands for clients.",
-    stat: "43%",
-    statNote: "average open rate on our own newsletters",
-    href: "/services",
-    cta: "See services",
-  },
-  {
-    name: "SoloDac Network",
-    body: "Five pages we put our name on, plus channels we run without it. Brands advertise here.",
-    stat: `${totalFollowersInThousands}K`,
-    statNote: "people follow our five named pages",
-    href: "/network",
-    cta: "See the network",
-  },
-  {
-    name: "Katran",
-    body: "The editing software we built for our own pages. Creators get access next.",
-    stat: totalReelViews,
-    statNote: "views on six reels made with it",
-    href: "/katran",
-    cta: "See Katran",
-  },
-];
 
 const comparison = {
   columns: ["Freelancers", "An in-house team", "A typical agency", "SoloDac"],
@@ -77,7 +50,7 @@ export default function Home() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative overflow-hidden pb-16 pt-32 sm:pb-24 sm:pt-44">
+      <section className="relative overflow-hidden pb-10 pt-32 sm:pb-14 sm:pt-40">
         <div className="pointer-events-none absolute -inset-x-[12%] -inset-y-[18%]"><MeshGradient /></div>
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-ink" />
         <div className="container relative">
@@ -104,32 +77,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* The three arms */}
-      <section className="bg-ink-2" aria-labelledby="arms">
-        <div className="container py-20 sm:py-24">
-          <Reveal>
-            <h2 id="arms" className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">One team. Three parts.</h2>
-          </Reveal>
-          <div className="mt-12 grid gap-4 md:grid-cols-3">
-            {arms.map((arm, index) => (
-              <Reveal key={arm.name} delay={index * 0.07} className="h-full">
-                <Link href={arm.href} className="group flex h-full flex-col rounded-2xl bg-ink p-7 transition-colors duration-200 hover:bg-ink-3">
-                  <h3 className="font-display text-[clamp(26px,2.2vw,32px)] leading-tight tracking-[-0.02em]">{arm.name}</h3>
-                  <p className="mt-3 flex-1 text-[16px] leading-relaxed text-paper/65">{arm.body}</p>
-                  <p className="mt-8 font-display text-[clamp(40px,3.6vw,56px)] leading-none tracking-[-0.04em]">{arm.stat}</p>
-                  <p className="mt-2 text-[14px] text-paper/55">{arm.statNote}</p>
-                  <span className="inline-flex items-center gap-1.5 pt-8 text-[15px] font-semibold transition-colors duration-200 group-hover:text-signal">
-                    {arm.cta} <ArrowUpRight size={16} />
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-        </div>
+      {/* How the three arms fit together */}
+      <section className="container py-14 sm:py-20" aria-label="How SoloDac fits together">
+        <HowItFits />
       </section>
 
       {/* The problem */}
-      <section className="container py-24 sm:py-32">
+      <section className="container py-14 sm:py-20">
         <Reveal>
           <h2 className="font-display max-w-4xl text-[clamp(2.4rem,5vw,4.25rem)] leading-[0.95] tracking-[-0.03em]">
             Growing a page usually takes five hires. We are all five.
@@ -144,13 +98,13 @@ export default function Home() {
       </section>
 
       {/* What are you growing */}
-      <section className="container pb-24 sm:pb-32" aria-labelledby="growing">
+      <section className="container pb-14 sm:pb-20" aria-labelledby="growing">
         <GrowthPicker />
       </section>
 
       {/* Every service */}
-      <section className="bg-ink-2" aria-labelledby="everything">
-        <div className="container py-24 sm:py-32">
+      <section aria-labelledby="everything">
+        <div className="container py-14 sm:py-20">
           <Reveal>
             <h2 id="everything" className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">
               What we do.
@@ -173,7 +127,7 @@ export default function Home() {
       </section>
 
       {/* Proof: the reels */}
-      <section className="container py-24 sm:py-32" aria-labelledby="reels">
+      <section className="container py-14 sm:py-20" aria-labelledby="reels">
         <Reveal>
           <h2 id="reels" className="font-display max-w-4xl text-[clamp(2.2rem,5vw,4.25rem)] leading-[0.98] tracking-[-0.03em]">
             Reels from our own pages.
@@ -196,8 +150,8 @@ export default function Home() {
       </section>
 
       {/* Comparison */}
-      <section className="bg-ink-2" aria-labelledby="compare">
-        <div className="container py-24 sm:py-32">
+      <section aria-labelledby="compare">
+        <div className="container py-14 sm:py-20">
           <Reveal>
             <h2 id="compare" className="font-display max-w-3xl text-[clamp(2.2rem,5vw,3.75rem)] leading-[0.98] tracking-[-0.03em]">
               How we compare.
@@ -267,7 +221,7 @@ export default function Home() {
       </section>
 
       {/* Katran */}
-      <section className="container py-24 sm:py-32">
+      <section className="container py-14 sm:py-20">
         <Reveal>
           <h2 className="font-display text-[clamp(2.4rem,5.5vw,4.5rem)] leading-[0.95] tracking-[-0.03em]">
             Katran, our own editing software.
@@ -282,8 +236,8 @@ export default function Home() {
       </section>
 
       {/* How we work */}
-      <section className="bg-ink-2">
-        <div className="container py-24 sm:py-32">
+      <section>
+        <div className="container py-14 sm:py-20">
           <Reveal>
             <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">How we work with you.</h2>
           </Reveal>
@@ -304,7 +258,7 @@ export default function Home() {
       </section>
 
       {/* Questions */}
-      <section className="container py-24 sm:py-32">
+      <section className="container py-14 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-12">
           <Reveal className="lg:col-span-4">
             <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">Common questions.</h2>
@@ -321,8 +275,8 @@ export default function Home() {
       </section>
 
       {/* Ask */}
-      <section className="bg-ink-2">
-        <div className="container py-24 sm:py-32">
+      <section>
+        <div className="container py-14 sm:py-20">
           <Reveal>
             <h2 className="font-display max-w-4xl text-[clamp(2.4rem,5.5vw,4.5rem)] leading-[0.95] tracking-[-0.03em]">
               Got a page, a channel or a brand that should be bigger?
