@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import type { ReactNode } from "react";
 import Layout from "@/components/Layout";
+import ParticleWord from "@/components/effects/ParticleWord";
 import Reveal from "@/components/Reveal";
 import { ReelFan } from "@/components/proof/ProofStack";
 import { CtaBand, PrimaryButton } from "@/components/site";
@@ -61,6 +62,12 @@ export default function About() {
         <Reveal delay={0.2} y={20}>
           <ReelFan order={[4, 1, 5]} className="mx-auto max-w-[460px] lg:mr-0" />
         </Reveal>
+      </section>
+
+      <section aria-label="SoloDac">
+        <div className="container">
+          <ParticleWord className="h-[200px] sm:h-[300px] lg:h-[360px]" />
+        </div>
       </section>
 
       <Part title="How it started">
