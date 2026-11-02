@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
  * every device. It runs through the list once and settles back on the first word, and holds
  * still for reduced motion, so the motion always ends.
  */
-export default function RotatingWord({ words, className, interval = 2000 }: { words: string[]; className?: string; interval?: number }) {
+export default function RotatingWord({ words, className, interval = 1000 }: { words: string[]; className?: string; interval?: number }) {
   const reduce = useReducedMotion();
   const [index, setIndex] = useState(0);
 
@@ -38,7 +38,7 @@ export default function RotatingWord({ words, className, interval = 2000 }: { wo
           initial={{ y: "100%", opacity: 0 }}
           animate={{ y: "0%", opacity: 1 }}
           exit={{ y: "-100%", opacity: 0 }}
-          transition={{ duration: 0.42, ease: [0.77, 0, 0.175, 1] }}
+          transition={{ duration: 0.32, ease: [0.77, 0, 0.175, 1] }}
         >
           {words[index]}
         </motion.span>
