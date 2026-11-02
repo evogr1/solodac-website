@@ -13,6 +13,7 @@ import Legal from "./pages/Legal";
 import Network from "./pages/Network";
 import NotFound from "./pages/NotFound";
 import Services from "./pages/Services";
+import Work from "./pages/Work";
 
 // Old URLs from the previous site still live in bios, DMs and decks.
 const redirects: Array<[string, string]> = [
@@ -25,13 +26,13 @@ const redirects: Array<[string, string]> = [
   ["/approach", "/about"],
   ["/careers", "/about#careers"],
   ["/thesis", "/about"],
-  ["/stories", "/network"],
-  ["/stories/:slug", "/network"],
+  ["/stories", "/work"],
+  ["/stories/:slug", "/work"],
   ["/events", "/network"],
   ["/campaigns", "/network"],
-  ["/case-studies", "/network"],
+  ["/case-studies", "/work"],
   ["/testimonials", "/network"],
-  ["/portfolio", "/network"],
+  ["/portfolio", "/work"],
   ["/fireyoureditor", "/katran"],
   ["/tools", "/katran"],
   ["/chop-shop", "/katran"],
@@ -65,6 +66,7 @@ function Router() {
       >
         <Switch location={location}>
           <Route path="/" component={Home} />
+          <Route path="/work" component={Work} />
           <Route path="/services" component={Services} />
           <Route path="/network" component={Network} />
           <Route path="/katran" component={Katran} />

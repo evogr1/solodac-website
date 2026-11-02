@@ -51,25 +51,31 @@ export function PageHero({
   intro,
   children,
   backdrop,
+  aside,
 }: {
   title: ReactNode;
   intro?: ReactNode;
   children?: ReactNode;
   backdrop?: ReactNode;
+  /** A picture beside the words on wide screens, under them on phones. */
+  aside?: ReactNode;
 }) {
   return (
     <section className="relative overflow-hidden pb-10 pt-32 sm:pb-14 sm:pt-40">
       {backdrop}
-      <div className="container relative">
-        <Reveal>
-          <h1 className="font-display max-w-5xl text-[clamp(2.75rem,8vw,6.5rem)] leading-[0.92] tracking-[-0.03em]">{title}</h1>
-        </Reveal>
-        {intro && (
-          <Reveal delay={0.08}>
-            <p className="mt-7 max-w-2xl text-base leading-relaxed text-paper/65 sm:text-lg">{intro}</p>
+      <div className={cn("container relative", aside && "grid items-end gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.75fr)] lg:gap-16")}>
+        <div>
+          <Reveal>
+            <h1 className={cn("font-display max-w-5xl", aside ? "text-[clamp(2.75rem,6vw,5.25rem)]" : "text-[clamp(2.75rem,8vw,6.5rem)]", "leading-[0.92] tracking-[-0.03em]")}>{title}</h1>
           </Reveal>
-        )}
-        {children && <Reveal delay={0.16}>{children}</Reveal>}
+          {intro && (
+            <Reveal delay={0.08}>
+              <p className="mt-7 max-w-2xl text-base leading-relaxed text-paper/65 sm:text-lg">{intro}</p>
+            </Reveal>
+          )}
+          {children && <Reveal delay={0.16}>{children}</Reveal>}
+        </div>
+        {aside && <Reveal delay={0.2} y={20}>{aside}</Reveal>}
       </div>
     </section>
   );

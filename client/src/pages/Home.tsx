@@ -8,11 +8,19 @@ import FiveHires from "@/components/home/FiveHires";
 import GrowthPicker from "@/components/home/GrowthPicker";
 import HowItFits from "@/components/home/HowItFits";
 import RotatingWord from "@/components/home/RotatingWord";
-import Reel from "@/components/katran/Reel";
+import ReelWall from "@/components/proof/ReelWall";
 import Reveal from "@/components/Reveal";
 import { GhostButton, PrimaryButton } from "@/components/site";
-import { millionViewReels, totalReelViews } from "@/lib/reels";
-import { services } from "@/lib/site";
+import { indianNumber } from "@/lib/format";
+import { totalReelViews } from "@/lib/reels";
+import { company, networkPages, newsletterReaders, services, totalFollowers } from "@/lib/site";
+
+const heroStats = [
+  { value: totalReelViews, label: "views on six of our reels" },
+  { value: indianNumber(totalFollowers), label: "people follow our named pages" },
+  { value: indianNumber(newsletterReaders), label: "newsletter readers" },
+  { value: String(company.locations.length), label: `offices in ${company.locations.map((office) => office.city).join(", ").replace(/, ([^,]+)$/, " and $1")}` },
+];
 
 const growing = ["YouTube channels.", "personal brands.", "Instagram pages.", "communities.", "brands.", "newsletters."];
 
@@ -70,11 +78,24 @@ export default function Home() {
               </p>
               <div className="flex flex-wrap gap-3">
                 <Magnetic><PrimaryButton href="/contact">Book a call</PrimaryButton></Magnetic>
-                <Magnetic><GhostButton href="/services">What we do</GhostButton></Magnetic>
+                <Magnetic><GhostButton href="/work">See our work</GhostButton></Magnetic>
               </div>
             </div>
           </Reveal>
+          <Reveal delay={0.18}>
+            <dl className="mt-12 grid grid-cols-2 gap-x-8 gap-y-7 sm:mt-16 lg:grid-cols-4">
+              {heroStats.map((stat) => (
+                <div key={stat.label} className="flex flex-col-reverse">
+                  <dt className="mt-2 text-[15px] leading-snug text-paper/60">{stat.label}</dt>
+                  <dd className="font-display text-[clamp(32px,3.6vw,52px)] leading-none tracking-[-0.03em]">{stat.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
         </div>
+        <Reveal delay={0.26} className="relative mt-12 sm:mt-16">
+          <ReelWall />
+        </Reveal>
       </section>
 
       {/* How the three arms fit together */}
@@ -126,25 +147,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Proof: the reels */}
-      <section className="container py-14 sm:py-20" aria-labelledby="reels">
+      {/* Proof: our own pages, as case studies */}
+      <section className="container py-14 sm:py-20" aria-labelledby="work">
         <Reveal>
-          <h2 id="reels" className="font-display max-w-4xl text-[clamp(2.2rem,5vw,4.25rem)] leading-[0.98] tracking-[-0.03em]">
-            Reels from our own pages.
+          <h2 id="work" className="font-display max-w-4xl text-[clamp(2.2rem,5vw,4.25rem)] leading-[0.98] tracking-[-0.03em]">
+            Our case studies are our own pages.
           </h2>
           <p className="mt-5 max-w-xl text-[18px] leading-relaxed text-paper/70">
-            Each one passed a million views. Together they have {totalReelViews}. All six were made with Katran, the editor we built for our own pages.
+            We built each of these and still run them every day. The reels above came from them.
           </p>
         </Reveal>
-        <div className="-mx-4 mt-12 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 sm:-mx-8 sm:scroll-px-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-6 lg:overflow-visible lg:px-0 lg:pb-0">
-          {millionViewReels.map((reel, index) => (
-            <Reveal key={reel.id} delay={index * 0.05} className="w-[62vw] max-w-[260px] shrink-0 snap-start sm:w-[34vw] lg:w-auto lg:max-w-none">
-              <Reel reel={reel} />
-            </Reveal>
+        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {networkPages.map((page, index) => (
+            <li key={page.slug}>
+              <Reveal delay={index * 0.05} className="h-full">
+                <Link href={`/work#${page.slug}`} className="group flex h-full flex-col rounded-2xl bg-ink-2 p-6 transition-colors duration-200 hover:bg-ink-3">
+                  <div className="flex items-start justify-between">
+                    <img src={page.logo} alt="" className="h-12 w-12 rounded-full object-cover" />
+                    <ArrowUpRight aria-hidden="true" size={18} className="text-paper/40 transition-[transform,color] duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-signal" />
+                  </div>
+                  <span className="font-display mt-8 text-[24px] leading-tight tracking-[-0.02em]">{page.name}</span>
+                  <span className="mt-1 text-[14px] text-paper/55">{page.category}</span>
+                  <span className="font-display mt-6 text-[32px] leading-none tracking-[-0.03em]">{page.followers}</span>
+                  <span className="mt-1 text-[14px] text-paper/55">followers</span>
+                </Link>
+              </Reveal>
+            </li>
           ))}
-        </div>
+        </ul>
         <div className="mt-12 flex flex-wrap gap-3">
-          <PrimaryButton href="/network">See the network</PrimaryButton>
+          <PrimaryButton href="/work">See the case studies</PrimaryButton>
           <GhostButton href="/contact?service=Brand%20partnership">Advertise with us</GhostButton>
         </div>
       </section>

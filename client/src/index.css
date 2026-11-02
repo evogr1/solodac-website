@@ -194,3 +194,19 @@ body.menu-open { overflow: hidden; }
 }
 
 
+
+/* The home hero's reel wall: one slow loop, paused under the pointer or focus. */
+@keyframes reel-wall {
+  to { transform: translateX(-50%); }
+}
+.reel-wall-track {
+  animation: reel-wall 46s linear infinite;
+}
+.reel-wall:hover .reel-wall-track,
+.reel-wall:focus-within .reel-wall-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reel-wall { overflow-x: auto; }
+  .reel-wall-track { animation: none; }
+}

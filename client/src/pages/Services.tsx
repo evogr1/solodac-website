@@ -1,6 +1,7 @@
 import { Check } from "lucide-react";
 import Layout from "@/components/Layout";
 import Reveal from "@/components/Reveal";
+import { ReelFan } from "@/components/proof/ProofStack";
 import { CtaBand, PageHero, PrimaryButton } from "@/components/site";
 import { scrollToId } from "@/lib/smoothScroll";
 import { services } from "@/lib/site";
@@ -11,8 +12,12 @@ export default function Services() {
       <PageHero
         title="Everything a page needs, from one team."
         intro="Every service here is something we run on our own pages first. If it doesn't work for us, we don't sell it to you."
+        aside={<ReelFan className="mx-auto max-w-[460px] lg:mr-0" />}
       >
-        <div className="mt-10 flex flex-wrap gap-2">
+        <div className="mt-9">
+          <PrimaryButton href="/contact">Book a call</PrimaryButton>
+        </div>
+        <div className="mt-8 flex flex-wrap gap-2">
           {services.map((service) => (
             <a key={service.id} href={`#${service.id}`} onClick={(event) => { event.preventDefault(); scrollToId(service.id); }} className="rounded-full bg-paper/10 px-4 py-2 text-[15px] text-paper/80 transition-colors hover:bg-paper hover:text-ink">
               {service.title}

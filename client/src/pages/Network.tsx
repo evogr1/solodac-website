@@ -1,8 +1,9 @@
 import { ArrowUpRight } from "lucide-react";
 import Layout from "@/components/Layout";
 import NetworkGlobe from "@/components/effects/NetworkGlobe";
+import { LogoRow } from "@/components/proof/ProofStack";
 import Reveal from "@/components/Reveal";
-import { CtaBand, PageHero, PrimaryButton } from "@/components/site";
+import { CtaBand, GhostButton, PageHero, PrimaryButton } from "@/components/site";
 import { igUrl, networkPages, totalFollowersInThousands } from "@/lib/site";
 
 const offers = [
@@ -20,7 +21,16 @@ export default function Network() {
         }
         title="The pages we put our name on."
         intro="These are the pages that carry the SoloDac name. We run more than this across Instagram and YouTube. The rest stay unbranded on purpose."
-      />
+      >
+        <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-6">
+          <LogoRow />
+          <p className="text-[15px] text-paper/70"><span className="font-semibold text-paper">{totalFollowersInThousands}K</span> followers</p>
+        </div>
+        <div className="mt-9 flex flex-wrap gap-3">
+          <PrimaryButton href="/contact?service=Brand%20partnership">Advertise with us</PrimaryButton>
+          <GhostButton href="/work">See the case studies</GhostButton>
+        </div>
+      </PageHero>
 
       <section className="container py-14 sm:py-20">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
