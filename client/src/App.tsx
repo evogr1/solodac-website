@@ -1,6 +1,7 @@
 import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import { useEffect } from "react";
 import { Redirect, Route, Switch, useLocation } from "wouter";
+import { pageByPath, siteUrl } from "@shared/pages";
 import CursorFollower from "./components/effects/CursorFollower";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { Header } from "./components/Layout";
@@ -36,23 +37,12 @@ const redirects: Array<[string, string]> = [
   ["/chop-shop", "/katran"],
 ];
 
-const titles: Record<string, string> = {
-  "/": "SoloDac | We grow pages, channels and brands",
-  "/services": "Services | SoloDac",
-  "/network": "Our pages | SoloDac",
-  "/katran": "Katran by SoloDac | A full production house",
-  "/about": "About | SoloDac",
-  "/contact": "Book a call | SoloDac",
-  "/privacy": "Privacy policy | SoloDac",
-  "/terms": "Terms of service | SoloDac",
-  "/refunds": "Refunds and cancellation | SoloDac",
-};
 
 function Router() {
   const [location] = useLocation();
 
   useEffect(() => {
-    document.title = titles[location] ?? "Page not found | SoloDac";
+    document.title = pageByPath(location)?.title ?? "Page not found | SoloDac";
     // Each page points search engines at its own address.
     let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (!canonical) {
@@ -60,7 +50,7 @@ function Router() {
       canonical.rel = "canonical";
       document.head.appendChild(canonical);
     }
-    canonical.href = `https://solodac.com${location === "/" ? "/" : location}`;
+    canonical.href = `${siteUrl}${location}`;
   }, [location]);
 
   // The old page fades and lifts away, then the new one rises in. The jump to the top of the
