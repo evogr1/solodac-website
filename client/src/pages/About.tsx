@@ -5,6 +5,12 @@ import Reveal from "@/components/Reveal";
 import { CtaBand } from "@/components/site";
 import { company } from "@/lib/site";
 
+const roles = [
+  { title: "Video editor", body: "Long-form YouTube edits and reels for our pages and our clients. Send three edits you're proud of." },
+  { title: "Writer", body: "YouTube scripts, reel hooks and carousel copy. Send three pieces you wrote." },
+  { title: "Designer", body: "Carousels, thumbnails and brand work. Send three designs." },
+];
+
 const rules = [
   { lead: "We run it on our own pages first.", body: "Every format we sell has already worked for us. Clients get what worked, not what might." },
   { lead: "Nothing goes out looking machine-made.", body: "Software helps us move fast. A person on the team decides what is good enough to post." },
@@ -71,15 +77,34 @@ export default function About() {
         </div>
       </Part>
 
-      <section id="careers" className="bg-paper text-ink">
-        <div className="container flex flex-col justify-between gap-8 py-16 sm:py-20 lg:flex-row lg:items-center">
-          <div>
-            <h2 className="font-display text-[clamp(2rem,4.5vw,3.25rem)] leading-[1] tracking-[-0.03em]">We're hiring editors, writers and designers.</h2>
-            <p className="mt-3 max-w-xl text-[17px] text-ink/70">Send us your best three pieces of work and a line about you.</p>
-          </div>
-          <a href={`mailto:${company.email}?subject=Work%20at%20SoloDac`} className="inline-flex shrink-0 items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-semibold text-paper transition-colors hover:bg-signal hover:text-ink">
-            Send your work <ArrowUpRight size={16} />
-          </a>
+      <section id="careers" className="bg-ink-2" aria-labelledby="careers-title">
+        <div className="container grid gap-12 py-20 sm:py-28 lg:grid-cols-12">
+          <Reveal className="lg:col-span-4">
+            <h2 id="careers-title" className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">Work with us.</h2>
+            <p className="mt-5 max-w-sm text-[17px] leading-relaxed text-paper/70">
+              We're hiring for these roles. Send your three best pieces of work and a line about you.
+            </p>
+          </Reveal>
+          <ul className="space-y-3 lg:col-span-7 lg:col-start-6">
+            {roles.map((role, index) => (
+              <li key={role.title}>
+                <Reveal delay={index * 0.06}>
+                  <a
+                    href={`mailto:${company.email}?subject=${encodeURIComponent(`Application: ${role.title}`)}`}
+                    className="group flex flex-col gap-4 rounded-2xl bg-ink p-6 transition-colors duration-200 hover:bg-ink-3 sm:flex-row sm:items-center sm:justify-between sm:p-7"
+                  >
+                    <span>
+                      <span className="font-display block text-[clamp(24px,2vw,30px)] leading-tight tracking-[-0.02em]">{role.title}</span>
+                      <span className="mt-2 block max-w-md text-[16px] leading-relaxed text-paper/65">{role.body}</span>
+                    </span>
+                    <span className="inline-flex shrink-0 items-center gap-1.5 text-[15px] font-semibold text-paper transition-colors duration-200 group-hover:text-signal">
+                      Apply <ArrowUpRight size={16} />
+                    </span>
+                  </a>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

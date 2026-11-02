@@ -53,6 +53,14 @@ function Router() {
 
   useEffect(() => {
     document.title = titles[location] ?? "Page not found | SoloDac";
+    // Each page points search engines at its own address.
+    let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.rel = "canonical";
+      document.head.appendChild(canonical);
+    }
+    canonical.href = `https://solodac.com${location === "/" ? "/" : location}`;
   }, [location]);
 
   // The old page fades and lifts away, then the new one rises in. The jump to the top of the
