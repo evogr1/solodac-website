@@ -17,7 +17,7 @@ export default function Network() {
     <Layout>
       <PageHero
         backdrop={
-          <NetworkGlobe className="pointer-events-none absolute -right-48 top-[52%] h-[420px] w-[420px] opacity-25 sm:-right-32 sm:top-24 sm:h-[560px] sm:w-[560px] sm:opacity-60 lg:left-[calc(50%+290px)] lg:right-auto lg:top-14 lg:h-[620px] lg:w-[620px] lg:opacity-100" />
+          <NetworkGlobe className="pointer-events-none absolute -right-28 top-[52%] h-[420px] w-[420px] opacity-25 sm:-right-12 sm:top-24 sm:h-[560px] sm:w-[560px] sm:opacity-60 lg:-right-12 lg:top-14 lg:h-[540px] lg:w-[540px] lg:opacity-60 xl:left-[calc(50%+290px)] xl:right-auto xl:h-[620px] xl:w-[620px] xl:opacity-100" />
         }
         title="The pages we put our name on."
         intro="These are the pages that carry the SoloDac name. We run more than this across Instagram and YouTube. The rest stay unbranded on purpose."

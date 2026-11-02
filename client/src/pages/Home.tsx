@@ -83,11 +83,12 @@ export default function Home() {
             </div>
           </Reveal>
           <Reveal delay={0.18}>
-            <dl className="mt-12 grid grid-cols-2 gap-x-8 gap-y-7 sm:mt-16 lg:grid-cols-4">
+            {/* One row on every screen, numbers lined up along the top. */}
+            <dl className="mt-12 grid grid-cols-3 gap-x-4 sm:mt-16 sm:gap-x-8 lg:grid-cols-4">
               {heroStats.map((stat) => (
-                <div key={stat.label} className="flex flex-col-reverse">
-                  <dt className="mt-2 text-[15px] leading-snug text-paper/60">{stat.label}</dt>
-                  <dd className="font-display text-[clamp(32px,3.6vw,52px)] leading-none tracking-[-0.03em]">{stat.value}</dd>
+                <div key={stat.label} className="flex flex-col">
+                  <dt className="mt-2 text-[14px] leading-snug text-paper/60 sm:text-[15px]">{stat.label}</dt>
+                  <dd className="font-display order-first text-[clamp(24px,6vw,44px)] leading-none tracking-[-0.03em] lg:text-[clamp(32px,3.6vw,52px)]">{stat.value}</dd>
                 </div>
               ))}
             </dl>

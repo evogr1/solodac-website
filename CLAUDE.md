@@ -32,4 +32,5 @@ Marketing site for SoloDac (solodac.com): React 19 + Vite + Tailwind v4 + wouter
   - Every page and section animates in (Reveal, page transition in `App.tsx`); keep the smooth scroll. Animations respect reduced motion.
 - Design skills live in `.claude/skills/`: design-taste-frontend (taste skill, with `scripts/lint.mjs` and `scripts/inspect.mjs`), impeccable, and Emil Kowalski's motion skills. Use them for any design work. The taste skill's flag on the cream brand colour is known and accepted.
 - Visual effects in `client/src/components/effects/` are adapted from Toolcraft examples (MIT, Pixel Point); the ported renderers live in `client/src/lib/effects/`. Every effect pauses off-screen and respects `prefers-reduced-motion`; cursor effects only run on fine pointers.
-- Check every change at 1440px and 390px, including the phone menu.
+- The particle word that forms "solodac" under the About hero (`ParticleWord`) stays. The owner asked for it back after it was removed.
+- Check every change at 1440px and 390px, including the phone menu. Also check iPad (768px portrait, 1194px landscape) with touch on: cursor effects get no mouse there.
