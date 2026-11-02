@@ -11,9 +11,37 @@ import Reel from "@/components/katran/Reel";
 import Reveal from "@/components/Reveal";
 import { GhostButton, PrimaryButton } from "@/components/site";
 import { millionViewReels, totalReelViews } from "@/lib/reels";
-import { services } from "@/lib/site";
+import { services, totalFollowersInThousands } from "@/lib/site";
 
 const growing = ["YouTube channels.", "personal brands.", "Instagram pages.", "communities.", "brands.", "newsletters."];
+
+// SoloDac's three arms, each with one real number.
+const arms = [
+  {
+    name: "SoloDac Agency",
+    body: "We grow YouTube channels, Instagram pages, newsletters and founder brands for clients.",
+    stat: "43%",
+    statNote: "average open rate on our own newsletters",
+    href: "/services",
+    cta: "See services",
+  },
+  {
+    name: "SoloDac Network",
+    body: "Five pages we put our name on, plus channels we run without it. Brands advertise here.",
+    stat: `${totalFollowersInThousands}K`,
+    statNote: "people follow our five named pages",
+    href: "/network",
+    cta: "See the network",
+  },
+  {
+    name: "Katran",
+    body: "The editing software we built for our own pages. Creators get access next.",
+    stat: totalReelViews,
+    statNote: "views on six reels made with it",
+    href: "/katran",
+    cta: "See Katran",
+  },
+];
 
 const comparison = {
   columns: ["Freelancers", "An in-house team", "A typical agency", "SoloDac"],
@@ -73,6 +101,30 @@ export default function Home() {
               </div>
             </div>
           </Reveal>
+        </div>
+      </section>
+
+      {/* The three arms */}
+      <section className="bg-ink-2" aria-labelledby="arms">
+        <div className="container py-20 sm:py-24">
+          <Reveal>
+            <h2 id="arms" className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">One team. Three parts.</h2>
+          </Reveal>
+          <div className="mt-12 grid gap-4 md:grid-cols-3">
+            {arms.map((arm, index) => (
+              <Reveal key={arm.name} delay={index * 0.07} className="h-full">
+                <Link href={arm.href} className="group flex h-full flex-col rounded-2xl bg-ink p-7 transition-colors duration-200 hover:bg-ink-3">
+                  <h3 className="font-display text-[clamp(26px,2.2vw,32px)] leading-tight tracking-[-0.02em]">{arm.name}</h3>
+                  <p className="mt-3 flex-1 text-[16px] leading-relaxed text-paper/65">{arm.body}</p>
+                  <p className="mt-8 font-display text-[clamp(40px,3.6vw,56px)] leading-none tracking-[-0.04em]">{arm.stat}</p>
+                  <p className="mt-2 text-[14px] text-paper/55">{arm.statNote}</p>
+                  <span className="inline-flex items-center gap-1.5 pt-8 text-[15px] font-semibold transition-colors duration-200 group-hover:text-signal">
+                    {arm.cta} <ArrowUpRight size={16} />
+                  </span>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
