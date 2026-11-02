@@ -20,7 +20,7 @@ const rules = [
 /** One part of the page: a small plain title on the left, the content on the right. */
 function Part({ id, title, children }: { id?: string; title: string; children: ReactNode }) {
   return (
-    <section id={id} className="container grid gap-6 py-14 sm:py-20 lg:grid-cols-12 lg:gap-8">
+    <section id={id} className="container grid gap-6 py-10 sm:py-14 lg:grid-cols-12 lg:gap-8">
       <h2 className="text-[clamp(20px,1.8vw,24px)] font-semibold lg:col-span-4">{title}</h2>
       <Reveal className="lg:col-span-7 lg:col-start-6">{children}</Reveal>
     </section>
@@ -77,8 +77,8 @@ export default function About() {
         </div>
       </Part>
 
-      <section id="careers" className="bg-ink-2" aria-labelledby="careers-title">
-        <div className="container grid gap-12 py-20 sm:py-28 lg:grid-cols-12">
+      <section id="careers" aria-labelledby="careers-title">
+        <div className="container grid gap-12 py-14 sm:py-20 lg:grid-cols-12">
           <Reveal className="lg:col-span-4">
             <h2 id="careers-title" className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">Work with us.</h2>
             <p className="mt-5 max-w-sm text-[17px] leading-relaxed text-paper/70">
@@ -91,7 +91,7 @@ export default function About() {
                 <Reveal delay={index * 0.06}>
                   <a
                     href={`mailto:${company.email}?subject=${encodeURIComponent(`Application: ${role.title}`)}`}
-                    className="group flex flex-col gap-4 rounded-2xl bg-ink p-6 transition-colors duration-200 hover:bg-ink-3 sm:flex-row sm:items-center sm:justify-between sm:p-7"
+                    className="group flex flex-col gap-4 rounded-2xl bg-ink-2 p-6 transition-colors duration-200 hover:bg-ink-3 sm:flex-row sm:items-center sm:justify-between sm:p-7"
                   >
                     <span>
                       <span className="font-display block text-[clamp(24px,2vw,30px)] leading-tight tracking-[-0.02em]">{role.title}</span>

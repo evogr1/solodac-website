@@ -134,7 +134,7 @@ function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-ink-2">
+    <footer className="mt-6 bg-ink">
       <div className="container grid gap-12 py-16 sm:py-20 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
           <Wordmark className="text-3xl" />

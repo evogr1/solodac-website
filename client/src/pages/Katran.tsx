@@ -105,7 +105,7 @@ export default function Katran() {
         </Reveal>
       </section>
 
-      <section className="pb-24 pt-16 sm:pb-32 lg:pt-20" aria-labelledby="reels">
+      <section className="pb-14 pt-12 sm:pb-20 lg:pt-16" aria-labelledby="reels">
         <div className="container">
           <h2 id="reels" className="text-[15px] text-paper/60">
             Made with Katran on our own pages. Each one passed a million views.
@@ -122,8 +122,8 @@ export default function Katran() {
         </div>
       </section>
 
-      <section className="bg-ink-2" aria-labelledby="how">
-        <div className="container py-24 sm:py-32">
+      <section aria-labelledby="how">
+        <div className="container py-14 sm:py-20">
           <Reveal>
             <h2 id="how" className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">How it works.</h2>
           </Reveal>
@@ -142,7 +142,7 @@ export default function Katran() {
         </div>
       </section>
 
-      <section className="container py-24 sm:py-32" aria-labelledby="makes">
+      <section className="container py-14 sm:py-20" aria-labelledby="makes">
         <Reveal>
           <h2 id="makes" className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">What goes in. What comes out.</h2>
         </Reveal>
@@ -162,7 +162,7 @@ export default function Katran() {
         </div>
       </section>
 
-      <section className="container pb-24 sm:pb-32">
+      <section className="container pb-14 sm:pb-20">
         <div className="grid gap-12 lg:grid-cols-12">
           <Reveal className="lg:col-span-4">
             <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">Before you join.</h2>
@@ -178,8 +178,8 @@ export default function Katran() {
         </div>
       </section>
 
-      <section id="waitlist" className="bg-ink-2">
-        <div className="container grid gap-12 py-24 sm:py-32 lg:grid-cols-12">
+      <section id="waitlist">
+        <div className="container grid gap-12 py-14 sm:py-20 lg:grid-cols-12">
           <Reveal className="lg:col-span-4">
             <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">Get early access.</h2>
             <p className="mt-6 max-w-[26rem] text-[18px] leading-relaxed text-paper/75">

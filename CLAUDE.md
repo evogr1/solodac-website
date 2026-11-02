@@ -25,7 +25,8 @@ Marketing site for SoloDac (solodac.com): React 19 + Vite + Tailwind v4 + wouter
 - Palette: ink `#0b0b0c` (with ink-2 and ink-3 for section tones), paper `#f4f1ea`, signal orange `#ff5a1f`. Type: Bricolage Grotesque (display) and Inter (text) only. Mono and serif fonts were removed.
 - Art direction (chosen by the owner, November 2026): dark, plain and proof-led. Real work over mock-ups (the million-view reels in `client/src/lib/reels.ts`), real numbers, plain sentences.
   - No eyebrow or kicker labels, no mono labels, no 01/02/03 numbering, no outlined boxes or divider lines (except real tables and timelines), no serif italic accents.
-  - No cream (paper) section backgrounds; alternate ink and ink-2 instead. Cream is for buttons and small surfaces.
+  - One ink background runs through every page: no coloured section bands, so sections merge without seams. ink-2 and ink-3 are for cards and panels only. Cream is for buttons and small surfaces.
+  - Keep vertical space tight: sections use `py-14 sm:py-20`, not more.
   - The white-then-grey two-part headline is kept only on the home and Katran heroes. Other headings are one plain sentence.
   - Orange is for actions and a few markers, not decoration. The orange mesh glow is on the home hero only.
   - Every page and section animates in (Reveal, page transition in `App.tsx`); keep the smooth scroll. Animations respect reduced motion.
