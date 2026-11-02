@@ -1,6 +1,6 @@
 # SoloDac website: project status
 
-Last updated: 1 November 2026. This note is the source of truth for where the SoloDac site, logo and tooling work stands. Facts here were checked against the repo and the live preview, not recalled from chat.
+Last updated: 2 November 2026. This note is the source of truth for where the SoloDac site, logo and tooling work stands. Facts here were checked against the repo and the live preview, not recalled from chat.
 
 ## Where to see things
 
@@ -24,7 +24,7 @@ Effects adapted from Toolcraft examples (MIT, Pixel Point). Ported renderers in 
 
 - **Home hero:** mesh gradient (Toolcraft mesh-gradient) with an orange glow that follows the mouse and rests bottom right. Headline animates in letter by letter. Letters near the cursor lift, grow and warm to orange; the orange "Ours first." flips to cream instead. Buttons are magnetic. A small orange dot follows the cursor on every page and becomes a ring over links.
 - **Network hero:** dotted globe (Toolcraft neon-globe) with the sample brand logos swapped for SoloDac page names: Arcs, CEOs, Virodh, Bourse. Loads only on that page (22 KB gzipped).
-- **Network page cards:** a procedural "web crawler" spider (two-bone IK legs, alternating gait) walks card to card; each card glows orange while it is read. With a mouse in that section it chases the cursor. Idea from the genai.works reel. `client/src/components/effects/CrawlerSpider.tsx`.
+- **Network page cards:** a crawler spider walked the cards. Removed on 1 November (it covered text on phones).
 - **About:** band where "solodac" forms from orange and cream particles, holds, scatters, repeats (Toolcraft particle-typography). Loops on its own; not cursor driven.
 - **Chop Shop hero:** same gradient as home. **Services and Contact:** a quieter gradient.
 - All effects pause off-screen and respect reduced motion. Cursor effects only run with a mouse.
@@ -109,14 +109,33 @@ The pipeline step that writes titles is pasting its alternatives into the title 
 - Page changes: the header stays outside the transition; the old page fades out, the new one rises in.
 - CLAUDE.md records the chosen art direction. `docs/SKILLS.md` lists every installed skill and plugin.
 
-## Still open (1 November)
+## Live on solodac.com as of 2 November (PRs #25 to #34)
+
+- **Seamless dark sections:** one ink background on every page, half the vertical spacing, "How it fits" (network, agency, Katran) replacing "One team. Three parts.".
+- **Search and previews (PR #28):** robots.txt, sitemap.xml (10 pages), one HTML file per page with its own title, description, canonical link and preview image (`shared/pages.ts`, `scripts/prerender-meta.ts`). Katran has its own preview card (`og-katran.png`). Organization structured data in `index.html` (no GSTIN).
+- **Audit (PR #29):** axe-core finds no accessibility issues. Speed on a slow phone over 4G: main content in about 2 to 2.6 seconds. The Katran headline no longer jumps when its font loads (size-adjusted fallback fonts). Katran input labels folded into the card headings.
+- **Look bigger (PR #30):**
+  - New `/work` page: the five named pages as case studies, with followers, posts and their million-view reels. "Work" is in the nav; /case-studies, /portfolio and /stories redirect there.
+  - Home hero: three real numbers (12 crore views, 6.3 lakh followers, 1.5 lakh newsletter readers) and a reel wall that drifts across the hero.
+  - The home reels section became a case-study teaser linking to /work.
+  - Services, Network and About: a button and real covers or logos in the first screen.
+  - About: headline "We grow pages, channels and brands." The proprietorship line is gone from About; it stays in the footer and legal pages.
+- **PR #31:** the "3 offices" number removed from the home hero (owner).
+- **Phones and iPads (PR #32):** the home glow drifts on its own when no mouse steers it, rests behind the headline and fades out before the numbers. The full nav shows from 1024 px; below that the menu button, so the header never wraps on iPads.
+- **PR #33:** the About particle word ("solodac" from dots) is back. CLAUDE.md says it stays.
+- **PR #34:** home hero numbers in one row with tops aligned on every screen. Network globe moved inwards on phone and iPad; iPad landscape has its own dimmed, fully visible position; laptops unchanged.
+- Checks now include iPhone 13, iPad Mini and iPad Pro 11 (both orientations) with touch on, not just narrow desktop windows.
+
+## Still open (2 November)
 
 - WhatsApp or phone number for the bot: owner to send; goes under the email in the footer and on Contact.
-- Turnstile on the forms: Web3Forms Pro, or a free Worker route that verifies Turnstile (needs a site key and a Worker secret).
+- Turnstile on the forms: Web3Forms Pro (turn on its Turnstile setting), or a free route through the site's Worker with Turnstile and Resend (needs a Turnstile site key, a Resend account and its DNS sending records). Keys go in Worker secrets, never in chat. Google Workspace mail is not affected by either.
+- To look like a bigger company: 5 to 10 client logos with one result each, 2 or 3 client quotes with name and photo, team size and a team or office photo, a founder photo, a 30 to 60 second showreel, any press or platform badges, a Cal.com or Google Calendar booking link.
+- Owner to read the "How we run every one of them" steps on /work and confirm they match how the team works.
 - www.solodac.com shows a 522: add a redirect rule in Cloudflare and turn on Always Use HTTPS (or sign in the full Cloudflare connector so a session can do it).
 - Lucre YouTube titles with leaked pipeline text: owner to name the repo that uploads them.
 - Final logo pick from the canvas.
-- Obsidian: cloud sessions cannot reach the Windows PC. Run the sync locally after pulling `main` (see docs/SKILLS.md and the commands in the latest chat).
+- Obsidian: the vault is the Mac folder `~/Desktop/solodac`, with this repo cloned in it. Cloud sessions cannot reach it, so run `git pull` there to bring these notes in.
 
 ## Decisions waiting on the owner
 
@@ -144,7 +163,7 @@ The pipeline step that writes titles is pasting its alternatives into the title 
 
 - **Strix security test:** needs Docker plus an LLM API key, or a Strix Cloud account. Neither exists in the cloud container.
 - **Agent Reach on Instagram:** profiles and posts need a login done by the owner on their own computer (`agent-reach login instagram`). Public YouTube, Reddit, GitHub and web reading works without login.
-- **Obsidian sync from the cloud:** the sync script lives on the owner's Windows PC; cloud sessions can only attach to Mac or Linux folders. Run `/obsidian-sync` locally after pulling this branch.
+- **Obsidian sync from the cloud:** the vault folder on the Mac is not shared with cloud sessions (Remote Control lists no usable folder). Pull the repo in the vault instead: `cd ~/Desktop/solodac/solodac-website && git pull origin main`.
 
 ## Side project: SoloDac logo builder (Toolcraft)
 
