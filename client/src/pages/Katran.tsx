@@ -1,4 +1,4 @@
-import { ArrowRight, Check, Loader2 } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import Reel from "@/components/katran/Reel";
 import Layout from "@/components/Layout";
@@ -150,11 +150,9 @@ export default function Katran() {
           {katranTools.map((tool, index) => (
             <Reveal key={tool.name} delay={index * 0.06}>
               <div className="flex h-full flex-col rounded-2xl bg-ink-2 p-7">
-                <p className="flex items-center gap-2 text-[15px] text-paper/60">
-                  {tool.input}
-                  <ArrowRight aria-hidden="true" size={15} className="text-signal" />
-                </p>
-                <h3 className="font-display mt-3 text-[clamp(26px,2.2vw,32px)] leading-tight tracking-[-0.02em]">{tool.output}</h3>
+                <h3 className="font-display text-[clamp(26px,2.2vw,32px)] leading-tight tracking-[-0.02em]">
+                  <span className="text-paper/55">{tool.input},</span> {tool.output.charAt(0).toLowerCase() + tool.output.slice(1)}.
+                </h3>
                 <p className="mt-4 text-[16px] leading-relaxed text-paper/65">{tool.body}</p>
               </div>
             </Reveal>
