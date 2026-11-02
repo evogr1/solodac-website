@@ -55,3 +55,7 @@ Total: 24 skills and 2 plugins.
 1. Pull the latest `main` in your solodac-website folder: `git pull origin main`.
 2. Restart Claude Code in that folder. It reads `.claude/skills/` from the repo.
 3. To have a skill in every project, copy it to your personal folder, for example `cp -r .claude/skills/design-taste-frontend ~/.claude/skills/` (on Windows: `xcopy /E /I .claude\skills\design-taste-frontend %USERPROFILE%\.claude\skills\design-taste-frontend`).
+
+## Skill library for the whole Mac (added 2 November 2026)
+
+`claude-library/` holds 23 more skills from open-seo, my-claude-code-setup, one-skill-to-rule-them-all and OmniRoute. They are not loaded by this project. `bash claude-library/install.sh` installs them and the project's own skills into `~/.claude/skills` and makes upload zips for the Claude app. See `claude-library/README.md` for what each skill needs.
