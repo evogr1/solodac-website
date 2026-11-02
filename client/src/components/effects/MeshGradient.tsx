@@ -9,8 +9,11 @@ export type MeshGradientPreset = {
   /** Seconds for one seamless loop of the drift. */
   loopSeconds: number;
   values?: Readonly<Record<string, unknown>>;
-  /** An interior mesh point that chases the mouse, then settles back at rest. */
-  follow?: { index: number; rest: { x: number; y: number } };
+  /**
+   * An interior mesh point that chases the mouse. With no mouse over it (phones, tablets,
+   * or the cursor elsewhere) it wanders slowly around its rest point on its own.
+   */
+  follow?: { index: number; rest: { x: number; y: number }; wander: { x: number; y: number } };
 };
 
 // Brand palettes: mostly ink, with signal orange glowing through.
@@ -22,7 +25,8 @@ export const meshPresets = {
       "#0B0B0C", "#141416", "#3A1206", "#C2410C",
     ],
     columns: 4,
-    follow: { index: 6, rest: { x: 0.8, y: 0.86 } },
+    // Rest sits behind the headline, clear of the numbers and the reel wall below it.
+    follow: { index: 6, rest: { x: 0.74, y: 0.34 }, wander: { x: 0.16, y: 0.12 } },
     loopSeconds: 26,
     values: { "motion.positionDrift": 30, "motion.colorDrift": 3, "mix.warp": 12, "mix.swirl": 6, "mix.grain": 7 },
   },
@@ -86,7 +90,8 @@ export default function MeshGradient({
     const basePoints = createGridPoints(preset.colors.length, preset.columns);
     const follow = preset.follow;
     const glow = { ...(follow?.rest ?? { x: 0.5, y: 0.5 }) };
-    let target = follow ? { ...follow.rest } : null;
+    // Set while a mouse is over the canvas; otherwise the glow wanders.
+    let pointer: { x: number; y: number } | null = null;
     let width = 0;
     let height = 0;
     let frame = 0;
@@ -96,7 +101,14 @@ export default function MeshGradient({
     const draw = (now: number) => {
       if (!width || !height) return;
       const progress = reduced ? 0.15 : (now - start) / 1000 / preset.loopSeconds;
-      if (follow && target) {
+      if (follow) {
+        const seconds = (now - start) / 1000;
+        const target = pointer ?? (reduced
+          ? follow.rest
+          : {
+              x: follow.rest.x + follow.wander.x * Math.sin((seconds / 15) * Math.PI * 2),
+              y: follow.rest.y + follow.wander.y * Math.sin((seconds / 11) * Math.PI * 2),
+            });
         // Ease toward the cursor so the glow trails it like liquid.
         glow.x += (target.x - glow.x) * 0.06;
         glow.y += (target.y - glow.y) * 0.06;
@@ -137,12 +149,10 @@ export default function MeshGradient({
       const x = (event.clientX - box.left) / box.width;
       const y = (event.clientY - box.top) / box.height;
       const inside = x > 0 && x < 1 && y > 0 && y < 1;
-      target = inside
-        ? { x: Math.min(0.9, Math.max(0.1, x)), y: Math.min(0.9, Math.max(0.1, y)) }
-        : { ...follow.rest };
+      pointer = inside ? { x: Math.min(0.9, Math.max(0.1, x)), y: Math.min(0.9, Math.max(0.1, y)) } : null;
     };
     const onPointerLeave = () => {
-      if (follow) target = { ...follow.rest };
+      pointer = null;
     };
     window.addEventListener("pointermove", onPointerMove, { passive: true });
     document.documentElement.addEventListener("pointerleave", onPointerLeave);
