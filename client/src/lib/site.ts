@@ -20,6 +20,7 @@ export const company = {
 
 export const nav = [
   { label: "Home", href: "/" },
+  { label: "Work", href: "/work" },
   { label: "Services", href: "/services" },
   { label: "Network", href: "/network" },
   { label: "Katran", href: "/katran" },
@@ -27,6 +28,8 @@ export const nav = [
 ];
 
 export type NetworkPage = {
+  /** Anchor on /work. */
+  slug: string;
   name: string;
   handle: string;
   category: string;
@@ -34,15 +37,16 @@ export type NetworkPage = {
   followers: string;
   posts: string;
   logo: string;
+  platforms: string[];
 };
 
 // Real follower counts. These are the pages we put our name on, not the full roster.
 export const networkPages: NetworkPage[] = [
-  { name: "Successful Arcs", handle: "successfularcs", category: "Global business", tagline: "Business stories from outside India. The founders, companies and decisions behind them, cut into short reels for people who want to build something.", followers: "280.1K", posts: "413", logo: saLogo },
-  { name: "Archive of CEOs", handle: "archiveofceos", category: "Global leadership", tagline: "What the world's best-known CEOs said and did. We cut interviews and talks into short lessons on leadership, money and work.", followers: "275.1K", posts: "297", logo: aocLogo },
-  { name: "Indian Pragati", handle: "indianpragati", category: "Indian news", tagline: "Indian news in short reels: policy, infrastructure, space and the economy. We report the facts and leave the opinion to the reader.", followers: "34.6K", posts: "230", logo: pragatiLogo },
-  { name: "Bourse India", handle: "bourseindiaa", category: "Indian politics", tagline: "India's political events, explained. Elections, policy fights and the people behind them, in posts anyone can follow.", followers: "29K", posts: "804", logo: bourseLogo },
-  { name: "Lucre", handle: "lucreindia", category: "Indian founders", tagline: "How India's biggest founders started, what went wrong and how they built companies worth crores. On Instagram and YouTube.", followers: "17.9K", posts: "104", logo: lucreLogo },
+  { slug: "successful-arcs", name: "Successful Arcs", handle: "successfularcs", category: "Global business", tagline: "Business stories from outside India. The founders, companies and decisions behind them, cut into short reels for people who want to build something.", followers: "280.1K", posts: "413", logo: saLogo, platforms: ["Instagram"] },
+  { slug: "archive-of-ceos", name: "Archive of CEOs", handle: "archiveofceos", category: "Global leadership", tagline: "What the world's best-known CEOs said and did. We cut interviews and talks into short lessons on leadership, money and work.", followers: "275.1K", posts: "297", logo: aocLogo, platforms: ["Instagram"] },
+  { slug: "indian-pragati", name: "Indian Pragati", handle: "indianpragati", category: "Indian news", tagline: "Indian news in short reels: policy, infrastructure, space and the economy. We report the facts and leave the opinion to the reader.", followers: "34.6K", posts: "230", logo: pragatiLogo, platforms: ["Instagram"] },
+  { slug: "bourse-india", name: "Bourse India", handle: "bourseindiaa", category: "Indian politics", tagline: "India's political events, explained. Elections, policy fights and the people behind them, in posts anyone can follow.", followers: "29K", posts: "804", logo: bourseLogo, platforms: ["Instagram"] },
+  { slug: "lucre", name: "Lucre", handle: "lucreindia", category: "Indian founders", tagline: "How India's biggest founders started, what went wrong and how they built companies worth crores. On Instagram and YouTube.", followers: "17.9K", posts: "104", logo: lucreLogo, platforms: ["Instagram", "YouTube"] },
 ];
 
 export const igUrl = (handle: string) => `https://www.instagram.com/${handle}/`;
@@ -148,9 +152,14 @@ export const serviceOptions = [
   "Something else",
 ];
 
-/** Followers across the network pages, rounded down to the thousand: "280.1K" counts as 280100. */
+/** "280.1K" → 280100. */
 const followerUnits: Record<string, number> = { K: 1_000, M: 1_000_000 };
+export const followerCount = (page: NetworkPage) => Math.round(parseFloat(page.followers) * (followerUnits[page.followers.slice(-1)] ?? 1));
 
-export const totalFollowersInThousands = Math.floor(
-  networkPages.reduce((sum, page) => sum + parseFloat(page.followers) * (followerUnits[page.followers.slice(-1)] ?? 1), 0) / 1000,
-);
+/** Followers across the network pages. */
+export const totalFollowers = networkPages.reduce((sum, page) => sum + followerCount(page), 0);
+export const totalFollowersInThousands = Math.floor(totalFollowers / 1000);
+
+/** Readers across our newsletters, and their average open rate. */
+export const newsletterReaders = 150_000;
+export const newsletterOpenRate = "43%";

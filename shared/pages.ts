@@ -20,6 +20,12 @@ export const pages: PageMeta[] = [
     image: "/og.png",
   },
   {
+    path: "/work",
+    title: "Our work | SoloDac",
+    description: "Successful Arcs, Archive of CEOs, Lucre, Indian Pragati and Bourse India. Pages SoloDac built and still runs, with their followers and their million-view reels.",
+    image: "/og.png",
+  },
+  {
     path: "/services",
     title: "Services | SoloDac",
     description: "YouTube channels, Instagram pages, newsletter marketing, editing, personal branding, brand partnerships, brand identity and websites. Everything a page needs, from one team.",

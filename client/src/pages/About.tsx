@@ -2,8 +2,10 @@ import { ArrowUpRight } from "lucide-react";
 import type { ReactNode } from "react";
 import Layout from "@/components/Layout";
 import Reveal from "@/components/Reveal";
-import { CtaBand } from "@/components/site";
+import { ReelFan } from "@/components/proof/ProofStack";
+import { CtaBand, PrimaryButton } from "@/components/site";
 import { company } from "@/lib/site";
+import { scrollToId } from "@/lib/smoothScroll";
 
 const roles = [
   { title: "Video editor", body: "Long-form YouTube edits and reels for our pages and our clients. Send three edits you're proud of." },
@@ -31,16 +33,33 @@ export default function About() {
 
   return (
     <Layout>
-      <section className="container pb-10 pt-32 sm:pt-44">
-        <Reveal>
-          <h1 className="font-display max-w-5xl text-[clamp(2.6rem,6vw,5.5rem)] leading-[0.95] tracking-[-0.03em]">
-            SoloDac is a media company that grows pages, channels and brands.
-          </h1>
-        </Reveal>
-        <Reveal delay={0.08}>
-          <p className="mt-8 max-w-2xl text-[18px] leading-relaxed text-paper/75">
-            We run our own pages about business and founders. We grow the same kind of pages for founders, creators and brands. And we build the software that makes both faster.
-          </p>
+      <section className="container grid items-end gap-12 pb-10 pt-32 sm:pt-40 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.75fr)] lg:gap-16">
+        <div>
+          <Reveal>
+            <h1 className="font-display max-w-5xl text-[clamp(2.75rem,7vw,6rem)] leading-[0.92] tracking-[-0.03em]">
+              We grow pages, channels and brands.
+            </h1>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <p className="mt-8 max-w-2xl text-[18px] leading-relaxed text-paper/75">
+              SoloDac is a media company. We run our own pages about business and founders. We grow the same kind of pages for founders, creators and brands. And we build the software that makes both faster.
+            </p>
+          </Reveal>
+          <Reveal delay={0.16}>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <PrimaryButton href="/contact">Book a call</PrimaryButton>
+              <button
+                type="button"
+                onClick={() => scrollToId("careers")}
+                className="inline-flex items-center gap-2 rounded-full bg-paper/10 px-6 py-3.5 text-sm font-semibold text-paper transition-[background-color,color,transform] duration-150 ease-out hover:bg-paper hover:text-ink active:scale-[0.97]"
+              >
+                We're hiring
+              </button>
+            </div>
+          </Reveal>
+        </div>
+        <Reveal delay={0.2} y={20}>
+          <ReelFan order={[4, 1, 5]} className="mx-auto max-w-[460px] lg:mr-0" />
         </Reveal>
       </section>
 
@@ -48,7 +67,7 @@ export default function About() {
         <div className="max-w-[62ch] space-y-5 text-[18px] leading-relaxed text-paper/75">
           <p>We started by building pages about business and founders for Indian audiences. Some of them grew into the hundreds of thousands. Along the way we built a team that could write, edit and design every day without dropping quality.</p>
           <p>Founders and brands started asking us to do the same for them. So we did. Then we got tired of slow editing and built our own tools. That became Katran.</p>
-          <p>SoloDac is founded and run by {company.proprietor}.</p>
+          <p>SoloDac was founded by {company.proprietor}.</p>
         </div>
       </Part>
 
@@ -62,10 +81,10 @@ export default function About() {
         </ul>
       </Part>
 
-      <Part id="company" title="Company details">
+      <Part id="company" title="Offices">
         <div className="max-w-[62ch] space-y-5 text-[18px] leading-relaxed text-paper/75">
           <p>
-            Our corporate office is in Indore, Madhya Pradesh, with regional offices in Chandigarh and Noida. {company.tradeName} is a {company.constitution.toLowerCase()} of {company.proprietor}.
+            Our corporate office is in Indore, Madhya Pradesh, with regional offices in Chandigarh and Noida.
           </p>
           <p>
             All client work is invoiced with GST. Write to us at{" "}
