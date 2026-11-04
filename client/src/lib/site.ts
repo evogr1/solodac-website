@@ -164,14 +164,3 @@ export const totalFollowersInThousands = Math.floor(totalFollowers / 1000);
 export const newsletterReaders = 150_000;
 export const newsletterOpenRate = "43%";
 
-/** Clients, named as the owner gave them (worked with directly or through partners). Spellings checked against company records and the clients' own sites. */
-export const clients = [
-  "Aditya Birla Group",
-  "Masters' Union",
-  "Tetr College of Business",
-  "Varahe Analytics",
-  "Kaidra Media",
-  "Orange Health Labs",
-  "Bonne Trinity",
-  "Aelira Lung Care",
-];

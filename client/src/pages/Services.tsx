@@ -1,6 +1,7 @@
 import { Check } from "lucide-react";
 import Layout from "@/components/Layout";
 import Reveal from "@/components/Reveal";
+import ClientWall from "@/components/proof/ClientWall";
 import { ReelFan } from "@/components/proof/ProofStack";
 import { CtaBand, PageHero, PrimaryButton } from "@/components/site";
 import { scrollToId } from "@/lib/smoothScroll";
@@ -53,6 +54,8 @@ export default function Services() {
           </div>
         </section>
       ))}
+
+      <ClientWall title="Clients we have worked with." />
 
       <CtaBand title="Not sure which one you need?" body="Most people aren't. Book a call and we'll work it out together." />
     </Layout>

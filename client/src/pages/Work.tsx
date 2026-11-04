@@ -1,7 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import Reel from "@/components/katran/Reel";
 import Layout from "@/components/Layout";
-import Clients from "@/components/proof/Clients";
+import ClientWall from "@/components/proof/ClientWall";
 import { LogoRow } from "@/components/proof/ProofStack";
 import Reveal from "@/components/Reveal";
 import { CtaBand, GhostButton, PageHero, PrimaryButton } from "@/components/site";
@@ -122,7 +122,7 @@ export default function Work() {
         );
       })}
 
-      <Clients />
+      <ClientWall title="Clients we have worked with." />
 
       <section className="container py-14 sm:py-20" aria-labelledby="method">
         <Reveal>

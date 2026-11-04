@@ -210,3 +210,8 @@ body.menu-open { overflow: hidden; }
   .reel-wall { overflow-x: auto; }
   .reel-wall-track { animation: none; }
 }
+
+/* Client logo rows: still and hand-scrollable for people who ask for reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  .client-wall { overflow-x: auto; }
+}
