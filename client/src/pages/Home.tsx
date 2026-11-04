@@ -8,6 +8,7 @@ import FiveHires from "@/components/home/FiveHires";
 import GrowthPicker from "@/components/home/GrowthPicker";
 import HowItFits from "@/components/home/HowItFits";
 import RotatingWord from "@/components/home/RotatingWord";
+import Clients from "@/components/proof/Clients";
 import ReelWall from "@/components/proof/ReelWall";
 import Reveal from "@/components/Reveal";
 import { GhostButton, PrimaryButton } from "@/components/site";
@@ -98,6 +99,9 @@ export default function Home() {
           <ReelWall />
         </Reveal>
       </section>
+
+      {/* Who we have worked with */}
+      <Clients className="pb-0 sm:pb-0" />
 
       {/* How the three arms fit together */}
       <section className="container py-14 sm:py-20" aria-label="How SoloDac fits together">

@@ -163,3 +163,12 @@ export const totalFollowersInThousands = Math.floor(totalFollowers / 1000);
 /** Readers across our newsletters, and their average open rate. */
 export const newsletterReaders = 150_000;
 export const newsletterOpenRate = "43%";
+
+/** Clients, named as the owner gave them (worked with directly or through partners). Spellings checked against company records. */
+export const clients = [
+  "Aditya Birla Group",
+  "Masters' Union",
+  "Tetr College of Business",
+  "Varahe Analytics",
+  "Kaidra Media",
+];
