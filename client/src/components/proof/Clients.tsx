@@ -9,11 +9,11 @@ export default function Clients({ className }: { className?: string }) {
       <Reveal>
         <h2 id="clients" className="text-[17px] text-paper/60">Clients we have worked with</h2>
       </Reveal>
-      <ul className="mt-6 flex flex-wrap gap-x-10 gap-y-4 sm:gap-x-14">
+      <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-3 sm:gap-x-14 sm:gap-y-4">
         {clients.map((name, index) => (
           <li key={name}>
             <Reveal delay={index * 0.05} y={14}>
-              <span className="font-display text-[clamp(24px,2.6vw,38px)] leading-tight tracking-[-0.02em] text-paper/85">{name}</span>
+              <span className="font-display text-[clamp(20px,2.6vw,38px)] leading-tight tracking-[-0.02em] text-paper/85">{name}</span>
             </Reveal>
           </li>
         ))}
