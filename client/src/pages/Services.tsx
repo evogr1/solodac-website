@@ -55,7 +55,7 @@ export default function Services() {
         </section>
       ))}
 
-      <ClientWall title="Clients we have worked with." />
+      <ClientWall />
 
       <CtaBand title="Not sure which one you need?" body="Most people aren't. Book a call and we'll work it out together." />
     </Layout>
