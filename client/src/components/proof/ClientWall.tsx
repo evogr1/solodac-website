@@ -5,19 +5,20 @@ import bonne from "@/assets/clients/bonne-trinity.png";
 import mastersUnion from "@/assets/clients/masters-union.png";
 import orangeHealth from "@/assets/clients/orange-health.png";
 import tetr from "@/assets/clients/tetr.png";
+import varahe from "@/assets/clients/varahe.svg";
 import Reveal from "@/components/Reveal";
 import { cn } from "@/lib/utils";
 
 type Client = { name: string; logo?: string; /** Optical size: wide logos sit lower so every mark weighs the same. */ scale: number };
 
 // Logos are each client's own, recoloured to one cream so eight brand palettes don't fight on ink.
-// Varahe Analytics and Kaidra Media are set as wordmarks until we have their logo files.
+// Varahe's mark is traced from its site header. Kaidra Media has no logo online yet, so it is set as a wordmark.
 const clients: Client[] = [
   { name: "Aditya Birla Group", logo: abg, scale: 1.35 },
   { name: "Masters' Union", logo: mastersUnion, scale: 0.95 },
   { name: "Tetr College of Business", logo: tetr, scale: 1.2 },
   { name: "Orange Health Labs", logo: orangeHealth, scale: 0.6 },
-  { name: "Varahe Analytics", scale: 1 },
+  { name: "Varahe Analytics", logo: varahe, scale: 0.9 },
   { name: "Bonne Trinity", logo: bonne, scale: 0.85 },
   { name: "Aelira Lung Care", logo: aelira, scale: 1.05 },
   { name: "Kaidra Media", scale: 1 },
