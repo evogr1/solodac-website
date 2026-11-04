@@ -122,7 +122,7 @@ export default function Work() {
         );
       })}
 
-      <ClientWall title="Clients we have worked with." />
+      <ClientWall />
 
       <section className="container py-14 sm:py-20" aria-labelledby="method">
         <Reveal>

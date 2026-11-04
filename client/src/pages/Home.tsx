@@ -105,6 +105,9 @@ export default function Home() {
         <HowItFits />
       </section>
 
+      {/* Who we have worked with */}
+      <ClientWall />
+
       {/* The problem */}
       <section className="container py-14 sm:py-20">
         <Reveal>
@@ -182,9 +185,6 @@ export default function Home() {
           <GhostButton href="/contact?service=Brand%20partnership">Advertise with us</GhostButton>
         </div>
       </section>
-
-      {/* Who we have worked with */}
-      <ClientWall />
 
       {/* Comparison */}
       <section aria-labelledby="compare">
