@@ -27,8 +27,14 @@ function Chip({ children, order }: { children: ReactNode; order: number }) {
 
 const pagesChip = (
   <Chip order={0}>
-    {networkPages.slice(0, 4).map((page) => (
-      <img key={page.handle} src={page.logo} alt="" className="-ml-[0.16em] h-[0.64em] w-[0.64em] rounded-full object-cover ring-[0.04em] ring-ink-3 first:ml-0" />
+    {networkPages.slice(0, 4).map((page, index) => (
+      <img
+        key={page.handle}
+        src={page.logo}
+        alt=""
+        // The fourth logo only shows from tablet width up, so the first sentence stays on one line on phones.
+        className={`-ml-[0.16em] h-[0.64em] w-[0.64em] rounded-full object-cover ring-[0.04em] ring-ink-3 first:ml-0 ${index === 3 ? "hidden sm:block" : ""}`}
+      />
     ))}
   </Chip>
 );
@@ -67,8 +73,11 @@ export default function HowItFits() {
   return (
     <div>
       <Reveal>
-        <h2 className="font-display max-w-5xl text-[clamp(2rem,4.2vw,4rem)] leading-[1.12] tracking-[-0.03em]">
-          Our pages{pagesChip} show us what works. Our agency{agencyChip} does it for you. Katran{katranChip} makes both faster.
+        <h2 className="font-display max-w-5xl text-[min(2rem,calc((100vw-2rem)/15.4))] leading-[1.12] sm:text-[clamp(2rem,4.2vw,4rem)] tracking-[-0.03em]">
+          {/* One sentence per line, so the three read as a pattern. */}
+          <span className="block">Our pages{pagesChip} show us what works.</span>
+          <span className="block">Our agency{agencyChip} does it for you.</span>
+          <span className="block">Katran{katranChip} makes both faster.</span>
         </h2>
       </Reveal>
       <div className="mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
