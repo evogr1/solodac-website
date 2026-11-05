@@ -9,6 +9,7 @@ import { readFileSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { pages, siteUrl, type PageMeta } from "../shared/pages";
+import { legacyPatterns } from "../shared/redirects";
 
 const outDir = path.resolve(import.meta.dirname, "../dist/public");
 const template = readFileSync(path.join(outDir, "index.html"), "utf8");
@@ -61,6 +62,21 @@ for (const page of pages) {
   writeFileSync(path.join(outDir, file), renderPage(page));
 }
 
+// The Worker only sees the old addresses listed in wrangler.jsonc, so the two lists must agree.
+const wrangler = JSON.parse(readFileSync(path.resolve(import.meta.dirname, "../wrangler.jsonc"), "utf8")) as { assets: { run_worker_first: string[]; not_found_handling: string } };
+const missing = legacyPatterns.filter((pattern) => !wrangler.assets.run_worker_first.includes(pattern));
+if (missing.length) throw new Error(`prerender-meta: add these to assets.run_worker_first in wrangler.jsonc: ${missing.join(", ")}`);
+if (wrangler.assets.not_found_handling !== "404-page") throw new Error('prerender-meta: wrangler.jsonc must set assets.not_found_handling to "404-page"');
+
+// 404.html is what Cloudflare serves, with a 404 status, for any address that is not a page or a file.
+// The app inside it reads the address and draws the "not found" page.
+let notFound = template;
+notFound = setTag(notFound, /<title>[^<]*<\/title>/, "<title>Page not found | SoloDac</title>");
+notFound = setTag(notFound, /<meta name="description" content="[^"]*" \/>/, '<meta name="description" content="This page does not exist. Go back to the SoloDac home page." />');
+notFound = setTag(notFound, /<div id="root"><\/div>/, () => `<div id="root">${holdImages(render("/404"))}</div>`);
+notFound = notFound.replace("</head>", '  <meta name="robots" content="noindex" />\n  </head>');
+writeFileSync(path.join(outDir, "404.html"), notFound);
+
 const today = new Date().toISOString().slice(0, 10);
 writeFileSync(
   path.join(outDir, "sitemap.xml"),
@@ -72,4 +88,4 @@ writeFileSync(path.join(outDir, "robots.txt"), `User-agent: *\nAllow: /\n\nSitem
 
 rmSync(path.resolve(import.meta.dirname, "../dist/server"), { recursive: true, force: true });
 
-console.log(`prerender-meta: wrote ${pages.length} pages, sitemap.xml and robots.txt`);
+console.log(`prerender-meta: wrote ${pages.length} pages, 404.html, sitemap.xml and robots.txt`);

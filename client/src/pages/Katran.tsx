@@ -7,6 +7,7 @@ import Reveal from "@/components/Reveal";
 import { millionViewReels as reels, totalReelViews } from "@/lib/reels";
 import { katranTools } from "@/lib/site";
 import { scrollToId } from "@/lib/smoothScroll";
+import { useHumanCheck } from "@/components/useHumanCheck";
 import { submitForm } from "@/lib/web3forms";
 
 const steps = [
@@ -27,16 +28,21 @@ function QuickJoin() {
   const [email, setEmail] = useState("");
   const [trap, setTrap] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const check = useHumanCheck();
+  const [waiting, setWaiting] = useState(false);
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
-    setStatus("sending");
+    setWaiting(false);
     if (trap) return setStatus("sent");
+    if (check.enabled && !check.token) return setWaiting(true);
+    setStatus("sending");
     try {
-      await submitForm("Katran waitlist", { email });
+      await submitForm("Katran waitlist", { email }, check.enabled ? check.token : undefined);
       setStatus("sent");
     } catch {
       setStatus("error");
+      check.reset();
     }
   }
 
@@ -79,8 +85,10 @@ function QuickJoin() {
           Get early access
         </button>
       </div>
+      {check.widget}
       <p role="alert" className="mt-3 px-2 text-[14px] text-signal-soft">
-        {status === "error" && "That didn't go through. Try again or email info@solodac.com."}
+        {waiting && "Checking that you're a person. Try again in a moment."}
+        {!waiting && status === "error" && "That didn't go through. Try again or email info@solodac.com."}
       </p>
     </form>
   );

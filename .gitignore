@@ -117,3 +117,6 @@ client/public/__manus__/version.json
 
 # Local state from `wrangler dev`
 .wrangler/
+
+# Local Worker settings and secrets, never committed
+.dev.vars*

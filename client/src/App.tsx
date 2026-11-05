@@ -2,6 +2,7 @@ import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import { useEffect } from "react";
 import { Redirect, Route, Switch, useLocation } from "wouter";
 import { pageByPath, siteUrl } from "@shared/pages";
+import { legacyRedirects } from "@shared/redirects";
 import CursorFollower from "./components/effects/CursorFollower";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { Header } from "./components/Layout";
@@ -14,30 +15,6 @@ import Network from "./pages/Network";
 import NotFound from "./pages/NotFound";
 import Services from "./pages/Services";
 import Work from "./pages/Work";
-
-// Old URLs from the previous site still live in bios, DMs and decks.
-const redirects: Array<[string, string]> = [
-  ["/marketing", "/contact"],
-  ["/eyeballs", "/contact"],
-  ["/youtube", "/services#youtube"],
-  ["/clipping", "/services#youtube"],
-  ["/studio", "/services"],
-  ["/services/:slug", "/services"],
-  ["/approach", "/about"],
-  ["/careers", "/about#careers"],
-  ["/thesis", "/about"],
-  ["/stories", "/work"],
-  ["/stories/:slug", "/work"],
-  ["/events", "/network"],
-  ["/campaigns", "/network"],
-  ["/case-studies", "/work"],
-  ["/testimonials", "/network"],
-  ["/portfolio", "/work"],
-  ["/fireyoureditor", "/katran"],
-  ["/tools", "/katran"],
-  ["/chop-shop", "/katran"],
-];
-
 
 function Router() {
   const [location] = useLocation();
@@ -75,7 +52,7 @@ function Router() {
           <Route path="/privacy">{() => <Legal doc="privacy" />}</Route>
           <Route path="/terms">{() => <Legal doc="terms" />}</Route>
           <Route path="/refunds">{() => <Legal doc="refunds" />}</Route>
-          {redirects.map(([from, to]) => (
+          {legacyRedirects.map(([from, to]) => (
             <Route key={from} path={from}>{() => <Redirect to={to} replace />}</Route>
           ))}
           <Route component={NotFound} />
