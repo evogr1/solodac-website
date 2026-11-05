@@ -3,6 +3,7 @@ import abg from "@/assets/clients/colour/aditya-birla.png";
 import aelira from "@/assets/clients/colour/aelira.png";
 import beco from "@/assets/clients/colour/beco.png";
 import bonne from "@/assets/clients/colour/bonne-trinity.png";
+import chandigarh from "@/assets/clients/colour/chandigarh-university.png";
 import hul from "@/assets/clients/colour/hindustan-unilever.svg";
 import jio from "@/assets/clients/colour/jio.svg";
 import lovable from "@/assets/clients/colour/lovable.svg";
@@ -28,6 +29,7 @@ type Client = {
 const clients: Client[] = [
   { name: "Hindustan Unilever", logo: hul, scale: 0.95, lift: 1.5 },
   { name: "Reliance Jio", logo: jio, scale: 1.2 },
+  { name: "Chandigarh University", logo: chandigarh, scale: 1.3 },
   { name: "Aditya Birla Group", logo: abg, scale: 1.45, lift: 1.35 },
   { name: "Masters' Union", logo: mastersUnion, scale: 0.95 },
   { name: "Tetr College of Business", logo: tetr, scale: 1.25, lift: 1.25 },
@@ -46,7 +48,7 @@ const clients: Client[] = [
 const COPIES = 4;
 const rows = [
   ["Hindustan Unilever", "Masters' Union", "Strawberry", "Orange Health Labs", "Bonne Trinity", "Lovable", "Kaidra Media"],
-  ["Aditya Birla Group", "Tetr College of Business", "Reliance Jio", "Varahe Analytics", "Aelira Lung Care", "Beco"],
+  ["Aditya Birla Group", "Tetr College of Business", "Chandigarh University", "Reliance Jio", "Varahe Analytics", "Aelira Lung Care", "Beco"],
 ].map((names) => names.map((name) => clients.find((client) => client.name === name)!));
 
 function Mark({ client, copy }: { client: Client; copy?: boolean }) {
