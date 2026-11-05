@@ -4,6 +4,7 @@ import aelira from "@/assets/clients/colour/aelira.png";
 import beco from "@/assets/clients/colour/beco.png";
 import bonne from "@/assets/clients/colour/bonne-trinity.png";
 import hul from "@/assets/clients/colour/hindustan-unilever.svg";
+import jio from "@/assets/clients/colour/jio.svg";
 import mastersUnion from "@/assets/clients/colour/masters-union.png";
 import orangeHealth from "@/assets/clients/colour/orange-health.webp";
 import tetr from "@/assets/clients/colour/tetr.svg";
@@ -24,6 +25,7 @@ type Client = {
 // Varahe's mark is traced from its site header. Kaidra Media has no logo online yet, so it is set as a wordmark.
 const clients: Client[] = [
   { name: "Hindustan Unilever", logo: hul, scale: 0.95, lift: 1.5 },
+  { name: "Reliance Jio", logo: jio, scale: 1.2 },
   { name: "Aditya Birla Group", logo: abg, scale: 1.45, lift: 1.35 },
   { name: "Masters' Union", logo: mastersUnion, scale: 0.95 },
   { name: "Tetr College of Business", logo: tetr, scale: 1.25, lift: 1.25 },
@@ -35,12 +37,12 @@ const clients: Client[] = [
   { name: "Kaidra Media", scale: 1 },
 ];
 
-// Two rows, each with its own five logos, so a logo is never on screen in both rows at once.
+// Two rows, each with its own logos, so a logo is never on screen in both rows at once.
 // Each row is drawn four times over, so even a very wide screen never shows the same logo twice in a row.
 const COPIES = 4;
 const rows = [
   ["Hindustan Unilever", "Masters' Union", "Orange Health Labs", "Bonne Trinity", "Kaidra Media"],
-  ["Aditya Birla Group", "Tetr College of Business", "Varahe Analytics", "Aelira Lung Care", "Beco"],
+  ["Aditya Birla Group", "Tetr College of Business", "Reliance Jio", "Varahe Analytics", "Aelira Lung Care", "Beco"],
 ].map((names) => names.map((name) => clients.find((client) => client.name === name)!));
 
 function Mark({ client, copy }: { client: Client; copy?: boolean }) {
