@@ -1,7 +1,9 @@
 import { useEffect, useRef } from "react";
 import abg from "@/assets/clients/aditya-birla.png";
 import aelira from "@/assets/clients/aelira.png";
+import beco from "@/assets/clients/beco.png";
 import bonne from "@/assets/clients/bonne-trinity.png";
+import hul from "@/assets/clients/hindustan-unilever.svg";
 import mastersUnion from "@/assets/clients/masters-union.png";
 import orangeHealth from "@/assets/clients/orange-health.png";
 import tetr from "@/assets/clients/tetr.png";
@@ -11,9 +13,10 @@ import { cn } from "@/lib/utils";
 
 type Client = { name: string; logo?: string; /** Optical size: wide logos sit lower so every mark weighs the same. */ scale: number };
 
-// Logos are each client's own, recoloured to one cream so eight brand palettes don't fight on ink.
+// Logos are each client's own, recoloured to one cream so ten brand palettes don't fight on ink.
 // Varahe's mark is traced from its site header. Kaidra Media has no logo online yet, so it is set as a wordmark.
 const clients: Client[] = [
+  { name: "Hindustan Unilever", logo: hul, scale: 0.95 },
   { name: "Aditya Birla Group", logo: abg, scale: 1.35 },
   { name: "Masters' Union", logo: mastersUnion, scale: 0.95 },
   { name: "Tetr College of Business", logo: tetr, scale: 1.2 },
@@ -21,6 +24,7 @@ const clients: Client[] = [
   { name: "Varahe Analytics", logo: varahe, scale: 0.9 },
   { name: "Bonne Trinity", logo: bonne, scale: 0.85 },
   { name: "Aelira Lung Care", logo: aelira, scale: 1.05 },
+  { name: "Beco", logo: beco, scale: 0.8 },
   { name: "Kaidra Media", scale: 1 },
 ];
 
