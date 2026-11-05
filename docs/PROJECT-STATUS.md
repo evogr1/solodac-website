@@ -1,6 +1,6 @@
 # SoloDac website: project status
 
-Last updated: 2 November 2026. This note is the source of truth for where the SoloDac site, logo and tooling work stands. Facts here were checked against the repo and the live preview, not recalled from chat.
+Last updated: 5 November 2026. This note is the source of truth for where the SoloDac site, logo and tooling work stands. Facts here were checked against the repo and the live preview, not recalled from chat.
 
 ## Where to see things
 
@@ -126,16 +126,24 @@ The pipeline step that writes titles is pasting its alternatives into the title 
 - **PR #34:** home hero numbers in one row with tops aligned on every screen. Network globe moved inwards on phone and iPad; iPad landscape has its own dimmed, fully visible position; laptops unchanged.
 - Checks now include iPhone 13, iPad Mini and iPad Pro 11 (both orientations) with touch on, not just narrow desktop windows.
 
-## Still open (2 November)
+## Live on solodac.com as of 5 November (PRs #36 to #57)
 
-- WhatsApp or phone number for the bot: owner to send; goes under the email in the footer and on Contact.
-- Turnstile on the forms: Web3Forms Pro (turn on its Turnstile setting), or a free route through the site's Worker with Turnstile and Resend (needs a Turnstile site key, a Resend account and its DNS sending records). Keys go in Worker secrets, never in chat. Google Workspace mail is not affected by either.
-- To look like a bigger company: 5 to 10 client logos with one result each, 2 or 3 client quotes with name and photo, team size and a team or office photo, a founder photo, a 30 to 60 second showreel, any press or platform badges, a Cal.com or Google Calendar booking link.
-- Owner to read the "How we run every one of them" steps on /work and confirm they match how the team works.
-- www.solodac.com shows a 522: add a redirect rule in Cloudflare and turn on Always Use HTTPS (or sign in the full Cloudflare connector so a session can do it).
-- Lucre YouTube titles with leaked pipeline text: owner to name the repo that uploads them.
-- Final logo pick from the canvas.
-- Obsidian: the vault is the Mac folder `~/Desktop/solodac`, with this repo cloned in it. Cloud sessions cannot reach it, so run `git pull` there to bring these notes in.
+- **Client wall:** 14 clients as real logos in their own colours, two rows drifting in opposite directions between the hero numbers and the reels. Each row has its own logos, so none shows in both at once. Heading: "Trusted by India's biggest names." Clients: Hindustan Unilever, Aditya Birla Group, Reliance Jio, Masters' Union, Tetr College of Business, Chandigarh University, Orange Health Labs, Varahe Analytics, Bonne Trinity, Aelira Lung Care, Beco, Strawberry, Lovable, Kaidra Media (set as text, no logo online yet). Logos live in `client/src/assets/clients/colour/`.
+- **Home:** hero numbers in one row, reel wall, "How it fits" sentence with pictures set into it (no underlines), the glow drifts on its own on phones and iPads, header menu button below 1024px.
+- **Search and speed:** every page is drawn to real HTML at build time (400 to 976 words per page for crawlers that skip JavaScript). Logos recompressed. Meta descriptions fixed. Phone reel fan centred.
+- **404 and old links:** unknown addresses return a real 404; 19 old addresses redirect permanently (`shared/redirects.ts`).
+- **Cloudflare settings (done by the owner's Chrome session, checked from here):** www redirects to the main address, http redirects to https. SPF, Google DKIM and DMARC (policy none) added, plus Resend's records.
+- **Forms:** protected by Cloudflare Turnstile and sent by Resend through the Worker. A real test email passed SPF, DKIM and DMARC. No fallback to Web3Forms while protection is on. Setup and notes: `docs/FORM-SPAM-SETUP.md`.
+- **Skills:** `claude-library/` holds 30 extra skills with an installer (`bash claude-library/install.sh`). Details in `claude-library/README.md`.
+- **Research:** `docs/CONTENT-PLAN.md` has keyword research (OpenSEO) and eight article ideas.
+
+## Still open (5 November)
+
+- **Owner, small:** send a real test from the Contact page, then delete or regenerate the old Web3Forms access key at web3forms.com (it is public in older copies of the page, so bots could bypass the new check through it).
+- **Owner, to make the site look bigger:** showreel video, team and founder photos, client quotes with name and role, a case-study figure (for example how long Archive of CEOs took to reach 275K), a booking-calendar link, the WhatsApp number, a Kaidra Media logo, a better Varahe logo file (ours is traced and lacks the small "ANALYTICS" line).
+- **Owner:** the Instagram reel they liked. No tool here can read Instagram; send 2 or 3 screenshots or a one-line description.
+- **Later:** move DMARC from `none` to `quarantine` after two to four weeks of clean reports. Write the first articles from `docs/CONTENT-PLAN.md`. Logo pick from the canvas. Confirm the careers roles and the "How we run every one of them" steps on /work.
+- **Obsidian:** the vault is the Mac folder `~/Desktop/solodac`. Cloud sessions cannot write to it. Pull the repo there: `cd ~/Desktop/solodac/solodac-website && git pull origin main`.
 
 ## Decisions waiting on the owner
 
