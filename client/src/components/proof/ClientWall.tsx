@@ -66,7 +66,7 @@ function Mark({ client, copy }: { client: Client; copy?: boolean }) {
  * Scrolling speeds them up and leans them with the scroll; hovering a row brings it to rest.
  * Pauses off-screen; with reduced motion the rows stand still and scroll by hand.
  */
-export default function ClientWall({ className, title = "Who hires us.", bare }: { className?: string; title?: string; /** Inside another section: no section padding. */ bare?: boolean }) {
+export default function ClientWall({ className, title = "Trusted by India's biggest names.", bare }: { className?: string; title?: string; /** Inside another section: no section padding. */ bare?: boolean }) {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRefs = useRef<Array<HTMLUListElement | null>>([]);
 
