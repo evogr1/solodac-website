@@ -5,8 +5,10 @@ import beco from "@/assets/clients/colour/beco.png";
 import bonne from "@/assets/clients/colour/bonne-trinity.png";
 import hul from "@/assets/clients/colour/hindustan-unilever.svg";
 import jio from "@/assets/clients/colour/jio.svg";
+import lovable from "@/assets/clients/colour/lovable.svg";
 import mastersUnion from "@/assets/clients/colour/masters-union.png";
 import orangeHealth from "@/assets/clients/colour/orange-health.webp";
+import strawberry from "@/assets/clients/colour/strawberry.svg";
 import tetr from "@/assets/clients/colour/tetr.svg";
 import varahe from "@/assets/clients/colour/varahe.svg";
 import Reveal from "@/components/Reveal";
@@ -34,6 +36,8 @@ const clients: Client[] = [
   { name: "Bonne Trinity", logo: bonne, scale: 0.85 },
   { name: "Aelira Lung Care", logo: aelira, scale: 1.1, lift: 1.4 },
   { name: "Beco", logo: beco, scale: 0.8 },
+  { name: "Strawberry", logo: strawberry, scale: 0.75 },
+  { name: "Lovable", logo: lovable, scale: 0.6 },
   { name: "Kaidra Media", scale: 1 },
 ];
 
@@ -41,7 +45,7 @@ const clients: Client[] = [
 // Each row is drawn four times over, so even a very wide screen never shows the same logo twice in a row.
 const COPIES = 4;
 const rows = [
-  ["Hindustan Unilever", "Masters' Union", "Orange Health Labs", "Bonne Trinity", "Kaidra Media"],
+  ["Hindustan Unilever", "Masters' Union", "Strawberry", "Orange Health Labs", "Bonne Trinity", "Lovable", "Kaidra Media"],
   ["Aditya Birla Group", "Tetr College of Business", "Reliance Jio", "Varahe Analytics", "Aelira Lung Care", "Beco"],
 ].map((names) => names.map((name) => clients.find((client) => client.name === name)!));
 
