@@ -8,7 +8,7 @@ export function ReelFan({ className, order = [3, 2, 0] }: { className?: string; 
   const picks = order.map((index) => millionViewReels[index]!);
   const tilt = ["-rotate-[7deg] translate-y-3", "z-10", "rotate-[7deg] translate-y-3"];
   return (
-    <figure className={cn("flex items-end", className)}>
+    <figure className={cn("flex items-end justify-center", className)}>
       {picks.map((reel, index) => (
         <div key={reel.id} className={cn("-ml-8 w-[34%] max-w-[190px] first:ml-0", tilt[index])}>
           <div className="aspect-[4/5] overflow-hidden rounded-[14px] bg-ink-3 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.9)] ring-[3px] ring-ink">

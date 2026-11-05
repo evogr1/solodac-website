@@ -34,3 +34,5 @@ Marketing site for SoloDac (solodac.com): React 19 + Vite + Tailwind v4 + wouter
 - Visual effects in `client/src/components/effects/` are adapted from Toolcraft examples (MIT, Pixel Point); the ported renderers live in `client/src/lib/effects/`. Every effect pauses off-screen and respects `prefers-reduced-motion`; cursor effects only run on fine pointers.
 - The particle word that forms "solodac" under the About hero (`ParticleWord`) stays. The owner asked for it back after it was removed.
 - Check every change at 1440px and 390px, including the phone menu. Also check iPad (768px portrait, 1194px landscape) with touch on: cursor effects get no mouse there.
+- The build draws every page to real HTML (`client/src/entry-server.tsx`, run by `scripts/prerender-meta.ts`) so crawlers that skip JavaScript read the text. Anything that reads `window` or `document` must sit inside an effect or a handler, never in a component body, or the build fails. The pre-built HTML holds back image addresses on purpose (they would delay the main script); keep that.
+- Logos in `client/src/assets/clients/colour/` are WebP or small SVG, about 170px tall at most. Do not drop in raw PNGs.
