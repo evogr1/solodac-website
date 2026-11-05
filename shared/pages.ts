@@ -28,7 +28,7 @@ export const pages: PageMeta[] = [
   {
     path: "/services",
     title: "Services | SoloDac",
-    description: "YouTube channels, Instagram pages, newsletter marketing, editing, personal branding, brand partnerships, brand identity and websites. Everything a page needs, from one team.",
+    description: "YouTube channels, Instagram pages, newsletters, editing, personal branding, partnerships, brand identity and websites. Everything a page needs, from one team.",
     image: "/og.png",
   },
   {
@@ -55,9 +55,9 @@ export const pages: PageMeta[] = [
     description: "Tell us about your page, channel or brand. We reply within one working day with a time for a call.",
     image: "/og.png",
   },
-  { path: "/privacy", title: "Privacy policy | SoloDac", description: "How SoloDac collects, uses and protects personal information.", image: "/og.png" },
-  { path: "/terms", title: "Terms of service | SoloDac", description: "The terms for using solodac.com, hiring SoloDac and using Katran.", image: "/og.png" },
-  { path: "/refunds", title: "Refunds and cancellation | SoloDac", description: "SoloDac's refund and cancellation policy for services and Katran.", image: "/og.png" },
+  { path: "/privacy", title: "Privacy policy | SoloDac", description: "How SoloDac collects, uses and protects your personal information when you use solodac.com, hire us or join the Katran waitlist.", image: "/og.png" },
+  { path: "/terms", title: "Terms of service | SoloDac", description: "The terms for using solodac.com, hiring SoloDac for services and using Katran, our editing software.", image: "/og.png" },
+  { path: "/refunds", title: "Refunds and cancellation | SoloDac", description: "SoloDac's refund and cancellation policy for monthly services and for Katran, including how to ask for a refund.", image: "/og.png" },
 ];
 
 export const pageByPath = (path: string) => pages.find((page) => page.path === path);
