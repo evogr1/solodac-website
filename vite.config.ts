@@ -33,6 +33,11 @@ export default defineConfig(() => {
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    rollupOptions: {
+      // Cloudflare's build machine allows very few open files. The icon library has
+      // hundreds of tiny files, so read them a couple at a time instead of twenty.
+      maxParallelFileOps: 2,
+    },
   },
   server: {
     port: 3000,
