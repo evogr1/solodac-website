@@ -95,13 +95,12 @@ export default function Home() {
             </dl>
           </Reveal>
         </div>
-        <Reveal delay={0.26} className="relative mt-12 sm:mt-16">
+        {/* Who we have worked with: straight under the numbers, above the reels. */}
+        <ClientWall bare className="relative mt-14 sm:mt-20" />
+        <Reveal delay={0.26} className="relative mt-14 sm:mt-20">
           <ReelWall />
         </Reveal>
       </section>
-
-      {/* Who we have worked with */}
-      <ClientWall />
 
       {/* How the three arms fit together */}
       <section className="container py-14 sm:py-20" aria-label="How SoloDac fits together">
