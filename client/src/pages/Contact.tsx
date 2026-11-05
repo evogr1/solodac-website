@@ -1,11 +1,13 @@
 import { ArrowUpRight } from "lucide-react";
+import { useSearch } from "wouter";
 import Layout from "@/components/Layout";
 import LeadForm from "@/components/LeadForm";
 import Reveal from "@/components/Reveal";
 import { company, serviceOptions } from "@/lib/site";
 
 export default function Contact() {
-  const requested = new URLSearchParams(window.location.search).get("service") ?? "";
+  // wouter's useSearch reads the query string in the browser and gives "" when the page is drawn at build time.
+  const requested = new URLSearchParams(useSearch()).get("service") ?? "";
   const initial: Record<string, string> = serviceOptions.includes(requested) ? { service: requested } : {};
 
   return (
