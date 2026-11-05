@@ -3,6 +3,9 @@
   "name": "solodac-website",
   "compatibility_date": "2026-09-18",
   "main": "worker/index.ts",
+  "vars": {
+    "TURNSTILE_SITE_KEY": "0x4AAAAAAF09iHH9ZxzpxQiI"
+  },
   "observability": {
     "enabled": true
   },

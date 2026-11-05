@@ -49,10 +49,24 @@ Save and deploy. No code change is needed.
 - Only pages on solodac.com can post to the route.
 - Field names and lengths are capped, so a bot cannot send a huge message.
 
+## One more step: switch off the old Web3Forms key
+
+The old form service key is visible in the page source, so a bot can post to Web3Forms directly and skip the new check. Once you have confirmed a real form reaches `info@solodac.com`, log in to web3forms.com and delete or regenerate that access key. The site no longer uses it while protection is on.
+
+(The key is in `client/src/lib/web3forms.ts`. If you ever turn protection off again, put a fresh Web3Forms key there.)
+
 ## If something goes wrong
 
-- If the check cannot load for a visitor (an ad blocker, for example), the form falls back to the old route instead of locking them out.
-- To switch protection off, delete `TURNSTILE_SITE_KEY` in the dashboard. The forms go back to Web3Forms at once.
+- While protection is on, a visitor whose check cannot finish (an ad blocker, an unusual browser) sees: "We couldn't confirm you're a person. Please email info@solodac.com." There is no fallback to the old route, on purpose.
+- The form waits up to 12 seconds for the check before giving up.
+- `TURNSTILE_SITE_KEY` is also set in `wrangler.jsonc` (it is public), so a deploy cannot erase it. If you change the key in the dashboard, change it there too.
+- To switch protection off, remove `TURNSTILE_SITE_KEY` from `wrangler.jsonc` and the dashboard and deploy. The forms go back to Web3Forms.
+
+## Live checks (5 November 2026)
+
+- The test form from the Contact page arrived from `forms@solodac.com` at `info@solodac.com` with SPF pass, DKIM pass and DMARC pass, and a reply goes to the address typed in the form.
+- DNS now has SPF, Google DKIM, DMARC (policy `none`, reports to `info@solodac.com`), Resend DKIM, and the `send` and `rsend` records.
+- Later: after two to four weeks of clean DMARC reports, move the DMARC policy from `none` to `quarantine`.
 
 ## How it was tested
 

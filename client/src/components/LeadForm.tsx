@@ -35,7 +35,7 @@ export default function LeadForm({
   // A hidden field people never see. Bots fill every field, so a value here means a bot.
   const [trap, setTrap] = useState("");
   const check = useHumanCheck();
-  const [waiting, setWaiting] = useState(false);
+  const [blocked, setBlocked] = useState(false);
   const successRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -46,19 +46,25 @@ export default function LeadForm({
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
-    setWaiting(false);
+    setBlocked(false);
     if (trap) {
       setStatus("sent");
       return;
     }
-    // With the human check on, the form can only be sent once Cloudflare has passed this visitor.
-    if (check.enabled && !check.token) {
-      setWaiting(true);
-      return;
-    }
     setStatus("sending");
     try {
-      await submitForm(subject, values, check.enabled ? check.token : undefined);
+      let token: string | undefined;
+      if (check.enabled) {
+        // The check usually finishes in a second or two. Give it up to 12 before giving up.
+        token = await check.waitForToken(12000);
+        if (!token) {
+          setBlocked(true);
+          setStatus("error");
+          check.reset();
+          return;
+        }
+      }
+      await submitForm(subject, values, token);
       setStatus("sent");
     } catch {
       setStatus("error");
@@ -144,8 +150,7 @@ export default function LeadForm({
           {submitLabel}
         </button>
         <p role="alert" className="text-sm text-signal-soft">
-          {waiting && "Checking that you're a person. Try again in a moment."}
-          {!waiting && status === "error" && "That didn't go through. Try again or email info@solodac.com."}
+          {status === "error" && (blocked ? "We couldn't confirm you're a person. Please email info@solodac.com." : "That didn't go through. Try again or email info@solodac.com.")}
         </p>
       </div>
     </form>
