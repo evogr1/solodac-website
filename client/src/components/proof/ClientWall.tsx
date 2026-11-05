@@ -35,7 +35,13 @@ const clients: Client[] = [
   { name: "Kaidra Media", scale: 1 },
 ];
 
-const rows = [clients, [...clients].reverse()];
+// Two rows, each with its own five logos, so a logo is never on screen in both rows at once.
+// Each row is drawn four times over, so even a very wide screen never shows the same logo twice in a row.
+const COPIES = 4;
+const rows = [
+  ["Hindustan Unilever", "Masters' Union", "Orange Health Labs", "Bonne Trinity", "Kaidra Media"],
+  ["Aditya Birla Group", "Tetr College of Business", "Varahe Analytics", "Aelira Lung Care", "Beco"],
+].map((names) => names.map((name) => clients.find((client) => client.name === name)!));
 
 function Mark({ client, copy }: { client: Client; copy?: boolean }) {
   const filter = client.lift ? `brightness(${client.lift})` : undefined;
@@ -75,7 +81,7 @@ export default function ClientWall({ className, title = "Trusted by India's bigg
     if (!section || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const tracks = trackRefs.current.filter(Boolean) as HTMLUListElement[];
-    const state = tracks.map((track, index) => ({ track, x: index === 0 ? 0 : -track.scrollWidth / 4, hover: 0, hovered: false }));
+    const state = tracks.map((track) => ({ track, x: null as number | null, hover: 0, hovered: false }));
     const cleanups = state.map((row) => {
       const enter = () => (row.hovered = true);
       const leave = () => (row.hovered = false);
@@ -107,10 +113,14 @@ export default function ClientWall({ className, title = "Trusted by India's bigg
         row.hover += ((row.hovered ? 1 : 0) - row.hover) * 0.08;
         const direction = index === 0 ? -1 : 1;
         const speed = (36 + boost) * (1 - row.hover);
-        const half = row.track.scrollWidth / 2;
+        // One set of logos is a quarter of the track. The loop wraps after exactly one set.
+        const period = row.track.scrollWidth / COPIES;
+        if (!period) return;
+        // The second row starts half a set along, so the rows never line up.
+        if (row.x === null) row.x = index === 0 ? 0 : -period / 2;
         row.x += direction * speed * dt;
-        if (row.x <= -half) row.x += half;
-        if (row.x > 0) row.x -= half;
+        while (row.x <= -period) row.x += period;
+        while (row.x > 0) row.x -= period;
         row.track.style.transform = `translate3d(${row.x}px,0,0) skewX(${lean * (1 - row.hover)}deg)`;
       });
       frame = visible ? requestAnimationFrame(tick) : 0;
@@ -154,7 +164,7 @@ export default function ClientWall({ className, title = "Trusted by India's bigg
               className="flex w-max items-center gap-14 pr-14 will-change-transform sm:gap-24 sm:pr-24"
             >
               {/* Each row is drawn twice so the loop has no seam. */}
-              {[...row, ...row].map((client, i) => (
+              {Array.from({ length: COPIES }, () => row).flat().map((client, i) => (
                 <Mark key={`${client.name}-${i}`} client={client} copy={i >= row.length} />
               ))}
             </ul>
