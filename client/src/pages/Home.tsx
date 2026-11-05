@@ -100,13 +100,13 @@ export default function Home() {
         </Reveal>
       </section>
 
+      {/* Who we have worked with */}
+      <ClientWall />
+
       {/* How the three arms fit together */}
       <section className="container py-14 sm:py-20" aria-label="How SoloDac fits together">
         <HowItFits />
       </section>
-
-      {/* Who we have worked with */}
-      <ClientWall />
 
       {/* The problem */}
       <section className="container py-14 sm:py-20">

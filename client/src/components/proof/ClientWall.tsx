@@ -1,55 +1,69 @@
 import { useEffect, useRef } from "react";
-import abg from "@/assets/clients/aditya-birla.png";
-import aelira from "@/assets/clients/aelira.png";
-import beco from "@/assets/clients/beco.png";
-import bonne from "@/assets/clients/bonne-trinity.png";
-import hul from "@/assets/clients/hindustan-unilever.svg";
-import mastersUnion from "@/assets/clients/masters-union.png";
-import orangeHealth from "@/assets/clients/orange-health.png";
-import tetr from "@/assets/clients/tetr.png";
-import varahe from "@/assets/clients/varahe.svg";
+import abg from "@/assets/clients/colour/aditya-birla.jpg";
+import aelira from "@/assets/clients/colour/aelira.png";
+import beco from "@/assets/clients/colour/beco.png";
+import bonne from "@/assets/clients/colour/bonne-trinity.png";
+import hul from "@/assets/clients/colour/hindustan-unilever.svg";
+import mastersUnion from "@/assets/clients/colour/masters-union.png";
+import orangeHealth from "@/assets/clients/colour/orange-health.webp";
+import tetr from "@/assets/clients/colour/tetr.svg";
+import varahe from "@/assets/clients/colour/varahe.svg";
 import Reveal from "@/components/Reveal";
 import { cn } from "@/lib/utils";
 
-type Client = { name: string; logo?: string; /** Optical size: wide logos sit lower so every mark weighs the same. */ scale: number };
+type Client = {
+  name: string;
+  logo?: string;
+  /** The logo's height as a share of its tile, so wide and tall marks weigh the same. */
+  fit: number;
+  /** Logos that are white or neon on their own sit on an ink tile; the rest on cream. */
+  tile?: "ink";
+};
 
-// Logos are each client's own, recoloured to one cream so ten brand palettes don't fight on ink.
+// Each logo is the client's own, in its own colours, on a tile so every one stays readable on the ink page.
 // Varahe's mark is traced from its site header. Kaidra Media has no logo online yet, so it is set as a wordmark.
 const clients: Client[] = [
-  { name: "Hindustan Unilever", logo: hul, scale: 0.95 },
-  { name: "Aditya Birla Group", logo: abg, scale: 1.35 },
-  { name: "Masters' Union", logo: mastersUnion, scale: 0.95 },
-  { name: "Tetr College of Business", logo: tetr, scale: 1.2 },
-  { name: "Orange Health Labs", logo: orangeHealth, scale: 0.6 },
-  { name: "Varahe Analytics", logo: varahe, scale: 0.9 },
-  { name: "Bonne Trinity", logo: bonne, scale: 0.85 },
-  { name: "Aelira Lung Care", logo: aelira, scale: 1.05 },
-  { name: "Beco", logo: beco, scale: 0.8 },
-  { name: "Kaidra Media", scale: 1 },
+  { name: "Hindustan Unilever", logo: hul, fit: 0.3 },
+  { name: "Aditya Birla Group", logo: abg, fit: 0.78 },
+  { name: "Masters' Union", logo: mastersUnion, fit: 0.42, tile: "ink" },
+  { name: "Tetr College of Business", logo: tetr, fit: 0.62 },
+  { name: "Orange Health Labs", logo: orangeHealth, fit: 0.32 },
+  { name: "Varahe Analytics", logo: varahe, fit: 0.4 },
+  { name: "Bonne Trinity", logo: bonne, fit: 0.42 },
+  { name: "Aelira Lung Care", logo: aelira, fit: 0.5 },
+  { name: "Beco", logo: beco, fit: 0.38, tile: "ink" },
+  { name: "Kaidra Media", fit: 0.3 },
 ];
 
 const rows = [clients, [...clients].reverse()];
 
 function Mark({ client, copy }: { client: Client; copy?: boolean }) {
-  const height = `calc(var(--logo-h) * ${client.scale})`;
+  const ink = client.tile === "ink";
   return (
-    <li aria-hidden={copy || undefined} className="group/logo flex shrink-0 items-center" title={client.name}>
-      {client.logo ? (
-        <img
-          src={client.logo}
-          alt={client.name}
-          draggable={false}
-          style={{ height }}
-          className="w-auto select-none opacity-75 transition-[opacity,transform] duration-300 ease-out group-hover/logo:-translate-y-1 group-hover/logo:opacity-100"
-        />
-      ) : (
-        <span
-          style={{ fontSize: `calc(var(--logo-h) * 0.62 * ${client.scale})` }}
-          className="font-display whitespace-nowrap font-bold leading-none tracking-[-0.035em] text-paper opacity-75 transition-[opacity,transform] duration-300 ease-out group-hover/logo:-translate-y-1 group-hover/logo:opacity-100"
-        >
-          {client.name}
-        </span>
-      )}
+    <li aria-hidden={copy || undefined} className="group/logo shrink-0" title={client.name}>
+      <div
+        className={cn(
+          "grid h-[var(--tile-h)] place-items-center rounded-[1.1rem] px-[calc(var(--tile-h)*0.3)] transition-transform duration-300 ease-out group-hover/logo:-translate-y-1.5",
+          ink ? "bg-ink-3" : "bg-paper",
+        )}
+      >
+        {client.logo ? (
+          <img
+            src={client.logo}
+            alt={client.name}
+            draggable={false}
+            style={{ height: `calc(var(--tile-h) * ${client.fit})` }}
+            className={cn("w-auto max-w-none select-none", !ink && "mix-blend-multiply")}
+          />
+        ) : (
+          <span
+            style={{ fontSize: `calc(var(--tile-h) * ${client.fit})` }}
+            className="font-display whitespace-nowrap font-bold leading-none tracking-[-0.035em] text-ink"
+          >
+            {client.name}
+          </span>
+        )}
+      </div>
     </li>
   );
 }
@@ -136,7 +150,7 @@ export default function ClientWall({ className, title = "Who hires us." }: { cla
         </Reveal>
       </div>
       <Reveal delay={0.1} y={20}>
-        <div className="client-wall mt-12 space-y-10 overflow-hidden sm:mt-16 sm:space-y-14 [--logo-h:36px] sm:[--logo-h:50px] lg:[--logo-h:60px]">
+        <div className="client-wall mt-12 space-y-4 overflow-hidden sm:mt-14 sm:space-y-5 [--tile-h:64px] sm:[--tile-h:80px] lg:[--tile-h:96px]">
           {rows.map((row, index) => (
             <ul
               key={index}
@@ -144,7 +158,7 @@ export default function ClientWall({ className, title = "Who hires us." }: { cla
                 trackRefs.current[index] = element;
               }}
               aria-hidden={index > 0 || undefined}
-              className="flex w-max items-center gap-14 pr-14 will-change-transform sm:gap-24 sm:pr-24"
+              className="flex w-max items-center gap-4 pr-4 will-change-transform sm:gap-5 sm:pr-5"
             >
               {/* Each row is drawn twice so the loop has no seam. */}
               {[...row, ...row].map((client, i) => (
