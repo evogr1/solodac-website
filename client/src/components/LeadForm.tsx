@@ -1,5 +1,6 @@
 import { Check, ChevronDown, Loader2 } from "lucide-react";
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useHumanCheck } from "@/components/useHumanCheck";
 import { submitForm } from "@/lib/web3forms";
 import { cn } from "@/lib/utils";
 
@@ -33,6 +34,8 @@ export default function LeadForm({
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   // A hidden field people never see. Bots fill every field, so a value here means a bot.
   const [trap, setTrap] = useState("");
+  const check = useHumanCheck();
+  const [waiting, setWaiting] = useState(false);
   const successRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -43,16 +46,23 @@ export default function LeadForm({
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
-    setStatus("sending");
+    setWaiting(false);
     if (trap) {
       setStatus("sent");
       return;
     }
+    // With the human check on, the form can only be sent once Cloudflare has passed this visitor.
+    if (check.enabled && !check.token) {
+      setWaiting(true);
+      return;
+    }
+    setStatus("sending");
     try {
-      await submitForm(subject, values);
+      await submitForm(subject, values, check.enabled ? check.token : undefined);
       setStatus("sent");
     } catch {
       setStatus("error");
+      check.reset();
     }
   }
 
@@ -122,6 +132,8 @@ export default function LeadForm({
         </label>
       ))}
 
+      <div className="sm:col-span-2">{check.widget}</div>
+
       <div className="flex flex-col gap-3 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
         <button
           type="submit"
@@ -132,7 +144,8 @@ export default function LeadForm({
           {submitLabel}
         </button>
         <p role="alert" className="text-sm text-signal-soft">
-          {status === "error" && "That didn't go through. Try again or email info@solodac.com."}
+          {waiting && "Checking that you're a person. Try again in a moment."}
+          {!waiting && status === "error" && "That didn't go through. Try again or email info@solodac.com."}
         </p>
       </div>
     </form>

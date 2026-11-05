@@ -9,7 +9,28 @@
   "assets": {
     "directory": "dist/public",
     "binding": "ASSETS",
-    "run_worker_first": ["/api/*"],
-    "not_found_handling": "single-page-application"
+    "run_worker_first": [
+      "/api/*",
+      "/marketing",
+      "/eyeballs",
+      "/youtube",
+      "/clipping",
+      "/studio",
+      "/services/*",
+      "/approach",
+      "/careers",
+      "/thesis",
+      "/stories",
+      "/stories/*",
+      "/events",
+      "/campaigns",
+      "/case-studies",
+      "/testimonials",
+      "/portfolio",
+      "/fireyoureditor",
+      "/tools",
+      "/chop-shop"
+    ],
+    "not_found_handling": "404-page"
   }
 }
