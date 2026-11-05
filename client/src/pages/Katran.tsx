@@ -29,16 +29,26 @@ function QuickJoin() {
   const [trap, setTrap] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const check = useHumanCheck();
-  const [waiting, setWaiting] = useState(false);
+  const [blocked, setBlocked] = useState(false);
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
-    setWaiting(false);
+    setBlocked(false);
     if (trap) return setStatus("sent");
-    if (check.enabled && !check.token) return setWaiting(true);
     setStatus("sending");
     try {
-      await submitForm("Katran waitlist", { email }, check.enabled ? check.token : undefined);
+      let token: string | undefined;
+      if (check.enabled) {
+        // The check usually finishes in a second or two. Give it up to 12 before giving up.
+        token = await check.waitForToken(12000);
+        if (!token) {
+          setBlocked(true);
+          setStatus("error");
+          check.reset();
+          return;
+        }
+      }
+      await submitForm("Katran waitlist", { email }, token);
       setStatus("sent");
     } catch {
       setStatus("error");
@@ -87,8 +97,7 @@ function QuickJoin() {
       </div>
       {check.widget}
       <p role="alert" className="mt-3 px-2 text-[14px] text-signal-soft">
-        {waiting && "Checking that you're a person. Try again in a moment."}
-        {!waiting && status === "error" && "That didn't go through. Try again or email info@solodac.com."}
+        {status === "error" && (blocked ? "We couldn't confirm you're a person. Please email info@solodac.com." : "That didn't go through. Try again or email info@solodac.com.")}
       </p>
     </form>
   );

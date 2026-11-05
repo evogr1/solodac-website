@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
 import { getLeadConfig } from "@/lib/web3forms";
 
 type TurnstileApi = {
@@ -16,7 +22,8 @@ let scriptReady: Promise<void> | null = null;
 function loadTurnstile() {
   scriptReady ??= new Promise<void>((resolve, reject) => {
     const script = document.createElement("script");
-    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+    script.src =
+      "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
     script.async = true;
     script.onload = () => resolve();
     script.onerror = () => reject(new Error("Turnstile failed to load"));
@@ -29,19 +36,33 @@ function loadTurnstile() {
  * Cloudflare Turnstile, the free human check. It stays out of the way: the visitor only sees
  * something if Cloudflare cannot tell they are a person. It runs only when the Worker says the
  * protected form route is on; otherwise `enabled` is false and nothing loads.
+ *
+ * Once it is on, a form never falls back to the old Web3Forms route (its key is public, so a bot
+ * could use it without ever passing the check). If the check cannot finish, `waitForToken`
+ * returns "" and the form tells the visitor to email us instead.
  */
-export function useHumanCheck(): { enabled: boolean; token: string; widget: ReactNode; reset: () => void } {
+export function useHumanCheck(): {
+  enabled: boolean;
+  widget: ReactNode;
+  waitForToken: (ms: number) => Promise<string>;
+  reset: () => void;
+} {
   const [siteKey, setSiteKey] = useState("");
-  const [token, setToken] = useState("");
-  // If the check cannot load (an ad blocker, a network block), the form falls back to the plain route
-  // rather than lock a real customer out.
-  const [failed, setFailed] = useState(false);
   const box = useRef<HTMLDivElement>(null);
   const widgetId = useRef("");
+  const token = useRef("");
+  const waiting = useRef<Array<(value: string) => void>>([]);
+  // Set when the check cannot run at all (script blocked, challenge error), so a submit does not wait for nothing.
+  const failed = useRef(false);
+
+  const deliver = useCallback((value: string) => {
+    token.current = value;
+    if (value) for (const resolve of waiting.current.splice(0)) resolve(value);
+  }, []);
 
   useEffect(() => {
     let off = false;
-    void getLeadConfig().then((config) => {
+    void getLeadConfig().then(config => {
       if (!off && config.turnstileSiteKey) setSiteKey(config.turnstileSiteKey);
     });
     return () => {
@@ -52,30 +73,58 @@ export function useHumanCheck(): { enabled: boolean; token: string; widget: Reac
   useEffect(() => {
     if (!siteKey) return;
     let cancelled = false;
+    const giveUp = () => {
+      failed.current = true;
+      token.current = "";
+      for (const resolve of waiting.current.splice(0)) resolve("");
+    };
     loadTurnstile()
       .then(() => {
         if (cancelled || !box.current || !window.turnstile) return;
+        failed.current = false;
         widgetId.current = window.turnstile.render(box.current, {
           sitekey: siteKey,
           theme: "dark",
           appearance: "interaction-only",
-          callback: (value: string) => setToken(value),
-          "expired-callback": () => setToken(""),
-          "error-callback": () => setFailed(true),
+          callback: (value: string) => deliver(value),
+          "expired-callback": () => deliver(""),
+          "error-callback": giveUp,
         });
       })
-      .catch(() => setFailed(true));
+      .catch(giveUp);
     return () => {
       cancelled = true;
       if (widgetId.current) window.turnstile?.remove(widgetId.current);
       widgetId.current = "";
     };
-  }, [siteKey]);
+  }, [siteKey, deliver]);
+
+  /** Resolves with the token as soon as there is one, or "" after `ms` (or when the check fails). */
+  const waitForToken = useCallback(
+    (ms: number) =>
+      token.current
+        ? Promise.resolve(token.current)
+        : failed.current
+          ? Promise.resolve("")
+          : new Promise<string>(resolve => {
+              const timer = setTimeout(() => resolve(token.current), ms);
+              waiting.current.push(value => {
+                clearTimeout(timer);
+                resolve(value);
+              });
+            }),
+    []
+  );
 
   const reset = useCallback(() => {
-    setToken("");
+    token.current = "";
     if (widgetId.current) window.turnstile?.reset(widgetId.current);
   }, []);
 
-  return { enabled: Boolean(siteKey) && !failed, token, widget: <div ref={box} />, reset };
+  return {
+    enabled: Boolean(siteKey),
+    widget: <div ref={box} />,
+    waitForToken,
+    reset,
+  };
 }
