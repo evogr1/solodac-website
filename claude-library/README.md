@@ -30,6 +30,7 @@ bash claude-library/install.sh
 | VoltAgent/awesome-design-md (reel: "Awesome DESIGN.md") | 84 design write-ups of real sites | Wrapped as one skill, `design-md-library` |
 | microsoft/playwright-cli (reel: "Playwright CLI") | A browser automation CLI with a skill | `playwright-cli`. The CLI itself installs with npm, see below. |
 | abi/screenshot-to-code (reel: "Image to code") | A web app, not a skill | Nothing. See "Image to code" below. |
+| guillaumemeyer/watermarks-remover | Tools that strip AI provenance marks from text and files | `clean-user-facing-text` only (text clean-up that keeps required disclosures). Left out: `remove-ai-marks` (needs the repo's Docker service) and the `stealer` module, which is built to attack text watermarks such as SynthID. |
 | Taste skill (reel) | | Already installed as `design-taste-frontend` |
 | gooseworks-ai/goose-skills | Marketing playbooks for growth work | All 181 skills: the 86 marketing skills (14 playbooks and their steps), the 63 video-ad skills, the 26 shared helpers and the 6 entry skills (`gooseworks`, `goose-ads`, `goose-video`, `make-custom-video`, `goose-video-local`, `goose-product-photos`). |
 
@@ -59,6 +60,10 @@ Start with `where-to-start` (it asks about your situation and picks a playbook) 
 **Video ads and the GooseWorks skills (goose-skills)**
 
 These are the other 95 skills from goose-skills: 63 video-ad skills (`render-*`, `create-*`, `video-production-harness` and more), 26 shared helpers (Meta ad manager and analysers, brand research, scrapers, graphic ads) and 6 entry skills (`goose-ads`, `goose-video`, `gooseworks` and others). Most of the video ones need `ffmpeg`, Python 3 and paid keys (fal, ElevenLabs and similar), and the scraper and Meta ones need their own accounts or keys. Put any key in your shell environment, never in a chat. `goose-skills-shared-index.json` lists which shared skill is used by which. All 181 skills make Claude's skill list long. If that bothers you, delete the ones you don't use from `~/.claude/skills`.
+
+**Text clean-up**
+
+- `clean-user-facing-text`: strips hidden Unicode characters from prose and rewrites it in a more natural voice, keeping every fact. It scores the text first and only rewrites when needed. It keeps required disclosures and never claims the result is undetectable. Needs Python 3 for its small scripts, no network.
 
 **Need a one-time install**
 
@@ -105,4 +110,4 @@ Then open http://localhost:5173. Put the key in that `.env` file only, never in 
 
 ## Licences
 
-open-seo, my-claude-code-setup, OmniRoute, Vercel agent-skills and awesome-design-md are MIT. playwright-cli is Apache 2.0. goose-skills is MIT. one-skill-to-rule-them-all is CC BY 4.0 (author: Eoghan Henn). Copies are in `licenses/`.
+open-seo, my-claude-code-setup, OmniRoute, Vercel agent-skills and awesome-design-md are MIT. playwright-cli is Apache 2.0. goose-skills and watermarks-remover are MIT. one-skill-to-rule-them-all is CC BY 4.0 (author: Eoghan Henn). Copies are in `licenses/`.
