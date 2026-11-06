@@ -1,3 +1,5 @@
+import { track } from "./track";
+
 const ACCESS_KEY = "fa96ec00-da5f-49aa-89cf-6cd11dd05a95";
 
 type LeadConfig = { turnstileSiteKey?: string };
@@ -24,6 +26,7 @@ export async function submitForm(subject: string, fields: Record<string, string>
       body: JSON.stringify({ subject, fields, token }),
     });
     if (!response.ok) throw new Error("Form submission failed");
+    track("form_sent");
     return;
   }
   const response = await fetch("https://api.web3forms.com/submit", {
@@ -33,4 +36,5 @@ export async function submitForm(subject: string, fields: Record<string, string>
   });
   const result = (await response.json().catch(() => ({}))) as { success?: boolean };
   if (!response.ok || !result.success) throw new Error("Form submission failed");
+  track("form_sent");
 }

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, useLocation } from "wouter";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
 import { scrollToId } from "@/lib/smoothScroll";
+import { track } from "@/lib/track";
 import { company, nav } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -34,6 +35,16 @@ export function Header() {
   }, [open]);
 
   useEffect(() => setOpen(false), [location]);
+
+  // Counts every click on a link to the contact page ("Book a call" and its siblings), from any page.
+  useEffect(() => {
+    const onClick = (event: MouseEvent) => {
+      const link = (event.target as Element | null)?.closest?.('a[href="/contact"]');
+      if (link) track("contact_click");
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
 
   // While the phone menu is open: Escape closes it and returns focus to the menu button,
   // and Tab cycles inside the header instead of wandering into the page behind it.

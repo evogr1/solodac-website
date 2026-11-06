@@ -3,6 +3,8 @@ import { getTicker } from "../shared/ticker";
 
 type Env = {
   ASSETS: { fetch: (request: Request) => Promise<Response> };
+  /** Daily counts of key actions (see handleTrack). Optional: without it, counting is skipped. */
+  EVENTS?: { get: (key: string) => Promise<string | null>; put: (key: string, value: string, options?: { expirationTtl?: number }) => Promise<void> };
   /** Public. The site key of the Turnstile widget. When absent, the forms use Web3Forms as before. */
   TURNSTILE_SITE_KEY?: string;
   /** Secret. Checks each form's Turnstile token with Cloudflare. */
@@ -84,6 +86,32 @@ async function handleLead(request: Request, env: Env): Promise<Response> {
   return json({ ok: true });
 }
 
+const EVENTS = new Set(["contact_click", "form_sent"]);
+
+/**
+ * Adds 1 to a daily total in KV, keyed "2026-11-06|contact_click|/services".
+ * Nothing about the visitor is stored. Read the totals in the Cloudflare dashboard:
+ * Workers & Pages, then KV, then solodac-events.
+ */
+async function handleTrack(request: Request, env: Env, ctx: { waitUntil: (promise: Promise<unknown>) => void }): Promise<Response> {
+  const done = () => new Response(null, { status: 204, headers: { "Cache-Control": "no-store" } });
+  if (request.method !== "POST" || !env.EVENTS) return done();
+  const origin = request.headers.get("Origin");
+  if (origin && new URL(origin).host !== new URL(request.url).host) return done();
+
+  const body = (await request.json().catch(() => null)) as { event?: unknown; page?: unknown } | null;
+  const event = typeof body?.event === "string" ? body.event : "";
+  const page = typeof body?.page === "string" && /^\/[a-z0-9\-/]{0,60}$/.test(body.page) ? body.page : "/other";
+  if (!EVENTS.has(event)) return done();
+
+  const key = `${new Date().toISOString().slice(0, 10)}|${event}|${page}`;
+  const events = env.EVENTS;
+  ctx.waitUntil(
+    events.get(key).then((current) => events.put(key, String((Number(current) || 0) + 1), { expirationTtl: 60 * 60 * 24 * 400 })),
+  );
+  return done();
+}
+
 // Pages and files get their security headers from client/public/_headers. Only /api/* and the
 // old addresses (see shared/redirects.ts) run here; everything else is served from the built files.
 export default {
@@ -95,6 +123,7 @@ export default {
       return json(protectedFormsOn(env) ? { turnstileSiteKey: env.TURNSTILE_SITE_KEY } : {});
     }
     if (url.pathname === "/api/lead") return handleLead(request, env);
+    if (url.pathname === "/api/track") return handleTrack(request, env, ctx);
 
     if (url.pathname !== "/api/ticker") {
       const target = legacyTarget(url.pathname);

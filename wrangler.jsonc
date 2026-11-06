@@ -6,6 +6,9 @@
   "vars": {
     "TURNSTILE_SITE_KEY": "0x4AAAAAAF09iHH9ZxzpxQiI"
   },
+  "kv_namespaces": [
+    { "binding": "EVENTS", "id": "b6e79e3d815a431f9645a45977c7a75d" }
+  ],
   "observability": {
     "enabled": true
   },
