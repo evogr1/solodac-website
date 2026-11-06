@@ -75,7 +75,7 @@ export default function Home() {
           <Reveal delay={0.1}>
             <div className="mt-10 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
               <p className="max-w-xl text-[18px] leading-relaxed text-paper/70">
-                We grew our own pages first. Now we grow yours.
+                We run our own pages every day, so we know what works. Now we run yours.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Magnetic><PrimaryButton href="/contact">Book a call</PrimaryButton></Magnetic>

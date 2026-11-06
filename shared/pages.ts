@@ -16,7 +16,7 @@ export const pages: PageMeta[] = [
   {
     path: "/",
     title: "SoloDac | We grow pages, channels and brands",
-    description: "SoloDac grows YouTube channels, Instagram pages, newsletters and founder brands. We grew our own pages first. Now we grow yours.",
+    description: "SoloDac grows YouTube channels, Instagram pages, newsletters and founder brands. We run our own pages every day, so we know what works. Now we run yours.",
     image: "/og.png",
   },
   {
