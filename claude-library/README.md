@@ -31,7 +31,7 @@ bash claude-library/install.sh
 | microsoft/playwright-cli (reel: "Playwright CLI") | A browser automation CLI with a skill | `playwright-cli`. The CLI itself installs with npm, see below. |
 | abi/screenshot-to-code (reel: "Image to code") | A web app, not a skill | Nothing. See "Image to code" below. |
 | Taste skill (reel) | | Already installed as `design-taste-frontend` |
-| gooseworks-ai/goose-skills | Marketing playbooks for growth work | All 86 skills in `skills/marketing/`: 14 playbooks and the steps they load. Left out: `skills/video/` (63 skills that need the GooseWorks video app), `skills/shared/` (older helpers for that app) and `skills/entry/` (the GooseWorks router, which needs its CLI). |
+| gooseworks-ai/goose-skills | Marketing playbooks for growth work | All 181 skills: the 86 marketing skills (14 playbooks and their steps), the 63 video-ad skills, the 26 shared helpers and the 6 entry skills (`gooseworks`, `goose-ads`, `goose-video`, `make-custom-video`, `goose-video-local`, `goose-product-photos`). |
 
 The other 47 OmniRoute skills only drive a running OmniRoute server (its keys, routes, cache and tunnels). They do nothing without one, so they were left out. The other open-seo skills are for developing OpenSEO itself.
 
@@ -54,7 +54,11 @@ The other 47 OmniRoute skills only drive a running OmniRoute server (its keys, r
 
 **Marketing playbooks (goose-skills)**
 
-Start with `where-to-start` (it asks about your situation and picks a playbook) or `marketing-guide`. The 14 playbooks, each one marketer job from start to finish: `research-market`, `research-competitors`, `research-audience`, `plan-campaign`, `make-content`, `make-static-ads`, `run-organic-social`, `run-paid-campaigns`, `work-with-creators`, `write-outreach`, `email-lifecycle`, `improve-search-visibility`, `analyze-performance`, and `write-report`. The longer names (for example `make-static-ads-ad-copy`) are steps the playbooks load. Some steps can use the GooseWorks data service for lookups. Everything else works with Claude alone. They add 86 skills, so Claude's skill list gets long. If that bothers you, delete the ones you don't want from `~/.claude/skills`.
+Start with `where-to-start` (it asks about your situation and picks a playbook) or `marketing-guide`. The 14 playbooks, each one marketer job from start to finish: `research-market`, `research-competitors`, `research-audience`, `plan-campaign`, `make-content`, `make-static-ads`, `run-organic-social`, `run-paid-campaigns`, `work-with-creators`, `write-outreach`, `email-lifecycle`, `improve-search-visibility`, `analyze-performance`, and `write-report`. The longer names (for example `make-static-ads-ad-copy`) are steps the playbooks load. Some steps can use the GooseWorks data service for lookups. Everything else works with Claude alone. 
+
+**Video ads and the GooseWorks skills (goose-skills)**
+
+These are the other 95 skills from goose-skills: 63 video-ad skills (`render-*`, `create-*`, `video-production-harness` and more), 26 shared helpers (Meta ad manager and analysers, brand research, scrapers, graphic ads) and 6 entry skills (`goose-ads`, `goose-video`, `gooseworks` and others). Most of the video ones need `ffmpeg`, Python 3 and paid keys (fal, ElevenLabs and similar), and the scraper and Meta ones need their own accounts or keys. Put any key in your shell environment, never in a chat. `goose-skills-shared-index.json` lists which shared skill is used by which. All 181 skills make Claude's skill list long. If that bothers you, delete the ones you don't use from `~/.claude/skills`.
 
 **Need a one-time install**
 
