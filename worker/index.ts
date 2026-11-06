@@ -4,7 +4,13 @@ import { getTicker } from "../shared/ticker";
 type Env = {
   ASSETS: { fetch: (request: Request) => Promise<Response> };
   /** Daily counts of key actions (see handleTrack). Optional: without it, counting is skipped. */
-  EVENTS?: { get: (key: string) => Promise<string | null>; put: (key: string, value: string, options?: { expirationTtl?: number }) => Promise<void> };
+  EVENTS?: {
+    get: (key: string) => Promise<string | null>;
+    put: (key: string, value: string, options?: { expirationTtl?: number; metadata?: unknown }) => Promise<void>;
+    list: (options?: { cursor?: string }) => Promise<{ keys: Array<{ name: string; metadata?: unknown }>; list_complete: boolean; cursor?: string }>;
+  };
+  /** Secret. The password for /stats. Without it the stats page stays off. */
+  STATS_KEY?: string;
   /** Public. The site key of the Turnstile widget. When absent, the forms use Web3Forms as before. */
   TURNSTILE_SITE_KEY?: string;
   /** Secret. Checks each form's Turnstile token with Cloudflare. */
@@ -107,10 +113,85 @@ async function handleTrack(request: Request, env: Env, ctx: { waitUntil: (promis
   const key = `${new Date().toISOString().slice(0, 10)}|${event}|${page}`;
   const events = env.EVENTS;
   ctx.waitUntil(
-    events.get(key).then((current) => events.put(key, String((Number(current) || 0) + 1), { expirationTtl: 60 * 60 * 24 * 400 })),
+    events.get(key).then((current) => {
+      const count = (Number(current) || 0) + 1;
+      return events.put(key, String(count), { expirationTtl: 60 * 60 * 24 * 400, metadata: { n: count } });
+    }),
   );
   return done();
 }
+
+const sameKey = (a: string, b: string) => {
+  let diff = a.length ^ b.length;
+  for (let i = 0; i < Math.max(a.length, b.length); i++) diff |= (a.charCodeAt(i) || 0) ^ (b.charCodeAt(i) || 0);
+  return diff === 0;
+};
+
+/** The last 30 days of totals, for the private /stats page. Needs the STATS_KEY password. */
+async function handleStats(request: Request, env: Env): Promise<Response> {
+  if (!env.STATS_KEY || !env.EVENTS) return json({ ok: false, error: "off" }, 404);
+  if (!sameKey(request.headers.get("X-Stats-Key") ?? "", env.STATS_KEY)) return json({ ok: false, error: "key" }, 401);
+
+  const since = new Date(Date.now() - 29 * 86400000).toISOString().slice(0, 10);
+  const days = new Map<string, Record<string, number>>();
+  const pages = new Map<string, Record<string, number>>();
+  let cursor: string | undefined;
+  for (let round = 0; round < 10; round++) {
+    const batch = await env.EVENTS.list({ cursor });
+    for (const { name, metadata } of batch.keys) {
+      const [date, event, page] = name.split("|");
+      const n = (metadata as { n?: number } | null)?.n;
+      if (!date || date < since || !EVENTS.has(event) || !n) continue;
+      for (const [map, id] of [[days, date], [pages, page]] as const) {
+        const row = map.get(id) ?? {};
+        row[event] = (row[event] ?? 0) + n;
+        map.set(id, row);
+      }
+    }
+    if (batch.list_complete) break;
+    cursor = batch.cursor;
+  }
+  const series = Array.from({ length: 30 }, (_, i) => {
+    const date = new Date(Date.now() - (29 - i) * 86400000).toISOString().slice(0, 10);
+    return { date, contact_click: days.get(date)?.contact_click ?? 0, form_sent: days.get(date)?.form_sent ?? 0 };
+  });
+  const byPage = [...pages].map(([page, row]) => ({ page, contact_click: row.contact_click ?? 0, form_sent: row.form_sent ?? 0 })).sort((a, b) => b.contact_click + b.form_sent - (a.contact_click + a.form_sent));
+  return json({ ok: true, series, byPage });
+}
+
+const STATS_PAGE = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Stats</title><style>
+:root{--ink:#0b0b0c;--card:#161618;--paper:#f4f1ea;--dim:rgba(244,241,234,.6);--sig:#ff5a1f}
+*{box-sizing:border-box}body{margin:0;background:var(--ink);color:var(--paper);font:16px/1.5 Inter,system-ui,sans-serif;padding:24px 16px 64px}
+main{max-width:960px;margin:0 auto}h1{font-size:clamp(28px,5vw,44px);letter-spacing:-.03em;margin:8px 0 24px}
+.card{background:var(--card);border-radius:20px;padding:20px;margin-bottom:16px}.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.big{font-size:40px;font-weight:700;letter-spacing:-.03em}.dim{color:var(--dim);font-size:14px}
+form{display:flex;gap:8px;flex-wrap:wrap}input{flex:1;min-width:200px;padding:12px 16px;border-radius:999px;border:0;background:var(--card);color:var(--paper);font:inherit}
+button{padding:12px 22px;border-radius:999px;border:0;background:var(--paper);color:var(--ink);font:inherit;font-weight:600;cursor:pointer}
+.bars{display:flex;align-items:flex-end;gap:3px;height:140px}.bars div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;min-width:0}
+.bars i{display:block;background:var(--paper);opacity:.85;border-radius:3px 3px 0 0}.bars b{display:block;background:var(--sig);border-radius:3px 3px 0 0}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:8px 0}th{color:var(--dim);font-weight:500;font-size:14px}td:not(:first-child),th:not(:first-child){text-align:right}
+.key{display:flex;gap:16px;margin-top:12px}.key span:before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}.k1:before{background:var(--paper)}.k2:before{background:var(--sig)}
+@media(prefers-color-scheme:light){}
+</style></head><body><main><h1>Site stats</h1><div id="out"></div><script>
+const out=document.getElementById('out');
+function login(msg){out.innerHTML='<div class="card"><p class="dim">'+(msg||'Enter the stats password.')+'</p><form><input type="password" id="k" autocomplete="current-password" aria-label="Password"><button>Open</button></form></div>';
+out.querySelector('form').onsubmit=function(e){e.preventDefault();try{sessionStorage.setItem('sk',document.getElementById('k').value)}catch(_){}load(document.getElementById('k').value)}}
+async function load(key){const r=await fetch('/api/stats',{headers:{'X-Stats-Key':key}});
+if(r.status===404)return out.innerHTML='<div class="card"><p>Stats are switched off. Add the STATS_KEY secret to turn them on.</p></div>';
+if(r.status===401)return login('Wrong password.');
+if(!r.ok)return login('Something went wrong. Try again.');
+const d=await r.json();const sum=(a,k)=>a.reduce((t,x)=>t+x[k],0);
+const w=d.series.slice(-7),c=sum(d.series,'contact_click'),f=sum(d.series,'form_sent');
+const max=Math.max(1,...d.series.map(x=>x.contact_click));
+const rate=c?Math.round(f/c*100)+'%':'none yet';
+out.innerHTML='<div class="grid"><div class="card"><div class="big">'+c+'</div><div class="dim">Contact clicks, 30 days ('+sum(w,'contact_click')+' in the last 7)</div></div>'+
+'<div class="card"><div class="big">'+f+'</div><div class="dim">Forms sent, 30 days ('+sum(w,'form_sent')+' in the last 7)</div></div>'+
+'<div class="card"><div class="big">'+rate+'</div><div class="dim">Forms sent per contact click</div></div></div>'+
+'<div class="card"><div class="bars" role="img" aria-label="Daily contact clicks and forms sent, last 30 days">'+d.series.map(x=>'<div title="'+x.date+': '+x.contact_click+' clicks, '+x.form_sent+' forms"><b style="height:'+Math.round(x.form_sent/max*140)+'px"></b><i style="height:'+Math.round(Math.max(0,x.contact_click-x.form_sent)/max*140)+'px"></i></div>').join('')+'</div><div class="key dim"><span class="k1">Contact clicks</span><span class="k2">Forms sent</span></div></div>'+
+'<div class="card"><table><tr><th>Page</th><th>Clicks</th><th>Forms</th></tr>'+(d.byPage.map(p=>'<tr><td>'+p.page.replace(/[<>&]/g,'')+'</td><td>'+p.contact_click+'</td><td>'+p.form_sent+'</td></tr>').join('')||'<tr><td class="dim">Nothing yet.</td><td></td><td></td></tr>')+'</table></div>'}
+let saved='';try{saved=sessionStorage.getItem('sk')||''}catch(_){}
+saved?load(saved):login();
+</script></main></body></html>`;
 
 // Pages and files get their security headers from client/public/_headers. Only /api/* and the
 // old addresses (see shared/redirects.ts) run here; everything else is served from the built files.
@@ -123,6 +204,12 @@ export default {
       return json(protectedFormsOn(env) ? { turnstileSiteKey: env.TURNSTILE_SITE_KEY } : {});
     }
     if (url.pathname === "/api/lead") return handleLead(request, env);
+    if (url.pathname === "/api/stats") return handleStats(request, env);
+    if (url.pathname === "/stats") {
+      return new Response(STATS_PAGE, {
+        headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store", "X-Robots-Tag": "noindex", "X-Frame-Options": "DENY", "Content-Security-Policy": "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; base-uri 'none'; form-action 'none'" },
+      });
+    }
     if (url.pathname === "/api/track") return handleTrack(request, env, ctx);
 
     if (url.pathname !== "/api/ticker") {
