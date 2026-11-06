@@ -31,6 +31,7 @@ bash claude-library/install.sh
 | microsoft/playwright-cli (reel: "Playwright CLI") | A browser automation CLI with a skill | `playwright-cli`. The CLI itself installs with npm, see below. |
 | abi/screenshot-to-code (reel: "Image to code") | A web app, not a skill | Nothing. See "Image to code" below. |
 | Taste skill (reel) | | Already installed as `design-taste-frontend` |
+| gooseworks-ai/goose-skills | Marketing playbooks for growth work | All 86 skills in `skills/marketing/`: 14 playbooks and the steps they load. Left out: `skills/video/` (63 skills that need the GooseWorks video app), `skills/shared/` (older helpers for that app) and `skills/entry/` (the GooseWorks router, which needs its CLI). |
 
 The other 47 OmniRoute skills only drive a running OmniRoute server (its keys, routes, cache and tunnels). They do nothing without one, so they were left out. The other open-seo skills are for developing OpenSEO itself.
 
@@ -50,6 +51,10 @@ The other 47 OmniRoute skills only drive a running OmniRoute server (its keys, r
 - `react-best-practices`, `composition-patterns`, `react-view-transitions`: Vercel's React guides for speed, component structure and View Transition animations.
 - `writing-guidelines`: reviews docs and prose against Vercel's writing rules.
 - `design-md-library`: design write-ups of 84 sites (Stripe, Linear, Apple, Notion, Raycast, Wise, Zapier and more). Ask for "a page in the style of Linear" and Claude reads that one file. It never copies logos, names or copy.
+
+**Marketing playbooks (goose-skills)**
+
+Start with `where-to-start` (it asks about your situation and picks a playbook) or `marketing-guide`. The 14 playbooks, each one marketer job from start to finish: `research-market`, `research-competitors`, `research-audience`, `plan-campaign`, `make-content`, `make-static-ads`, `run-organic-social`, `run-paid-campaigns`, `work-with-creators`, `write-outreach`, `email-lifecycle`, `improve-search-visibility`, `analyze-performance`, and `write-report`. The longer names (for example `make-static-ads-ad-copy`) are steps the playbooks load. Some steps can use the GooseWorks data service for lookups. Everything else works with Claude alone. They add 86 skills, so Claude's skill list gets long. If that bothers you, delete the ones you don't want from `~/.claude/skills`.
 
 **Need a one-time install**
 
@@ -96,4 +101,4 @@ Then open http://localhost:5173. Put the key in that `.env` file only, never in 
 
 ## Licences
 
-open-seo, my-claude-code-setup, OmniRoute, Vercel agent-skills and awesome-design-md are MIT. playwright-cli is Apache 2.0. one-skill-to-rule-them-all is CC BY 4.0 (author: Eoghan Henn). Copies are in `licenses/`.
+open-seo, my-claude-code-setup, OmniRoute, Vercel agent-skills and awesome-design-md are MIT. playwright-cli is Apache 2.0. goose-skills is MIT. one-skill-to-rule-them-all is CC BY 4.0 (author: Eoghan Henn). Copies are in `licenses/`.
