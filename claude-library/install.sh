@@ -6,6 +6,7 @@
 # 1. Copies claude-library/skills/* and .claude/skills/* into ~/.claude/skills,
 #    so Claude Code uses them in every folder and every project.
 #    A skill that is already there is left alone unless you pass --update.
+#    Add --all to also install the large optional sets in claude-library/more/.
 # 2. Makes one zip per skill in ~/Desktop/claude-skill-zips, for the Claude app
 #    and claude.ai (Settings > Capabilities > Skills > Upload skill).
 #
@@ -14,7 +15,11 @@
 set -euo pipefail
 
 update=false
-[ "${1:-}" = "--update" ] && update=true
+all=false
+for arg in "$@"; do
+  [ "$arg" = "--update" ] && update=true
+  [ "$arg" = "--all" ] && all=true
+done
 
 repo="$(cd "$(dirname "$0")/.." && pwd)"
 target="$HOME/.claude/skills"
@@ -23,7 +28,10 @@ mkdir -p "$target" "$zips"
 
 installed=0
 skipped=0
-for dir in "$repo"/claude-library/skills/* "$repo"/.claude/skills/*; do
+dirs=("$repo"/claude-library/skills/* "$repo"/.claude/skills/*)
+# --all also installs claude-library/more/* (the large optional sets, such as the 277 extra ECC skills).
+[ "$all" = true ] && dirs+=("$repo"/claude-library/more/*/*)
+for dir in "${dirs[@]}"; do
   [ -f "$dir/SKILL.md" ] || continue
   name="$(basename "$dir")"
   if [ -e "$target/$name" ] && [ "$update" = false ]; then

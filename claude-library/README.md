@@ -31,6 +31,10 @@ bash claude-library/install.sh
 | microsoft/playwright-cli (reel: "Playwright CLI") | A browser automation CLI with a skill | `playwright-cli`. The CLI itself installs with npm, see below. |
 | abi/screenshot-to-code (reel: "Image to code") | A web app, not a skill | Nothing. See "Image to code" below. |
 | guillaumemeyer/watermarks-remover | Tools that strip AI provenance marks from text and files | `clean-user-facing-text` only (text clean-up that keeps required disclosures). Left out: `remove-ai-marks` (needs the repo's Docker service) and the `stealer` module, which is built to attack text watermarks such as SynthID. |
+| ai-job-search-dev/ai-job-search | A job search workflow on Claude Code | All 9 skills: `job-application-assistant`, `job-scraper`, `upskill` and six job-board searches (`linkedin-search`, `jobindex-search`, `jobnet-search`, `jobdanmark-search`, `jobbank-search`, `freehire-search`). Several are for the Danish and Canadian job markets. |
+| AgricIDaniel/claude-seo | An SEO toolkit for Claude Code | 25 skills (`seo` plus `seo-page`, `seo-technical`, `seo-schema`, `seo-content`, `seo-geo`, `seo-local`, `seo-backlinks`, `seo-sitemap` and more) and 7 connector skills (`seo-ahrefs`, `seo-bing`, `seo-seranking`, `seo-matomo`, `seo-profound`, `seo-unlighthouse`, `seo-firecrawl`). Its `seo-audit` is installed as `seo-site-audit`, because the OpenSEO skill already has that name. The extension install scripts were not copied. |
+| affaan-m/ECC | A huge Claude Code setup (314 skills) | 37 picked for this work in `skills/`: writing and brand voice, content, design and motion, frontend, accessibility, browser tests, security review, research, marketing and social. The other 277 are in `claude-library/more/ecc/`, installed only with `--all`. |
+| Albert-Weasker/niubigeo | A self-hosted app that tracks brand mentions in AI answers (GEO) | Nothing. It is a web app with no skills. See "NiubiGEO" below. |
 | Taste skill (reel) | | Already installed as `design-taste-frontend` |
 | gooseworks-ai/goose-skills | Marketing playbooks for growth work | All 181 skills: the 86 marketing skills (14 playbooks and their steps), the 63 video-ad skills, the 26 shared helpers and the 6 entry skills (`gooseworks`, `goose-ads`, `goose-video`, `make-custom-video`, `goose-video-local`, `goose-product-photos`). |
 
@@ -65,6 +69,18 @@ These are the other 95 skills from goose-skills: 63 video-ad skills (`render-*`,
 
 - `clean-user-facing-text`: strips hidden Unicode characters from prose and rewrites it in a more natural voice, keeping every fact. It scores the text first and only rewrites when needed. It keeps required disclosures and never claims the result is undetectable. Needs Python 3 for its small scripts, no network.
 
+**Job search (ai-job-search)**
+
+`job-application-assistant`, `job-scraper`, `upskill` and the job-board searches. The board searches drive public job sites and are tuned for Denmark and Canada, so they are of little use for India. They are in the library because you asked for them. The scrapers can break a site's terms, so check a site's rules before running them.
+
+**SEO (claude-seo)**
+
+Start with `seo`. It routes to the others. The connector skills (`seo-ahrefs`, `seo-seranking`, `seo-matomo` and so on) only work with an account or key for that service. `seo-site-audit` is a full-site audit. `seo-audit` (from OpenSEO) is the other one.
+
+**The big optional set (ECC)**
+
+`bash claude-library/install.sh --update --all` also installs 277 more skills from ECC (language and framework patterns, ops, finance, logistics, healthcare and more). They are mostly not relevant here and make Claude's skill list very long (about 590 skills in all), so they are off by default.
+
 **Need a one-time install**
 
 - `playwright-cli`: needs the CLI. On the Mac: `npm install -g @playwright/cli@latest`. Then Claude can open a browser, click, type and take screenshots from Claude Code.
@@ -85,6 +101,10 @@ Every script was read for network calls, key handling and code execution:
 - `task-observer` works offline.
 
 No skill adds hooks or changes settings when installed.
+
+## NiubiGEO
+
+A self-hosted app (Next.js, Docker) that tracks whether AI answers mention a brand. It has no skills, so nothing was installed. To try it, clone `Albert-Weasker/niubigeo` and follow its Docker guide. Its keys go in its `.env`, never in a chat.
 
 ## Headroom
 
@@ -110,4 +130,4 @@ Then open http://localhost:5173. Put the key in that `.env` file only, never in 
 
 ## Licences
 
-open-seo, my-claude-code-setup, OmniRoute, Vercel agent-skills and awesome-design-md are MIT. playwright-cli is Apache 2.0. goose-skills and watermarks-remover are MIT. one-skill-to-rule-them-all is CC BY 4.0 (author: Eoghan Henn). Copies are in `licenses/`.
+open-seo, my-claude-code-setup, OmniRoute, Vercel agent-skills and awesome-design-md are MIT. playwright-cli is Apache 2.0. goose-skills, watermarks-remover, ai-job-search, claude-seo and ECC are MIT. NiubiGEO is Apache 2.0 (licence copied, nothing else taken). one-skill-to-rule-them-all is CC BY 4.0 (author: Eoghan Henn). Copies are in `licenses/`.
