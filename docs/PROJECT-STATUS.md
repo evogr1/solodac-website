@@ -134,7 +134,7 @@ The pipeline step that writes titles is pasting its alternatives into the title 
 - **404 and old links:** unknown addresses return a real 404; 19 old addresses redirect permanently (`shared/redirects.ts`).
 - **Cloudflare settings (done by the owner's Chrome session, checked from here):** www redirects to the main address, http redirects to https. SPF, Google DKIM and DMARC (policy none) added, plus Resend's records.
 - **Forms:** protected by Cloudflare Turnstile and sent by Resend through the Worker. A real test email passed SPF, DKIM and DMARC. No fallback to Web3Forms while protection is on. Setup and notes: `docs/FORM-SPAM-SETUP.md`.
-- **Skills:** `claude-library/` holds 252 extra skills (plus 277 optional) with an installer (`bash claude-library/install.sh`). Details in `claude-library/README.md`.
+- **Skills:** `claude-library/` holds 291 extra skills (plus 277 optional) with an installer (`bash claude-library/install.sh`). Details in `claude-library/README.md`.
 - **Research:** `docs/CONTENT-PLAN.md` has keyword research (OpenSEO) and eight article ideas.
 
 ## Still open (5 November)
