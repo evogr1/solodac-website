@@ -4,6 +4,7 @@ import aelira from "@/assets/clients/colour/aelira.webp";
 import beco from "@/assets/clients/colour/beco.webp";
 import bonne from "@/assets/clients/colour/bonne-trinity.webp";
 import chandigarh from "@/assets/clients/colour/chandigarh-university.webp";
+import dyson from "@/assets/clients/colour/dyson.svg";
 import hul from "@/assets/clients/colour/hindustan-unilever.svg";
 import jio from "@/assets/clients/colour/jio.svg";
 import lovable from "@/assets/clients/colour/lovable.svg";
@@ -29,6 +30,7 @@ type Client = {
 const clients: Client[] = [
   { name: "Hindustan Unilever", logo: hul, scale: 0.95, lift: 1.5 },
   { name: "Reliance Jio", logo: jio, scale: 1.2 },
+  { name: "Dyson", logo: dyson, scale: 0.9 },
   { name: "Chandigarh University", logo: chandigarh, scale: 1.3 },
   { name: "Aditya Birla Group", logo: abg, scale: 1.45, lift: 1.35 },
   { name: "Masters' Union", logo: mastersUnion, scale: 0.95 },
@@ -48,7 +50,7 @@ const clients: Client[] = [
 const COPIES = 4;
 const rows = [
   ["Hindustan Unilever", "Masters' Union", "Strawberry", "Orange Health Labs", "Bonne Trinity", "Lovable", "Kaidra Media"],
-  ["Aditya Birla Group", "Tetr College of Business", "Chandigarh University", "Reliance Jio", "Varahe Analytics", "Aelira Lung Care", "Beco"],
+  ["Aditya Birla Group", "Tetr College of Business", "Chandigarh University", "Reliance Jio", "Dyson", "Varahe Analytics", "Aelira Lung Care", "Beco"],
 ].map((names) => names.map((name) => clients.find((client) => client.name === name)!));
 
 function Mark({ client, copy }: { client: Client; copy?: boolean }) {
