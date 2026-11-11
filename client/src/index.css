@@ -195,20 +195,13 @@ body.menu-open { overflow: hidden; }
 
 
 
-/* The home hero's reel wall: one slow loop, paused under the pointer or focus. */
-@keyframes reel-wall {
-  to { transform: translateX(-50%); }
+/* The home hero's reel wall: a row you scroll by hand that also drifts. No scrollbar. */
+.reel-wall {
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
 }
-.reel-wall-track {
-  animation: reel-wall 46s linear infinite;
-}
-.reel-wall:hover .reel-wall-track,
-.reel-wall:focus-within .reel-wall-track {
-  animation-play-state: paused;
-}
-@media (prefers-reduced-motion: reduce) {
-  .reel-wall { overflow-x: auto; }
-  .reel-wall-track { animation: none; }
+.reel-wall::-webkit-scrollbar {
+  display: none;
 }
 
 /* Client logo rows: still and hand-scrollable for people who ask for reduced motion. */
