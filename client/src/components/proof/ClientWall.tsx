@@ -114,13 +114,13 @@ export default function ClientWall({ className, title = "Trusted by brands in In
       const scrolled = window.scrollY - lastScroll;
       lastScroll = window.scrollY;
       velocity += ((dt > 0 ? scrolled / dt : 0) - velocity) * 0.12;
-      const boost = Math.min(Math.abs(velocity) * 0.25, 900);
-      const lean = Math.max(-7, Math.min(7, velocity * -0.006));
+      const boost = Math.min(Math.abs(velocity) * 0.06, 120);
+      const lean = Math.max(-3, Math.min(3, velocity * -0.0025));
 
       state.forEach((row, index) => {
         row.hover += ((row.hovered ? 1 : 0) - row.hover) * 0.08;
         const direction = index === 0 ? -1 : 1;
-        const speed = (36 + boost) * (1 - row.hover);
+        const speed = (26 + boost) * (1 - row.hover);
         // One set of logos is a quarter of the track. The loop wraps after exactly one set.
         const period = row.track.scrollWidth / COPIES;
         if (!period) return;
