@@ -19,11 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-This licence covers the original code in this repository. It does not cover:
-- the SoloDac name, logo and brand
-- client logos and reel images shown on the site
-- the third-party skills in claude-library/, which keep their own licences
-  (see claude-library/licenses/)
-- the visual effects in client/src/components/effects/, adapted from Toolcraft
-  examples by Pixel Point (MIT)

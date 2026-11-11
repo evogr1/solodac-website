@@ -44,4 +44,4 @@ Form protection needs `TURNSTILE_SECRET` and `RESEND_API_KEY` set on the Worker.
 
 ## Licence
 
-The original code is MIT, see [LICENSE](LICENSE). The brand, client logos, reel images and the third-party skills are not covered by it. The LICENSE file says exactly what is left out.
+The original code is MIT, see [LICENSE](LICENSE). The brand, client logos, reel images and the third-party skills are not covered by it. [NOTICE.md](NOTICE.md) says exactly what is left out.
