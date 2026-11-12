@@ -5,7 +5,8 @@ import { clearDotPlanCache } from "@/lib/effects/particle-type/dots-shape";
 import { getDotsLoopTiming } from "@/lib/effects/particle-type/dots-timing";
 import type { DotsSettings } from "@/lib/effects/particle-type/dots-types";
 
-const fontFamily = "Bricolage Grotesque";
+// The name the self-hosted font file registers under (see index.css).
+const fontFamily = "Bricolage Grotesque Variable";
 const fontWeight = "800";
 
 function createSettings(text: string, width: number, height: number, compact: boolean): DotsSettings {

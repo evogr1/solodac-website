@@ -12,7 +12,7 @@ export default function Contact() {
 
   return (
     <Layout>
-      <section className="relative overflow-hidden pb-24 pt-32 sm:pt-44">
+      <section className="relative overflow-hidden pb-14 pt-32 sm:pb-20 sm:pt-44">
         <div className="container relative grid gap-14 lg:grid-cols-[1fr_1.25fr] lg:gap-20">
           <Reveal>
             <h1 className="font-display text-[clamp(3rem,8vw,6rem)] leading-[0.9] tracking-[-0.03em]">Let's talk.</h1>

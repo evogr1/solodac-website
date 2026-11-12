@@ -1,5 +1,4 @@
 import { legacyTarget } from "../shared/redirects";
-import { getTicker } from "../shared/ticker";
 
 type Env = {
   ASSETS: { fetch: (request: Request) => Promise<Response> };
@@ -11,7 +10,7 @@ type Env = {
   };
   /** Secret. The password for /stats. Without it the stats page stays off. */
   STATS_KEY?: string;
-  /** Public. The site key of the Turnstile widget. When absent, the forms use Web3Forms as before. */
+  /** Public. The site key of the Turnstile widget. When absent, the forms are off. */
   TURNSTILE_SITE_KEY?: string;
   /** Secret. Checks each form's Turnstile token with Cloudflare. */
   TURNSTILE_SECRET?: string;
@@ -212,29 +211,10 @@ export default {
     }
     if (url.pathname === "/api/track") return handleTrack(request, env, ctx);
 
-    if (url.pathname !== "/api/ticker") {
-      const target = legacyTarget(url.pathname);
-      if (target && (request.method === "GET" || request.method === "HEAD")) {
-        return new Response(null, { status: 301, headers: { Location: target, "Cache-Control": "public, max-age=3600" } });
-      }
-      return env.ASSETS.fetch(request);
+    const target = legacyTarget(url.pathname);
+    if (target && (request.method === "GET" || request.method === "HEAD")) {
+      return new Response(null, { status: 301, headers: { Location: target, "Cache-Control": "public, max-age=3600" } });
     }
-
-    const cache = (caches as unknown as { default: Cache }).default;
-    const cacheKey = new Request(url.origin + "/api/ticker");
-    const cached = await cache.match(cacheKey);
-    if (cached) return cached;
-
-    const quotes = await getTicker();
-    // An empty result is cached briefly too, so a Yahoo outage doesn't cost 15 requests per visit.
-    const response = new Response(JSON.stringify(quotes), {
-      headers: {
-        "Content-Type": "application/json",
-        "Cache-Control": `public, max-age=${quotes.length ? 60 : 30}`,
-        "X-Content-Type-Options": "nosniff",
-      },
-    });
-    ctx.waitUntil(cache.put(cacheKey, response.clone()));
-    return response;
+    return env.ASSETS.fetch(request);
   },
 };

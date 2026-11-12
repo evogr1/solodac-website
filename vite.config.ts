@@ -1,26 +1,11 @@
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import path from "node:path";
-import { defineConfig, type Plugin, type ViteDevServer } from "vite";
-
-const PROJECT_ROOT = import.meta.dirname;
-
-function vitePluginTickerApi(): Plugin {
-  return {
-    name: "solodac-ticker-api",
-    configureServer(server: ViteDevServer) {
-      server.middlewares.use("/api/ticker", async (_req, res) => {
-        const { getTicker } = await server.ssrLoadModule(path.join(PROJECT_ROOT, "shared/ticker.ts"));
-        res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify(await getTicker()));
-      });
-    },
-  };
-}
+import { defineConfig } from "vite";
 
 export default defineConfig(() => {
   return {
-  plugins: [react(), tailwindcss(), vitePluginTickerApi()],
+  plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),

@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "wouter";
+import FaqSchema from "@/components/FaqSchema";
 import Layout from "@/components/Layout";
 import HeroHeadline from "@/components/effects/HeroHeadline";
 import Magnetic from "@/components/effects/Magnetic";
@@ -14,7 +15,7 @@ import Reveal from "@/components/Reveal";
 import { GhostButton, PrimaryButton } from "@/components/site";
 import { indianNumber } from "@/lib/format";
 import { totalReelViews } from "@/lib/reels";
-import { networkPages, newsletterReaders, services, totalFollowers } from "@/lib/site";
+import { katranTools, networkPages, newsletterReaders, services, totalFollowers } from "@/lib/site";
 
 const heroStats = [
   { value: totalReelViews, label: "views on six of our reels" },
@@ -23,6 +24,9 @@ const heroStats = [
 ];
 
 const growing = ["YouTube channels.", "personal brands.", "Instagram pages.", "communities.", "brands.", "newsletters."];
+// What a screen reader hears for the rotating headline: one sentence, not six fragments.
+const growingNames = growing.map((word) => word.replace(/\.$/, ""));
+const growingLabel = `We grow ${growingNames.slice(0, -1).join(", ")} and ${growingNames.at(-1)}.`;
 
 const comparison = {
   columns: ["Freelancers", "An in-house team", "A typical agency", "SoloDac"],
@@ -66,7 +70,7 @@ export default function Home() {
           <Reveal>
             <HeroHeadline
               className="font-display max-w-6xl text-[clamp(2.6rem,9vw,8.5rem)] leading-[0.92]"
-              label={`We grow ${growing.join(" ")}`}
+              label={growingLabel}
               lines={[{ breakAfter: true, text: "We grow" }]}
             >
               <RotatingWord words={growing} className="text-paper/45" />
@@ -269,6 +273,18 @@ export default function Home() {
             <PrimaryButton href="/katran" className="self-start sm:self-auto">See Katran</PrimaryButton>
           </div>
         </Reveal>
+        {/* What goes in and what comes out, in the tools' own words from the Katran page. */}
+        <ul className="mt-12 grid gap-8 sm:grid-cols-3 sm:gap-10">
+          {katranTools.map((tool, index) => (
+            <li key={tool.name}>
+              <Reveal delay={index * 0.06} y={16}>
+                <p className="font-display text-[clamp(24px,2.2vw,32px)] leading-tight tracking-[-0.02em]">
+                  <span className="text-paper/55">{tool.input},</span> {tool.output.charAt(0).toLowerCase() + tool.output.slice(1)}.
+                </p>
+              </Reveal>
+            </li>
+          ))}
+        </ul>
       </section>
 
       {/* How we work */}
@@ -295,6 +311,7 @@ export default function Home() {
 
       {/* Questions */}
       <section className="container py-14 sm:py-20">
+        <FaqSchema faqs={faqs} />
         <div className="grid gap-12 lg:grid-cols-12">
           <Reveal className="lg:col-span-4">
             <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">Common questions.</h2>
