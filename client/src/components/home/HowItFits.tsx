@@ -63,7 +63,7 @@ const katranChip = (
 );
 
 const parts = [
-  { name: "SoloDac Network", line: `${totalFollowersInThousands}K people follow our five named pages.`, href: "/network", cta: "See the network" },
+  { name: "SoloDac Network", line: `${totalFollowersInThousands}K people follow our six named pages.`, href: "/network", cta: "See the network" },
   { name: "SoloDac Agency", line: "YouTube, Instagram, newsletters, editing and founder brands, done for you.", href: "/services", cta: "See services" },
   { name: "Katran", line: `${totalReelViews} views on six reels made with it.`, href: "/katran", cta: "See Katran" },
 ];

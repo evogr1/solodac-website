@@ -38,11 +38,11 @@ export default function Work() {
         </div>
       </PageHero>
 
-      <section className="container pb-4" aria-label="All five pages together">
+      <section className="container pb-4" aria-label="All six pages together">
         <Reveal>
           <dl className="grid grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-3">
             {[
-              { value: indianNumber(totalFollowers), label: "followers across five pages" },
+              { value: indianNumber(totalFollowers), label: "followers across six pages" },
               { value: totalReelViews, label: "views on six of our reels" },
               { value: totalPosts.toLocaleString("en-IN"), label: "posts published" },
             ].map((stat) => (

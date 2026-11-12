@@ -79,7 +79,7 @@ export default function Network() {
           <Reveal>
             <h2 id="brands" className="font-display text-[clamp(2.2rem,5vw,3.75rem)] leading-[0.98] tracking-[-0.03em]">Put your brand in front of these audiences.</h2>
             <p className="mt-8 font-display text-[clamp(56px,7vw,104px)] leading-none tracking-[-0.04em] text-signal">{totalFollowersInThousands}K</p>
-            <p className="mt-2 text-[17px] text-paper/70">people follow these five pages.</p>
+            <p className="mt-2 text-[17px] text-paper/70">people follow these six pages.</p>
             <p className="mt-6 max-w-md text-[17px] leading-relaxed text-paper/65">We only take partnerships that fit the page. That's why people still trust what the pages post.</p>
             <div className="mt-9">
               <PrimaryButton href="/contact?service=Brand%20partnership">Advertise with us</PrimaryButton>

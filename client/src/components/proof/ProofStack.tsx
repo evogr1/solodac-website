@@ -25,7 +25,7 @@ export function ReelFan({ className, order = [3, 2, 0] }: { className?: string; 
   );
 }
 
-/** The five named pages' logos, overlapping. */
+/** The six named pages' logos, overlapping. */
 export function LogoRow({ size = "md", className }: { size?: "md" | "lg"; className?: string }) {
   const box = size === "lg" ? "h-16 w-16 sm:h-24 sm:w-24 -ml-4 sm:-ml-6" : "h-12 w-12 -ml-3";
   return (

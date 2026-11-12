@@ -89,7 +89,7 @@ const tracks: Track[] = [
     proof: {
       kind: "number",
       value: `${totalFollowersInThousands}K`,
-      note: "people follow the five pages we put our name on.",
+      note: "people follow the six pages we put our name on.",
     },
     enquiry: "Brand partnership",
   },
