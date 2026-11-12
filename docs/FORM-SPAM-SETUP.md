@@ -53,14 +53,14 @@ Save and deploy. No code change is needed.
 
 The old form service key is visible in the page source, so a bot can post to Web3Forms directly and skip the new check. Once you have confirmed a real form reaches `info@solodac.com`, log in to web3forms.com and delete or regenerate that access key. The site no longer uses it while protection is on.
 
-(The key is in `client/src/lib/web3forms.ts`. If you ever turn protection off again, put a fresh Web3Forms key there.)
+(Update, 12 November 2026: the Web3Forms code and its key were removed from the site. The old key still works at web3forms.com until you delete it there.)
 
 ## If something goes wrong
 
 - While protection is on, a visitor whose check cannot finish (an ad blocker, an unusual browser) sees: "We couldn't confirm you're a person. Please email info@solodac.com." There is no fallback to the old route, on purpose.
 - The form waits up to 12 seconds for the check before giving up.
 - `TURNSTILE_SITE_KEY` is also set in `wrangler.jsonc` (it is public), so a deploy cannot erase it. If you change the key in the dashboard, change it there too.
-- To switch protection off, remove `TURNSTILE_SITE_KEY` from `wrangler.jsonc` and the dashboard and deploy. The forms go back to Web3Forms.
+- To switch protection off, remove `TURNSTILE_SITE_KEY` from `wrangler.jsonc` and the dashboard and deploy. The forms then stop sending and tell visitors to email instead. There is no Web3Forms route any more.
 
 ## Live checks (5 November 2026)
 

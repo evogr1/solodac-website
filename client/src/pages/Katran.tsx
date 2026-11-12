@@ -1,6 +1,7 @@
 import { Check, Loader2 } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import Reel from "@/components/katran/Reel";
+import FaqSchema from "@/components/FaqSchema";
 import Layout from "@/components/Layout";
 import LeadForm from "@/components/LeadForm";
 import Reveal from "@/components/Reveal";
@@ -8,7 +9,7 @@ import { millionViewReels as reels, totalReelViews } from "@/lib/reels";
 import { katranTools } from "@/lib/site";
 import { scrollToId } from "@/lib/smoothScroll";
 import { useHumanCheck } from "@/components/useHumanCheck";
-import { submitForm } from "@/lib/web3forms";
+import { submitForm } from "@/lib/forms";
 
 const steps = [
   { title: "Send something", body: "A podcast or interview link, a voiceover, or just a topic." },
@@ -77,7 +78,10 @@ function QuickJoin() {
         <label htmlFor="quick-email" className="sr-only">Email</label>
         <input
           id="quick-email"
+          name="email"
           type="email"
+          autoComplete="email"
+          inputMode="email"
           required
           maxLength={254}
           placeholder="Your email"
@@ -106,6 +110,7 @@ function QuickJoin() {
 export default function Katran() {
   return (
     <Layout>
+      <FaqSchema faqs={faqs} />
       <section className="container pt-32 sm:pt-40">
         <Reveal>
           <h1 className="font-display max-w-5xl text-[clamp(44px,6.4vw,104px)] leading-[0.94] tracking-[-0.04em]">

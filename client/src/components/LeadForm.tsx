@@ -1,7 +1,7 @@
 import { Check, ChevronDown, Loader2 } from "lucide-react";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useHumanCheck } from "@/components/useHumanCheck";
-import { submitForm } from "@/lib/web3forms";
+import { submitForm } from "@/lib/forms";
 import { cn } from "@/lib/utils";
 
 export type Field =
@@ -11,6 +11,9 @@ export type Field =
 
 // Long enough for any real answer, short enough that a bot can't paste a novel into the inbox.
 const maxLengths = { text: 120, email: 254, tel: 30, url: 300, textarea: 3000 } as const;
+
+// What each field tells the browser, so phones and password managers can fill it in.
+const autoFill: Record<string, string> = { name: "name", email: "email", phone: "tel", company: "organization" };
 
 const inputClass =
   "w-full rounded-xl border border-paper/15 bg-ink px-4 py-3.5 text-paper placeholder:text-paper/50 transition-colors focus:border-signal focus:outline-none";
@@ -106,6 +109,7 @@ export default function LeadForm({
             <span className="relative block">
               <select
                 className={cn(inputClass, "appearance-none pr-11")}
+                name={field.name}
                 required={field.required}
                 value={values[field.name] ?? ""}
                 onChange={(event) => set(field.name, event.target.value)}
@@ -118,6 +122,7 @@ export default function LeadForm({
           ) : field.type === "textarea" ? (
             <textarea
               className={cn(inputClass, "min-h-[140px] resize-y")}
+              name={field.name}
               required={field.required}
               maxLength={maxLengths.textarea}
               placeholder={field.placeholder}
@@ -127,7 +132,9 @@ export default function LeadForm({
           ) : (
             <input
               className={inputClass}
+              name={field.name}
               type={field.type}
+              autoComplete={autoFill[field.name] ?? "off"}
               required={field.required}
               maxLength={maxLengths[field.type]}
               placeholder={field.placeholder}

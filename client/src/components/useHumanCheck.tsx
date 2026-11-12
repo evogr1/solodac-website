@@ -5,7 +5,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { getLeadConfig } from "@/lib/web3forms";
+import { getLeadConfig } from "@/lib/forms";
 
 type TurnstileApi = {
   render: (element: HTMLElement, options: Record<string, unknown>) => string;
@@ -37,9 +37,8 @@ function loadTurnstile() {
  * something if Cloudflare cannot tell they are a person. It runs only when the Worker says the
  * protected form route is on; otherwise `enabled` is false and nothing loads.
  *
- * Once it is on, a form never falls back to the old Web3Forms route (its key is public, so a bot
- * could use it without ever passing the check). If the check cannot finish, `waitForToken`
- * returns "" and the form tells the visitor to email us instead.
+ * There is no other route for a form. If the check cannot finish, `waitForToken` returns ""
+ * and the form tells the visitor to email us instead.
  */
 export function useHumanCheck(): {
   enabled: boolean;
