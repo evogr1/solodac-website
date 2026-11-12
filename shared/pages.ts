@@ -22,7 +22,7 @@ export const pages: PageMeta[] = [
   {
     path: "/work",
     title: "Our work | SoloDac",
-    description: "Successful Arcs, Archive of CEOs, Lucre, Indian Pragati and Bourse India. Pages SoloDac built and still runs, with their followers and their million-view reels.",
+    description: "Successful Arcs, Archive of CEOs, Krefion, Lucre, Indian Pragati and Bourse India. Pages SoloDac built and still runs, with their followers and their million-view reels.",
     image: "/og.png",
   },
   {
@@ -34,7 +34,7 @@ export const pages: PageMeta[] = [
   {
     path: "/network",
     title: "Our pages | SoloDac",
-    description: "Successful Arcs, Archive of CEOs, Indian Pragati, Bourse India and Lucre. The pages SoloDac puts its name on, and how brands can reach their audiences.",
+    description: "Successful Arcs, Archive of CEOs, Krefion, Indian Pragati, Bourse India and Lucre. The pages SoloDac puts its name on, and how brands can reach their audiences.",
     image: "/og.png",
   },
   {

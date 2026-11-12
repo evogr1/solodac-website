@@ -3,6 +3,7 @@ import aocLogo from "../assets/partners/archiveofceos.jpg";
 import pragatiLogo from "../assets/partners/indianpragati.svg";
 import bourseLogo from "../assets/partners/bourse.jpg";
 import lucreLogo from "../assets/partners/lucre.jpg";
+import krefionLogo from "../assets/partners/krefion.jpg";
 
 export const company = {
   tradeName: "SOLODAC",
@@ -44,6 +45,7 @@ export type NetworkPage = {
 export const networkPages: NetworkPage[] = [
   { slug: "successful-arcs", name: "Successful Arcs", handle: "successfularcs", category: "Global business", tagline: "Business stories from outside India. The founders, companies and decisions behind them, cut into short reels for people who want to build something.", followers: "280.1K", posts: "413", logo: saLogo, platforms: ["Instagram"] },
   { slug: "archive-of-ceos", name: "Archive of CEOs", handle: "archiveofceos", category: "Global leadership", tagline: "What the world's best-known CEOs said and did. We cut interviews and talks into short lessons on leadership, money and work.", followers: "275.1K", posts: "297", logo: aocLogo, platforms: ["Instagram"] },
+  { slug: "krefion", name: "Krefion", handle: "krefion", category: "Business and money", tagline: "Business, wealth and motivation. Short reels and posts on how money is made and kept, for people who want to build their own.", followers: "153K", posts: "667", logo: krefionLogo, platforms: ["Instagram"] },
   { slug: "indian-pragati", name: "Indian Pragati", handle: "indianpragati", category: "Indian news", tagline: "Indian news in short reels: policy, infrastructure, space and the economy. We report the facts and leave the opinion to the reader.", followers: "34.6K", posts: "230", logo: pragatiLogo, platforms: ["Instagram"] },
   { slug: "bourse-india", name: "Bourse India", handle: "bourseindiaa", category: "Indian politics", tagline: "India's political events, explained. Elections, policy fights and the people behind them, in posts anyone can follow.", followers: "29K", posts: "804", logo: bourseLogo, platforms: ["Instagram"] },
   { slug: "lucre", name: "Lucre", handle: "lucreindia", category: "Indian founders", tagline: "How India's biggest founders started, what went wrong and how they built companies worth crores. On Instagram and YouTube.", followers: "17.9K", posts: "104", logo: lucreLogo, platforms: ["Instagram", "YouTube"] },
