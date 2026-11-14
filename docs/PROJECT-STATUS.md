@@ -159,6 +159,14 @@ The pipeline step that writes titles is pasting its alternatives into the title 
 - 28 text blocks under 13 px.
 - Left and right margins differ (128 px vs 149 px).
 
+## Reel row refresh (14 November)
+
+- Ten reels over 1M views, up from six. Four Lucre YouTube Shorts added: Aamir Khan ad 3.8M (6ugLsJ-hzW8), spoon on Shark Tank 2.8M (JEUnd8cqbx4), Dr Kalam 2.5M (DKMdtFnuTI0), Kellogg's breakfast 1.1M (RiI45n9g4lQ). Lucre counts refreshed on 14 November: BharatPe 6.4M, 70-hour workweek 5.9M. Instagram counts are still from 31 October.
+- Total is now "14 crore views". The reel count in the copy comes from the list (`reelCountWord`), so it updates itself.
+- The home reel row spreads each page's reels through the row. One set is 2,120px wide, so no reel shows twice on screens up to that width.
+- Client logo rows drift at 60px a second (was 26).
+- Close to a million and worth adding next: iPhone Diwali gift 9.0 lakh (vM34jRuFrXs), Jio 6.7 lakh in its first day (rBuPStnYrTM).
+
 ## Tools installed for this project (in `.claude/` of the repo)
 
 - **Skills:** taste skill (`design-taste-frontend`), impeccable, 12 of Emil Kowalski's skills (motion, review, apple-design and more), 9 Strix security skills, agent-reach.

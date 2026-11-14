@@ -14,11 +14,11 @@ import ReelWall from "@/components/proof/ReelWall";
 import Reveal from "@/components/Reveal";
 import { GhostButton, PrimaryButton } from "@/components/site";
 import { indianNumber } from "@/lib/format";
-import { totalReelViews } from "@/lib/reels";
+import { reelCountWord, totalReelViews } from "@/lib/reels";
 import { katranTools, networkPages, newsletterReaders, services, totalFollowers } from "@/lib/site";
 
 const heroStats = [
-  { value: totalReelViews, label: "views on six of our reels" },
+  { value: totalReelViews, label: `views on ${reelCountWord} of our reels` },
   { value: indianNumber(totalFollowers), label: "people follow our named pages" },
   { value: indianNumber(newsletterReaders), label: "newsletter readers" },
 ];

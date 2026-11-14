@@ -3,7 +3,7 @@ import { ArrowUpRight, Instagram, Mail, Youtube } from "lucide-react";
 import type { ReactNode } from "react";
 import { Link } from "wouter";
 import Reveal from "@/components/Reveal";
-import { millionViewReels, totalReelViews } from "@/lib/reels";
+import { millionViewReels, reelCountWord, totalReelViews } from "@/lib/reels";
 import { networkPages, totalFollowersInThousands } from "@/lib/site";
 
 /**
@@ -65,7 +65,7 @@ const katranChip = (
 const parts = [
   { name: "SoloDac Network", line: `${totalFollowersInThousands}K people follow our six named pages.`, href: "/network", cta: "See the network" },
   { name: "SoloDac Agency", line: "YouTube, Instagram, newsletters, editing and founder brands, done for you.", href: "/services", cta: "See services" },
-  { name: "Katran", line: `${totalReelViews} views on six reels made with it.`, href: "/katran", cta: "See Katran" },
+  { name: "Katran", line: `${totalReelViews} views on ${reelCountWord} reels made with it.`, href: "/katran", cta: "See Katran" },
 ];
 
 /** How SoloDac's three arms feed each other: one sentence with a picture set beside each arm. */

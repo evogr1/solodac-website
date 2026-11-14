@@ -6,14 +6,27 @@ const COPIES = 3;
 const SPEED = 72; // px per second while drifting
 const IDLE_MS = 1800; // how long the row rests after a touch, wheel or drag before it drifts again
 
+// Spread each page's reels evenly through the row, so one page never fills a whole screen.
+const pageSizes = new Map<string, number>();
+millionViewReels.forEach((reel) => pageSizes.set(reel.page, (pageSizes.get(reel.page) ?? 0) + 1));
+const seen = new Map<string, number>();
+const spread = millionViewReels
+  .map((reel) => {
+    const nth = seen.get(reel.page) ?? 0;
+    seen.set(reel.page, nth + 1);
+    return { reel, at: (nth + 0.5) / pageSizes.get(reel.page)! };
+  })
+  .sort((a, b) => a.at - b.at)
+  .map((item) => item.reel);
+
 /**
  * Our million-view reels in a row you can swipe or scroll by hand. Left alone it drifts on its own,
  * stops the moment someone touches it, and eases back in after a short rest. The set is drawn three
  * times so the loop has no seam. For people who ask for reduced motion it stays still and scrolls by hand.
  */
 export default function ReelWall() {
-  const count = millionViewReels.length;
-  const items = Array.from({ length: COPIES }, () => millionViewReels).flat();
+  const count = spread.length;
+  const items = Array.from({ length: COPIES }, () => spread).flat();
   const scroller = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
