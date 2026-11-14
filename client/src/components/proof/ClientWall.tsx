@@ -50,6 +50,7 @@ const clients: Client[] = [
 // Two rows, each with its own logos, so a logo is never on screen in both rows at once.
 // Each row is drawn four times over, so even a very wide screen never shows the same logo twice in a row.
 const COPIES = 4;
+const SPEED = 60; // px per second while drifting
 const rows = [
   ["Hindustan Unilever", "Masters' Union", "Strawberry", "Flipkart", "Orange Health Labs", "Bonne Trinity", "Lovable", "Kaidra Media"],
   ["Aditya Birla Group", "Tetr College of Business", "Chandigarh University", "Reliance Jio", "Dyson", "Varahe Analytics", "Aelira Lung Care", "Beco"],
@@ -124,7 +125,7 @@ export default function ClientWall({ className, title = "Trusted by brands in In
       state.forEach((row, index) => {
         row.hover += ((row.hovered ? 1 : 0) - row.hover) * 0.08;
         const direction = index === 0 ? -1 : 1;
-        const speed = (26 + boost) * (1 - row.hover);
+        const speed = (SPEED + boost) * (1 - row.hover);
         // One set of logos is a quarter of the track. The loop wraps after exactly one set.
         const period = row.track.scrollWidth / COPIES;
         if (!period) return;

@@ -6,7 +6,7 @@ import { LogoRow } from "@/components/proof/ProofStack";
 import Reveal from "@/components/Reveal";
 import { CtaBand, GhostButton, PageHero, PrimaryButton } from "@/components/site";
 import { indianNumber } from "@/lib/format";
-import { millionViewReels, totalReelViews } from "@/lib/reels";
+import { millionViewReels, reelCountWord, totalReelViews } from "@/lib/reels";
 import { igUrl, networkPages, totalFollowers } from "@/lib/site";
 
 const totalPosts = networkPages.reduce((sum, page) => sum + Number(page.posts), 0);
@@ -43,7 +43,7 @@ export default function Work() {
           <dl className="grid grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-3">
             {[
               { value: indianNumber(totalFollowers), label: "followers across six pages" },
-              { value: totalReelViews, label: "views on six of our reels" },
+              { value: totalReelViews, label: `views on ${reelCountWord} of our reels` },
               { value: totalPosts.toLocaleString("en-IN"), label: "posts published" },
             ].map((stat) => (
               <div key={stat.label} className="flex flex-col-reverse">
