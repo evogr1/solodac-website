@@ -39,9 +39,9 @@ export const pages: PageMeta[] = [
   },
   {
     path: "/katran",
-    title: "Katran by SoloDac | The editor behind 14 crore views",
+    title: "Katran by SoloDac | The editor our own pages use every day",
     description: "Katran turns long videos, voiceovers and topics into reels, YouTube videos and carousels. Our own pages post with it every day. Get early access.",
-    image: "/og-katran.png",
+    image: "/og.png",
   },
   {
     path: "/about",

@@ -167,6 +167,17 @@ The pipeline step that writes titles is pasting its alternatives into the title 
 - Client logo rows drift at 60px a second (was 26).
 - Close to a million and worth adding next: iPhone Diwali gift 9.0 lakh (vM34jRuFrXs), Jio 6.7 lakh in its first day (rBuPStnYrTM).
 
+## Trust pass after Google's "Deceptive pages" flag (17 November)
+
+- Katran hero is now "The editor our own pages use every day." The salary comparison is gone from the Katran hero, the Katran FAQ and the home Katran section. Pricing line: "Pricing is shared with the waitlist first."
+- Every view count on a reel tile links to the public post (`Reel.tsx`, `ReelFan` in `ProofStack.tsx`). The home reel row already did.
+- Every form carries one line on how the details are used, with a link to /privacy (`FormNote.tsx`). Buttons say what they do: "Join the waitlist", "Send enquiry".
+- Katran has a plain line saying what it is and that it is in private use.
+- The private /stats page and /api/stats are removed, because /stats showed a password box on a public address. Daily counts are still written to KV by /api/track; read them in the Cloudflare dashboard.
+- `/.well-known/security.txt` added. Renew its Expires date before 17 November 2027.
+- Katran's link preview now uses the general card (`og.png`). `og-katran.png` was deleted because it carried the old "12 crore views" headline.
+- Not done: the footer legal name. The GSTIN on the site is the proprietorship's, so the company name cannot sit next to it. Waiting on the owner.
+
 ## Tools installed for this project (in `.claude/` of the repo)
 
 - **Skills:** taste skill (`design-taste-frontend`), impeccable, 12 of Emil Kowalski's skills (motion, review, apple-design and more), 9 Strix security skills, agent-reach.

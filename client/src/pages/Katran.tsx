@@ -2,10 +2,11 @@ import { Check, Loader2 } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import Reel from "@/components/katran/Reel";
 import FaqSchema from "@/components/FaqSchema";
+import FormNote from "@/components/FormNote";
 import Layout from "@/components/Layout";
 import LeadForm from "@/components/LeadForm";
 import Reveal from "@/components/Reveal";
-import { millionViewReels as reels, totalReelViews } from "@/lib/reels";
+import { millionViewReels as reels } from "@/lib/reels";
 import { katranTools } from "@/lib/site";
 import { scrollToId } from "@/lib/smoothScroll";
 import { useHumanCheck } from "@/components/useHumanCheck";
@@ -21,7 +22,7 @@ const faqs = [
   { q: "Is it live?", a: "Yes, inside SoloDac. Our editors and our pages use it every day. Creators get access in batches, and the waitlist goes first." },
   { q: "Will my videos look AI-made?", a: "That is the one thing we built it to avoid. If an edit wouldn't pass on our own pages, it doesn't ship." },
   { q: "Who is it for?", a: "YouTube creators, Instagram page owners and small editing teams who post often and want to spend less time on the timeline." },
-  { q: "What will it cost?", a: "Less than one full-time editor's monthly salary. The waitlist gets exact pricing first." },
+  { q: "What will it cost?", a: "Pricing is shared with the waitlist first." },
 ];
 
 /** Email only, right in the hero, for people who are already convinced. */
@@ -96,10 +97,11 @@ function QuickJoin() {
           className="inline-flex items-center justify-center gap-2 rounded-full bg-signal px-6 py-3.5 text-[15px] font-semibold text-ink transition-[background-color,transform] duration-150 ease-out hover:bg-paper active:scale-[0.97] disabled:opacity-60"
         >
           {status === "sending" && <Loader2 size={16} className="animate-spin" />}
-          Get early access
+          Join the waitlist
         </button>
       </div>
       {check.widget}
+      <FormNote className="mt-3 px-2" />
       <p role="alert" className="mt-3 px-2 text-[14px] text-signal-soft">
         {status === "error" && (blocked ? "We couldn't confirm you're a person. Please email info@solodac.com." : "That didn't go through. Try again or email info@solodac.com.")}
       </p>
@@ -114,23 +116,28 @@ export default function Katran() {
       <section className="container pt-32 sm:pt-40">
         <Reveal>
           <h1 className="font-display max-w-5xl text-[clamp(44px,6.4vw,104px)] leading-[0.94] tracking-[-0.04em]">
-            The editor behind {totalReelViews} views.
+            The editor our own pages use every day.
           </h1>
         </Reveal>
         <Reveal delay={0.08}>
           <p className="mt-8 max-w-2xl text-[19px] leading-relaxed text-paper/80">
-            Katran turns long videos, voiceovers and topics into reels, YouTube videos and carousels. Our own pages post with it every day. Creators get access next, for less than one editor's monthly salary.
+            Katran turns long videos, voiceovers and topics into reels, YouTube videos and carousels. Our own pages post with it every day. Creators get access next. Pricing is shared with the waitlist first.
           </p>
         </Reveal>
         <Reveal delay={0.16} className="mt-9">
           <QuickJoin />
+        </Reveal>
+        <Reveal delay={0.2}>
+          <p className="mt-8 max-w-2xl text-[16px] leading-relaxed text-paper/60">
+            Katran is SoloDac's own editing tool. It is in private use and opening to creators in batches.
+          </p>
         </Reveal>
       </section>
 
       <section className="pb-14 pt-12 sm:pb-20 lg:pt-16" aria-labelledby="reels">
         <div className="container">
           <h2 id="reels" className="text-[15px] text-paper/60">
-            Made with Katran on our own pages. Each one passed a million views.
+            Made with Katran on our own pages. Each one passed a million views. Every count links to the public post.
           </h2>
         </div>
         <div className="container mt-5">

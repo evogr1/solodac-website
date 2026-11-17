@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { reelUrl } from "@/lib/format";
 
 export type ReelData = {
   /** YouTube video id, or the Instagram shortcode when `platform` is "instagram". */
@@ -84,7 +85,15 @@ export default function Reel({ reel, className }: { reel: ReelData; className?: 
       </div>
       <figcaption className="mt-3 flex flex-col text-[14px] leading-snug text-paper/60">
         <span className="text-paper">{reel.page}</span>
-        <span>{formatViews(reel.views)}</span>
+        <a
+          href={reelUrl(reel)}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${formatViews(reel.views)}. See the post on ${reel.platform === "instagram" ? "Instagram" : "YouTube"}: ${reel.title}`}
+          className="self-start underline decoration-paper/25 underline-offset-4 transition-colors duration-200 hover:text-paper hover:decoration-signal"
+        >
+          {formatViews(reel.views)} on {reel.platform === "instagram" ? "Instagram" : "YouTube"}
+        </a>
       </figcaption>
     </figure>
   );
