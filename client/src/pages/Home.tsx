@@ -17,8 +17,9 @@ import { indianNumber } from "@/lib/format";
 import { reelCountWord, totalReelViews } from "@/lib/reels";
 import { katranTools, networkPages, newsletterReaders, services, totalFollowers } from "@/lib/site";
 
-const heroStats = [
-  { value: totalReelViews, label: `views on ${reelCountWord} of our reels` },
+// The views total links to the reels it adds up, each of which links to its public post.
+const heroStats: Array<{ value: string; label: string; href?: string }> = [
+  { value: totalReelViews, label: `views on ${reelCountWord} of our reels`, href: "/katran#reels" },
   { value: indianNumber(totalFollowers), label: "people follow our named pages" },
   { value: indianNumber(newsletterReaders), label: "newsletter readers" },
 ];
@@ -92,7 +93,9 @@ export default function Home() {
             <dl className="mt-12 grid grid-cols-3 gap-x-4 sm:mt-16 sm:gap-x-8 lg:grid-cols-4">
               {heroStats.map((stat) => (
                 <div key={stat.label} className="flex flex-col">
-                  <dt className="mt-2 text-[14px] leading-snug text-paper/60 sm:text-[15px]">{stat.label}</dt>
+                  <dt className="mt-2 text-[14px] leading-snug text-paper/60 sm:text-[15px]">
+                    {stat.href ? <a href={stat.href} className="underline decoration-paper/25 underline-offset-4 transition-colors duration-200 hover:text-paper hover:decoration-signal">{stat.label}</a> : stat.label}
+                  </dt>
                   <dd className="font-display order-first text-[clamp(24px,6vw,44px)] leading-none tracking-[-0.03em] lg:text-[clamp(32px,3.6vw,52px)]">{stat.value}</dd>
                 </div>
               ))}
