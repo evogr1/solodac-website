@@ -193,7 +193,10 @@ function Footer() {
       <div>
         <div className="container flex flex-col gap-2 pb-10 text-[13px] text-paper/55 sm:flex-row sm:items-center sm:justify-between">
           <span>© {year} {company.tradeName}. All rights reserved.</span>
-          <span>GSTIN {company.gstin} · Indore, Madhya Pradesh</span>
+          <span>
+            {company.tradeName}, a {company.constitution.toLowerCase()} of {company.proprietor} · GSTIN {company.gstin} · Indore, Madhya Pradesh ·{" "}
+            <a href={`mailto:${company.email}`} className="hover:text-paper">{company.email}</a>
+          </span>
         </div>
       </div>
     </footer>
