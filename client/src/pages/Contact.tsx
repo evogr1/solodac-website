@@ -43,7 +43,7 @@ export default function Contact() {
           <Reveal delay={0.1}>
             <LeadForm
               subject="New enquiry from solodac.com"
-              submitLabel="Send"
+              submitLabel="Send enquiry"
               successTitle="Got it. Talk soon."
               successBody="Someone from the team will reply within one working day. If it's urgent, email info@solodac.com."
               initial={initial}

@@ -1,5 +1,6 @@
 import { Check, ChevronDown, Loader2 } from "lucide-react";
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import FormNote from "@/components/FormNote";
 import { useHumanCheck } from "@/components/useHumanCheck";
 import { submitForm } from "@/lib/forms";
 import { cn } from "@/lib/utils";
@@ -160,6 +161,7 @@ export default function LeadForm({
           {status === "error" && (blocked ? "We couldn't confirm you're a person. Please email info@solodac.com." : "That didn't go through. Try again or email info@solodac.com.")}
         </p>
       </div>
+      <FormNote className="sm:col-span-2" />
     </form>
   );
 }

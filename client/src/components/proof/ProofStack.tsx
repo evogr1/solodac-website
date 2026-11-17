@@ -1,4 +1,4 @@
-import { indianNumber } from "@/lib/format";
+import { indianNumber, reelUrl } from "@/lib/format";
 import { millionViewReels } from "@/lib/reels";
 import { networkPages } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -10,7 +10,14 @@ export function ReelFan({ className, order = [3, 2, 0] }: { className?: string; 
   return (
     <figure className={cn("flex items-end justify-center", className)}>
       {picks.map((reel, index) => (
-        <div key={reel.id} className={cn("-ml-8 w-[34%] max-w-[190px] first:ml-0", tilt[index])}>
+        <a
+          key={reel.id}
+          href={reelUrl(reel)}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${reel.title}, ${indianNumber(reel.views)} views. Opens the post.`}
+          className={cn("-ml-8 block w-[34%] max-w-[190px] first:ml-0", tilt[index])}
+        >
           <div className="aspect-[4/5] overflow-hidden rounded-[14px] bg-ink-3 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.9)] ring-[3px] ring-ink">
             <img src={reel.poster} alt="" decoding="async" className="h-full w-full object-cover object-[50%_46%]" />
           </div>
@@ -18,7 +25,7 @@ export function ReelFan({ className, order = [3, 2, 0] }: { className?: string; 
             <span className="block font-semibold text-paper">{indianNumber(reel.views)}</span>
             views
           </div>
-        </div>
+        </a>
       ))}
       <figcaption className="sr-only">Three reels from our own pages, with their view counts.</figcaption>
     </figure>

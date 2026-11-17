@@ -268,7 +268,7 @@ export default function Home() {
           </h2>
           <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-xl text-[18px] leading-relaxed text-paper/70">
-              It writes, cuts, captions and designs for our pages every day. Creators get access next, for less than one editor's salary.
+              It writes, cuts, captions and designs for our pages every day. Creators get access next. Pricing is shared with the waitlist first.
             </p>
             <PrimaryButton href="/katran" className="self-start sm:self-auto">See Katran</PrimaryButton>
           </div>
