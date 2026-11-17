@@ -41,13 +41,16 @@ export default function Work() {
       <section className="container pb-4" aria-label="All six pages together">
         <Reveal>
           <dl className="grid grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-3">
-            {[
+            {([
               { value: indianNumber(totalFollowers), label: "followers across six pages" },
-              { value: totalReelViews, label: `views on ${reelCountWord} of our reels` },
+              // Links to the reels it adds up, each of which links to its public post.
+              { value: totalReelViews, label: `views on ${reelCountWord} of our reels`, href: "/katran#reels" },
               { value: totalPosts.toLocaleString("en-IN"), label: "posts published" },
-            ].map((stat) => (
+            ] as Array<{ value: string; label: string; href?: string }>).map((stat) => (
               <div key={stat.label} className="flex flex-col-reverse">
-                <dt className="mt-2 text-[15px] text-paper/60">{stat.label}</dt>
+                <dt className="mt-2 text-[15px] text-paper/60">
+                  {stat.href ? <a href={stat.href} className="underline decoration-paper/25 underline-offset-4 transition-colors duration-200 hover:text-paper hover:decoration-signal">{stat.label}</a> : stat.label}
+                </dt>
                 <dd className="font-display text-[clamp(36px,4.4vw,64px)] leading-none tracking-[-0.03em]">{stat.value}</dd>
               </div>
             ))}
