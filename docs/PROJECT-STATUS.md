@@ -178,6 +178,12 @@ The pipeline step that writes titles is pasting its alternatives into the title 
 - Katran's link preview now uses the general card (`og.png`). `og-katran.png` was deleted because it carried the old "12 crore views" headline.
 - Not done: the footer legal name. The GSTIN on the site is the proprietorship's, so the company name cannot sit next to it. Waiting on the owner.
 
+## Numbers refresh (19 November)
+
+- Follower and post counts for all six pages read from Instagram through Kestrel on 19 November and rounded down, so the site never shows more than the real number. Total is now 795K.
+- Two more Lucre Shorts past a million added: Jio 65.7 lakh (rBuPStnYrTM), Guwahati iPhone gift 17.5 lakh (vM34jRuFrXs). Twelve reels, 15 crore views. Other Lucre counts refreshed the same day. Katran's reel grid is six across on desktop.
+- Archive of CEOs' Shark Tank hoodie reel (DfmijTFBCrH, 1.1 lakh likes) is likely past a million, but its view count needs the owner's Instagram insights.
+
 ## Tools installed for this project (in `.claude/` of the repo)
 
 - **Skills:** taste skill (`design-taste-frontend`), impeccable, 12 of Emil Kowalski's skills (motion, review, apple-design and more), 9 Strix security skills, agent-reach.
