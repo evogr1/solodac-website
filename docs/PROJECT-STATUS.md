@@ -184,6 +184,14 @@ The pipeline step that writes titles is pasting its alternatives into the title 
 - Two more Lucre Shorts past a million added: Jio 65.7 lakh (rBuPStnYrTM), Guwahati iPhone gift 17.5 lakh (vM34jRuFrXs). Twelve reels, 15 crore views. Other Lucre counts refreshed the same day. Katran's reel grid is six across on desktop.
 - Archive of CEOs' Shark Tank hoodie reel (DfmijTFBCrH, 1.1 lakh likes) is likely past a million, but its view count needs the owner's Instagram insights.
 
+## Katran pilot on the site (19 November)
+
+- /katran now matches the live pilot at katran.solodac.com: niche ideas, reels in your style, Instagram and YouTube Shorts, ask-first then autopilot after 10 approvals, free on your own Claude Code plan. Hero buttons go to katran.solodac.com (signup and home). Keep the wording in step with that site.
+- The hero email box is gone; the bottom waitlist form stays for people not ready to connect.
+- "How it works" now describes the pilot. The katranTools section is scoped to "our own pages", because the pilot is reels only.
+- The pricing line from the 17 November trust pass ("Pricing is shared with the waitlist first") was replaced, since Katran is now free.
+- /refunds still mentions payments for Katran. That is approved legal text, so it was left for the owner.
+
 ## Tools installed for this project (in `.claude/` of the repo)
 
 - **Skills:** taste skill (`design-taste-frontend`), impeccable, 12 of Emil Kowalski's skills (motion, review, apple-design and more), 9 Strix security skills, agent-reach.

@@ -40,7 +40,7 @@ export const pages: PageMeta[] = [
   {
     path: "/katran",
     title: "Katran by SoloDac | The editor our own pages use every day",
-    description: "Katran turns long videos, voiceovers and topics into reels, YouTube videos and carousels. Our own pages post with it every day. Get early access.",
+    description: "Katran finds ideas that work in your niche, makes reels in your style and posts them to Instagram and YouTube Shorts. Our own pages use it every day. Free pilot for creators.",
     image: "/og.png",
   },
   {
