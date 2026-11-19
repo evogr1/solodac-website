@@ -277,7 +277,7 @@ export default function Home() {
           </div>
         </Reveal>
         {/* What goes in and what comes out, in the tools' own words from the Katran page. */}
-        <ul className="mt-12 grid gap-8 sm:grid-cols-3 sm:gap-10">
+        <ul className="mt-12 grid gap-8 sm:grid-cols-2 sm:gap-10 lg:grid-cols-4">
           {katranTools.map((tool, index) => (
             <li key={tool.name}>
               <Reveal delay={index * 0.06} y={16}>

@@ -192,6 +192,13 @@ The pipeline step that writes titles is pasting its alternatives into the title 
 - The pricing line from the 17 November trust pass ("Pricing is shared with the waitlist first") was replaced, since Katran is now free.
 - /refunds still mentions payments for Katran. That is approved legal text, so it was left for the owner.
 
+## Katran features (19 November, from the owner)
+
+- Added the live stream clipper to `katranTools` (clips a stream while it runs, no download first).
+- New /katran section "It remembers every page.": one brain per page plus a central brain. Worded as what it holds, not "never hallucinates".
+- "Coming next to the pilot: long-form YouTube videos and Instagram carousels." Remove that line once they ship to creators.
+- The owner also said the clipper was rebuilt as a better version. No specifics were given, so no copy changed for it.
+
 ## Tools installed for this project (in `.claude/` of the repo)
 
 - **Skills:** taste skill (`design-taste-frontend`), impeccable, 12 of Emil Kowalski's skills (motion, review, apple-design and more), 9 Strix security skills, agent-reach.

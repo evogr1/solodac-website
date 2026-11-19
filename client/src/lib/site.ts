@@ -137,6 +137,12 @@ export const katranTools = [
     body: "Point it at a reel you like. It finds the original source, cuts the strongest part and syncs captions to the word. The output is ready to post in your page's own style.",
   },
   {
+    name: "Live stream clipper",
+    input: "Live stream link in",
+    output: "Clips out while it runs",
+    body: "Paste a live stream link. It watches the stream as it plays without downloading it first, finds the strongest moments and keeps sending out clips until the stream ends.",
+  },
+  {
     name: "Carousel studio",
     input: "Topic in",
     output: "Carousel out",
