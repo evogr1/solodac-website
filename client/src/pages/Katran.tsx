@@ -92,7 +92,7 @@ export default function Katran() {
         <Reveal>
           <h2 id="makes" className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">What it does for our own pages.</h2>
         </Reveal>
-        <div className="mt-14 grid gap-4 md:grid-cols-3">
+        <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {katranTools.map((tool, index) => (
             <Reveal key={tool.name} delay={index * 0.06}>
               <div className="flex h-full flex-col rounded-2xl bg-ink-2 p-7">
@@ -103,6 +103,22 @@ export default function Katran() {
               </div>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      <section className="container pb-14 sm:pb-20" aria-labelledby="brains">
+        <div className="grid gap-12 lg:grid-cols-12">
+          <Reveal className="lg:col-span-5">
+            <h2 id="brains" className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">It remembers every page.</h2>
+          </Reveal>
+          <Reveal delay={0.08} className="lg:col-span-6 lg:col-start-7">
+            <p className="text-[18px] leading-relaxed text-paper/75">
+              Each page has its own brain. It holds that page's style, its instructions and what has worked before. A central brain connects them all and keeps every page on track, so instructions don't get lost between one video and the next.
+            </p>
+            <p className="mt-6 text-[18px] leading-relaxed text-paper/75">
+              Coming next to the pilot: long-form YouTube videos and Instagram carousels.
+            </p>
+          </Reveal>
         </div>
       </section>
 
