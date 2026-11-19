@@ -1,113 +1,28 @@
-import { Check, Loader2 } from "lucide-react";
-import { useState, type FormEvent } from "react";
 import Reel from "@/components/katran/Reel";
 import FaqSchema from "@/components/FaqSchema";
-import FormNote from "@/components/FormNote";
 import Layout from "@/components/Layout";
 import LeadForm from "@/components/LeadForm";
 import Reveal from "@/components/Reveal";
+import { GhostButton, PrimaryButton } from "@/components/site";
 import { millionViewReels as reels } from "@/lib/reels";
 import { katranTools } from "@/lib/site";
-import { scrollToId } from "@/lib/smoothScroll";
-import { useHumanCheck } from "@/components/useHumanCheck";
-import { submitForm } from "@/lib/forms";
+
+// The pilot, in the same words as katran.solodac.com. Keep the two in step.
+const pilot = { site: "https://katran.solodac.com/", signup: "https://katran.solodac.com/signup" };
 
 const steps = [
-  { title: "Send something", body: "A podcast or interview link, a voiceover, or just a topic." },
-  { title: "Katran makes the cut", body: "It picks the moment, cuts it, writes the hook, sets the captions and designs the frames in your page's style." },
-  { title: "You check it and post", body: "Change anything you like. Katran remembers your style, so the next one needs fewer changes." },
+  { title: "Connect your page", body: "Sign in with Facebook and pick your Instagram professional account. Add your YouTube channel to post Shorts too." },
+  { title: "Katran makes the reels", body: "It picks ideas that are working in your niche and makes reels in your style, on your own Claude Code plan." },
+  { title: "You approve, or autopilot does", body: "Every reel waits for your OK. After you approve 10 in a row you can switch on autopilot, and pause it any time." },
 ];
 
 const faqs = [
-  { q: "Is it live?", a: "Yes, inside SoloDac. Our editors and our pages use it every day. Creators get access in batches, and the waitlist goes first." },
+  { q: "Is it live?", a: "Yes. Our own pages use it every day, and creators can join the pilot at katran.solodac.com." },
   { q: "Will my videos look AI-made?", a: "That is the one thing we built it to avoid. If an edit wouldn't pass on our own pages, it doesn't ship." },
   { q: "Who is it for?", a: "YouTube creators, Instagram page owners and small editing teams who post often and want to spend less time on the timeline." },
-  { q: "What will it cost?", a: "Pricing is shared with the waitlist first." },
+  { q: "What will it cost?", a: "Nothing. Reels are made on your own Claude Code plan, and Katran doesn't charge for them." },
+  { q: "Can it post without asking me?", a: "Only if you switch on autopilot. It unlocks after you approve 10 reels in a row, and you can pause it or switch it off any time." },
 ];
-
-/** Email only, right in the hero, for people who are already convinced. */
-function QuickJoin() {
-  const [email, setEmail] = useState("");
-  const [trap, setTrap] = useState("");
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  const check = useHumanCheck();
-  const [blocked, setBlocked] = useState(false);
-
-  async function onSubmit(event: FormEvent) {
-    event.preventDefault();
-    setBlocked(false);
-    if (trap) return setStatus("sent");
-    setStatus("sending");
-    try {
-      let token: string | undefined;
-      if (check.enabled) {
-        // The check usually finishes in a second or two. Give it up to 12 before giving up.
-        token = await check.waitForToken(12000);
-        if (!token) {
-          setBlocked(true);
-          setStatus("error");
-          check.reset();
-          return;
-        }
-      }
-      await submitForm("Katran waitlist", { email }, token);
-      setStatus("sent");
-    } catch {
-      setStatus("error");
-      check.reset();
-    }
-  }
-
-  if (status === "sent") {
-    return (
-      <p role="status" className="flex items-start gap-3 text-[17px] leading-relaxed text-paper/85">
-        <Check size={20} className="mt-1 shrink-0 text-signal" />
-        <span>
-          You're on the list.{" "}
-          <button type="button" onClick={() => scrollToId("waitlist")} className="underline decoration-paper/30 underline-offset-4 hover:decoration-signal">
-            Tell us what you make
-          </button>{" "}
-          to get in sooner.
-        </span>
-      </p>
-    );
-  }
-
-  return (
-    <form onSubmit={onSubmit} className="w-full max-w-[30rem]">
-      <div className="flex flex-col gap-2 rounded-full sm:flex-row sm:bg-ink-2 sm:p-1.5">
-        <label htmlFor="quick-email" className="sr-only">Email</label>
-        <input
-          id="quick-email"
-          name="email"
-          type="email"
-          autoComplete="email"
-          inputMode="email"
-          required
-          maxLength={254}
-          placeholder="Your email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          className="min-w-0 flex-1 rounded-full border border-paper/15 bg-ink-2 px-5 py-3.5 text-[16px] text-paper placeholder:text-paper/50 focus:border-signal focus:outline-none sm:border-0 sm:bg-transparent"
-        />
-        <input type="text" name="botcheck" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" value={trap} onChange={(event) => setTrap(event.target.value)} />
-        <button
-          type="submit"
-          disabled={status === "sending"}
-          className="inline-flex items-center justify-center gap-2 rounded-full bg-signal px-6 py-3.5 text-[15px] font-semibold text-ink transition-[background-color,transform] duration-150 ease-out hover:bg-paper active:scale-[0.97] disabled:opacity-60"
-        >
-          {status === "sending" && <Loader2 size={16} className="animate-spin" />}
-          Join the waitlist
-        </button>
-      </div>
-      {check.widget}
-      <FormNote className="mt-3 px-2" />
-      <p role="alert" className="mt-3 px-2 text-[14px] text-signal-soft">
-        {status === "error" && (blocked ? "We couldn't confirm you're a person. Please email info@solodac.com." : "That didn't go through. Try again or email info@solodac.com.")}
-      </p>
-    </form>
-  );
-}
 
 export default function Katran() {
   return (
@@ -121,15 +36,17 @@ export default function Katran() {
         </Reveal>
         <Reveal delay={0.08}>
           <p className="mt-8 max-w-2xl text-[19px] leading-relaxed text-paper/80">
-            Katran turns long videos, voiceovers and topics into reels, YouTube videos and carousels. Our own pages post with it every day. Creators get access next. Pricing is shared with the waitlist first.
+            Katran finds ideas that are working in your niche, makes reels in your style and posts them to Instagram and YouTube Shorts at your posting times. Our own pages post with it every day. Free to use. Reels are made on your own Claude Code plan.
           </p>
         </Reveal>
-        <Reveal delay={0.16} className="mt-9">
-          <QuickJoin />
+        <Reveal delay={0.16} className="mt-9 flex flex-wrap gap-3">
+          <PrimaryButton href={pilot.signup} external>Join the pilot</PrimaryButton>
+          <GhostButton href={pilot.site} external>How the pilot works</GhostButton>
         </Reveal>
         <Reveal delay={0.2}>
           <p className="mt-8 max-w-2xl text-[16px] leading-relaxed text-paper/60">
-            Katran is SoloDac's own editing tool. It is in private use and opening to creators in batches.
+            Katran is SoloDac's own editing tool. It is in private use and opening to creators in batches. The pilot runs at{" "}
+            <a href={pilot.site} target="_blank" rel="noreferrer" className="underline decoration-paper/30 underline-offset-4 hover:text-paper hover:decoration-signal">katran.solodac.com</a>.
           </p>
         </Reveal>
       </section>
@@ -173,7 +90,7 @@ export default function Katran() {
 
       <section className="container py-14 sm:py-20" aria-labelledby="makes">
         <Reveal>
-          <h2 id="makes" className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">What goes in. What comes out.</h2>
+          <h2 id="makes" className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">What it does for our own pages.</h2>
         </Reveal>
         <div className="mt-14 grid gap-4 md:grid-cols-3">
           {katranTools.map((tool, index) => (
@@ -208,9 +125,9 @@ export default function Katran() {
       <section id="waitlist">
         <div className="container grid gap-12 py-14 sm:py-20 lg:grid-cols-12">
           <Reveal className="lg:col-span-4">
-            <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">Get early access.</h2>
+            <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.03em]">Not ready to connect yet?</h2>
             <p className="mt-6 max-w-[26rem] text-[18px] leading-relaxed text-paper/75">
-              Tell us what you make. We open access in batches and pick the creators whose work fits each one.
+              Tell us what you make. We open the pilot in batches and reach out when a spot fits your page.
             </p>
           </Reveal>
           <Reveal delay={0.08} className="lg:col-span-7 lg:col-start-6">

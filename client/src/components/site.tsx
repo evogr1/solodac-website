@@ -35,15 +35,10 @@ export function PrimaryButton({ href, children, className, external }: ButtonPro
   return <Link href={href} className={classes}>{inner}</Link>;
 }
 
-export function GhostButton({ href, children, className }: ButtonProps) {
-  return (
-    <Link
-      href={href}
-      className={cn("inline-flex items-center gap-2 rounded-full bg-paper/10 px-6 py-3.5 text-sm font-semibold text-paper transition-[background-color,color,transform] duration-150 ease-out hover:bg-paper hover:text-ink active:scale-[0.97]", className)}
-    >
-      {children}
-    </Link>
-  );
+export function GhostButton({ href, children, className, external }: ButtonProps) {
+  const classes = cn("inline-flex items-center gap-2 rounded-full bg-paper/10 px-6 py-3.5 text-sm font-semibold text-paper transition-[background-color,color,transform] duration-150 ease-out hover:bg-paper hover:text-ink active:scale-[0.97]", className);
+  if (external) return <a href={href} target="_blank" rel="noreferrer" className={classes}>{children}</a>;
+  return <Link href={href} className={classes}>{children}</Link>;
 }
 
 export function PageHero({

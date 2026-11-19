@@ -55,7 +55,7 @@ const faqs = [
   { q: "Can my brand advertise on your pages?", a: "Yes. We offer sponsored posts, story features and launch campaigns across several pages. The Network page lists the audiences." },
   { q: "Do you work with clients outside India?", a: "Yes. Alongside the pages on this site, we run unbranded pages and channels for audiences in the US, the UK and India." },
   { q: "How is the work priced?", a: "Most work runs on a monthly retainer. You get the price in writing, with what it covers, before anything starts." },
-  { q: "What is Katran?", a: "The editing software we built for our own pages. Our editors use it every day, and creators can join the waitlist for early access." },
+  { q: "What is Katran?", a: "The editing software we built for our own pages. Our editors use it every day, and creators can join a free pilot at katran.solodac.com." },
   { q: "How do we get started?", a: "Book a 30-minute call. We'll look at where your page, channel or brand is today and where you want it to be." },
 ]
 
@@ -271,7 +271,7 @@ export default function Home() {
           </h2>
           <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-xl text-[18px] leading-relaxed text-paper/70">
-              It writes, cuts, captions and designs for our pages every day. Creators get access next. Pricing is shared with the waitlist first.
+              It writes, cuts, captions and designs for our pages every day. Creators can now join a free pilot that makes reels on their own Claude Code plan.
             </p>
             <PrimaryButton href="/katran" className="self-start sm:self-auto">See Katran</PrimaryButton>
           </div>
