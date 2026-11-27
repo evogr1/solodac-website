@@ -15,8 +15,8 @@ export type PageMeta = {
 export const pages: PageMeta[] = [
   {
     path: "/",
-    title: "YouTube & Instagram Growth Agency in India | SoloDac",
-    description: "SoloDac grows YouTube channels, Instagram pages, newsletters and founder brands. We run our own pages every day, so we know what works. Now we run yours.",
+    title: "YouTube & Instagram Growth Agency | India & Global | SoloDac",
+    description: "We grow YouTube channels, Instagram pages, newsletters and founder brands for clients in India and abroad. We run our own pages every day.",
     image: "/og.png",
   },
   {
