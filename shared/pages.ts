@@ -15,19 +15,19 @@ export type PageMeta = {
 export const pages: PageMeta[] = [
   {
     path: "/",
-    title: "SoloDac | We grow pages, channels and brands",
+    title: "YouTube & Instagram Growth Agency in India | SoloDac",
     description: "SoloDac grows YouTube channels, Instagram pages, newsletters and founder brands. We run our own pages every day, so we know what works. Now we run yours.",
     image: "/og.png",
   },
   {
     path: "/work",
-    title: "Our work | SoloDac",
+    title: "YouTube & Instagram Pages We Built and Run | SoloDac",
     description: "Successful Arcs, Archive of CEOs, Krefion, Lucre, Indian Pragati and Bourse India. Pages SoloDac built and still runs, with their followers and their million-view reels.",
     image: "/og.png",
   },
   {
     path: "/services",
-    title: "Services | SoloDac",
+    title: "YouTube, Reels & Personal Branding Services | SoloDac",
     description: "YouTube channels, Instagram pages, newsletters, editing, personal branding, partnerships, brand identity and websites. Everything a page needs, from one team.",
     image: "/og.png",
   },
@@ -51,7 +51,7 @@ export const pages: PageMeta[] = [
   },
   {
     path: "/contact",
-    title: "Book a call | SoloDac",
+    title: "Book a YouTube & Instagram Growth Call | SoloDac",
     description: "Tell us about your page, channel or brand. We reply within one working day with a time for a call.",
     image: "/og.png",
   },
